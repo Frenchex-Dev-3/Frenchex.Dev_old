@@ -1,12 +1,11 @@
 ﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Destroy
+namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Destroy;
+
+public class DestroyCommandResponseBuilder : RootResponseBuilder, IDestroyCommandResponseBuilder
 {
-    public class DestroyCommandResponseBuilder : RootResponseBuilder, IDestroyCommandResponseBuilder
+    public IDestroyCommandResponse Build()
     {
-        public IDestroyCommandResponse Build()
-        {
-            return new DestroyCommandResponse();
-        }
+        return new DestroyCommandResponse();
     }
 }

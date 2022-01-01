@@ -1,7 +1,5 @@
-﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Define.Machine.Add
-{
-    public class DefineMachineAddCommandResponse : IDefineMachineAddCommandResponse
-    {
+﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Define.Machine.Add;
 
-    }
+public class DefineMachineAddCommandResponse : IDefineMachineAddCommandResponse
+{
 }

@@ -1,36 +1,34 @@
-﻿using Frenchex.Dev.Vos.Lib.Domain.Bases;
-using Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
+﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
+using Frenchex.Dev.Vos.Lib.Domain.Configuration;
 
-namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Define.Machine.Add
+namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Define.Machine.Add;
+
+public class DefineMachineAddCommandRequestBuilder : IDefineMachineAddCommandRequestBuilder
 {
-    public class DefineMachineAddCommandRequestBuilder : IDefineMachineAddCommandRequestBuilder
+    private MachineDefinitionDeclaration? _definition;
+
+    public DefineMachineAddCommandRequestBuilder(
+        IBaseRequestBuilderFactory baseRequestBuilderFactory
+    )
     {
-        public IBaseRequestBuilder BaseBuilder { get; }
+        BaseBuilder = baseRequestBuilderFactory.Factory(this);
+    }
 
-        public DefineMachineAddCommandRequestBuilder(
-            IBaseRequestBuilderFactory baseRequestBuilderFactory
-        )
-        {
-            BaseBuilder = baseRequestBuilderFactory.Factory(this);
-        }
-        public IDefineMachineAddCommandRequest Build()
-        {
-            if (null == _definition)
-            {
-                throw new InvalidOperationException("definition is null");
-            }
+    public IBaseRequestBuilder BaseBuilder { get; }
 
-            return new DefineMachineAddCommandRequest(
-                _definition,
-                BaseBuilder.Build()
-            );
-        }
+    public IDefineMachineAddCommandRequest Build()
+    {
+        if (null == _definition) throw new InvalidOperationException("definitionDeclaration is null");
 
-        private MachineDefinition? _definition;
-        public IDefineMachineAddCommandRequestBuilder UsingDefinition(MachineDefinition definition)
-        {
-            _definition = definition;
-            return this;
-        }
+        return new DefineMachineAddCommandRequest(
+            _definition,
+            BaseBuilder.Build()
+        );
+    }
+
+    public IDefineMachineAddCommandRequestBuilder UsingDefinition(MachineDefinitionDeclaration definitionDeclaration)
+    {
+        _definition = definitionDeclaration;
+        return this;
     }
 }

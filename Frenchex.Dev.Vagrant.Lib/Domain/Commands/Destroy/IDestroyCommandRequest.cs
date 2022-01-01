@@ -1,11 +1,12 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Destroy
+﻿using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Destroy;
+
+public interface IDestroyCommandRequest : IRootCommandRequest
 {
-    public interface IDestroyCommandRequest : Root.IRootCommandRequest
-    {
-        string NameOrId { get; }
-        bool Force { get; }
-        bool Parallel { get; }
-        bool Graceful { get; }
-        int DestroyTimeoutInMiliSeconds { get; }
-    }
+    string NameOrId { get; }
+    bool Force { get; }
+    bool Parallel { get; }
+    bool Graceful { get; }
+    int DestroyTimeoutInMiliSeconds { get; }
 }

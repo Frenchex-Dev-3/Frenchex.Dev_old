@@ -1,9 +1,8 @@
 ﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Destroy
+namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Destroy;
+
+public interface IDestroyCommandResponseBuilderFactory : IRootResponseBuilderFactory
 {
-    public interface IDestroyCommandResponseBuilderFactory : IRootResponseBuilderFactory
-    {
-        IDestroyCommandResponseBuilder Build();
-    }
+    IDestroyCommandResponseBuilder Build();
 }

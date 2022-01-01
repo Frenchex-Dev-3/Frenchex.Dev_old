@@ -1,7 +1,6 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Init
+﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Init;
+
+public interface IInitCommandRequestBuilderFactory
 {
-    public interface IInitCommandRequestBuilderFactory
-    {
-        IInitCommandRequestBuilder Factory();
-    }
+    IInitCommandRequestBuilder Factory();
 }

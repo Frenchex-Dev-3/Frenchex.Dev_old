@@ -1,9 +1,8 @@
 ﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Status
+namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Status;
+
+public interface IStatusCommandRequestBuilderFactory : IRootCommandRequestBuilderFactory
 {
-    public interface IStatusCommandRequestBuilderFactory : IRootCommandRequestBuilderFactory
-    {
-        IStatusCommandRequestBuilder Factory();
-    }
+    IStatusCommandRequestBuilder Factory();
 }

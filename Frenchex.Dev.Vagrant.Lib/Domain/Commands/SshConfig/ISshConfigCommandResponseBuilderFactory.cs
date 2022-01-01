@@ -1,7 +1,8 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.SshConfig
+﻿using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.SshConfig;
+
+public interface ISshConfigCommandResponseBuilderFactory : IRootCommandResponseBuilderFactory
 {
-    public interface ISshConfigCommandResponseBuilderFactory : Root.IRootCommandResponseBuilderFactory
-    {
-        ISshConfigCommandResponseBuilder Build();
-    }
+    ISshConfigCommandResponseBuilder Build();
 }

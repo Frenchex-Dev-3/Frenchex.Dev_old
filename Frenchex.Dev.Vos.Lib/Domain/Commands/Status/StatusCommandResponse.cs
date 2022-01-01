@@ -1,17 +1,16 @@
-﻿using Frenchex.Dev.Vagrant.Lib.Domain;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
+using Frenchex.Dev.Vagrant.Lib.Domain;
 
-namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Status
+namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Status;
+
+public class StatusCommandResponse : IStatusCommandResponse
 {
-    public class StatusCommandResponse : IStatusCommandResponse
+    public StatusCommandResponse(
+        IImmutableDictionary<string, VagrantMachineStatusEnum> statuses
+    )
     {
-        public IImmutableDictionary<string, VagrantMachineStatusEnum> Statuses { get; }
-
-        public StatusCommandResponse(
-            IImmutableDictionary<string, VagrantMachineStatusEnum> statuses
-        )
-        {
-            Statuses = statuses;
-        }
+        Statuses = statuses;
     }
+
+    public IImmutableDictionary<string, VagrantMachineStatusEnum> Statuses { get; }
 }

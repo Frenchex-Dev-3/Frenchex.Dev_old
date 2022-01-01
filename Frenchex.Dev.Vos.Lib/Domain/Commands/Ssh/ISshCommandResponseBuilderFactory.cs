@@ -1,9 +1,8 @@
 ﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Ssh
+namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Ssh;
+
+public interface ISshCommandResponseBuilderFactory : IRootResponseBuilderFactory
 {
-    public interface ISshCommandResponseBuilderFactory : IRootResponseBuilderFactory
-    {
-        ISshCommandResponseBuilder Build();
-    }
+    ISshCommandResponseBuilder Build();
 }

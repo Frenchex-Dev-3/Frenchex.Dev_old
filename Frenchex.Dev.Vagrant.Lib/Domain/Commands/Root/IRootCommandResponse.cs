@@ -1,10 +1,9 @@
 ﻿using Frenchex.Dev.Dotnet.Process.Lib.Domain.Process;
 
-namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+
+public interface IRootCommandResponse
 {
-    public interface IRootCommandResponse
-    {
-        IProcess Process { get; }
-        ProcessExecutionResult ProcessExecutionResult { get; }
-    }
+    IProcess Process { get; }
+    ProcessExecutionResult ProcessExecutionResult { get; }
 }

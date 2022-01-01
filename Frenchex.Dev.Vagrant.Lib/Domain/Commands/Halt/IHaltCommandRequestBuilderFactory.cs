@@ -1,7 +1,6 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Halt
+﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Halt;
+
+public interface IHaltCommandRequestBuilderFactory
 {
-    public interface IHaltCommandRequestBuilderFactory
-    {
-        IHaltCommandRequestBuilder Factory();
-    }
+    IHaltCommandRequestBuilder Factory();
 }

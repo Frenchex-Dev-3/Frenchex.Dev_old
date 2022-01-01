@@ -1,9 +1,10 @@
-﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Halt
+﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
+
+namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Halt;
+
+public interface IHaltCommandRequest : IRootCommandRequest
 {
-    public interface IHaltCommandRequest : Root.IRootCommandRequest
-    {
-        string[] Names { get; }
-        bool Force { get; }
-        int HaltTimeoutInMiliSeconds { get; }
-    }
+    string[] Names { get; }
+    bool Force { get; }
+    int HaltTimeoutInMiliSeconds { get; }
 }

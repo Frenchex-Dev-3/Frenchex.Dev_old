@@ -1,7 +1,6 @@
-﻿namespace Frenchex.Dev.Dotnet.Cli.Lib.Domain
+﻿namespace Frenchex.Dev.Dotnet.Cli.Lib.Domain;
+
+public interface IProgram
 {
-    public interface IProgram
-    {
-        Task RunAsync();
-    }
+    Task RunAsync();
 }

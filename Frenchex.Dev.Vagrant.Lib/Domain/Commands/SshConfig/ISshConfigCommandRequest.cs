@@ -1,8 +1,9 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.SshConfig
+﻿using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.SshConfig;
+
+public interface ISshConfigCommandRequest : IRootCommandRequest
 {
-    public interface ISshConfigCommandRequest : Root.IRootCommandRequest
-    {
-        string NameOrId { get; }
-        string Host { get; }
-    }
+    string NameOrId { get; }
+    string Host { get; }
 }

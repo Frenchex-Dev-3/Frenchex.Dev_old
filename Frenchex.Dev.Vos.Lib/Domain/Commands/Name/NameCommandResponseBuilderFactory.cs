@@ -1,10 +1,9 @@
-﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Name
+﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Name;
+
+public class NameCommandResponseBuilderFactory : INameCommandResponseBuilderFactory
 {
-    public class NameCommandResponseBuilderFactory : INameCommandResponseBuilderFactory
+    public INameCommandResponseBuilder Factory()
     {
-        public INameCommandResponseBuilder Factory()
-        {
-            return new NameCommandResponseBuilder();
-        }
+        return new NameCommandResponseBuilder();
     }
 }

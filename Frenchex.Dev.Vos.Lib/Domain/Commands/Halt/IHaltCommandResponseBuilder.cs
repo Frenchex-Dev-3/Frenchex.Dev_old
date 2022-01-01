@@ -1,9 +1,8 @@
 ﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Halt
+namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Halt;
+
+public interface IHaltCommandResponseBuilder : IRootResponseBuilder
 {
-    public interface IHaltCommandResponseBuilder : IRootResponseBuilder
-    {
-        IHaltCommandResponse Build();
-    }
+    IHaltCommandResponse Build();
 }

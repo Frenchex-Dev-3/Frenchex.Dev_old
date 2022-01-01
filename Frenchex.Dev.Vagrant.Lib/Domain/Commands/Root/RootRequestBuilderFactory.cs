@@ -1,7 +1,5 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root
-{
-    abstract public class RootRequestBuilderFactory : IRootCommandRequestBuilderFactory
-    {
+﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
 
-    }
+public abstract class RootRequestBuilderFactory : IRootCommandRequestBuilderFactory
+{
 }

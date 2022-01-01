@@ -1,12 +1,11 @@
 ﻿using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Ssh
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Ssh;
+
+public class SshCommandResponseBuilderFactory : RootCommandResponseBuilderFactory, ISshCommandResponseBuilderFactory
 {
-    public class SshCommandResponseBuilderFactory : RootCommandResponseBuilderFactory, ISshCommandResponseBuilderFactory
+    public ISshCommandResponseBuilder Build()
     {
-        public ISshCommandResponseBuilder Build()
-        {
-            return new SshCommandResponseBuilder();
-        }
+        return new SshCommandResponseBuilder();
     }
 }

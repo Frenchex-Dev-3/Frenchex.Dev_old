@@ -1,7 +1,6 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Status
+﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Status;
+
+public interface IStatusCommandRequestBuilderFactory
 {
-    public interface IStatusCommandRequestBuilderFactory
-    {
-        IStatusCommandRequestBuilder Factory();
-    }
+    IStatusCommandRequestBuilder Factory();
 }

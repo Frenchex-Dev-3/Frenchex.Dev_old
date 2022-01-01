@@ -1,9 +1,8 @@
 ﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Halt
+namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Halt;
+
+public interface IHaltCommandRequestBuilderFactory : IRootCommandRequestBuilderFactory
 {
-    public interface IHaltCommandRequestBuilderFactory : IRootCommandRequestBuilderFactory
-    {
-        IHaltCommandRequestBuilder Factory();
-    }
+    IHaltCommandRequestBuilder Factory();
 }

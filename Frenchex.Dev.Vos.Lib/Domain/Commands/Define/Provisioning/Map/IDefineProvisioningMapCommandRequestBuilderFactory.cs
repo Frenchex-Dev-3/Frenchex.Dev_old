@@ -1,7 +1,6 @@
-﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Define.Provisioning.Map
+﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Define.Provisioning.Map;
+
+public interface IDefineProvisioningMapCommandRequestBuilderFactory
 {
-    public interface IDefineProvisioningMapCommandRequestBuilderFactory
-    {
-        IDefineProvisioningMapCommandRequestBuilder NewInstance();
-    }
+    IDefineProvisioningMapCommandRequestBuilder NewInstance();
 }

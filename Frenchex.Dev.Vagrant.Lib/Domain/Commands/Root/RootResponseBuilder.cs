@@ -1,22 +1,21 @@
 ﻿using Frenchex.Dev.Dotnet.Process.Lib.Domain.Process;
 
-namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+
+public abstract class RootResponseBuilder : IRootCommandResponseBuilder
 {
-    abstract public class RootResponseBuilder : IRootCommandResponseBuilder
+    protected IProcess? _process;
+    protected ProcessExecutionResult? _processExecutionResult;
+
+    public IRootCommandResponseBuilder SetProcess(IProcess process)
     {
-        protected IProcess? _process;
-        protected ProcessExecutionResult? _processExecutionResult;
+        _process = process;
+        return this;
+    }
 
-        public IRootCommandResponseBuilder SetProcess(IProcess process)
-        {
-            _process = process;
-            return this;
-        }
-
-        public IRootCommandResponseBuilder SetProcessExecutionResult(ProcessExecutionResult processExecutionResult)
-        {
-            _processExecutionResult = processExecutionResult;
-            return this;
-        }
+    public IRootCommandResponseBuilder SetProcessExecutionResult(ProcessExecutionResult processExecutionResult)
+    {
+        _processExecutionResult = processExecutionResult;
+        return this;
     }
 }

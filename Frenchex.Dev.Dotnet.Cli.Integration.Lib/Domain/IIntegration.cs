@@ -1,9 +1,8 @@
 ﻿using System.CommandLine;
 
-namespace Frenchex.Dev.Dotnet.Cli.Integration.Lib.Domain
+namespace Frenchex.Dev.Dotnet.Cli.Integration.Lib.Domain;
+
+public interface IIntegration
 {
-    public interface IIntegration
-    {
-        void Integrate(RootCommand rootCommand);
-    }
+    void Integrate(RootCommand rootCommand);
 }

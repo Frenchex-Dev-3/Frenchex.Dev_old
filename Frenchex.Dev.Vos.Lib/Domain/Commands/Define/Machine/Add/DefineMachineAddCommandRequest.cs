@@ -1,17 +1,17 @@
-﻿using Frenchex.Dev.Vos.Lib.Domain.Bases;
-using Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
+﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
+using Frenchex.Dev.Vos.Lib.Domain.Configuration;
 
-namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Define.Machine.Add
+namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Define.Machine.Add;
+
+public class DefineMachineAddCommandRequest : RootRequest, IDefineMachineAddCommandRequest
 {
-    public class DefineMachineAddCommandRequest : RootRequest, IDefineMachineAddCommandRequest
+    public DefineMachineAddCommandRequest(
+        MachineDefinitionDeclaration machineDefinitionDeclaration,
+        IBaseRequest baseRequest
+    ) : base(baseRequest)
     {
-        public DefineMachineAddCommandRequest(
-            MachineDefinition machineDefinition,
-            IBaseRequest baseRequest
-        ) : base(baseRequest)
-        {
-            Definition = machineDefinition;
-        }
-        public MachineDefinition Definition { get; }
+        DefinitionDeclaration = machineDefinitionDeclaration;
     }
+
+    public MachineDefinitionDeclaration DefinitionDeclaration { get; }
 }

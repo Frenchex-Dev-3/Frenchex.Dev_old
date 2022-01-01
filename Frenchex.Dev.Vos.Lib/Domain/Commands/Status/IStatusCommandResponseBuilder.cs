@@ -1,12 +1,11 @@
-﻿using Frenchex.Dev.Vagrant.Lib.Domain;
+﻿using System.Collections.Immutable;
+using Frenchex.Dev.Vagrant.Lib.Domain;
 using Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
-using System.Collections.Immutable;
 
-namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Status
+namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Status;
+
+public interface IStatusCommandResponseBuilder : IRootResponseBuilder
 {
-    public interface IStatusCommandResponseBuilder : IRootResponseBuilder
-    {
-        IStatusCommandResponse Build();
-        IStatusCommandResponseBuilder WithStatuses(IImmutableDictionary<string, VagrantMachineStatusEnum> statuses);
-    }
+    IStatusCommandResponse Build();
+    IStatusCommandResponseBuilder WithStatuses(IImmutableDictionary<string, (string, VagrantMachineStatusEnum)> statuses);
 }

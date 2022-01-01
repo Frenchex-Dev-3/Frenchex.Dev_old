@@ -1,7 +1,8 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Destroy
+﻿using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Destroy;
+
+public interface IDestroyCommandResponseBuilderFactory : IRootCommandResponseBuilderFactory
 {
-    public interface IDestroyCommandResponseBuilderFactory : Root.IRootCommandResponseBuilderFactory
-    {
-        IDestroyCommandResponseBuilder Build();
-    }
+    IDestroyCommandResponseBuilder Build();
 }

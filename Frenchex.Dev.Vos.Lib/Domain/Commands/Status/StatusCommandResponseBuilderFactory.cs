@@ -1,10 +1,9 @@
-﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Status
+﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Status;
+
+public class StatusCommandResponseBuilderFactory : IStatusCommandResponseBuilderFactory
 {
-    public class StatusCommandResponseBuilderFactory : IStatusCommandResponseBuilderFactory
+    public IStatusCommandResponseBuilder Factory()
     {
-        public IStatusCommandResponseBuilder Factory()
-        {
-            return new StatusCommandResponseBuilder();
-        }
+        return new StatusCommandResponseBuilder();
     }
 }

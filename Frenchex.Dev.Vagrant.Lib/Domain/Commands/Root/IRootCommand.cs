@@ -1,6 +1,5 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root
+﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+
+public interface IRootCommand
 {
-    public interface IRootCommand
-    {
-    }
 }

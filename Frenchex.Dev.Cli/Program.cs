@@ -1,26 +1,22 @@
 ﻿using Frenchex.Dev.Dotnet.Cli.Integration.Lib.Domain;
 using Frenchex.Dev.Dotnet.Cli.Lib.Domain;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ServicesConfiguration = Frenchex.Dev.Cli.DependencyInjection.ServicesConfiguration;
 
 await Builder
     .Build<Host>(
-         (IServiceCollection services) =>
-         {
-             new Frenchex
-                 .Dev
-                 .Cli
-                 .DependencyInjection
-                 .ServicesConfiguration()
-                 .ConfigureServices(services);
+        services =>
+        {
+            new ServicesConfiguration()
+                .ConfigureServices(services);
 
-             return ""; // weird need
-         },
+            return ""; // weird need
+        },
         "hostsettings.json",
         "appsettings.json",
         "FRENCHEXDEV_"
-       )
+    )
     .RunAsync();
 
 internal class Host : BasicHostedService

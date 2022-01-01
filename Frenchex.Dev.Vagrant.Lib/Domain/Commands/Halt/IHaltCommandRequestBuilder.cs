@@ -1,10 +1,11 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Halt
+﻿using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Halt;
+
+public interface IHaltCommandRequestBuilder : IRootCommandRequestBuilder
 {
-    public interface IHaltCommandRequestBuilder : Root.IRootCommandRequestBuilder
-    {
-        IHaltCommandRequest Build();
-        IHaltCommandRequestBuilder UsingNamesOrIds(string[] namesOrIds);
-        IHaltCommandRequestBuilder WithForce(bool with);
-        IHaltCommandRequestBuilder UsingHaltTimeoutInMiliSeconds(int timeoutMs);
-    }
+    IHaltCommandRequest Build();
+    IHaltCommandRequestBuilder UsingNamesOrIds(string[] namesOrIds);
+    IHaltCommandRequestBuilder WithForce(bool with);
+    IHaltCommandRequestBuilder UsingHaltTimeoutInMiliSeconds(int timeoutMs);
 }

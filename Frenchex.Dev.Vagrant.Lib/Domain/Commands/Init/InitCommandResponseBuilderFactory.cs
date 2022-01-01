@@ -1,12 +1,11 @@
 ﻿using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Init
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Init;
+
+public class InitCommandResponseBuilderFactory : RootCommandResponseBuilderFactory, IInitCommandResponseBuilderFactory
 {
-    public class InitCommandResponseBuilderFactory : RootCommandResponseBuilderFactory, IInitCommandResponseBuilderFactory
+    public IInitCommandResponseBuilder Build()
     {
-        public IInitCommandResponseBuilder Build()
-        {
-            return new InitCommandResponseBuilder();
-        }
+        return new InitCommandResponseBuilder();
     }
 }

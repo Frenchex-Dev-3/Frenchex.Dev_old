@@ -1,7 +1,5 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root
-{
-    public interface IRootCommandResponseBuilderFactory
-    {
+﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
 
-    }
+public interface IRootCommandResponseBuilderFactory
+{
 }

@@ -1,37 +1,33 @@
 ﻿using Frenchex.Dev.Dotnet.Filesystem.Lib.Domain;
 using Newtonsoft.Json;
 
-namespace Frenchex.Dev.Vos.Lib.Domain.Actions.Configuration.Create
+namespace Frenchex.Dev.Vos.Lib.Domain.Actions.Configuration.Create;
+
+public interface IConfigurationCreateAction
 {
-    public interface IConfigurationCreateAction
+    Task Create(string path, Domain.Configuration.Configuration? configuration = null);
+}
+
+public class ConfigurationCreateAction : IConfigurationCreateAction
+{
+    private readonly IFilesystem _filesystem;
+
+    public ConfigurationCreateAction(
+        IFilesystem filesystem
+    )
     {
-        Task Create(string path, Bases.Configuration? configuration = null);
+        _filesystem = filesystem;
     }
 
-    public class ConfigurationCreateAction : IConfigurationCreateAction
+    public async Task Create(string path, Domain.Configuration.Configuration? configuration = null)
     {
-        private readonly IFilesystem _filesystem;
+        if (configuration is null) configuration = new Domain.Configuration.Configuration();
 
-        public ConfigurationCreateAction(
-            IFilesystem filesystem
-        )
+        var newConfigSerializedJson = JsonConvert.SerializeObject(configuration, new JsonSerializerSettings
         {
-            _filesystem = filesystem;
-        }
+            NullValueHandling = NullValueHandling.Ignore
+        });
 
-        public async Task Create(string path, Bases.Configuration? configuration = null)
-        {
-            if (configuration is null)
-            {
-                configuration = new Bases.Configuration();
-            }
-
-            var newConfigSerializedJson = JsonConvert.SerializeObject(configuration, new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore
-            });
-
-            await _filesystem.WriteAllTextAsync(path, newConfigSerializedJson);
-        }
+        await _filesystem.WriteAllTextAsync(path, newConfigSerializedJson);
     }
 }

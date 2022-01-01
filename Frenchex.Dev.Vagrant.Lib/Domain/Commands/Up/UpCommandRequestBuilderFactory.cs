@@ -1,21 +1,20 @@
 ﻿using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Up
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Up;
+
+public class UpCommandRequestBuilderFactory : IUpCommandRequestBuilderFactory
 {
-    public class UpCommandRequestBuilderFactory : IUpCommandRequestBuilderFactory
+    private readonly IBaseCommandRequestBuilderFactory _baseFactory;
+
+    public UpCommandRequestBuilderFactory(
+        IBaseCommandRequestBuilderFactory baseRequestBuilderFactory
+    )
     {
-        private readonly IBaseCommandRequestBuilderFactory _baseFactory;
+        _baseFactory = baseRequestBuilderFactory;
+    }
 
-        public UpCommandRequestBuilderFactory(
-            IBaseCommandRequestBuilderFactory baseRequestBuilderFactory
-        )
-        {
-            _baseFactory = baseRequestBuilderFactory;
-        }
-
-        public IUpCommandRequestBuilder Factory()
-        {
-            return new UpCommandRequestBuilder(_baseFactory);
-        }
+    public IUpCommandRequestBuilder Factory()
+    {
+        return new UpCommandRequestBuilder(_baseFactory);
     }
 }

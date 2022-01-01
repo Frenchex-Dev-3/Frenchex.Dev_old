@@ -1,19 +1,18 @@
 ﻿using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.SshConfig
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.SshConfig;
+
+public class SshConfigCommandRequestBuilderFactory : RootCommandRequestBuilderFactory,
+    ISshConfigCommandRequestBuilderFactory
 {
-    public class SshConfigCommandRequestBuilderFactory : RootCommandRequestBuilderFactory, ISshConfigCommandRequestBuilderFactory
+    public SshConfigCommandRequestBuilderFactory(
+        IBaseCommandRequestBuilderFactory baseCommandRequestBuilderFactory
+    ) : base(baseCommandRequestBuilderFactory)
     {
-        public SshConfigCommandRequestBuilderFactory(
-            IBaseCommandRequestBuilderFactory baseCommandRequestBuilderFactory
-        ) : base(baseCommandRequestBuilderFactory)
-        {
+    }
 
-        }
-
-        public ISshConfigCommandRequestBuilder Factory()
-        {
-            return new SshConfigCommandRequestBuilder(_baseRequestBuilderFactory);
-        }
+    public ISshConfigCommandRequestBuilder Factory()
+    {
+        return new SshConfigCommandRequestBuilder(_baseRequestBuilderFactory);
     }
 }

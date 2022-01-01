@@ -1,9 +1,8 @@
 ﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Define.Provisioning.New
+namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Define.Provisioning.New;
+
+public interface IDefineProvisioningNewCommandRequestBuilder : IRootCommandRequestBuilder
 {
-    public interface IDefineProvisioningNewCommandRequestBuilder : IRootCommandRequestBuilder
-    {
-        IDefineProvisioningNewCommandRequest Build();
-    }
+    IDefineProvisioningNewCommandRequest Build();
 }

@@ -1,7 +1,6 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root
+﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+
+public interface IBaseCommandRequestBuilderFactory
 {
-    public interface IBaseCommandRequestBuilderFactory
-    {
-        IBaseCommandRequestBuilder Factory(object parent);
-    }
+    IBaseCommandRequestBuilder Factory(object parent);
 }

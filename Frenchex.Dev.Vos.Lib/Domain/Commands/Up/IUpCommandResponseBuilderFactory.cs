@@ -1,9 +1,8 @@
 ﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Up
+namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Up;
+
+public interface IUpCommandResponseBuilderFactory : IRootResponseBuilderFactory
 {
-    public interface IUpCommandResponseBuilderFactory : IRootResponseBuilderFactory
-    {
-        IUpCommandResponseBuilder Factory();
-    }
+    IUpCommandResponseBuilder Factory();
 }

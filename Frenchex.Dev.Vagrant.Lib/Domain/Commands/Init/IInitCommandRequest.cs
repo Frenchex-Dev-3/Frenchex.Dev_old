@@ -1,13 +1,14 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Init
+﻿using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Init;
+
+public interface IInitCommandRequest : IRootCommandRequest
 {
-    public interface IInitCommandRequest : Root.IRootCommandRequest
-    {
-        string? BoxName { get; }
-        string? BoxUrl { get; }
-        string? BoxVersion { get; }
-        bool? Force { get; }
-        bool? Minimal { get; }
-        string? OutputToFile { get; }
-        string? TemplateFile { get; }
-    }
+    string? BoxName { get; }
+    string? BoxUrl { get; }
+    string? BoxVersion { get; }
+    bool? Force { get; }
+    bool? Minimal { get; }
+    string? OutputToFile { get; }
+    string? TemplateFile { get; }
 }

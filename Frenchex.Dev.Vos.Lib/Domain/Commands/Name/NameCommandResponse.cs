@@ -1,12 +1,11 @@
-﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Name
-{
-    public class NameCommandResponse : INameCommandResponse
-    {
-        public string[] Names { get; private set; }
+﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Name;
 
-        public NameCommandResponse(string[] names)
-        {
-            Names = names;
-        }
+public class NameCommandResponse : INameCommandResponse
+{
+    public NameCommandResponse(string[] names)
+    {
+        Names = names;
     }
+
+    public string[] Names { get; }
 }

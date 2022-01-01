@@ -1,19 +1,17 @@
 ﻿using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Status
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Status;
+
+public class StatusCommandRequestBuilderFactory : RootCommandRequestBuilderFactory, IStatusCommandRequestBuilderFactory
 {
-    public class StatusCommandRequestBuilderFactory : RootCommandRequestBuilderFactory, IStatusCommandRequestBuilderFactory
+    public StatusCommandRequestBuilderFactory(
+        IBaseCommandRequestBuilderFactory baseRequestBuilderFactory
+    ) : base(baseRequestBuilderFactory)
     {
-        public StatusCommandRequestBuilderFactory(
-            IBaseCommandRequestBuilderFactory baseRequestBuilderFactory
-        ) : base(baseRequestBuilderFactory)
-        {
+    }
 
-        }
-
-        public IStatusCommandRequestBuilder Factory()
-        {
-            return new StatusCommandRequestBuilder(_baseRequestBuilderFactory);
-        }
+    public IStatusCommandRequestBuilder Factory()
+    {
+        return new StatusCommandRequestBuilder(_baseRequestBuilderFactory);
     }
 }

@@ -1,7 +1,5 @@
-﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Root
-{
-    public interface IRootCommandRequestBuilderFactory
-    {
+﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
 
-    }
+public interface IRootCommandRequestBuilderFactory
+{
 }

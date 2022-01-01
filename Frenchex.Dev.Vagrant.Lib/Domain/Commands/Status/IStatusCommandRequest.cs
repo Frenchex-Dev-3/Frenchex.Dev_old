@@ -1,7 +1,8 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Status
+﻿using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Status;
+
+public interface IStatusCommandRequest : IRootCommandRequest
 {
-    public interface IStatusCommandRequest : Root.IRootCommandRequest
-    {
-        string[] NamesOrIds { get; }
-    }
+    string[] NamesOrIds { get; }
 }

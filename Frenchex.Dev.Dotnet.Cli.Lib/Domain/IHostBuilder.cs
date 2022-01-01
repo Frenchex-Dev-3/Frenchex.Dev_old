@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Frenchex.Dev.Dotnet.Cli.Lib.Domain
+namespace Frenchex.Dev.Dotnet.Cli.Lib.Domain;
+
+public interface IHostBuilder
 {
-    public interface IHostBuilder
-    {
-        IHost Build(Context context, Func<IServiceCollection, IServiceCollection> servicesConfigurationLambda);
-    }
+    IHost Build(Context context, Func<IServiceCollection, IServiceCollection> servicesConfigurationLambda);
 }

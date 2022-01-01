@@ -1,21 +1,19 @@
 ﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Init
+namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Init;
+
+public class InitCommandRequest : RootRequest, IInitCommandRequest
 {
-    public class InitCommandRequest : RootRequest, IInitCommandRequest
+    public InitCommandRequest(
+        IBaseRequest baseRequest,
+        string namingPattern,
+        int leadingZeroes
+    ) : base(baseRequest)
     {
-        public int InstanceNumber { get; }
-
-        public string NamingPattern { get; }
-
-        public InitCommandRequest(
-            IBaseRequest baseRequest,
-            int instanceNumber,
-            string namingPatetrn
-        ) : base(baseRequest)
-        {
-            InstanceNumber = instanceNumber;
-            NamingPattern = namingPatetrn;
-        }
+        NamingPattern = namingPattern;
+        LeadingZeroes = leadingZeroes;
     }
+
+    public string NamingPattern { get; }
+    public int LeadingZeroes { get; }
 }

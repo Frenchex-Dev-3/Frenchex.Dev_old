@@ -1,10 +1,9 @@
-﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Define.Provisioning.Map
+﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Define.Provisioning.Map;
+
+public class DefineProvisioningMapCommandResponseBuilderFactory : IDefineProvisioningMapCommandResponseBuilderFactory
 {
-    public class DefineProvisioningMapCommandResponseBuilderFactory : IDefineProvisioningMapCommandResponseBuilderFactory
+    public IDefineProvisioningMapCommandResponseBuilder Factory()
     {
-        public IDefineProvisioningMapCommandResponseBuilder Factory()
-        {
-            return new DefineProvisioningMapCommandResponseBuilder();
-        }
+        return new DefineProvisioningMapCommandResponseBuilder();
     }
 }

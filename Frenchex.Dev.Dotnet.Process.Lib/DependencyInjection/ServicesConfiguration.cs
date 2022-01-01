@@ -1,17 +1,16 @@
 ﻿using Frenchex.Dev.Dotnet.Process.Lib.Domain.ProcessBuilder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Frenchex.Dev.Dotnet.Process.Lib.DependencyInjection
-{
-    public class ServicesConfiguration
-    {
-        public static void ConfigureServices(IServiceCollection services)
-        {
-            services.AddLogging();
+namespace Frenchex.Dev.Dotnet.Process.Lib.DependencyInjection;
 
-            services
-               .AddSingleton<IProcessBuilder, AsyncProcessBuilder>()
-               ;
-        }
+public class ServicesConfiguration
+{
+    public static void ConfigureServices(IServiceCollection services)
+    {
+        services.AddLogging();
+
+        services
+            .AddSingleton<IProcessBuilder, AsyncProcessBuilder>()
+            ;
     }
 }

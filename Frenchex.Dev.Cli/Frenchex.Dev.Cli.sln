@@ -33,49 +33,53 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frenchex.Dev.Vagrant.Lib.Te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vos", "Vos", "{A1E1C601-ECB7-49B0-9D5F-DF41C51F613A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frenchex.Dev.Vos.Lib", "..\Frenchex.Dev.Vos.Lib\Frenchex.Dev.Vos.Lib.csproj", "{54CA55D2-A343-4870-AE1A-68384F6E42C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frenchex.Dev.Vos.Lib", "..\Frenchex.Dev.Vos.Lib\Frenchex.Dev.Vos.Lib.csproj", "{54CA55D2-A343-4870-AE1A-68384F6E42C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commands", "Commands", "{90F54D66-F11D-4570-A0B6-2D8B002FC3FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frenchex.Dev.Commands.Init.Lib", "..\Frenchex.Dev.Commands.Init.Lib\Frenchex.Dev.Commands.Init.Lib.csproj", "{738B80F4-C75E-4D3E-A6BC-23E61DE7D1D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frenchex.Dev.Commands.Init.Lib", "..\Frenchex.Dev.Commands.Init.Lib\Frenchex.Dev.Commands.Init.Lib.csproj", "{738B80F4-C75E-4D3E-A6BC-23E61DE7D1D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frenchex.Dev.Commands.Scopes.Lib", "..\Frenchex.Dev.Commands.Scopes.Lib\Frenchex.Dev.Commands.Scopes.Lib.csproj", "{CA7A3621-270D-4EC6-A56D-EEB61A84FDFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frenchex.Dev.Commands.Scopes.Lib", "..\Frenchex.Dev.Commands.Scopes.Lib\Frenchex.Dev.Commands.Scopes.Lib.csproj", "{CA7A3621-270D-4EC6-A56D-EEB61A84FDFA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Init", "Init", "{F1C7784D-3B12-4193-A964-1FBD65C72A5B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scopes", "Scopes", "{06146CF7-3919-4485-9701-46F1C53BA805}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frenchex.Dev.Commands.Init.Lib.Tests", "..\Frenchex.Dev.Commands.Init.Lib.Tests\Frenchex.Dev.Commands.Init.Lib.Tests.csproj", "{F55C8896-7FF9-4E97-BCB4-BFF632244F00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frenchex.Dev.Commands.Init.Lib.Tests", "..\Frenchex.Dev.Commands.Init.Lib.Tests\Frenchex.Dev.Commands.Init.Lib.Tests.csproj", "{F55C8896-7FF9-4E97-BCB4-BFF632244F00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frenchex.Dev.Commands.Scopes.Lib.Tests", "..\Frenchex.Dev.Commands.Scopes.Lib.Tests\Frenchex.Dev.Commands.Scopes.Lib.Tests.csproj", "{412CA408-839E-4463-8BF3-E471B486EF22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frenchex.Dev.Commands.Scopes.Lib.Tests", "..\Frenchex.Dev.Commands.Scopes.Lib.Tests\Frenchex.Dev.Commands.Scopes.Lib.Tests.csproj", "{412CA408-839E-4463-8BF3-E471B486EF22}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cli.Integration", "Cli.Integration", "{8FE90B11-3503-4944-B587-EF0106B55E2D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cli.Integration", "Cli.Integration", "{30A7BC06-0AB8-47E8-972B-DE3A70D1CC76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frenchex.Dev.Commands.Scopes.Cli.Integration.Lib.Tests", "..\Frenchex.Dev.Commands.Scopes.Cli.Integration.Lib.Tests\Frenchex.Dev.Commands.Scopes.Cli.Integration.Lib.Tests.csproj", "{60F33BF3-AA60-4A56-8AA3-A7AAB0361E2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frenchex.Dev.Commands.Scopes.Cli.Integration.Lib.Tests", "..\Frenchex.Dev.Commands.Scopes.Cli.Integration.Lib.Tests\Frenchex.Dev.Commands.Scopes.Cli.Integration.Lib.Tests.csproj", "{60F33BF3-AA60-4A56-8AA3-A7AAB0361E2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frenchex.Dev.Commands.Scopes.Cli.Integration.Lib", "..\Frenchex.Dev.Commands.Scopes.Cli.Integration.Lib\Frenchex.Dev.Commands.Scopes.Cli.Integration.Lib.csproj", "{3F52F190-7BB2-4F7B-8518-F50CB33E0F59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frenchex.Dev.Commands.Scopes.Cli.Integration.Lib", "..\Frenchex.Dev.Commands.Scopes.Cli.Integration.Lib\Frenchex.Dev.Commands.Scopes.Cli.Integration.Lib.csproj", "{3F52F190-7BB2-4F7B-8518-F50CB33E0F59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frenchex.Dev.Commands.Init.Cli.Integration.Lib", "..\Frenchex.Dev.Commands.Init.Cli.Integration.Lib\Frenchex.Dev.Commands.Init.Cli.Integration.Lib.csproj", "{E2FE2A98-EFC5-465D-A005-28050BE3013F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frenchex.Dev.Commands.Init.Cli.Integration.Lib", "..\Frenchex.Dev.Commands.Init.Cli.Integration.Lib\Frenchex.Dev.Commands.Init.Cli.Integration.Lib.csproj", "{E2FE2A98-EFC5-465D-A005-28050BE3013F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frenchex.Dev.Commands.Init.Cli.Integration.Lib.Tests", "..\Frenchex.Dev.Commands.Init.Cli.Integration.Lib.Tests\Frenchex.Dev.Commands.Init.Cli.Integration.Lib.Tests.csproj", "{72D743C6-A101-4EFB-BB66-D442CD8ACBCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frenchex.Dev.Commands.Init.Cli.Integration.Lib.Tests", "..\Frenchex.Dev.Commands.Init.Cli.Integration.Lib.Tests\Frenchex.Dev.Commands.Init.Cli.Integration.Lib.Tests.csproj", "{72D743C6-A101-4EFB-BB66-D442CD8ACBCA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{F3FF78E5-183E-48A7-8470-A535E2E6A302}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{1B18AC78-9780-41A2-9A34-008CA566CA6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frenchex.Dev.Vos.Lib.Tests", "..\Frenchex.Dev.Vos.Lib.Tests\Frenchex.Dev.Vos.Lib.Tests.csproj", "{BD527B7B-BD50-43E4-BB69-BEF8C5C50E8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frenchex.Dev.Vos.Lib.Tests", "..\Frenchex.Dev.Vos.Lib.Tests\Frenchex.Dev.Vos.Lib.Tests.csproj", "{BD527B7B-BD50-43E4-BB69-BEF8C5C50E8C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cli.Integration", "Cli.Integration", "{110381C8-81E9-483B-8659-A569516B23CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frenchex.Dev.Vos.Cli.Integration.Lib.Tests", "..\Frenchex.Dev.Vos.Cli.Integration.Lib.Tests\Frenchex.Dev.Vos.Cli.Integration.Lib.Tests.csproj", "{52BD2A4E-8564-44EE-98DD-E531CC6A8168}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frenchex.Dev.Vos.Cli.Integration.Lib.Tests", "..\Frenchex.Dev.Vos.Cli.Integration.Lib.Tests\Frenchex.Dev.Vos.Cli.Integration.Lib.Tests.csproj", "{52BD2A4E-8564-44EE-98DD-E531CC6A8168}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frenchex.Dev.Vos.Cli.Integration.Lib", "..\Frenchex.Dev.Vos.Cli.Integration.Lib\Frenchex.Dev.Vos.Cli.Integration.Lib.csproj", "{EC48ABC0-D9FE-4906-B4C8-3D6CBE823D39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frenchex.Dev.Vos.Cli.Integration.Lib", "..\Frenchex.Dev.Vos.Cli.Integration.Lib\Frenchex.Dev.Vos.Cli.Integration.Lib.csproj", "{EC48ABC0-D9FE-4906-B4C8-3D6CBE823D39}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gitlab", "Gitlab", "{A9159C4F-751D-44F3-AC10-F363F89E1A8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Github", "Github", "{9FDD76F8-19A8-4BAA-8BB4-DCB1E5FF3C43}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packer", "Packer", "{075F5CD1-3D36-4199-8E3D-AE51E00215BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Git", "Git", "{FFBB8154-BE30-4393-A1FC-3C03F99CB5C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

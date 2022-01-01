@@ -1,9 +1,8 @@
-﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Root
+﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
+
+public interface IRootCommand<U, R>
+    where U : IRootCommandRequest
+    where R : IRootCommandResponse
 {
-    public interface IRootCommand<U, R>
-        where U : IRootCommandRequest
-        where R : IRootCommandResponse
-    {
-        Task<R> Execute(U request);
-    }
+    Task<R> Execute(U request);
 }

@@ -1,10 +1,9 @@
-﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Define.Machine.Add
+﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Define.Machine.Add;
+
+public class DefineMachineAddCommandResponseBuilder : IDefineMachineAddCommandResponseBuilder
 {
-    public class DefineMachineAddCommandResponseBuilder : IDefineMachineAddCommandResponseBuilder
+    public IDefineMachineAddCommandResponse Build()
     {
-        public IDefineMachineAddCommandResponse Build()
-        {
-            return new DefineMachineAddCommandResponse();
-        }
+        return new DefineMachineAddCommandResponse();
     }
 }

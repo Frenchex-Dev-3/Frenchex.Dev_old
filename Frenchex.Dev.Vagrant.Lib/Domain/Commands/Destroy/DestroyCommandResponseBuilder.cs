@@ -1,17 +1,14 @@
 ﻿using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Destroy
-{
-    public class DestroyCommandResponseBuilder : RootResponseBuilder, IDestroyCommandResponseBuilder
-    {
-        public IDestroyCommandResponse Build()
-        {
-            if (null == _process || null == _processExecutionResult)
-            {
-                throw new InvalidOperationException("missing process or execution result");
-            }
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Destroy;
 
-            return new DestroyCommandResponse(_process, _processExecutionResult);
-        }
+public class DestroyCommandResponseBuilder : RootResponseBuilder, IDestroyCommandResponseBuilder
+{
+    public IDestroyCommandResponse Build()
+    {
+        if (null == _process || null == _processExecutionResult)
+            throw new InvalidOperationException("missing process or execution result");
+
+        return new DestroyCommandResponse(_process, _processExecutionResult);
     }
 }

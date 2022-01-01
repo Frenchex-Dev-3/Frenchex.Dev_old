@@ -1,7 +1,6 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root
+﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+
+public interface IRootCommandRequest
 {
-    public interface IRootCommandRequest
-    {
-        IBaseCommandRequest Base { get; }
-    }
+    IBaseCommandRequest Base { get; }
 }

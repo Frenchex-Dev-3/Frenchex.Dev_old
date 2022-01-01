@@ -5,7 +5,7 @@ VAGRANT_VERSION = 2
 
 ENV["LC_ALL"] = "en_US.UTF-8"
 
-debug = ENV["VEX_VAGRANTFILE_DEBUG"];
+debug = ENV["VOS_VAGRANTFILE_DEBUG"];
 
 # Get this file directory
   require 'pathname'
@@ -129,7 +129,7 @@ debug = ENV["VEX_VAGRANTFILE_DEBUG"];
 
         srv.vm.network 'private_network', ip: ip
 
-        srv.vm.network "public_network", bridge: server['bridge'] || ENV['vagrant_machine_default_bridge']
+        srv.vm.network "public_network", bridge: server['network_bridge'] || ENV['vagrant_machine_default_bridge']
         
         srv.vm.hostname = servername_real
        

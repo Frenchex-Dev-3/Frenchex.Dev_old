@@ -1,7 +1,6 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Up
+﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Up;
+
+public interface IUpCommandRequestBuilderFactory
 {
-    public interface IUpCommandRequestBuilderFactory
-    {
-        IUpCommandRequestBuilder Factory();
-    }
+    IUpCommandRequestBuilder Factory();
 }

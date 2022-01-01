@@ -1,9 +1,5 @@
-﻿using Frenchex.Dev.Dotnet.Process.Lib.Domain.Process;
+﻿namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
 
-namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Root
+public abstract class RootResponseBuilder : IRootResponseBuilder
 {
-    abstract public class RootResponseBuilder : IRootResponseBuilder
-    {
-
-    }
 }

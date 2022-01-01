@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Frenchex.Dev.Dotnet.Cli.Lib.Domain
+namespace Frenchex.Dev.Dotnet.Cli.Lib.Domain;
+
+public interface IServicesConfiguration
 {
-    public interface IServicesConfiguration
-    {
-        void ConfigureServices(IServiceCollection services);
-    }
+    void ConfigureServices(IServiceCollection services);
 }

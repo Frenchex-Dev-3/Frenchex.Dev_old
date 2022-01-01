@@ -1,7 +1,8 @@
-﻿namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Init
+﻿using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+
+namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Init;
+
+public interface IInitCommandResponseBuilder : IRootCommandResponseBuilder
 {
-    public interface IInitCommandResponseBuilder : Root.IRootCommandResponseBuilder
-    {
-        IInitCommandResponse Build();
-    }
+    IInitCommandResponse Build();
 }
