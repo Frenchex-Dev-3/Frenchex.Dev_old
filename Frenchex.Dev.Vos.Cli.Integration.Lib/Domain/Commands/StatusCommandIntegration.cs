@@ -4,7 +4,7 @@ using Frenchex.Dev.Vos.Lib.Domain.Commands.Status;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands;
 
-public interface IStatusCommandIntegration : IVexCommandIntegration
+public interface IStatusCommandIntegration : IVosCommandIntegration
 {
 }
 

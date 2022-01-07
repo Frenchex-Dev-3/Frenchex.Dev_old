@@ -2,7 +2,7 @@
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands;
 
-public interface IVexCommandIntegration
+public interface IVosCommandIntegration
 {
     void Integrate(Command rootCommand);
 }

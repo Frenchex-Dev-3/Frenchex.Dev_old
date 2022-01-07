@@ -4,7 +4,7 @@ using Frenchex.Dev.Vos.Lib.Domain.Commands.Destroy;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands;
 
-public interface IDestroyCommandIntegration : IVexCommandIntegration
+public interface IDestroyCommandIntegration : IVosCommandIntegration
 {
 }
 

@@ -4,7 +4,7 @@ using Frenchex.Dev.Vos.Lib.Domain.Commands.Init;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands;
 
-public interface IInitCommandIntegration : IVexCommandIntegration
+public interface IInitCommandIntegration : IVosCommandIntegration
 {
 }
 
@@ -26,15 +26,15 @@ public class InitCommandIntegration : ABaseCommandIntegration, IInitCommandInteg
     {
         var command = new Command("init", "Runs Vex init")
         {
-            new Argument<int>("instance-number"),
-            new Option<string>(new[] {"--naming", "-n"}, () => "#{name}#{instance}", "Naming pattern"),
+            new Option<string>(new[] {"--naming", "-n"}, () => "#{name}-#{instance}", "Naming pattern"),
+            new Option<int>(new[] {"--zeroes", "-z"}, () => 2, "Numbering leading zeroes"),
             new Option<int>(new[] {"--timeoutms", "-t"}, "TimeOut in ms"),
             new Option<string>(new[] {"--working-directory", "-w"}, "Working Directory")
         };
 
         command.Handler = CommandHandler.Create(async (
-            int instance,
             string naming,
+            int zeroes,
             int timeOutMiliseconds,
             string workingDirectory
         ) =>
@@ -45,8 +45,8 @@ public class InitCommandIntegration : ABaseCommandIntegration, IInitCommandInteg
                         .UsingTimeoutMiliseconds(timeOutMiliseconds)
                         .UsingWorkingDirectory(workingDirectory)
                         .Parent<IInitCommandRequestBuilder>()
-                        .WithInstanceNumber(instance)
                         .WithNamingPattern(naming)
+                        .WithGivenLeadingZeroes(zeroes)
                         .Build()
                     )
                 ;

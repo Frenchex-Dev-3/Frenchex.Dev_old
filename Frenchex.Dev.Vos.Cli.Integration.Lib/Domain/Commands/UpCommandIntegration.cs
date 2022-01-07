@@ -5,7 +5,7 @@ using Frenchex.Dev.Vos.Lib.Domain.Definitions;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands;
 
-public interface IUpCommandIntegration : IVexCommandIntegration
+public interface IUpCommandIntegration : IVosCommandIntegration
 {
 }
 
@@ -68,6 +68,7 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
                         .Build()
                     )
                 ;
+
             if (null == response.Response.Process.WrappedProcess
                 || null == response.Response.ProcessExecutionResult.WaitForCompleteExit)
                 throw new InvalidOperationException("missing response elements");

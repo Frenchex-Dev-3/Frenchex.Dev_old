@@ -30,27 +30,28 @@ public class ServicesConfiguration
 
 
         services
-            .AddSingleton<IVexCommandIntegration, DefineCommandIntegration>()
+            .AddSingleton<IVosCommandIntegration, DefineCommandIntegration>()
             .AddSingleton<IDefineCommandIntegration, DefineCommandIntegration>()
             .AddSingleton<IDefineMachineCommandIntegration, DefineMachineCommandIntegration>()
             .AddSingleton<IDefineSubCommandIntegration, DefineMachineCommandIntegration>()
             .AddSingleton<IDefineMachineSubCommandIntegration, DefineMachineAddCommandIntegration>()
             .AddSingleton<IDefineSubCommandIntegration, DefineMachineTypeCommandIntegration>()
             .AddSingleton<IDefineMachineTypeSubCommandIntegration, DefineMachineTypeAddCommandIntegration>()
-            .AddSingleton<IVexCommandIntegration, DestroyCommandIntegration>()
+            .AddSingleton<IVosCommandIntegration, DestroyCommandIntegration>()
             .AddSingleton<IDestroyCommandIntegration, DestroyCommandIntegration>()
-            .AddSingleton<IVexCommandIntegration, HaltCommandIntegration>()
+            .AddSingleton<IVosCommandIntegration, HaltCommandIntegration>()
             .AddSingleton<IHaltCommandIntegration, HaltCommandIntegration>()
-            .AddSingleton<IVexCommandIntegration, InitCommandIntegration>()
+            .AddSingleton<IVosCommandIntegration, InitCommandIntegration>()
             .AddSingleton<IInitCommandIntegration, InitCommandIntegration>()
-            .AddSingleton<IVexCommandIntegration, SshCommandIntegration>()
+            .AddSingleton<IVosCommandIntegration, SshCommandIntegration>()
             .AddSingleton<ISshCommandIntegration, SshCommandIntegration>()
-            .AddSingleton<IVexCommandIntegration, SshConfigCommandIntegration>()
+            .AddSingleton<IVosCommandIntegration, SshConfigCommandIntegration>()
             .AddSingleton<ISshConfigCommandIntegration, SshConfigCommandIntegration>()
-            .AddSingleton<IVexCommandIntegration, UpCommandIntegration>()
+            .AddSingleton<IVosCommandIntegration, UpCommandIntegration>()
             .AddSingleton<IUpCommandIntegration, UpCommandIntegration>()
-            .AddSingleton<IVexCommandIntegration, StatusCommandIntegration>()
+            .AddSingleton<IVosCommandIntegration, StatusCommandIntegration>()
             .AddSingleton<IStatusCommandIntegration, StatusCommandIntegration>()
+            .AddSingleton<INameCommandIntegration, NameCommandIntegration>()
             ;
     }
 }

@@ -6,9 +6,9 @@ namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain;
 
 public class Integration : IIntegration
 {
-    private readonly IEnumerable<IVexCommandIntegration> _vexCommands;
+    private readonly IEnumerable<IVosCommandIntegration> _vexCommands;
 
-    public Integration(IEnumerable<IVexCommandIntegration> vexCommands)
+    public Integration(IEnumerable<IVosCommandIntegration> vexCommands)
     {
         _vexCommands = vexCommands;
     }

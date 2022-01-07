@@ -6,5 +6,5 @@ namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Status;
 
 public interface IStatusCommandResponse : IRootCommandResponse
 {
-    IImmutableDictionary<string, VagrantMachineStatusEnum> Statuses { get; }
+    IImmutableDictionary<string, (string, VagrantMachineStatusEnum)> Statuses { get; }
 }

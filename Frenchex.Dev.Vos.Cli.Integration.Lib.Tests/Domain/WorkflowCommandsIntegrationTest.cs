@@ -36,6 +36,7 @@ public class WorkflowCommandsIntegrationTest
         _haltCommandIntegration = di.GetRequiredService<IHaltCommandIntegration>();
         _destroyCommandIntegration = di.GetRequiredService<IDestroyCommandIntegration>();
         _statusCommandIntegration = di.GetRequiredService<IStatusCommandIntegration>();
+        _nameCommandIntegration = di.GetRequiredService<INameCommandIntegration>();
 
         _rootCommand = new RootCommand();
 
@@ -47,6 +48,7 @@ public class WorkflowCommandsIntegrationTest
         _sshCommandIntegration.Integrate(_rootCommand);
         _upCommandIntegration.Integrate(_rootCommand);
         _statusCommandIntegration.Integrate(_rootCommand);
+        _nameCommandIntegration.Integrate(_rootCommand);
     }
 
     #endregion
@@ -62,6 +64,7 @@ public class WorkflowCommandsIntegrationTest
     private IHaltCommandIntegration? _haltCommandIntegration;
     private IDestroyCommandIntegration? _destroyCommandIntegration;
     private IStatusCommandIntegration? _statusCommandIntegration;
+    private INameCommandIntegration? _nameCommandIntegration;
 
     #endregion
 
@@ -69,18 +72,37 @@ public class WorkflowCommandsIntegrationTest
 
     public static IEnumerable<object[]> Test_Data()
     {
-        const string timeOutOpt = "--timeoutms 100000000";
+        var timeOutOpt = "--timeoutms " + TimeSpan.FromMinutes(10).TotalMilliseconds;
         const string workingDirOpt = "--working-directory #WORKING_DIRECTORY#";
 
         yield return new object[]
         {
             new[]
             {
-                $"init 1 {timeOutOpt} {workingDirOpt}",
+                $"init {timeOutOpt} {workingDirOpt}",
+                $"define machine-type add foo 'generic/alpine38' 4 128 --enabled {timeOutOpt} {workingDirOpt}",
+                $"define machine add foo foo 4 --enabled {timeOutOpt} {workingDirOpt}",
+                $"name foo-[2-*] {timeOutOpt} {workingDirOpt}",
+                $"status foo-[2-*] {timeOutOpt} {workingDirOpt}",
+                $"up foo-0 {timeOutOpt} {workingDirOpt}",
+                $"up foo-[2-*] {timeOutOpt} {workingDirOpt}",
+                $"status foo-[2-*] {timeOutOpt} {workingDirOpt}",
+                $"halt foo-[2-*] {timeOutOpt} {workingDirOpt}",
+                $"destroy foo-[2-*] --force {timeOutOpt} {workingDirOpt}",
+                $"destroy --force {timeOutOpt} {workingDirOpt}"
+            }
+        };
+
+        yield return new object[]
+        {
+            new[]
+            {
+                $"init {timeOutOpt} {workingDirOpt}",
                 $"define machine-type add foo 'generic/alpine38' 4 128 --enabled {timeOutOpt} {workingDirOpt}",
                 $"define machine-type add bar 'generic/alpine38' 4 128 --enabled {timeOutOpt} {workingDirOpt}",
                 $"define machine add foo foo 4 --enabled {timeOutOpt} {workingDirOpt}",
                 $"define machine add bar bar 4 --enabled {timeOutOpt} {workingDirOpt}",
+                $"name bar-0 foo-[2-*] {timeOutOpt} {workingDirOpt}",
                 $"status bar-* foo-[2-*] {timeOutOpt} {workingDirOpt}",
                 $"up foo-0 {timeOutOpt} {workingDirOpt}",
                 $"up foo-[2-*] {timeOutOpt} {workingDirOpt}",
@@ -102,11 +124,12 @@ public class WorkflowCommandsIntegrationTest
 
         if (!Directory.Exists(workingDirectory)) Directory.CreateDirectory(workingDirectory);
 
-        Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe", "-n " + workingDirectory);
+        var process = Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe", "-n " + workingDirectory);
 
         foreach (var command in commands)
             await RunTest(_rootCommand, command.Replace("#WORKING_DIRECTORY#", workingDirectory));
-
+        
+        process.Kill();
         Directory.Delete(workingDirectory, true);
     }
 

@@ -27,6 +27,172 @@ namespace Frenchex.Dev.Vos.Lib.Tests.Domain.Commands;
 [TestClass]
 public class CompleteWorkflowTests
 {
+    public static IEnumerable<object[]> Test_Data()
+    {
+        var tempDir = Path.Join(Path.GetTempPath(), Path.GetRandomFileName());
+        yield return new object[]
+        {
+            BuildInitCommandRequest(tempDir),
+            BuildDefineMachineTypeAddCommandRequestsList(tempDir),
+            BuildDefineMachineAddCommandRequestsList(tempDir),
+            BuildNameCommandRequestsList(tempDir),
+            BuildStatusBeforeUpCommandRequestsList(tempDir),
+            BuildUpCommandRequestsList(tempDir),
+            BuildStatusAfterUpCommandRequestsList(tempDir),
+            BuildSshConfigCommandRequestsList(tempDir),
+            BuildSshCommandRequestsList(tempDir),
+            BuildHaltCommandRequestsList(tempDir),
+            BuildDestroyCommandRequestsList(tempDir),
+            true, // start vs code
+            true  // clean at end
+        };
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(Test_Data), DynamicDataSourceType.Method)]
+    public async Task Test_Complete_Workflow(
+        IInitCommandRequest initRequest,
+        IList<IDefineMachineTypeAddCommandRequest> defineMachineTypeAddCommandRequestsList,
+        IList<IDefineMachineAddCommandRequest> defineMachineAddCommandRequestsList,
+        IList<INameCommandRequest> nameCommandRequestsList,
+        IList<IStatusCommandRequest> statusBeforeUpCommandRequestsList,
+        IList<IUpCommandRequest> upRequestsList,
+        IList<IStatusCommandRequest> statusAfterUpCommandRequestsList,
+        IList<ISshConfigCommandRequest> sshConfigCommandRequestsList,
+        IList<ISshCommandRequest> sshCommandRequestsList,
+        IList<IHaltCommandRequest> haltRequestsList,
+        IList<IDestroyCommandRequest> destroyRequestsLists,
+        bool codeStart,
+        bool cleanAtEnd
+    )
+    {
+        if (
+            null == _initCommand
+            || null == _defineMachineAddCommand
+            || null == _defineMachineTypeAddCommand
+            || null == _statusCommand
+            || null == _upCommand
+            || null == _sshCommand
+            || null == _sshConfigCommand
+            || null == _haltCommand
+            || null == _destroyCommand
+            || null == _nameCommand
+            || null == _nameCommandRequestBuilderFactory
+        )
+            throw new InvalidOperationException("commands are null, no di setup done");
+
+        TestInner(await _initCommand.Execute(initRequest));
+
+        Process? codeProcess = null;
+        if (codeStart)
+            codeProcess = Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe", "-n " + initRequest.Base.WorkingDirectory);
+
+        foreach (var item in defineMachineTypeAddCommandRequestsList)
+        {
+            TestInner(await _defineMachineTypeAddCommand.Execute(item));
+            // more asserts on fs
+        }
+
+        foreach (var item in defineMachineAddCommandRequestsList)
+        {
+            TestInner(await _defineMachineAddCommand.Execute(item));
+            // more asserts on fs 
+        }
+
+        foreach (var item in nameCommandRequestsList)
+        {
+            var response = await _nameCommand.Execute(item);
+            Assert.IsNotNull(response);
+            // assert given names are given as expected
+        }
+
+        foreach (var item in statusBeforeUpCommandRequestsList)
+        {
+            var statusResponse = await _statusCommand.Execute(item);
+            Assert.IsNotNull(statusResponse);
+            Assert.IsTrue(statusResponse.Statuses.Any());
+
+            foreach (var statusItem in statusResponse.Statuses)
+                Assert.AreEqual(VagrantMachineStatusEnum.NotCreated, statusItem.Value);
+        }
+
+        var willBeUp = new List<string>();
+
+        foreach (var item in upRequestsList)
+        {
+            var upResponse = await _upCommand.Execute(item);
+            TestInner(upResponse);
+            Assert.IsNotNull(upResponse.Response);
+            Assert.IsNotNull(upResponse.Response?.ProcessExecutionResult?.WaitForCompleteExit);
+            await upResponse.Response.ProcessExecutionResult.WaitForCompleteExit;
+
+            Assert.AreEqual(0, upResponse.Response.ProcessExecutionResult.ExitCode);
+
+            var realNames = await _nameCommand.Execute(_nameCommandRequestBuilderFactory.Factory()
+                .BaseBuilder
+                .UsingWorkingDirectory(item.Base.WorkingDirectory)
+                .Parent<INameCommandRequestBuilder>()
+                .WithNames(item.Names)
+                .Build());
+
+            willBeUp.AddRange(realNames.Names);
+        }
+
+        foreach (var item in statusAfterUpCommandRequestsList)
+        {
+            var statusResponse = await _statusCommand.Execute(item);
+            Assert.IsNotNull(statusResponse);
+            Assert.IsTrue(statusResponse.Statuses.Any());
+
+            foreach (var (key, value) in statusResponse.Statuses)
+                Assert.AreEqual(
+                    willBeUp.Contains(key)
+                        ? VagrantMachineStatusEnum.Running
+                        : VagrantMachineStatusEnum.NotCreated, value);
+        }
+
+        foreach (var item in sshConfigCommandRequestsList)
+        {
+            TestInner(await _sshConfigCommand.Execute(item));
+            //more asserts
+        }
+
+        foreach (var item in sshCommandRequestsList)
+        {
+            TestInner(await _sshCommand.Execute(item));
+            //more asserts
+        }
+
+        foreach (var item in haltRequestsList)
+        {
+            TestInner(await _haltCommand.Execute(item));
+            //more asserts
+        }
+
+        foreach (var item in destroyRequestsLists)
+        {
+            TestInner(await _destroyCommand.Execute(item));
+            //more asserts
+        }
+
+        // generic asserts
+        Assert.IsTrue(Directory.Exists(initRequest.Base.WorkingDirectory));
+        Assert.IsTrue(File.Exists(Path.Join(initRequest.Base.WorkingDirectory, "Vagrantfile")));
+
+        if (codeStart && codeProcess != null)
+        {
+            codeProcess.Kill();
+        }
+
+        if (cleanAtEnd)
+        {
+            //clean
+            Directory.Delete(initRequest.Base.WorkingDirectory, true);
+            Assert.IsFalse(Directory.Exists(initRequest.Base.WorkingDirectory));
+        }
+    }
+
+    #region Statics
     private static IServiceProvider? _di;
 
     // factories used to build requests in dynamic method ::Test_Data
@@ -108,8 +274,7 @@ public class CompleteWorkflowTests
 
     private static List<IStatusCommandRequest> BuildStatusAfterUpCommandRequestsList(string tempDir)
     {
-        if (null == _statusCommandRequestBuilderFactory
-           )
+        if (null == _statusCommandRequestBuilderFactory)
             throw new InvalidOperationException("null");
 
         return new List<IStatusCommandRequest>
@@ -464,150 +629,24 @@ public class CompleteWorkflowTests
             .Build();
     }
 
-    public static IEnumerable<object[]> Test_Data()
-    {
-        var tempDir = Path.Join(Path.GetTempPath(), Path.GetRandomFileName());
-        yield return new object[]
-        {
-            BuildInitCommandRequest(tempDir),
-            BuildDefineMachineTypeAddCommandRequestsList(tempDir),
-            BuildDefineMachineAddCommandRequestsList(tempDir),
-            BuildStatusBeforeUpCommandRequestsList(tempDir),
-            BuildUpCommandRequestsList(tempDir),
-            BuildStatusAfterUpCommandRequestsList(tempDir),
-            BuildSshConfigCommandRequestsList(tempDir),
-            BuildSshCommandRequestsList(tempDir),
-            BuildHaltCommandRequestsList(tempDir),
-            BuildDestroyCommandRequestsList(tempDir),
-            true, // start vs code
-            true  // clean at end
-        };
-    }
 
-    [TestMethod]
-    [DynamicData(nameof(Test_Data), DynamicDataSourceType.Method)]
-    public async Task Test_Complete_Workflow(
-        IInitCommandRequest initRequest,
-        IList<IDefineMachineTypeAddCommandRequest> defineMachineTypeAddCommandRequestsList,
-        IList<IDefineMachineAddCommandRequest> defineMachineAddCommandRequestsList,
-        IList<IStatusCommandRequest> statusBeforeUpCommandRequestsList,
-        IList<IUpCommandRequest> upRequestsList,
-        IList<IStatusCommandRequest> statusAfterUpCommandRequestsList,
-        IList<ISshConfigCommandRequest> sshConfigCommandRequestsList,
-        IList<ISshCommandRequest> sshCommandRequestsList,
-        IList<IHaltCommandRequest> haltRequestsList,
-        IList<IDestroyCommandRequest> destroyRequestsLists,
-        bool startCode,
-        bool cleanAtEnd
-    )
+    private static object BuildNameCommandRequestsList(string tempDir)
     {
-        if (
-            null == _initCommand
-            || null == _defineMachineAddCommand
-            || null == _defineMachineTypeAddCommand
-            || null == _statusCommand
-            || null == _upCommand
-            || null == _sshCommand
-            || null == _sshConfigCommand
-            || null == _haltCommand
-            || null == _destroyCommand
-            || null == _nameCommand
-            || null == _nameCommandRequestBuilderFactory
-        )
+        if (null == _nameCommandRequestBuilderFactory)
             throw new InvalidOperationException("null");
 
-
-        TestInner(await _initCommand.Execute(initRequest));
-
-        if (startCode)
-            Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe", "-n " + initRequest.Base.WorkingDirectory);
-
-        foreach (var item in defineMachineTypeAddCommandRequestsList)
+        return new List<INameCommandRequest>
         {
-            TestInner(await _defineMachineTypeAddCommand.Execute(item));
-        }
-
-        foreach (var item in defineMachineAddCommandRequestsList)
-        {
-            TestInner(await _defineMachineAddCommand.Execute(item));
-        }
-
-        foreach (var item in statusBeforeUpCommandRequestsList)
-        {
-            var statusResponse = await _statusCommand.Execute(item);
-            Assert.IsNotNull(statusResponse);
-            Assert.IsTrue(statusResponse.Statuses.Any());
-
-            foreach (var statusItem in statusResponse.Statuses)
-                Assert.AreEqual(VagrantMachineStatusEnum.NotCreated, statusItem.Value);
-        }
-
-        var willBeUp = new List<string>();
-
-        foreach (var item in upRequestsList)
-        {
-            var upResponse = await _upCommand.Execute(item);
-            TestInner(upResponse);
-            Assert.IsNotNull(upResponse.Response);
-            Assert.IsNotNull(upResponse.Response?.ProcessExecutionResult?.WaitForCompleteExit);
-            await upResponse.Response.ProcessExecutionResult.WaitForCompleteExit;
-
-            Assert.AreEqual(0, upResponse.Response.ProcessExecutionResult.ExitCode);
-
-            var realNames = await _nameCommand.Execute(_nameCommandRequestBuilderFactory.Factory()
+            _nameCommandRequestBuilderFactory.Factory()
                 .BaseBuilder
-                .UsingWorkingDirectory(item.Base.WorkingDirectory)
+                .UsingWorkingDirectory(tempDir)
+                .UsingTimeoutMiliseconds(1000 * 100)
                 .Parent<INameCommandRequestBuilder>()
-                .WithNames(item.Names)
-                .Build());
-
-            willBeUp.AddRange(realNames.Names);
-        }
-
-        foreach (var item in statusAfterUpCommandRequestsList)
-        {
-            var statusResponse = await _statusCommand.Execute(item);
-            Assert.IsNotNull(statusResponse);
-            Assert.IsTrue(statusResponse.Statuses.Any());
-
-            foreach (var (key, value) in statusResponse.Statuses)
-                Assert.AreEqual(
-                    willBeUp.Contains(key)
-                        ? VagrantMachineStatusEnum.Running
-                        : VagrantMachineStatusEnum.NotCreated, value);
-        }
-
-        foreach (var item in sshConfigCommandRequestsList)
-        {
-            TestInner(await _sshConfigCommand.Execute(item));
-        }
-
-        foreach (var item in sshCommandRequestsList)
-        {
-            TestInner(await _sshCommand.Execute(item));
-        }
-
-        foreach (var item in haltRequestsList)
-        {
-            TestInner(await _haltCommand.Execute(item));
-        }
-
-        foreach (var item in destroyRequestsLists)
-        {
-            TestInner(await _destroyCommand.Execute(item));
-        }
-
-        // generic asserts
-        Assert.IsTrue(Directory.Exists(initRequest.Base.WorkingDirectory));
-        Assert.IsTrue(File.Exists(Path.Join(initRequest.Base.WorkingDirectory, "Vagrantfile")));
-
-        if (cleanAtEnd)
-        {
-            //clean
-            Directory.Delete(initRequest.Base.WorkingDirectory, true);
-            Assert.IsFalse(Directory.Exists(initRequest.Base.WorkingDirectory));
-        }
+                .WithNames(new []{"foo-0", "bar-[2-*]"})
+                .Build()
+        };
     }
+    #endregion
 
     private static void TestInner(IRootCommandResponse response)
     {

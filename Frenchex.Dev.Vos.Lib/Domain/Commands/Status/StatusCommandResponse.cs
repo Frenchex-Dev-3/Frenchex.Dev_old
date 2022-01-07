@@ -6,11 +6,11 @@ namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Status;
 public class StatusCommandResponse : IStatusCommandResponse
 {
     public StatusCommandResponse(
-        IImmutableDictionary<string, VagrantMachineStatusEnum> statuses
+        IImmutableDictionary<string, (string, VagrantMachineStatusEnum)> statuses
     )
     {
         Statuses = statuses;
     }
 
-    public IImmutableDictionary<string, VagrantMachineStatusEnum> Statuses { get; }
+    public IImmutableDictionary<string, (string, VagrantMachineStatusEnum)> Statuses { get; }
 }

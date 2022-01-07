@@ -4,7 +4,7 @@ using Frenchex.Dev.Vos.Lib.Domain.Commands.SshConfig;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands;
 
-public interface ISshConfigCommandIntegration : IVexCommandIntegration
+public interface ISshConfigCommandIntegration : IVosCommandIntegration
 {
 }
 

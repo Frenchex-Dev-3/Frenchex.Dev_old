@@ -4,7 +4,7 @@ using Frenchex.Dev.Vos.Lib.Domain.Commands.Halt;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands;
 
-public interface IHaltCommandIntegration : IVexCommandIntegration
+public interface IHaltCommandIntegration : IVosCommandIntegration
 {
 }
 
