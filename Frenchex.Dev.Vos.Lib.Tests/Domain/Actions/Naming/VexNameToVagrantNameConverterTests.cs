@@ -117,7 +117,8 @@ public class VexNameToVagrantNameConverterTests
 
         Assert.AreEqual(converted.Length, expectedNames.Length);
 
-        foreach (var expected in expectedNames) Assert.IsTrue(converted.Contains(expected));
+        foreach (var expected in expectedNames)
+            Assert.IsTrue(converted.Contains(expected), $"{expected} {converted}");
     }
 
     #region Static Setup

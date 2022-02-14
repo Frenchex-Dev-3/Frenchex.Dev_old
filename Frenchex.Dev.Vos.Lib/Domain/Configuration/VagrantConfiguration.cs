@@ -4,8 +4,7 @@ namespace Frenchex.Dev.Vos.Lib.Domain.Configuration;
 
 public class VagrantConfiguration
 {
-    [JsonProperty("prefix-with-dirbase")] public bool PrefixWithDirBase { get; set; } = true;
-    [JsonProperty("prefix-with-instance-number")] public bool PrefixWithInstanceNumber { get; set; } = true;
+    [JsonProperty("prefix-with-dirbase")] public bool PrefixWithDirBase { get; set; } = false;
 
     [JsonProperty("instance-number")] public int InstanceNumber { get; set; }
 

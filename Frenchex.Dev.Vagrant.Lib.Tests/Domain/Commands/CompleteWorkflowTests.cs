@@ -183,13 +183,13 @@ public class CompleteWorkflowTests
            )
             throw new InvalidOperationException("Command RequestFactory");
 
-        await TestInner(_realInitCommand.StartProcess(initRequest), true);
-        await TestInner(_realStatusCommand.StartProcess(statusRequest));
-        await TestInner(_realUpCommand.StartProcess(upRequest));
-        await TestInner(_realSshConfigCommand.StartProcess(sshConfigCommandRequest));
-        await TestInner(_realSshCommand.StartProcess(sshCommandRequest));
-        await TestInner(_realHaltCommand.StartProcess(haltRequest));
-        await TestInner(_realDestroyCommand.StartProcess(destroyRequest));
+        await TestInner("init", _realInitCommand.StartProcess(initRequest), true);
+        await TestInner("status", _realStatusCommand.StartProcess(statusRequest));
+        await TestInner("up", _realUpCommand.StartProcess(upRequest));
+        await TestInner("ssh-config", _realSshConfigCommand.StartProcess(sshConfigCommandRequest));
+        await TestInner("ssh", _realSshCommand.StartProcess(sshCommandRequest));
+        await TestInner("halt", _realHaltCommand.StartProcess(haltRequest));
+        await TestInner("destroy", _realDestroyCommand.StartProcess(destroyRequest));
 
         // generic asserts
         Assert.IsTrue(Directory.Exists(initRequest.Base.WorkingDirectory));
@@ -200,12 +200,12 @@ public class CompleteWorkflowTests
         Assert.IsFalse(Directory.Exists(initRequest.Base.WorkingDirectory));
     }
 
-    private static async Task TestInner(IRootCommandResponse response, bool outputCanBeEmptyButNotNull = false)
+    private static async Task TestInner(string debug, IRootCommandResponse response, bool outputCanBeEmptyButNotNull = false)
     {
-        Assert.IsNotNull(response);
-        Assert.IsNotNull(response.ProcessExecutionResult);
-        Assert.IsNotNull(response.ProcessExecutionResult.WaitForCompleteExit);
-        Assert.IsNotNull(response.ProcessExecutionResult.OutputStream);
+        Assert.IsNotNull(response, $"{debug} response is not null");
+        Assert.IsNotNull(response.ProcessExecutionResult, $"{debug} response.PER is not null");
+        Assert.IsNotNull(response.ProcessExecutionResult.WaitForCompleteExit, $"{debug} response.WaitForComplexeExit");
+        Assert.IsNotNull(response.ProcessExecutionResult.OutputStream, $"{debug} response outputstream");
 
         await response.ProcessExecutionResult.WaitForCompleteExit;
 
@@ -213,12 +213,12 @@ public class CompleteWorkflowTests
         var outputReader = new StreamReader(response.ProcessExecutionResult.OutputStream);
         var output = await outputReader.ReadToEndAsync();
 
-        Assert.AreEqual(0, response.ProcessExecutionResult.ExitCode);
+        Assert.AreEqual(0, response.ProcessExecutionResult.ExitCode, $"{debug} exit code is zero");
 
         if (outputCanBeEmptyButNotNull)
-            Assert.IsNotNull(output);
+            Assert.IsNotNull(output, $"{debug} output can be empty but not null");
         else
-            Assert.IsTrue(!string.IsNullOrEmpty(output));
+            Assert.IsTrue(!string.IsNullOrEmpty(output), $"{debug} output is neither empty nor null");
     }
 
     #endregion

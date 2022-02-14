@@ -43,8 +43,8 @@ public class CompleteWorkflowTests
             BuildSshCommandRequestsList(tempDir),
             BuildHaltCommandRequestsList(tempDir),
             BuildDestroyCommandRequestsList(tempDir),
-            true, // start vs code
-            true  // clean at end
+            false, // start vs code
+            false // clean at end
         };
     }
 
@@ -113,7 +113,9 @@ public class CompleteWorkflowTests
             Assert.IsTrue(statusResponse.Statuses.Any());
 
             foreach (var statusItem in statusResponse.Statuses)
-                Assert.AreEqual(VagrantMachineStatusEnum.NotCreated, statusItem.Value);
+            {
+                Assert.IsTrue(statusItem.Value.ToString().Contains(VagrantMachineStatusEnum.NotCreated.ToString()));
+            }
         }
 
         var willBeUp = new List<string>();
@@ -126,7 +128,7 @@ public class CompleteWorkflowTests
             Assert.IsNotNull(upResponse.Response?.ProcessExecutionResult?.WaitForCompleteExit);
             await upResponse.Response.ProcessExecutionResult.WaitForCompleteExit;
 
-            Assert.AreEqual(0, upResponse.Response.ProcessExecutionResult.ExitCode);
+            Assert.AreEqual(0, upResponse.Response.ProcessExecutionResult.ExitCode, "up exit code is zero");
 
             var realNames = await _nameCommand.Execute(_nameCommandRequestBuilderFactory.Factory()
                 .BaseBuilder
@@ -145,10 +147,10 @@ public class CompleteWorkflowTests
             Assert.IsTrue(statusResponse.Statuses.Any());
 
             foreach (var (key, value) in statusResponse.Statuses)
-                Assert.AreEqual(
+                Assert.IsTrue( value.ToString().Contains(
                     willBeUp.Contains(key)
-                        ? VagrantMachineStatusEnum.Running
-                        : VagrantMachineStatusEnum.NotCreated, value);
+                        ? VagrantMachineStatusEnum.Running.ToString()
+                        : VagrantMachineStatusEnum.NotCreated.ToString()));
         }
 
         foreach (var item in sshConfigCommandRequestsList)
@@ -481,7 +483,7 @@ public class CompleteWorkflowTests
                     .BaseBuilder
                     .With3DEnabled(true)
                     .WithBiosLogoImage("")
-                    .WithBox("debian/buster64")
+                    .WithBox("generic/alpine38")
                     .WithFiles(new Dictionary<string, FileCopyDefinition>())
                     .WithGui(false)
                     .WithOsType(OsTypeEnum.Debian_64)
@@ -491,15 +493,14 @@ public class CompleteWorkflowTests
                     .WithProvisioning(new Dictionary<string, ProvisioningDefinition>())
                     .WithSharedFolders(new Dictionary<string, SharedFolderDefinition>())
                     .WithVideoRamInMb(16)
-                    .WithRamInMb(512)
+                    .WithRamInMb(128)
                     .WithVirtualCpus(2)
                     .Parent<MachineDefinitionBuilder>()
                     .WithMachineType("foo")
                     .WithName("foo")
-                    .WithNamingPattern("#{name}-#{instance}")
                     .WithInstances(4)
                     .WithIPv4Start(2)
-                    .WithIPv4Pattern("10.100.1.#{number}")
+                    .WithIPv4Pattern("10.100.1.#INSTANCE#")
                     .IsPrimary(true)
                     .Enabled(true)
                     .WithVirtualCPUs(2)
@@ -517,7 +518,7 @@ public class CompleteWorkflowTests
                     .BaseBuilder
                     .With3DEnabled(true)
                     .WithBiosLogoImage("")
-                    .WithBox("debian/buster64")
+                    .WithBox("generic/alpine38")
                     .WithFiles(new Dictionary<string, FileCopyDefinition>())
                     .WithGui(false)
                     .WithOsType(OsTypeEnum.Debian_64)
@@ -525,21 +526,18 @@ public class CompleteWorkflowTests
                     .WithPageFusion(false)
                     .WithProvider(ProviderEnum.virtualbox)
                     .WithProvisioning(new Dictionary<string, ProvisioningDefinition>())
-                    .WithRamInMb(512)
+                    .WithRamInMb(128)
                     .WithSharedFolders(new Dictionary<string, SharedFolderDefinition>())
                     .WithVideoRamInMb(16)
                     .WithVirtualCpus(2)
                     .Parent<MachineDefinitionBuilder>()
                     .WithMachineType("bar")
                     .WithName("bar")
-                    .WithNamingPattern("#{name}-#{instance}")
                     .WithInstances(4)
                     .WithIPv4Start(2)
-                    .WithIPv4Pattern("10.100.2.#{number}")
+                    .WithIPv4Pattern("10.100.2.#INSTANCE#")
                     .IsPrimary(false)
                     .Enabled(true)
-                    .WithVirtualCPUs(2)
-                    .WithRamInMB(512)
                     .WithNetworkBridge(defaultSystemNetworkBridge.First().Item1.Description)
                     .Build()
                 )
@@ -567,7 +565,7 @@ public class CompleteWorkflowTests
                     .BaseBuilder
                     .With3DEnabled(true)
                     .WithBiosLogoImage("")
-                    .WithBox("debian/buster64")
+                    .WithBox("generic/alpine38")
                     .WithFiles(new Dictionary<string, FileCopyDefinition>())
                     .WithGui(false)
                     .WithOsType(OsTypeEnum.Debian_64)
@@ -593,7 +591,7 @@ public class CompleteWorkflowTests
                     .BaseBuilder
                     .With3DEnabled(true)
                     .WithBiosLogoImage("")
-                    .WithBox("debian/buster64")
+                    .WithBox("generic/alpine38")
                     .WithFiles(new Dictionary<string, FileCopyDefinition>())
                     .WithGui(false)
                     .WithOsType(OsTypeEnum.Debian_64)
@@ -624,7 +622,6 @@ public class CompleteWorkflowTests
             .UsingWorkingDirectory(tempDir)
             .UsingTimeoutMiliseconds(1000 * 100)
             .Parent<IInitCommandRequestBuilder>()
-            .WithNamingPattern("#{name}#{instance}")
             .WithGivenLeadingZeroes(2)
             .Build();
     }

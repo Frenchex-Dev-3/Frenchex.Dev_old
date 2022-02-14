@@ -131,12 +131,12 @@ public class WorkflowCommandsIntegrationTest
         if (!Directory.Exists(workingDirectory))
             Directory.CreateDirectory(workingDirectory);
 
-        var process = Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe", "-n " + workingDirectory);
+       // var process = Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe", "-n " + workingDirectory);
 
         foreach (var command in commands)
             await RunTest(_rootCommand, command.Replace("#WORKING_DIRECTORY#", workingDirectory));
 
-        process.Kill();
+        //process.Kill();
 
         Directory.Delete(workingDirectory, true);
     }

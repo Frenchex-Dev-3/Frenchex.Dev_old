@@ -52,8 +52,8 @@ public class VexNameToVagrantNameConverter : IVexNameToVagrantNameConverter
 
                         if (instances == "*")
                             to = (configuration?.Machines[machineName]?.Instances ?? 0) - 1;
-
-                      
+                        else 
+                            from = to = int.Parse(instances);
 
                         break;
                     }
