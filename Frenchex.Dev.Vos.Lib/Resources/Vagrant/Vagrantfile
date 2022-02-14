@@ -5,7 +5,7 @@ VAGRANT_VERSION = 2
 
 ENV["LC_ALL"] = "en_US.UTF-8"
 
-debug = ENV["VOS_VAGRANTFILE_DEBUG"];
+debug = ENV["VOS_DEBUG"] == "true";
 
 # Get this file directory
   require 'pathname'
@@ -104,21 +104,16 @@ debug = ENV["VOS_VAGRANTFILE_DEBUG"];
         throw "undefined $#{servername}-#{instance}.ipv4_pattern"
       end
 
-      ip = ip_pattern.gsub("\#{number}", (instance+ip_start.to_i).to_s)
+      ip = ip_pattern.gsub("#INSTANCE#", (instance+ip_start.to_i).to_s)
 
       puts "ip #{ip}" if debug
 
-      hostname_pattern = server["naming_pattern"]
-      puts hostname_pattern if debug
-      if (!hostname_pattern)
-        throw "undefined $#{servername}-#{instance}.naming_pattern"
-      end
+      servername_real = (vagrant_config["vagrant"]["prefix-with-dirbase"] ? "#{onlyDir}-" : "") + 
+        vagrant_config["vagrant"]["naming-pattern"]
+          .gsub("#MACHINE-INSTANCE#", instance_str)
+          .gsub("#MACHINE-NAME#", servername)
 
-      servername_real = (vagrant_config["vagrant"]["prefix-with-dirbase"] ? "#{onlyDir}-" : "") + hostname_pattern
-        .gsub("\#{instance}", instance_str)
-        .gsub("\#{name}", servername)
-
-        puts "servername_real #{servername_real}" if debug
+      puts "servername_real #{servername_real}" if debug
       
       config.vm.define servername_real, primary: (server['is_primary'] && instance == 0) do |srv|
 

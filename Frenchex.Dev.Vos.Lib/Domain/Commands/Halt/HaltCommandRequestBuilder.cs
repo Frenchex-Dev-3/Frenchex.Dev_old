@@ -27,7 +27,7 @@ public class HaltCommandRequestBuilder : RootCommandRequestBuilder, IHaltCommand
         );
     }
 
-    public IHaltCommandRequestBuilder UsingNames(string[] namesOrIds)
+    public IHaltCommandRequestBuilder UsingNames(string[]? namesOrIds)
     {
         _usingNamesOrIds = namesOrIds;
         return this;

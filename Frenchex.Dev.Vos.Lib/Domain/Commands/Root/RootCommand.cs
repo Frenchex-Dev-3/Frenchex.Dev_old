@@ -17,14 +17,14 @@ public abstract class RootCommand
         _nameToVagrantNameConverter = nameConverter;
     }
 
-    protected async Task<Configuration.Configuration> ConfigurationLoad(string path)
+    protected async Task<Configuration.Configuration> ConfigurationLoad(string? path)
     {
         return await _configurationLoadAction.Load(Path.Join(path, "config.json"));
     }
 
     protected string[] MapNamesToVagrantNames(
         string[] names,
-        string workingDirectory,
+        string? workingDirectory,
         Configuration.Configuration configuration
     )
     {

@@ -10,8 +10,6 @@ await Builder
         {
             new ServicesConfiguration()
                 .ConfigureServices(services);
-
-            return ""; // weird need
         },
         "hostsettings.json",
         "appsettings.json",
@@ -19,7 +17,7 @@ await Builder
     )
     .RunAsync();
 
-internal class Host : BasicHostedService
+public class Host : BasicHostedService
 {
     public Host(
         ILogger<AbstractHostedService> logger,
@@ -28,5 +26,6 @@ internal class Host : BasicHostedService
         IEnumerable<IIntegration> integrations
     ) : base("Frenchex.Dev.Cli", logger, hostApplicationLifetime, entryPointInfo, integrations)
     {
+
     }
 }

@@ -7,7 +7,7 @@ public class Filesystem : IFilesystem
         File.Copy(v1, v2);
     }
 
-    public DirectoryInfo CreateDirectory(string path)
+    public DirectoryInfo CreateDirectory(string? path)
     {
         return Directory.CreateDirectory(path);
     }
@@ -22,7 +22,7 @@ public class Filesystem : IFilesystem
         Directory.Delete(path, true);
     }
 
-    public bool DirectoryExists(string path)
+    public bool DirectoryExists(string? path)
     {
         return Directory.Exists(path);
     }

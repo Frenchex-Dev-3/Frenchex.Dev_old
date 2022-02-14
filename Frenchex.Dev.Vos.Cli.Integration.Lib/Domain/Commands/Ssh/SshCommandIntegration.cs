@@ -1,12 +1,7 @@
 ﻿using System.CommandLine;
-using System.CommandLine.Invocation;
 using Frenchex.Dev.Vos.Lib.Domain.Commands.Ssh;
 
-namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands;
-
-public interface ISshCommandIntegration : IVosCommandIntegration
-{
-}
+namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Ssh;
 
 public class SshCommandIntegration : ABaseCommandIntegration, ISshCommandIntegration
 {
@@ -33,11 +28,11 @@ public class SshCommandIntegration : ABaseCommandIntegration, ISshCommandIntegra
             new Option<int>(new[] {"--timeout", "-t"}, "TimeOut in ms")
         };
 
-        command.Handler = CommandHandler.Create(async (
+        command.SetHandler(async (
             string nameOrId,
             string sshCommand,
             string host,
-            string workingDirectory,
+            string? workingDirectory,
             int timeOutMiliseconds
         ) =>
         {

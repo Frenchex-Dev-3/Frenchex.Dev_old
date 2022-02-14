@@ -11,7 +11,7 @@ public class BaseRequest : IBaseRequest
         bool debugTimestamp,
         bool tty,
         bool help,
-        string workingDirectory,
+        string? workingDirectory,
         int timeoutMs
     )
     {
@@ -35,7 +35,7 @@ public class BaseRequest : IBaseRequest
     public bool DebugTimestamp { get; }
     public bool Tty { get; }
     public bool Help { get; }
-    public string WorkingDirectory { get; }
+    public string? WorkingDirectory { get; }
     public int TimeoutInMiliSeconds { get; } = 1000 * 2;
 
     public T Parent<T>(T parent)

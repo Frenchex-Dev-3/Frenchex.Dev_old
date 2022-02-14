@@ -10,7 +10,7 @@ public interface IBaseRequest
     bool DebugTimestamp { get; }
     bool Tty { get; }
     bool Help { get; }
-    string WorkingDirectory { get; }
+    string? WorkingDirectory { get; }
     int TimeoutInMiliSeconds { get; }
     T Parent<T>(T parent);
 }

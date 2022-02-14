@@ -1,12 +1,7 @@
 ﻿using System.CommandLine;
-using System.CommandLine.Invocation;
 using Frenchex.Dev.Vos.Lib.Domain.Commands.SshConfig;
 
-namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands;
-
-public interface ISshConfigCommandIntegration : IVosCommandIntegration
-{
-}
+namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.SshConfig;
 
 public class SshConfigCommandIntegration : ABaseCommandIntegration, ISshConfigCommandIntegration
 {
@@ -29,11 +24,11 @@ public class SshConfigCommandIntegration : ABaseCommandIntegration, ISshConfigCo
             new Argument<string[]>("name", "Name or ID"),
             new Option<string>(new[] {"--host", "-h"}, "Host on guest"),
             new Option<string>(new[] {"--working-directory", "-w"}, "Working Directory"),
-            new Option<int>(new[] {"--timeoutms", "-t"}, "TimeOut in ms"),
+            new Option<int>(new[] {"--timeout-ms", "-t"}, "TimeOut in ms"),
             new Option<bool>(new[] {"--color"}, "Color")
         };
 
-        command.Handler = CommandHandler.Create(async (
+        command.SetHandler(async (
             string nameOrId,
             string host,
             string workingDirectory,

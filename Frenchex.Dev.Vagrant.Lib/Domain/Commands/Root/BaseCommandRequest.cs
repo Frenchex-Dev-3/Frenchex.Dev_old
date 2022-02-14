@@ -3,7 +3,7 @@
 public class BaseCommandRequest : IBaseCommandRequest
 {
     public BaseCommandRequest(
-        string workingDirectory,
+        string? workingDirectory,
         bool? color,
         bool? machineReadable,
         bool? version,
@@ -35,6 +35,6 @@ public class BaseCommandRequest : IBaseCommandRequest
     public bool DebugTimestamp { get; }
     public bool Tty { get; }
     public bool Help { get; }
-    public string WorkingDirectory { get; }
+    public string? WorkingDirectory { get; }
     public int TimeoutInMiliSeconds { get; } = 1000 * 2;
 }

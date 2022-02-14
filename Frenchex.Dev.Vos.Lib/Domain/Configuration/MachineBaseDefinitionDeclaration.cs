@@ -30,7 +30,7 @@ public class MachineBaseDefinitionDeclaration
     [JsonConverter(typeof(StringEnumConverter))]
     public ProviderEnum? Provider { get; set; }
 
-    [JsonProperty("enabled")] public bool? Enabled { get; set; }
+    [JsonProperty("is_enabled")] public bool? Enabled { get; set; }
 
     [JsonProperty("box")] public string? Box { get; set; }
 

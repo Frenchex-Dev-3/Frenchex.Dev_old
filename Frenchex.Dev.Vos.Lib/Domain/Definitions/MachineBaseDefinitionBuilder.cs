@@ -89,7 +89,7 @@ public class MachineBaseDefinitionBuilder
         return this;
     }
 
-    public MachineBaseDefinitionBuilder WithBox(string box)
+    public MachineBaseDefinitionBuilder WithBox(string? box)
     {
         _box = box;
         return this;

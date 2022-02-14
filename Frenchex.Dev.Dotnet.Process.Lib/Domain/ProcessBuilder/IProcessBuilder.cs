@@ -11,7 +11,7 @@ public interface IProcessBuildingParameters
 {
     string Command { get; }
     string Arguments { get; }
-    string WorkingDirectory { get; }
+    string? WorkingDirectory { get; }
     int TimeOutInMiliSeconds { get; }
     bool UseShellExecute { get; }
     bool RedirectStandardInput { get; }
@@ -25,7 +25,7 @@ public class ProcessBuildingParameters : IProcessBuildingParameters
     public ProcessBuildingParameters(
         string command,
         string arguments,
-        string workingDirectory,
+        string? workingDirectory,
         int timeoutMs,
         bool useShellExecute,
         bool redirectStandardInput,
@@ -47,7 +47,7 @@ public class ProcessBuildingParameters : IProcessBuildingParameters
 
     public string Command { get; set; }
     public string Arguments { get; set; }
-    public string WorkingDirectory { get; set; }
+    public string? WorkingDirectory { get; set; }
     public int TimeOutInMiliSeconds { get; set; }
     public bool UseShellExecute { get; set; } = true;
     public bool RedirectStandardInput { get; set; } = true;

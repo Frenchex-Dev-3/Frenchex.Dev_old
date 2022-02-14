@@ -12,6 +12,6 @@ public interface IBaseRequestBuilder
     IBaseRequestBuilder WithTimestamp(bool with);
     IBaseRequestBuilder WithTty(bool with);
     IBaseRequestBuilder WithHelp(bool with);
-    IBaseRequestBuilder UsingWorkingDirectory(string workingDirectory);
+    IBaseRequestBuilder UsingWorkingDirectory(string? workingDirectory);
     IBaseRequestBuilder UsingTimeoutMiliseconds(int timeoutMs);
 }

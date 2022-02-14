@@ -272,7 +272,7 @@ public class CompleteWorkflowTests
         _defaultGatewayGetterAction = _di.GetRequiredService<IDefaultGatewayGetterAction>();
     }
 
-    private static List<IStatusCommandRequest> BuildStatusAfterUpCommandRequestsList(string tempDir)
+    private static List<IStatusCommandRequest> BuildStatusAfterUpCommandRequestsList(string? tempDir)
     {
         if (null == _statusCommandRequestBuilderFactory)
             throw new InvalidOperationException("null");
@@ -310,7 +310,7 @@ public class CompleteWorkflowTests
         };
     }
 
-    private static List<IStatusCommandRequest> BuildStatusBeforeUpCommandRequestsList(string tempDir)
+    private static List<IStatusCommandRequest> BuildStatusBeforeUpCommandRequestsList(string? tempDir)
     {
         if (null == _statusCommandRequestBuilderFactory
            )
@@ -327,7 +327,7 @@ public class CompleteWorkflowTests
         };
     }
 
-    private static List<IDestroyCommandRequest> BuildDestroyCommandRequestsList(string tempDir)
+    private static List<IDestroyCommandRequest> BuildDestroyCommandRequestsList(string? tempDir)
     {
         if (null == _destroyCommandRequestBuilderFactory
            )
@@ -361,7 +361,7 @@ public class CompleteWorkflowTests
         };
     }
 
-    private static List<IHaltCommandRequest> BuildHaltCommandRequestsList(string tempDir)
+    private static List<IHaltCommandRequest> BuildHaltCommandRequestsList(string? tempDir)
     {
         if (null == _haltCommandRequestBuilderFactory
            )
@@ -392,7 +392,7 @@ public class CompleteWorkflowTests
         };
     }
 
-    private static List<ISshCommandRequest> BuildSshCommandRequestsList(string tempDir)
+    private static List<ISshCommandRequest> BuildSshCommandRequestsList(string? tempDir)
     {
         if (null == _sshCommandRequestBuilderFactory
            )
@@ -419,7 +419,7 @@ public class CompleteWorkflowTests
         };
     }
 
-    private static List<ISshConfigCommandRequest> BuildSshConfigCommandRequestsList(string tempDir)
+    private static List<ISshConfigCommandRequest> BuildSshConfigCommandRequestsList(string? tempDir)
     {
         if (null == _sshConfigCommandRequestBuilderFactory) throw new InvalidOperationException("null");
 
@@ -442,7 +442,7 @@ public class CompleteWorkflowTests
         };
     }
 
-    private static List<IUpCommandRequest> BuildUpCommandRequestsList(string tempDir)
+    private static List<IUpCommandRequest> BuildUpCommandRequestsList(string? tempDir)
     {
         if (null == _upCommandRequestBuilderFactory) throw new InvalidOperationException("null");
 
@@ -460,7 +460,7 @@ public class CompleteWorkflowTests
     }
 
 
-    private static List<IDefineMachineAddCommandRequest> BuildDefineMachineAddCommandRequestsList(string tempDir)
+    private static List<IDefineMachineAddCommandRequest> BuildDefineMachineAddCommandRequestsList(string? tempDir)
     {
         if (null == _defineMachineAddCommandRequestBuilderFactory
             || null == _machineDefinitionBuilderFactory
@@ -548,7 +548,7 @@ public class CompleteWorkflowTests
     }
 
     private static List<IDefineMachineTypeAddCommandRequest> BuildDefineMachineTypeAddCommandRequestsList(
-        string tempDir)
+        string? tempDir)
     {
         if (null == _defineMachineTypeAddCommandRequestBuilderFactory
             || null == _machineTypeDefinitionBuilderFactory
@@ -613,7 +613,7 @@ public class CompleteWorkflowTests
         };
     }
 
-    private static IInitCommandRequest BuildInitCommandRequest(string tempDir)
+    private static IInitCommandRequest BuildInitCommandRequest(string? tempDir)
     {
         if (null == _initCommandRequestBuilderFactory
            )
@@ -630,7 +630,7 @@ public class CompleteWorkflowTests
     }
 
 
-    private static object BuildNameCommandRequestsList(string tempDir)
+    private static object BuildNameCommandRequestsList(string? tempDir)
     {
         if (null == _nameCommandRequestBuilderFactory)
             throw new InvalidOperationException("null");

@@ -6,7 +6,7 @@ namespace Frenchex.Dev.Dotnet.Cli.Lib.Domain;
 public class Builder
 {
     public static IProgram Build<T>(
-        Func<IServiceCollection, string> servicesConfigurationLambda,
+        Action<IServiceCollection> servicesConfigurationLambda,
         string hostSettingsJsonFilename,
         string appSettingsJsonFilename,
         string envVarPrefix
@@ -14,16 +14,29 @@ public class Builder
     {
         var services = new ServiceCollection();
 
-        servicesConfigurationLambda(services);
+        new DependencyInjection.ServicesConfiguration()
+            .ConfigureServices(services);
 
         var di = services.BuildServiceProvider();
 
-        var programBuilder = di.GetRequiredService<IProgramBuilder>();
+        var scope = di.CreateAsyncScope();
+
+        var scopedDi = scope.ServiceProvider;
+
+        var programBuilder = scopedDi.GetRequiredService<IProgramBuilder>();
 
         var program = programBuilder.Build(
-            new Context(hostSettingsJsonFilename, appSettingsJsonFilename, envVarPrefix,
-                Directory.GetCurrentDirectory()),
-            services => services.AddHostedService<T>()
+            new Context(
+                hostSettingsJsonFilename, 
+                appSettingsJsonFilename, 
+                envVarPrefix,
+                Directory.GetCurrentDirectory()
+            ),
+            programServices =>
+            {
+                servicesConfigurationLambda(programServices);
+                programServices.AddHostedService<T>();
+            }
         );
 
         return program;

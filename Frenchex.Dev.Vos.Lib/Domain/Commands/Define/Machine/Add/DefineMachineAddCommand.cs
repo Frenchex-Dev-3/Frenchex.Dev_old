@@ -26,19 +26,12 @@ public class DefineMachineAddCommand : RootCommand, IDefineMachineAddCommand
         if (null == request?.DefinitionDeclaration?.Name)
             throw new InvalidOperationException("request or definitionDeclaration or name is null");
 
-        try
-        {
-            var configFilePath = Path.Join(request.Base.WorkingDirectory, "config.json");
-            var config = await _configurationLoadAction.Load(configFilePath);
+        var configFilePath = Path.Join(request.Base.WorkingDirectory, "config.json");
+        var config = await _configurationLoadAction.Load(configFilePath);
 
-            config.Machines.Add(request.DefinitionDeclaration.Name, request.DefinitionDeclaration);
+        config.Machines.Add(request.DefinitionDeclaration.Name, request.DefinitionDeclaration);
 
-            await _configurationSaveAction.Save(config, configFilePath);
-        }
-        catch (Exception e)
-        {
-        }
-
+        await _configurationSaveAction.Save(config, configFilePath);
 
         return _responseBuilderFactory
             .Factory()

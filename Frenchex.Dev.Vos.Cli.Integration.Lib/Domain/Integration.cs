@@ -18,6 +18,7 @@ public class Integration : IIntegration
         var command = new Command("vos", "Vos commands");
         rootCommand.Add(command);
 
-        foreach (var vexCommand in _vexCommands) vexCommand.Integrate(command);
+        foreach (var vexCommand in _vexCommands) 
+            vexCommand.Integrate(command);
     }
 }

@@ -27,7 +27,7 @@ public class DestroyCommandRequestBuilder : RootCommandRequestBuilder, IDestroyC
         );
     }
 
-    public IDestroyCommandRequestBuilder UsingName(string nameOrId)
+    public IDestroyCommandRequestBuilder UsingName(string? nameOrId)
     {
         _withName = nameOrId;
         return this;

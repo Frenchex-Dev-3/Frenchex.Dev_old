@@ -5,5 +5,5 @@ namespace Frenchex.Dev.Dotnet.Cli.Lib.Domain;
 
 public interface IHostBuilder
 {
-    IHost Build(Context context, Func<IServiceCollection, IServiceCollection> servicesConfigurationLambda);
+    IHost Build(Context context, Action<IServiceCollection> servicesConfigurationLambda);
 }

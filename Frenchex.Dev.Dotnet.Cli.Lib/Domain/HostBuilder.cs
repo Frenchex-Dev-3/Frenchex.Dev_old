@@ -24,7 +24,9 @@ public class HostBuilder : IHostBuilder
         _servicesConfiguration = servicesConfiguration;
     }
 
-    public IHost Build(Context context, Func<IServiceCollection, IServiceCollection> servicesConfigurationLambda)
+    public IHost Build(
+        Context context, 
+        Action<IServiceCollection> servicesConfigurationLambda)
     {
         return Host
                 .CreateDefaultBuilder(_entryPointInfo.CommandLineArgs)

@@ -27,20 +27,20 @@ public class UpCommand : RootCommand, IUpCommand
 
     public async Task<IUpCommandResponse> Execute(IUpCommandRequest request)
     {
-        var vagrantUpProcess = _vagrantUpCommand.StartProcess(
-            _vagrantUpCommandRequestBuilderFactory.Factory()
-                .BaseBuilder
-                .UsingWorkingDirectory(request.Base.WorkingDirectory)
-                .Parent<Vagrant.Lib.Domain.Commands.Up.IUpCommandRequestBuilder>()
-                .UsingNamesOrIds(
-                    MapNamesToVagrantNames(
-                        request.Names,
-                        request.Base.WorkingDirectory,
-                        await ConfigurationLoad(request.Base.WorkingDirectory)
-                    )
+        var libRequest = _vagrantUpCommandRequestBuilderFactory.Factory()
+            .BaseBuilder
+            .UsingWorkingDirectory(request.Base.WorkingDirectory)
+            .Parent<Vagrant.Lib.Domain.Commands.Up.IUpCommandRequestBuilder>()
+            .UsingNamesOrIds(
+                MapNamesToVagrantNames(
+                    request.Names,
+                    request.Base.WorkingDirectory,
+                    await ConfigurationLoad(request.Base.WorkingDirectory)
                 )
-                .Build()
-        );
+            )
+            .Build();
+
+        var vagrantUpProcess = _vagrantUpCommand.StartProcess(libRequest);
 
         return _responseBuilderFactory.Factory()
             .WithUpResponse(vagrantUpProcess)

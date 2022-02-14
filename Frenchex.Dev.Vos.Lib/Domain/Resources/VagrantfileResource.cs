@@ -5,7 +5,7 @@ namespace Frenchex.Dev.Vos.Lib.Domain.Resources;
 
 public interface IVagrantfileResource
 {
-    void Copy(string destination);
+    void Copy(string? destination);
 }
 
 public class VagrantfileResource : IVagrantfileResource
@@ -29,7 +29,7 @@ public class VagrantfileResource : IVagrantfileResource
         );
     }
 
-    public void Copy(string destination)
+    public void Copy(string? destination)
     {
         _filesystem
             .CopyFile(

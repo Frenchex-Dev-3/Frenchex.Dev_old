@@ -13,7 +13,7 @@ public class ProgramBuilder : IProgramBuilder
         _hostBuilder = hostBuilder;
     }
 
-    public IProgram Build(Context context, Func<IServiceCollection, IServiceCollection> registerServices)
+    public IProgram Build(Context context, Action<IServiceCollection> registerServices)
     {
         return new Program(_hostBuilder.Build(context, registerServices));
     }

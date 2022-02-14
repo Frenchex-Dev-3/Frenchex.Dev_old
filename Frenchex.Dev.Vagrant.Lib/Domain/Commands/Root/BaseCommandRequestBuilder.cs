@@ -44,7 +44,7 @@ public class BaseCommandRequestBuilder : IBaseCommandRequestBuilder
         return this;
     }
 
-    public IBaseCommandRequestBuilder UsingWorkingDirectory(string workingDirectory)
+    public IBaseCommandRequestBuilder UsingWorkingDirectory(string? workingDirectory)
     {
         _workingDirectory = workingDirectory;
         return this;

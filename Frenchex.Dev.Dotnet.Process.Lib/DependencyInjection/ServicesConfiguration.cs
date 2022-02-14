@@ -10,7 +10,7 @@ public class ServicesConfiguration
         services.AddLogging();
 
         services
-            .AddSingleton<IProcessBuilder, AsyncProcessBuilder>()
+            .AddScoped<IProcessBuilder, AsyncProcessBuilder>()
             ;
     }
 }

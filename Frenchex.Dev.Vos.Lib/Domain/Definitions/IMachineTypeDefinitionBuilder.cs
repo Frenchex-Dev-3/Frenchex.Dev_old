@@ -3,7 +3,7 @@
 public interface IMachineTypeDefinitionBuilder
 {
     public MachineBaseDefinitionBuilder BaseBuilder { get; }
-    public IMachineTypeDefinitionBuilder WithName(string name);
+    public IMachineTypeDefinitionBuilder WithName(string? name);
 
     public MachineTypeDefinition Build();
 }

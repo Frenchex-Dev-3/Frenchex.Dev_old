@@ -1,7 +1,8 @@
-﻿using System.CommandLine;
-using System.CommandLine.Invocation;
-using Frenchex.Dev.Vos.Lib.Domain.Commands.Define.MachineType.Add;
+﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Define.MachineType.Add;
 using Frenchex.Dev.Vos.Lib.Domain.Definitions;
+using System.CommandLine;
+using System.CommandLine.Help;
+using System.CommandLine.Invocation;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Define.MachineType.Add;
 
@@ -24,49 +25,72 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
 
     public void Integrate(Command rootCommand)
     {
+        var nameArg = new Argument<string>("name", "Name");
+        var boxNameArg = new Argument<string>("box-name", "Box Name");
+        var vcpusArg = new Argument<int>("vcpus", "Virtual CPUs");
+        var ramMbArg = new Argument<int>("ram-mb", "RAM in MB");
+        var osTypeArg = new Argument<string>("os-type", "OS Name");
+        var osVersionArg = new Argument<string>("os-version", "OS Version");
+        var isEnabledOpt = new Option<bool>(new[] {"--enabled", "-e"}, "Enable Machine Type");
+        var isEnabled3dOpt = new Option<bool>(new[] {"--enable3d"}, "Enable 3D");
+        var timeoutMsOpt = new Option<int>(new[] {"--timeout-ms", "-t"}, "TimeOut in ms");
+        var workingDirOpt = new Option<string>(new[] {"--working-directory", "-w"}, "Working Directory");
+
         var command = new Command("add", "Define Machine-Types")
         {
-            new Argument<string>("name", "Name"),
-            new Argument<string>("box-name", "Box Name"),
-            new Argument<int>("vcpus", "Virtual CPUs"),
-            new Argument<int>("ram-in-mb", "RAM in MB"),
-            new Option<bool>(new[] {"--enabled", "-e"}, "Enable Machine Type"),
-            new Option<bool>(new[] {"--enable3d"}, "Enable 3D"),
-            new Option<int>(new[] {"--timeoutms", "-t"}, "TimeOut in ms"),
-            new Option<string>(new[] {"--working-directory", "-w"}, "Working Directory")
+            nameArg,
+            boxNameArg,
+            vcpusArg,
+            ramMbArg,
+            osTypeArg,
+            osVersionArg,
+            isEnabledOpt,
+            isEnabled3dOpt,
+            timeoutMsOpt,
+            workingDirOpt
         };
 
-        command.Handler = CommandHandler.Create(async (
-            string name,
-            string boxName,
-            int vCpus,
-            int ramInMb,
-            bool enabled,
-            bool enable3D,
-            int timeOutMiliseconds,
-            string workingDirectory
+        var binder = new DefineMachineTypeAddCommandIntegrationPayloadBinder(
+            nameArg,
+            boxNameArg,
+            vcpusArg,
+            ramMbArg,
+            osTypeArg,
+            osVersionArg,
+            isEnabledOpt,
+            isEnabled3dOpt,
+            timeoutMsOpt,
+            workingDirOpt
+        );
+
+        command.SetHandler(async(
+            DefineMachineTypeAddCommandIntegrationPayload payload,
+            InvocationContext ctx,
+            HelpBuilder helpBuilder,
+            CancellationToken cancellationToken
         ) =>
         {
             var request = _requestBuilderFactory.Factory()
                 .BaseBuilder
-                .UsingTimeoutMiliseconds(timeOutMiliseconds)
-                .UsingWorkingDirectory(workingDirectory)
+                .UsingTimeoutMiliseconds(payload.TimeOutMs)
+                .UsingWorkingDirectory(payload.WorkingDirectory)
                 .Parent<IDefineMachineTypeAddCommandRequestBuilder>()
                 .UsingDefinition(_machineTypeDefinitionBuilder.Factory()
                     .BaseBuilder
-                    .Enabled(enabled)
-                    .With3DEnabled(enable3D)
-                    .WithBox(boxName)
-                    .WithRamInMb(ramInMb)
-                    .WithVirtualCpus(vCpus)
+                    .Enabled(payload.Enabled)
+                    .With3DEnabled(payload.Enable3D)
+                    .WithBox(payload.BoxName)
+                    .WithRamInMb(payload.RamInMb)
+                    .WithVirtualCpus(payload.VCpus)
+                    .WithOsType(Enum.Parse<OsTypeEnum>(payload.OsType))
                     .Parent<IMachineTypeDefinitionBuilder>()
-                    .WithName(name)
+                    .WithName(payload.Name)
                     .Build()
                 )
                 .Build();
 
             var response = await _command.Execute(request);
-        });
+        }, binder);
 
         rootCommand.AddCommand(command);
     }

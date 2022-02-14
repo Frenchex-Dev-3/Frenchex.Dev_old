@@ -13,7 +13,7 @@ public class MachineTypeDefinitionBuilder : IMachineTypeDefinitionBuilder
 
     public MachineBaseDefinitionBuilder BaseBuilder { get; }
 
-    public IMachineTypeDefinitionBuilder WithName(string name)
+    public IMachineTypeDefinitionBuilder WithName(string? name)
     {
         _name = name;
         return this;

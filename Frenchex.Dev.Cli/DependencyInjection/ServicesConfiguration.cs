@@ -7,7 +7,9 @@ internal class ServicesConfiguration : IServicesConfiguration
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        new Dotnet.Cli.Lib.DependencyInjection.ServicesConfiguration()
+      
+        Vos.Cli.Integration.Lib.DependencyInjection.ServicesConfiguration
             .ConfigureServices(services);
+
     }
 }

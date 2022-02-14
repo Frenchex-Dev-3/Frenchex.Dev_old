@@ -4,11 +4,14 @@ namespace Frenchex.Dev.Vos.Lib.Domain.Configuration;
 
 public class VagrantConfiguration
 {
-    [JsonProperty("prefix-with-dirbase")] public bool PrefixWithDirBase { get; set; }
+    [JsonProperty("prefix-with-dirbase")] public bool PrefixWithDirBase { get; set; } = true;
+    [JsonProperty("prefix-with-instance-number")] public bool PrefixWithInstanceNumber { get; set; } = true;
 
-    [JsonProperty("numbering-format")] public string NumberingFormat { get; set; } = "{0,2:D2}";
+    [JsonProperty("instance-number")] public int InstanceNumber { get; set; }
 
-    [JsonProperty("naming-pattern")] public string NamingPattern { get; set; } = "#VDI-INSTANCE#-#NAME#-#INSTANCE#";
+    [JsonProperty("zeroes")] public int Zeroes { get; set; } = 2;
+
+    [JsonProperty("naming-pattern")] public string NamingPattern { get; set; } = "#MACHINE-NAME#-#MACHINE-INSTANCE#";
 
     [JsonProperty("plugins")] public Dictionary<string, VagrantPluginsConfiguration> Plugins { get; set; } = new();
 }

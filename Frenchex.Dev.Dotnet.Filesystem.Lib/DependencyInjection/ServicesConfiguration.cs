@@ -8,7 +8,7 @@ public class ServicesConfiguration
     public static IServiceCollection ConfigureServices(IServiceCollection services)
     {
         services
-            .AddSingleton<IFilesystem, Domain.Filesystem>()
+            .AddScoped<IFilesystem, Domain.Filesystem>()
             ;
 
         return services;

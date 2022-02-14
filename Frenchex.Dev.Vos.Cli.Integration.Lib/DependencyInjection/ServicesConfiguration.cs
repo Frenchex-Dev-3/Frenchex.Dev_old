@@ -5,6 +5,14 @@ using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Define.Machine;
 using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Define.Machine.Add;
 using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Define.MachineType;
 using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Define.MachineType.Add;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Destroy;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Halt;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Init;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Name;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Ssh;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.SshConfig;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Status;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Up;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.DependencyInjection;
@@ -17,7 +25,7 @@ public class ServicesConfiguration
             .ConfigureServices(services);
 
         services
-            .AddTransient<IIntegration, Domain.Integration>()
+            .AddScoped<IIntegration, Domain.Integration>();
             ;
 
         /**
@@ -30,28 +38,39 @@ public class ServicesConfiguration
 
 
         services
-            .AddSingleton<IVosCommandIntegration, DefineCommandIntegration>()
-            .AddSingleton<IDefineCommandIntegration, DefineCommandIntegration>()
-            .AddSingleton<IDefineMachineCommandIntegration, DefineMachineCommandIntegration>()
-            .AddSingleton<IDefineSubCommandIntegration, DefineMachineCommandIntegration>()
-            .AddSingleton<IDefineMachineSubCommandIntegration, DefineMachineAddCommandIntegration>()
-            .AddSingleton<IDefineSubCommandIntegration, DefineMachineTypeCommandIntegration>()
-            .AddSingleton<IDefineMachineTypeSubCommandIntegration, DefineMachineTypeAddCommandIntegration>()
-            .AddSingleton<IVosCommandIntegration, DestroyCommandIntegration>()
-            .AddSingleton<IDestroyCommandIntegration, DestroyCommandIntegration>()
-            .AddSingleton<IVosCommandIntegration, HaltCommandIntegration>()
-            .AddSingleton<IHaltCommandIntegration, HaltCommandIntegration>()
-            .AddSingleton<IVosCommandIntegration, InitCommandIntegration>()
-            .AddSingleton<IInitCommandIntegration, InitCommandIntegration>()
-            .AddSingleton<IVosCommandIntegration, SshCommandIntegration>()
-            .AddSingleton<ISshCommandIntegration, SshCommandIntegration>()
-            .AddSingleton<IVosCommandIntegration, SshConfigCommandIntegration>()
-            .AddSingleton<ISshConfigCommandIntegration, SshConfigCommandIntegration>()
-            .AddSingleton<IVosCommandIntegration, UpCommandIntegration>()
-            .AddSingleton<IUpCommandIntegration, UpCommandIntegration>()
-            .AddSingleton<IVosCommandIntegration, StatusCommandIntegration>()
-            .AddSingleton<IStatusCommandIntegration, StatusCommandIntegration>()
-            .AddSingleton<INameCommandIntegration, NameCommandIntegration>()
+            .AddScoped<IVosCommandIntegration, DefineCommandIntegration>()
+            .AddScoped<IDefineCommandIntegration, DefineCommandIntegration>()
+            
+            .AddScoped<IDefineMachineCommandIntegration, DefineMachineCommandIntegration>()
+            .AddScoped<IDefineSubCommandIntegration, DefineMachineCommandIntegration>()
+            .AddScoped<IDefineMachineSubCommandIntegration, DefineMachineAddCommandIntegration>()
+            
+            .AddScoped<IDefineSubCommandIntegration, DefineMachineTypeCommandIntegration>()
+            .AddScoped<IDefineMachineTypeSubCommandIntegration, DefineMachineTypeAddCommandIntegration>()
+            
+            .AddScoped<IVosCommandIntegration, DestroyCommandIntegration>()
+            .AddScoped<IDestroyCommandIntegration, DestroyCommandIntegration>()
+            
+            .AddScoped<IVosCommandIntegration, HaltCommandIntegration>()
+            .AddScoped<IHaltCommandIntegration, HaltCommandIntegration>()
+            
+            .AddScoped<IVosCommandIntegration, InitCommandIntegration>()
+            .AddScoped<IInitCommandIntegration, InitCommandIntegration>()
+            
+            .AddScoped<IVosCommandIntegration, SshCommandIntegration>()
+            .AddScoped<ISshCommandIntegration, SshCommandIntegration>()
+            
+            .AddScoped<IVosCommandIntegration, SshConfigCommandIntegration>()
+            .AddScoped<ISshConfigCommandIntegration, SshConfigCommandIntegration>()
+            
+            .AddScoped<IVosCommandIntegration, UpCommandIntegration>()
+            .AddScoped<IUpCommandIntegration, UpCommandIntegration>()
+
+            .AddScoped<IVosCommandIntegration, StatusCommandIntegration>()
+            .AddScoped<IStatusCommandIntegration, StatusCommandIntegration>()
+
+            .AddScoped<IVosCommandIntegration, NameCommandIntegration>()
+            .AddScoped<INameCommandIntegration, NameCommandIntegration>()
             ;
     }
 }
