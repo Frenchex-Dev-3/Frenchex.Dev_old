@@ -14,6 +14,7 @@ using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.SshConfig;
 using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Status;
 using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Up;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.DependencyInjection;
 

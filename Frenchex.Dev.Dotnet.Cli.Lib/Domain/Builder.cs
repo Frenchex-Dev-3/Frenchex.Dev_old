@@ -1,12 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Frenchex.Dev.Dotnet.Cli.Lib.Domain;
 
 public class Builder
 {
     public static IProgram Build<T>(
-        Action<IServiceCollection> servicesConfigurationLambda,
+        Action<IServiceCollection> configureProgramServices,
+        Action<ILoggingBuilder> configureProgramLogging,
         string hostSettingsJsonFilename,
         string appSettingsJsonFilename,
         string envVarPrefix
@@ -18,13 +20,10 @@ public class Builder
             .ConfigureServices(services);
 
         var di = services.BuildServiceProvider();
-
         var scope = di.CreateAsyncScope();
-
         var scopedDi = scope.ServiceProvider;
-
         var programBuilder = scopedDi.GetRequiredService<IProgramBuilder>();
-
+        
         var program = programBuilder.Build(
             new Context(
                 hostSettingsJsonFilename,
@@ -32,11 +31,8 @@ public class Builder
                 envVarPrefix,
                 Directory.GetCurrentDirectory()
             ),
-            programServices =>
-            {
-                servicesConfigurationLambda(programServices);
-                programServices.AddHostedService<T>();
-            }
+            configureProgramServices,
+            configureProgramLogging
         );
 
         return program;

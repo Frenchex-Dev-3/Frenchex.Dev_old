@@ -22,7 +22,7 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
 
     public void Integrate(Command rootCommand)
     {
-        var namesArg = new Argument<string[]>("Names of Machine to Up");
+        var namesArg = new Argument<string[]>("names or IDs");
         var provisionOpt = new Option<bool>(new[] {"--provision"}, "Provision");
         var provisionWithOpt = new Option<string[]>(new[] {"--provision-with"}, "Provision with");
         var destroyOnErrorOpt = new Option<bool>(new[] {"--destroy-on-error"}, "Destroy on error");

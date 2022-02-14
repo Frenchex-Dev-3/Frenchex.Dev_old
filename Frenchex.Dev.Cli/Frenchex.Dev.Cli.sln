@@ -58,8 +58,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D1275F1D-E2F7-4745-A129-9AC6494E8953}"
 	ProjectSection(SolutionItems) = preProject
 		.runsettings = .runsettings
-		.github\workflows\dotnet-package.yml = .github\workflows\dotnet-package.yml
+		..\.github\workflows\dotnet-package.yml = ..\.github\workflows\dotnet-package.yml
+		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installers", "Installers", "{E18846D0-CCB8-4539-8C3C-DA7FE43952FC}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupWindows", "..\SetupWindows\SetupWindows.vdproj", "{F53E887C-26DD-4786-9BF6-A0BC07228F6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +120,8 @@ Global
 		{EC48ABC0-D9FE-4906-B4C8-3D6CBE823D39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC48ABC0-D9FE-4906-B4C8-3D6CBE823D39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC48ABC0-D9FE-4906-B4C8-3D6CBE823D39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F53E887C-26DD-4786-9BF6-A0BC07228F6B}.Debug|Any CPU.ActiveCfg = Debug
+		{F53E887C-26DD-4786-9BF6-A0BC07228F6B}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -136,6 +143,7 @@ Global
 		{110381C8-81E9-483B-8659-A569516B23CE} = {A1E1C601-ECB7-49B0-9D5F-DF41C51F613A}
 		{52BD2A4E-8564-44EE-98DD-E531CC6A8168} = {110381C8-81E9-483B-8659-A569516B23CE}
 		{EC48ABC0-D9FE-4906-B4C8-3D6CBE823D39} = {110381C8-81E9-483B-8659-A569516B23CE}
+		{F53E887C-26DD-4786-9BF6-A0BC07228F6B} = {E18846D0-CCB8-4539-8C3C-DA7FE43952FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ACE53D10-C47F-48EC-BE86-38013BCEBB85}

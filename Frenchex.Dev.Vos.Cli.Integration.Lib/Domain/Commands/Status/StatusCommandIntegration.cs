@@ -21,7 +21,7 @@ public class StatusCommandIntegration : ABaseCommandIntegration, IStatusCommandI
 
     public void Integrate(Command rootCommand)
     {
-        var nameArg = new Argument<string[]>("Names");
+        var nameArg = new Argument<string[]>("names");
         var workingDirOpt = new Option<string>(new[] {"--working-directory", "-w"}, "Working Directory");
         var timeoutOpt = new Option<int>(new[] {"--timeout-ms", "-t"}, "TimeOut in ms");
 

@@ -100,7 +100,7 @@ public class WorkflowCommandsIntegrationTest
 
     [TestMethod]
     [DynamicData(nameof(Test_Data), DynamicDataSourceType.Method)]
-    public async Task Test_Complete_Workflow_Integration_Args(string[] commands)
+    public void Test_Complete_Workflow_Integration_Args(string[] commands)
     {
         if (null == _rootCommand)
             throw new InvalidOperationException("missing DI setup");

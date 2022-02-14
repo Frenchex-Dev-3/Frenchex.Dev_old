@@ -1,5 +1,6 @@
 ﻿using Frenchex.Dev.Dotnet.Cli.Integration.Lib.Domain;
 using Frenchex.Dev.Dotnet.Cli.Lib.Domain;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ServicesConfiguration = Frenchex.Dev.Cli.DependencyInjection.ServicesConfiguration;
@@ -8,17 +9,30 @@ await Builder
     .Build<Host>(
         services =>
         {
+            services.AddHostedService<Host>();
             new ServicesConfiguration()
                 .ConfigureServices(services);
         },
-        "hostsettings.json",
-        "appsettings.json",
+        logging => logging.AddConsole(),
+        "Configurations\\hostsettings.json",
+        "Configurations\\appsettings.json",
         "FRENCHEXDEV_"
     )
     .RunAsync();
 
+
+/// <summary>
+/// Implements BasicHostedService for this Program
+/// </summary>
 public class Host : BasicHostedService
 {
+    /// <summary>
+    /// Constructor for this Program Host
+    /// </summary>
+    /// <param name="logger"></param>
+    /// <param name="hostApplicationLifetime"></param>
+    /// <param name="entryPointInfo"></param>
+    /// <param name="integrations"></param>
     public Host(
         ILogger<AbstractHostedService> logger,
         IHostApplicationLifetime hostApplicationLifetime,

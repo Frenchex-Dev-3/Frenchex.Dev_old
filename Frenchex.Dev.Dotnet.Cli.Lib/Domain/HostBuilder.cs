@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Frenchex.Dev.Dotnet.Cli.Lib.Domain;
 
@@ -26,7 +27,9 @@ public class HostBuilder : IHostBuilder
 
     public IHost Build(
         Context context,
-        Action<IServiceCollection> servicesConfigurationLambda)
+        Action<IServiceCollection> servicesConfigurationLambda,
+        Action<ILoggingBuilder> loggingConfigurationLambda
+    )
     {
         return Host
                 .CreateDefaultBuilder(_entryPointInfo.CommandLineArgs)
@@ -44,6 +47,7 @@ public class HostBuilder : IHostBuilder
                     servicesConfigurationLambda(services);
                     _servicesConfiguration.ConfigureServices(services);
                 })
+                .ConfigureLogging(loggingConfigurationLambda)
                 .Build()
             ;
     }
