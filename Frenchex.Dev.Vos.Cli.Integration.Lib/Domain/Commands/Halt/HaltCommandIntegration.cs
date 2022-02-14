@@ -23,11 +23,12 @@ public class HaltCommandIntegration : ABaseCommandIntegration, IHaltCommandInteg
     {
         var namesArg = new Argument<string[]>("names", "Names or IDs");
         var forceOpt = new Option<bool>(new[] {"--force", "-f"}, "Force");
-        var haltTimeoutMsOpt = new Option<int>(new[] {"--halt-timeoutms"}, () => (int) TimeSpan.FromMinutes(1).TotalMilliseconds,
+        var haltTimeoutMsOpt = new Option<int>(new[] {"--halt-timeoutms"},
+            () => (int) TimeSpan.FromMinutes(1).TotalMilliseconds,
             "Halt timeout in ms");
         var timeoutMsOpt = new Option<int>(new[] {"--timeout-ms", "-t"}, "Timeout in ms");
         var workingDirOpt = new Option<string>(new[] {"--working-directory", "-w"}, "Working Directory");
-        
+
         var command = new Command("halt", "Runs Vagrant halt")
         {
             namesArg,
@@ -69,5 +70,4 @@ public class HaltCommandIntegration : ABaseCommandIntegration, IHaltCommandInteg
 
         rootCommand.AddCommand(command);
     }
-
 }

@@ -7,5 +7,7 @@ namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Status;
 public interface IStatusCommandResponseBuilder : IRootResponseBuilder
 {
     IStatusCommandResponse Build();
-    IStatusCommandResponseBuilder WithStatuses(IImmutableDictionary<string, (string, VagrantMachineStatusEnum)> statuses);
+
+    IStatusCommandResponseBuilder WithStatuses(
+        IImmutableDictionary<string, (string, VagrantMachineStatusEnum)> statuses);
 }

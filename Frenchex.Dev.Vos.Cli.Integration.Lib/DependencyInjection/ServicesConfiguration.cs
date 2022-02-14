@@ -26,7 +26,7 @@ public class ServicesConfiguration
 
         services
             .AddScoped<IIntegration, Domain.Integration>();
-            ;
+        ;
 
         /**
         * Integration classes are meant to be used only once during execution of CLI.
@@ -40,35 +40,25 @@ public class ServicesConfiguration
         services
             .AddScoped<IVosCommandIntegration, DefineCommandIntegration>()
             .AddScoped<IDefineCommandIntegration, DefineCommandIntegration>()
-            
             .AddScoped<IDefineMachineCommandIntegration, DefineMachineCommandIntegration>()
             .AddScoped<IDefineSubCommandIntegration, DefineMachineCommandIntegration>()
             .AddScoped<IDefineMachineSubCommandIntegration, DefineMachineAddCommandIntegration>()
-            
             .AddScoped<IDefineSubCommandIntegration, DefineMachineTypeCommandIntegration>()
             .AddScoped<IDefineMachineTypeSubCommandIntegration, DefineMachineTypeAddCommandIntegration>()
-            
             .AddScoped<IVosCommandIntegration, DestroyCommandIntegration>()
             .AddScoped<IDestroyCommandIntegration, DestroyCommandIntegration>()
-            
             .AddScoped<IVosCommandIntegration, HaltCommandIntegration>()
             .AddScoped<IHaltCommandIntegration, HaltCommandIntegration>()
-            
             .AddScoped<IVosCommandIntegration, InitCommandIntegration>()
             .AddScoped<IInitCommandIntegration, InitCommandIntegration>()
-            
             .AddScoped<IVosCommandIntegration, SshCommandIntegration>()
             .AddScoped<ISshCommandIntegration, SshCommandIntegration>()
-            
             .AddScoped<IVosCommandIntegration, SshConfigCommandIntegration>()
             .AddScoped<ISshConfigCommandIntegration, SshConfigCommandIntegration>()
-            
             .AddScoped<IVosCommandIntegration, UpCommandIntegration>()
             .AddScoped<IUpCommandIntegration, UpCommandIntegration>()
-
             .AddScoped<IVosCommandIntegration, StatusCommandIntegration>()
             .AddScoped<IStatusCommandIntegration, StatusCommandIntegration>()
-
             .AddScoped<IVosCommandIntegration, NameCommandIntegration>()
             .AddScoped<INameCommandIntegration, NameCommandIntegration>()
             ;

@@ -25,7 +25,8 @@ public class DefineMachineAddCommandIntegration : ABaseCommandIntegration, IDefi
         var nameArg = new Argument<string>("name", "Name");
         var typeArg = new Argument<string>("type", "MachineType Name");
         var instancesArg = new Argument<int>("instances", "# of instances");
-        var namingPatternOpt = new Option<string>(new[] {"--naming-pattern"}, () => "#vdi#-#name#-#instance#", "Naming Pattern");
+        var namingPatternOpt =
+            new Option<string>(new[] {"--naming-pattern"}, () => "#vdi#-#name#-#instance#", "Naming Pattern");
         var isPrimaryOpt = new Option<bool>(new[] {"--primary"}, "Primary");
         var isEnabledOpt = new Option<bool>(new[] {"--enabled", "-e"}, "Enabled");
         var vCpusOpt = new Option<int>(new[] {"--vcpus", "-c"}, () => 2, "Virtual CPUs");

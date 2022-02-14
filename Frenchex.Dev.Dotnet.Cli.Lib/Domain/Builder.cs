@@ -27,8 +27,8 @@ public class Builder
 
         var program = programBuilder.Build(
             new Context(
-                hostSettingsJsonFilename, 
-                appSettingsJsonFilename, 
+                hostSettingsJsonFilename,
+                appSettingsJsonFilename,
                 envVarPrefix,
                 Directory.GetCurrentDirectory()
             ),

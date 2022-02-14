@@ -163,6 +163,7 @@ public class CompleteWorkflowTests
 
     [TestMethod]
     [DynamicData(nameof(Test_Data), DynamicDataSourceType.Method)]
+    [TestCategory("need-vagrant")]
     public async Task Test_Complete_Workflow(
         IInitCommandRequest initRequest,
         IUpCommandRequest upRequest,
@@ -200,7 +201,8 @@ public class CompleteWorkflowTests
         Assert.IsFalse(Directory.Exists(initRequest.Base.WorkingDirectory));
     }
 
-    private static async Task TestInner(string debug, IRootCommandResponse response, bool outputCanBeEmptyButNotNull = false)
+    private static async Task TestInner(string debug, IRootCommandResponse response,
+        bool outputCanBeEmptyButNotNull = false)
     {
         Assert.IsNotNull(response, $"{debug} response is not null");
         Assert.IsNotNull(response.ProcessExecutionResult, $"{debug} response.PER is not null");

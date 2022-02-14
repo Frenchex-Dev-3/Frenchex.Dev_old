@@ -22,7 +22,7 @@ public class StatusCommandIntegrationPayloadBinder : BinderBase<StatusCommandInt
 
     protected override StatusCommandIntegrationPayload GetBoundValue(BindingContext bindingContext)
     {
-        return new()
+        return new StatusCommandIntegrationPayload
         {
             WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDirOpt),
             TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutOpt),

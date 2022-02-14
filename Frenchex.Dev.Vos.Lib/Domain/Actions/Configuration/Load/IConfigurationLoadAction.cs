@@ -12,8 +12,8 @@ public class ConfigurationLoadAction : IConfigurationLoadAction
     public async Task<Domain.Configuration.Configuration> Load(string path)
     {
         var loaded = await File.ReadAllTextAsync(path);
-        
-        Domain.Configuration.Configuration? deserialized = new Domain.Configuration.Configuration();
+
+        var deserialized = new Domain.Configuration.Configuration();
 
         try
         {

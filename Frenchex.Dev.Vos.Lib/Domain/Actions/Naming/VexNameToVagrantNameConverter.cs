@@ -24,8 +24,6 @@ public class VexNameToVagrantNameConverter : IVexNameToVagrantNameConverter
         var dirBase = Path.GetFileName(workingDirectory);
 
         var prefixWithDirBase = configuration.Vagrant.PrefixWithDirBase;
-        var prefixWithInstanceNumber = configuration.Vagrant.PrefixWithInstanceNumber;
-        var instanceNumber = configuration.Vagrant.InstanceNumber;
         var namingPattern = configuration.Vagrant.NamingPattern;
 
         foreach (var name in inputNamedPatterns)
@@ -39,52 +37,52 @@ public class VexNameToVagrantNameConverter : IVexNameToVagrantNameConverter
             switch (matchesPatternFromToWildcard.Count)
             {
                 case 0:
-                    {
-                        var matchesPatternFromTo = PatternFromTo.Matches(name);
+                {
+                    var matchesPatternFromTo = PatternFromTo.Matches(name);
 
-                        var firstMatches = matchesPatternFromTo.First();
-                       
-                        if (firstMatches.Groups.ContainsKey("machine"))
-                            machineName = firstMatches.Groups["machine"].Value;
+                    var firstMatches = matchesPatternFromTo.First();
 
-                        if (firstMatches.Groups.ContainsKey("instance"))
-                            instances = firstMatches.Groups["instance"].Value;
+                    if (firstMatches.Groups.ContainsKey("machine"))
+                        machineName = firstMatches.Groups["machine"].Value;
 
-                        if (instances == "*")
-                            to = (configuration?.Machines[machineName]?.Instances ?? 0) - 1;
-                        else 
-                            from = to = int.Parse(instances);
+                    if (firstMatches.Groups.ContainsKey("instance"))
+                        instances = firstMatches.Groups["instance"].Value;
 
-                        break;
-                    }
+                    if (instances == "*")
+                        to = (configuration?.Machines[machineName]?.Instances ?? 0) - 1;
+                    else
+                        from = to = int.Parse(instances);
+
+                    break;
+                }
                 case > 0:
+                {
+                    var firstMatches = matchesPatternFromToWildcard.First();
+
+                    if (firstMatches.Groups.ContainsKey("machine"))
+                        machineName = firstMatches.Groups["machine"].Value;
+
+                    if (firstMatches.Groups.ContainsKey("instance"))
+                        instances = firstMatches.Groups["instance"].Value;
+
+
+                    if (instances.Contains('-')) // [2-*], [2-3-4], 
                     {
-                        var firstMatches = matchesPatternFromToWildcard.First();
+                        var instancesSplit = instances.Split('-');
 
-                        if (firstMatches.Groups.ContainsKey("machine"))
-                            machineName = firstMatches.Groups["machine"].Value;
+                        from = int.Parse(instancesSplit[0]);
 
-                        if (firstMatches.Groups.ContainsKey("instance"))
-                            instances = firstMatches.Groups["instance"].Value;
-
-                      
-                        if (instances.Contains('-')) // [2-*], [2-3-4], 
+                        if (instancesSplit.Length == 2)
                         {
-                            var instancesSplit = instances.Split('-');
+                            var instanceSplitTo = instancesSplit[1];
 
-                            from = int.Parse(instancesSplit[0]);
-
-                            if (instancesSplit.Length == 2)
-                            {
-                                var instanceSplitTo = instancesSplit[1];
-
-                                if (instanceSplitTo == "*")
-                                    to = (configuration?.Machines[machineName]?.Instances ?? 0) - 1;
-                            }
+                            if (instanceSplitTo == "*")
+                                to = (configuration?.Machines[machineName]?.Instances ?? 0) - 1;
                         }
-
-                        break;
                     }
+
+                    break;
+                }
             }
 
             if (from > to)

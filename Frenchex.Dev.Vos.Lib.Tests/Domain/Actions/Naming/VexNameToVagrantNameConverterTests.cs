@@ -23,7 +23,7 @@ public class VexNameToVagrantNameConverterTests
         {
             Vagrant = new VagrantConfiguration
             {
-                PrefixWithDirBase = false,
+                PrefixWithDirBase = false
             },
             Machines = new Dictionary<string, MachineDefinitionDeclaration>
             {

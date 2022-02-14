@@ -26,6 +26,5 @@ public class Host : BasicHostedService
         IEnumerable<IIntegration> integrations
     ) : base("Frenchex.Dev.Cli", logger, hostApplicationLifetime, entryPointInfo, integrations)
     {
-
     }
 }

@@ -1,13 +1,12 @@
-﻿using Frenchex.Dev.Dotnet.Cli.Integration.Lib.Domain;
+﻿using System;
+using System.Collections.Generic;
+using System.CommandLine;
+using System.IO;
+using System.Threading.Tasks;
+using Frenchex.Dev.Dotnet.Cli.Integration.Lib.Domain;
 using Frenchex.Dev.Vos.Cli.Integration.Lib.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.CommandLine;
-using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Tests.Domain;
 
@@ -121,6 +120,7 @@ public class WorkflowCommandsIntegrationTest
 
     [TestMethod]
     [DynamicData(nameof(Test_Data), DynamicDataSourceType.Method)]
+    [TestCategory("need-vagrant")]
     public async Task Test_Complete_Workflow_Integration(string[] commands)
     {
         if (null == _rootCommand)
@@ -131,7 +131,7 @@ public class WorkflowCommandsIntegrationTest
         if (!Directory.Exists(workingDirectory))
             Directory.CreateDirectory(workingDirectory);
 
-       // var process = Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe", "-n " + workingDirectory);
+        // var process = Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe", "-n " + workingDirectory);
 
         foreach (var command in commands)
             await RunTest(_rootCommand, command.Replace("#WORKING_DIRECTORY#", workingDirectory));

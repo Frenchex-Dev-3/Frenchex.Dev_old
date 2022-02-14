@@ -20,38 +20,38 @@ public class Statuses
     public string ToString(VagrantMachineStatusEnum status)
     {
         if (status == VagrantMachineStatusEnum.NotCreated)
-            return Statuses.NotCreated;
+            return NotCreated;
 
         if (status == VagrantMachineStatusEnum.Running)
-            return Statuses.Running;
+            return Running;
 
         if (status == VagrantMachineStatusEnum.Aborted)
-            return Statuses.Aborted;
+            return Aborted;
 
         if (status == VagrantMachineStatusEnum.Stopped)
-            return Statuses.Stopped;
+            return Stopped;
 
         if (status == VagrantMachineStatusEnum.Suspended)
-            return Statuses.Suspended;
+            return Suspended;
 
         throw new InvalidOperationException("unknown enum status value");
     }
 
     public VagrantMachineStatusEnum ToEnum(string status)
     {
-        if (status == Statuses.NotCreated)
+        if (status == NotCreated)
             return VagrantMachineStatusEnum.NotCreated;
 
-        if (status == Statuses.Running)
+        if (status == Running)
             return VagrantMachineStatusEnum.Running;
 
-        if (status == Statuses.Aborted)
+        if (status == Aborted)
             return VagrantMachineStatusEnum.Aborted;
 
-        if (status == Statuses.Stopped)
+        if (status == Stopped)
             return VagrantMachineStatusEnum.Stopped;
 
-        if (status == Statuses.Suspended)
+        if (status == Suspended)
             return VagrantMachineStatusEnum.Suspended;
 
         throw new InvalidOperationException("unknown string status value");

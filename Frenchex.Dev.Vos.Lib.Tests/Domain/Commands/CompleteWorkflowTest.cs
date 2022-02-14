@@ -30,7 +30,7 @@ public class CompleteWorkflowTests
     public static IEnumerable<object[]> Test_Data()
     {
         var tempDir = Path.Join(Path.GetTempPath(), Path.GetRandomFileName());
-        yield return new object[]
+        yield return new[]
         {
             BuildInitCommandRequest(tempDir),
             BuildDefineMachineTypeAddCommandRequestsList(tempDir),
@@ -50,6 +50,7 @@ public class CompleteWorkflowTests
 
     [TestMethod]
     [DynamicData(nameof(Test_Data), DynamicDataSourceType.Method)]
+    [TestCategory("need-vagrant")]
     public async Task Test_Complete_Workflow(
         IInitCommandRequest initRequest,
         IList<IDefineMachineTypeAddCommandRequest> defineMachineTypeAddCommandRequestsList,
@@ -85,19 +86,16 @@ public class CompleteWorkflowTests
 
         Process? codeProcess = null;
         if (codeStart)
-            codeProcess = Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe", "-n " + initRequest.Base.WorkingDirectory);
+            codeProcess = Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe",
+                "-n " + initRequest.Base.WorkingDirectory);
 
         foreach (var item in defineMachineTypeAddCommandRequestsList)
-        {
             TestInner(await _defineMachineTypeAddCommand.Execute(item));
-            // more asserts on fs
-        }
+        // more asserts on fs
 
         foreach (var item in defineMachineAddCommandRequestsList)
-        {
             TestInner(await _defineMachineAddCommand.Execute(item));
-            // more asserts on fs 
-        }
+        // more asserts on fs 
 
         foreach (var item in nameCommandRequestsList)
         {
@@ -113,9 +111,7 @@ public class CompleteWorkflowTests
             Assert.IsTrue(statusResponse.Statuses.Any());
 
             foreach (var statusItem in statusResponse.Statuses)
-            {
                 Assert.IsTrue(statusItem.Value.ToString().Contains(VagrantMachineStatusEnum.NotCreated.ToString()));
-            }
         }
 
         var willBeUp = new List<string>();
@@ -147,44 +143,33 @@ public class CompleteWorkflowTests
             Assert.IsTrue(statusResponse.Statuses.Any());
 
             foreach (var (key, value) in statusResponse.Statuses)
-                Assert.IsTrue( value.ToString().Contains(
+                Assert.IsTrue(value.ToString().Contains(
                     willBeUp.Contains(key)
                         ? VagrantMachineStatusEnum.Running.ToString()
                         : VagrantMachineStatusEnum.NotCreated.ToString()));
         }
 
         foreach (var item in sshConfigCommandRequestsList)
-        {
             TestInner(await _sshConfigCommand.Execute(item));
-            //more asserts
-        }
+        //more asserts
 
         foreach (var item in sshCommandRequestsList)
-        {
             TestInner(await _sshCommand.Execute(item));
-            //more asserts
-        }
+        //more asserts
 
         foreach (var item in haltRequestsList)
-        {
             TestInner(await _haltCommand.Execute(item));
-            //more asserts
-        }
+        //more asserts
 
         foreach (var item in destroyRequestsLists)
-        {
             TestInner(await _destroyCommand.Execute(item));
-            //more asserts
-        }
+        //more asserts
 
         // generic asserts
         Assert.IsTrue(Directory.Exists(initRequest.Base.WorkingDirectory));
         Assert.IsTrue(File.Exists(Path.Join(initRequest.Base.WorkingDirectory, "Vagrantfile")));
 
-        if (codeStart && codeProcess != null)
-        {
-            codeProcess.Kill();
-        }
+        if (codeStart && codeProcess != null) codeProcess.Kill();
 
         if (cleanAtEnd)
         {
@@ -194,7 +179,13 @@ public class CompleteWorkflowTests
         }
     }
 
+    private static void TestInner(IRootCommandResponse response)
+    {
+        Assert.IsNotNull(response);
+    }
+
     #region Statics
+
     private static IServiceProvider? _di;
 
     // factories used to build requests in dynamic method ::Test_Data
@@ -639,14 +630,10 @@ public class CompleteWorkflowTests
                 .UsingWorkingDirectory(tempDir)
                 .UsingTimeoutMiliseconds(1000 * 100)
                 .Parent<INameCommandRequestBuilder>()
-                .WithNames(new []{"foo-0", "bar-[2-*]"})
+                .WithNames(new[] {"foo-0", "bar-[2-*]"})
                 .Build()
         };
     }
-    #endregion
 
-    private static void TestInner(IRootCommandResponse response)
-    {
-        Assert.IsNotNull(response);
-    }
+    #endregion
 }

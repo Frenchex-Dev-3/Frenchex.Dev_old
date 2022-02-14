@@ -14,7 +14,8 @@ public class StatusCommandResponseBuilder : IStatusCommandResponseBuilder
         );
     }
 
-    public IStatusCommandResponseBuilder WithStatuses(IImmutableDictionary<string, (string, VagrantMachineStatusEnum)> statuses)
+    public IStatusCommandResponseBuilder WithStatuses(
+        IImmutableDictionary<string, (string, VagrantMachineStatusEnum)> statuses)
     {
         _statuses = statuses;
         return this;

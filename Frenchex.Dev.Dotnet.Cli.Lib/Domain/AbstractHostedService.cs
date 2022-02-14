@@ -83,10 +83,10 @@ public abstract class AbstractHostedService : IHostedService
 
     protected void BuildCommands()
     {
-        if (null == _rootCommand) 
+        if (null == _rootCommand)
             throw new ArgumentNullException(nameof(_rootCommand));
 
-        foreach (var integration in _integrations) 
+        foreach (var integration in _integrations)
             integration.Integrate(_rootCommand);
     }
 
@@ -99,7 +99,7 @@ public abstract class AbstractHostedService : IHostedService
 
     private async Task<int> ExecuteMainCommand()
     {
-        if (null == _rootCommand) 
+        if (null == _rootCommand)
             throw new ArgumentNullException(nameof(_rootCommand));
 
         return await _rootCommand.InvokeAsync(_entryPointInfo.CommandLineArgs);

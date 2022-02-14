@@ -1,8 +1,8 @@
-﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Up;
-using Frenchex.Dev.Vos.Lib.Domain.Definitions;
-using System.CommandLine;
+﻿using System.CommandLine;
 using System.CommandLine.Help;
 using System.CommandLine.Invocation;
+using Frenchex.Dev.Vos.Lib.Domain.Commands.Up;
+using Frenchex.Dev.Vos.Lib.Domain.Definitions;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Up;
 
@@ -27,7 +27,8 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
         var provisionWithOpt = new Option<string[]>(new[] {"--provision-with"}, "Provision with");
         var destroyOnErrorOpt = new Option<bool>(new[] {"--destroy-on-error"}, "Destroy on error");
         var parallelOpt = new Option<bool>(new[] {"--parallel"}, "Parallel");
-        var providerOpt = new Option<string>(new[] {"--provider"}, () => ProviderEnum.virtualbox.ToString(), "Provider");
+        var providerOpt =
+            new Option<string>(new[] {"--provider"}, () => ProviderEnum.virtualbox.ToString(), "Provider");
         var installProviderOpt = new Option<bool>(new[] {"--install-provider", "-i"}, "Install provider");
         var timeoutMs = new Option<int>(new[] {"--timeout-ms", "-t"}, () => 0, "TimeOut in ms");
         var workiongDirOpt = new Option<string>(new[] {"--working-directory", "-w"}, () => Environment.CurrentDirectory,

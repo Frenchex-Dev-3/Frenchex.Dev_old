@@ -73,56 +73,49 @@ public class ServicesConfiguration
             .AddScoped<INameCommandRequestBuilderFactory, NameCommandRequestBuilderFactory>()
             .AddScoped<INameCommandResponseBuilder, NameCommandResponseBuilder>()
             .AddScoped<INameCommandResponseBuilderFactory, NameCommandResponseBuilderFactory>()
-
             .AddScoped<IDefineMachineAddCommand, DefineMachineAddCommand>()
             .AddScoped<IDefineMachineAddCommandRequestBuilder, DefineMachineAddCommandRequestBuilder>()
             .AddScoped<IDefineMachineAddCommandRequestBuilderFactory, DefineMachineAddCommandRequestBuilderFactory>()
             .AddScoped<IDefineMachineAddCommandResponseBuilder, DefineMachineAddCommandResponseBuilder>()
             .AddScoped<IDefineMachineAddCommandResponseBuilderFactory,
                 DefineMachineAddCommandResponseBuilderFactory>()
-
             .AddScoped<IDefineMachineTypeAddCommand, DefineMachineTypeAddCommand>()
             .AddScoped<IDefineMachineTypeAddCommandRequestBuilder, DefineMachineTypeAddCommandRequestBuilder>()
-            .AddScoped<IDefineMachineTypeAddCommandRequestBuilderFactory, DefineMachineTypeAddCommandRequestBuilderFactory>()
+            .AddScoped<IDefineMachineTypeAddCommandRequestBuilderFactory,
+                DefineMachineTypeAddCommandRequestBuilderFactory>()
             .AddScoped<IDefineMachineTypeAddCommandResponseBuilder, DefineMachineTypeAddCommandResponseBuilder>()
-            .AddScoped<IDefineMachineTypeAddCommandResponseBuilderFactory, DefineMachineTypeAddCommandResponseBuilderFactory>()
-
+            .AddScoped<IDefineMachineTypeAddCommandResponseBuilderFactory,
+                DefineMachineTypeAddCommandResponseBuilderFactory>()
             .AddScoped<IDestroyCommand, DestroyCommand>()
             .AddScoped<IDestroyCommandRequestBuilder, DestroyCommandRequestBuilder>()
             .AddScoped<IDestroyCommandRequestBuilderFactory, DestroyCommandRequestBuilderFactory>()
             .AddScoped<IDestroyCommandResponseBuilder, DestroyCommandResponseBuilder>()
             .AddScoped<IDestroyCommandResponseBuilderFactory, DestroyCommandResponseBuilderFactory>()
-
             .AddScoped<IHaltCommand, HaltCommand>()
             .AddScoped<IHaltCommandRequestBuilder, HaltCommandRequestBuilder>()
             .AddScoped<IHaltCommandRequestBuilderFactory, HaltCommandRequestBuilderFactory>()
             .AddScoped<IHaltCommandResponseBuilder, HaltCommandResponseBuilder>()
             .AddScoped<IHaltCommandResponseBuilderFactory, HaltCommandResponseBuilderFactory>()
-
             .AddScoped<IInitCommand, InitCommand>()
             .AddScoped<IInitCommandRequestBuilder, InitCommandRequestBuilder>()
             .AddScoped<IInitCommandRequestBuilderFactory, InitCommandRequestBuilderFactory>()
             .AddScoped<IInitCommandResponseBuilder, InitCommandResponseBuilder>()
             .AddScoped<IInitCommandResponseBuilderFactory, InitCommandResponseBuilderFactory>()
-
             .AddScoped<ISshCommand, SshCommand>()
             .AddScoped<ISshCommandRequestBuilder, SshCommandRequestBuilder>()
             .AddScoped<ISshCommandRequestBuilderFactory, SshCommandRequestBuilderFactory>()
             .AddScoped<ISshCommandResponseBuilder, SshCommandResponseBuilder>()
             .AddScoped<ISshCommandResponseBuilderFactory, SshCommandResponseBuilderFactory>()
-
             .AddScoped<ISshConfigCommand, SshConfigCommand>()
             .AddScoped<ISshConfigCommandRequestBuilder, SshConfigCommandRequestBuilder>()
             .AddScoped<ISshConfigCommandRequestBuilderFactory, SshConfigCommandRequestBuilderFactory>()
             .AddScoped<ISshConfigCommandResponseBuilder, SshConfigCommandResponseBuilder>()
             .AddScoped<ISshConfigCommandResponseBuilderFactory, SshConfigCommandResponseBuilderFactory>()
-
             .AddScoped<IStatusCommand, StatusCommand>()
             .AddScoped<IStatusCommandRequestBuilder, StatusCommandRequestBuilder>()
             .AddScoped<IStatusCommandRequestBuilderFactory, StatusCommandRequestBuilderFactory>()
             .AddScoped<IStatusCommandResponseBuilder, StatusCommandResponseBuilder>()
             .AddScoped<IStatusCommandResponseBuilderFactory, StatusCommandResponseBuilderFactory>()
-
             .AddScoped<IUpCommand, UpCommand>()
             .AddScoped<IUpCommandRequestBuilder, UpCommandRequestBuilder>()
             .AddScoped<IUpCommandRequestBuilderFactory, UpCommandRequestBuilderFactory>()

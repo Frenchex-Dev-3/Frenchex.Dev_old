@@ -7,9 +7,7 @@ internal class ServicesConfiguration : IServicesConfiguration
 {
     public void ConfigureServices(IServiceCollection services)
     {
-      
         Vos.Cli.Integration.Lib.DependencyInjection.ServicesConfiguration
             .ConfigureServices(services);
-
     }
 }

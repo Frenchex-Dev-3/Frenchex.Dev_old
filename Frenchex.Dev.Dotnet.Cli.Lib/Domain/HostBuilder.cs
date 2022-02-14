@@ -25,7 +25,7 @@ public class HostBuilder : IHostBuilder
     }
 
     public IHost Build(
-        Context context, 
+        Context context,
         Action<IServiceCollection> servicesConfigurationLambda)
     {
         return Host

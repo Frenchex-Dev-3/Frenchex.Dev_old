@@ -1,8 +1,8 @@
-﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Define.MachineType.Add;
-using Frenchex.Dev.Vos.Lib.Domain.Definitions;
-using System.CommandLine;
+﻿using System.CommandLine;
 using System.CommandLine.Help;
 using System.CommandLine.Invocation;
+using Frenchex.Dev.Vos.Lib.Domain.Commands.Define.MachineType.Add;
+using Frenchex.Dev.Vos.Lib.Domain.Definitions;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Define.MachineType.Add;
 
@@ -63,7 +63,7 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
             workingDirOpt
         );
 
-        command.SetHandler(async(
+        command.SetHandler(async (
             DefineMachineTypeAddCommandIntegrationPayload payload,
             InvocationContext ctx,
             HelpBuilder helpBuilder,

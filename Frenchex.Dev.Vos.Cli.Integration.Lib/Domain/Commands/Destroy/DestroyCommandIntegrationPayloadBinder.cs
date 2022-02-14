@@ -1,22 +1,21 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Binding;
-using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Init;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Destroy;
 
 public class DestroyCommandIntegrationPayloadBinder : BinderBase<DestroyCommandIntegrationPayload>
 {
-    private readonly Argument<string[]> _nameOpt;
     private readonly Option<bool> _forceOpt;
     private readonly Option<bool> _gracefulOpt;
+    private readonly Argument<string[]> _nameOpt;
     private readonly Option<int> _timeoutMsOpt;
     private readonly Option<string> _workingDirOpt;
 
     public DestroyCommandIntegrationPayloadBinder(
-        Argument<string[]> nameOpt, 
-        Option<bool> forceOpt, 
-        Option<bool> gracefulOpt, 
-        Option<int> timeoutMsOpt, 
+        Argument<string[]> nameOpt,
+        Option<bool> forceOpt,
+        Option<bool> gracefulOpt,
+        Option<int> timeoutMsOpt,
         Option<string> workingDirOpt
     )
     {
@@ -27,8 +26,9 @@ public class DestroyCommandIntegrationPayloadBinder : BinderBase<DestroyCommandI
         _workingDirOpt = workingDirOpt;
     }
 
-    protected override DestroyCommandIntegrationPayload GetBoundValue(BindingContext bindingContext) =>
-        new DestroyCommandIntegrationPayload
+    protected override DestroyCommandIntegrationPayload GetBoundValue(BindingContext bindingContext)
+    {
+        return new()
         {
             TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMsOpt),
             WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDirOpt),
@@ -36,4 +36,5 @@ public class DestroyCommandIntegrationPayloadBinder : BinderBase<DestroyCommandI
             Graceful = bindingContext.ParseResult.GetValueForOption(_gracefulOpt),
             NameOrId = bindingContext.ParseResult.GetValueForArgument(_nameOpt)
         };
+    }
 }

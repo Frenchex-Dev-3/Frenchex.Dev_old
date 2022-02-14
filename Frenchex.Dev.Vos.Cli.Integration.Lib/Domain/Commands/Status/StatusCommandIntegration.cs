@@ -1,7 +1,7 @@
-﻿using Frenchex.Dev.Vos.Lib.Domain.Commands.Status;
-using System.CommandLine;
+﻿using System.CommandLine;
 using System.CommandLine.Help;
 using System.CommandLine.Invocation;
+using Frenchex.Dev.Vos.Lib.Domain.Commands.Status;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Status;
 
@@ -22,8 +22,8 @@ public class StatusCommandIntegration : ABaseCommandIntegration, IStatusCommandI
     public void Integrate(Command rootCommand)
     {
         var nameArg = new Argument<string[]>("Names");
-        var workingDirOpt = new Option<string>(new[] { "--working-directory", "-w" }, "Working Directory");
-        var timeoutOpt = new Option<int>(new[] { "--timeout-ms", "-t" }, "TimeOut in ms");
+        var workingDirOpt = new Option<string>(new[] {"--working-directory", "-w"}, "Working Directory");
+        var timeoutOpt = new Option<int>(new[] {"--timeout-ms", "-t"}, "TimeOut in ms");
 
 
         var command = new Command("status", "Runs Vagrant status")
