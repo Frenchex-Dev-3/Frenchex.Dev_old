@@ -13,10 +13,11 @@ await Builder
             new ServicesConfiguration()
                 .ConfigureServices(services);
         },
-        logging => logging.AddConsole(),
+        logging => logging.ClearProviders().AddConsole(),
         "Configurations\\hostsettings.json",
         "Configurations\\appsettings.json",
-        "FRENCHEXDEV_"
+        "FRENCHEXDEV_",
+        AppDomain.CurrentDomain.BaseDirectory
     )
     .RunAsync();
 

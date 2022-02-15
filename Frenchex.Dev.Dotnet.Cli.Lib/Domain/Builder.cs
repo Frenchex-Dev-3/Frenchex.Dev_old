@@ -7,11 +7,12 @@ namespace Frenchex.Dev.Dotnet.Cli.Lib.Domain;
 public class Builder
 {
     public static IProgram Build<T>(
-        Action<IServiceCollection> configureProgramServices,
-        Action<ILoggingBuilder> configureProgramLogging,
+        Action<IServiceCollection> configureProgramServicesAction,
+        Action<ILoggingBuilder> configureProgramLoggingAction,
         string hostSettingsJsonFilename,
         string appSettingsJsonFilename,
-        string envVarPrefix
+        string envVarPrefix,
+        string appDomainDirectory
     ) where T : class, IHostedService
     {
         var services = new ServiceCollection();
@@ -26,13 +27,13 @@ public class Builder
         
         var program = programBuilder.Build(
             new Context(
-                hostSettingsJsonFilename,
-                appSettingsJsonFilename,
+                Path.GetFullPath(hostSettingsJsonFilename, appDomainDirectory),
+                Path.GetFullPath(appSettingsJsonFilename, appDomainDirectory),
                 envVarPrefix,
                 Directory.GetCurrentDirectory()
             ),
-            configureProgramServices,
-            configureProgramLogging
+            configureProgramServicesAction,
+            configureProgramLoggingAction
         );
 
         return program;
