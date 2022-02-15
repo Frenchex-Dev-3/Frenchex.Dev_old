@@ -2,7 +2,7 @@
 
 public abstract class RootCommandRequestBuilder : IRootCommandRequestBuilder
 {
-    public RootCommandRequestBuilder(
+    protected RootCommandRequestBuilder(
         IBaseRequestBuilderFactory baseRequestBuilderFactory
     )
     {

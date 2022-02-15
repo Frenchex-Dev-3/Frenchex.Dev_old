@@ -45,7 +45,7 @@ public class UpCommand : RootCommand, IUpCommand
     {
         return new StringBuilder()
                 .Append(request.Provision ? "" : " --no-provision")
-                .Append(request.ProvisionWith?.Length > 0 ? " " + string.Join(' ', request.ProvisionWith) : "")
+                .Append(request.ProvisionWith.Length > 0 ? " " + string.Join(' ', request.ProvisionWith) : "")
                 .Append(request.DestroyOnError ? "" : " --no-destroy-on-error")
                 .Append(request.Parallel ? "" : " --no-parallel")
                 .Append(!string.IsNullOrEmpty(request.Provider) ? $" --provider {request.Provider}" : "")
@@ -57,9 +57,7 @@ public class UpCommand : RootCommand, IUpCommand
 
     protected static string BuildVagrantArguments(IUpCommandRequest request)
     {
-        return null == request?.NamesOrIds
-            ? ""
-            : string.Join(' ', request.NamesOrIds);
+        return string.Join(' ', request.NamesOrIds);
     }
 
     protected static string BuildArguments(string command, IUpCommandRequest request)

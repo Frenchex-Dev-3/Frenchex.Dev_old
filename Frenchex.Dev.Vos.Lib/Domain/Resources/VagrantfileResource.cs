@@ -10,7 +10,7 @@ public interface IVagrantfileResource
 
 public class VagrantfileResource : IVagrantfileResource
 {
-    private const string VAGRANTFILE = "Vagrantfile";
+    private const string Vagrantfile = "Vagrantfile";
     private readonly IFilesystem _filesystem;
     private readonly string _sourceVagrantfile;
 
@@ -25,7 +25,7 @@ public class VagrantfileResource : IVagrantfileResource
             Path.GetDirectoryName(assembly.Location),
             "Resources",
             "Vagrant",
-            VAGRANTFILE
+            Vagrantfile
         );
     }
 
@@ -34,7 +34,7 @@ public class VagrantfileResource : IVagrantfileResource
         _filesystem
             .CopyFile(
                 _sourceVagrantfile,
-                Path.Join(destination, VAGRANTFILE)
+                Path.Join(destination, Vagrantfile)
             );
     }
 }

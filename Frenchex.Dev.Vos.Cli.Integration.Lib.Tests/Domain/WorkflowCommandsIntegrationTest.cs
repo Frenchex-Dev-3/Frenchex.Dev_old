@@ -53,10 +53,13 @@ public class WorkflowCommandsIntegrationTest
 
     #region Test_Complete_Workflow_Integration
 
+    public const string WorkingDirectoryMarkholder = "#WORKING_DIRECTORY#";
+
+
     public static IEnumerable<object[]> Test_Data()
     {
         var timeOutOpt = "--timeout-ms " + TimeSpan.FromMinutes(10).TotalMilliseconds;
-        const string workingDirOpt = "--working-directory #WORKING_DIRECTORY#";
+        const string workingDirOpt = $"--working-directory {WorkingDirectoryMarkholder}";
 
         yield return new object[]
         {
@@ -109,7 +112,9 @@ public class WorkflowCommandsIntegrationTest
 
         foreach (var command in commands)
         {
-            var realArgs = $"vos {command}";
+            var realArgs = $"vos {command}"
+                .Replace(WorkingDirectoryMarkholder, workingDirectory);
+
             var argsParsed = _rootCommand.Parse(realArgs);
 
             Assert.IsNotNull(argsParsed, realArgs);
@@ -134,25 +139,24 @@ public class WorkflowCommandsIntegrationTest
         // var process = Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe", "-n " + workingDirectory);
 
         foreach (var command in commands)
-            await RunTest(_rootCommand, command.Replace("#WORKING_DIRECTORY#", workingDirectory));
+        {
+            var realArgs = $"vos {command}"
+                .Replace(WorkingDirectoryMarkholder, workingDirectory);
+
+            var argsParsed = _rootCommand.Parse(realArgs);
+
+            Assert.IsNotNull(argsParsed, realArgs);
+            Assert.AreEqual(0, argsParsed.Errors.Count, realArgs, argsParsed.Errors);
+            Assert.IsNotNull(argsParsed.CommandResult);
+
+            var invokeResult = await _rootCommand.InvokeAsync(realArgs);
+            Assert.AreEqual(0, invokeResult, realArgs);
+        }
 
         //process.Kill();
 
         Directory.Delete(workingDirectory, true);
     }
-
-    private static async Task RunTest(RootCommand rootCommand, string args)
-    {
-        var realArgs = $"vos {args}";
-        var argsParsed = rootCommand.Parse(realArgs);
-
-        Assert.IsNotNull(argsParsed, realArgs);
-        Assert.AreEqual(0, argsParsed.Errors.Count, realArgs, argsParsed.Errors);
-        Assert.IsNotNull(argsParsed.CommandResult);
-
-        var invokeResult = await rootCommand.InvokeAsync(realArgs);
-        Assert.AreEqual(0, invokeResult, realArgs);
-    }
-
+    
     #endregion
 }

@@ -12,6 +12,6 @@ public class NameCommandRequestBuilderFactory : RootCommandRequestBuilderFactory
 
     public INameCommandRequestBuilder Factory()
     {
-        return new NameCommandRequestBuilder(_baseRequestBuilderFactory);
+        return new NameCommandRequestBuilder(BaseRequestBuilderFactory);
     }
 }

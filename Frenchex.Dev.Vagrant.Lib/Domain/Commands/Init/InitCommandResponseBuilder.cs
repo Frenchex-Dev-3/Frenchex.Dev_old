@@ -6,10 +6,10 @@ public class InitCommandResponseBuilder : RootResponseBuilder, IInitCommandRespo
 {
     public IInitCommandResponse Build()
     {
-        if (null == _process) throw new InvalidOperationException("process is null");
+        if (null == Process) throw new InvalidOperationException("process is null");
 
-        if (null == _processExecutionResult) throw new InvalidOperationException("processExecutionResult is null");
+        if (null == ProcessExecutionResult) throw new InvalidOperationException("processExecutionResult is null");
 
-        return new InitCommandResponse(_process, _processExecutionResult);
+        return new InitCommandResponse(Process, ProcessExecutionResult);
     }
 }

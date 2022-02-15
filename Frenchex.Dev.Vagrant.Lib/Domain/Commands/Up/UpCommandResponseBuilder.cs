@@ -6,9 +6,9 @@ public class UpCommandResponseBuilder : RootResponseBuilder, IUpCommandResponseB
 {
     public IUpCommandResponse Build()
     {
-        if (null == _process || null == _processExecutionResult)
+        if (null == Process || null == ProcessExecutionResult)
             throw new InvalidOperationException("missing process or execution result");
 
-        return new UpCommandResponse(_process, _processExecutionResult);
+        return new UpCommandResponse(Process, ProcessExecutionResult);
     }
 }

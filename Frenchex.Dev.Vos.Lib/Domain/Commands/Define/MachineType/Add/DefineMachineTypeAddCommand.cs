@@ -26,7 +26,7 @@ public class DefineMachineTypeAddCommand : RootCommand, IDefineMachineTypeAddCom
     public async Task<IDefineMachineTypeAddCommandResponse> Execute(IDefineMachineTypeAddCommandRequest request)
     {
         var configFilePath = Path.Join(request.Base.WorkingDirectory, "config.json");
-        var config = await _configurationLoadAction.Load(configFilePath);
+        var config = await ConfigurationLoadAction.Load(configFilePath);
 
         if (request.Definition.Name != null)
             config.MachineTypes.Add(request.Definition.Name, request.Definition);

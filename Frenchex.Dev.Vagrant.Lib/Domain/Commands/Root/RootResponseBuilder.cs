@@ -4,18 +4,18 @@ namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
 
 public abstract class RootResponseBuilder : IRootCommandResponseBuilder
 {
-    protected IProcess? _process;
-    protected ProcessExecutionResult? _processExecutionResult;
+    protected IProcess? Process;
+    protected ProcessExecutionResult? ProcessExecutionResult;
 
     public IRootCommandResponseBuilder SetProcess(IProcess process)
     {
-        _process = process;
+        Process = process;
         return this;
     }
 
     public IRootCommandResponseBuilder SetProcessExecutionResult(ProcessExecutionResult processExecutionResult)
     {
-        _processExecutionResult = processExecutionResult;
+        ProcessExecutionResult = processExecutionResult;
         return this;
     }
 }

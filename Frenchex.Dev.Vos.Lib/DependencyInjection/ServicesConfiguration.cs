@@ -1,5 +1,4 @@
-﻿using Frenchex.Dev.Vos.Lib.Domain.Actions.Configuration.Create;
-using Frenchex.Dev.Vos.Lib.Domain.Actions.Configuration.Load;
+﻿using Frenchex.Dev.Vos.Lib.Domain.Actions.Configuration.Load;
 using Frenchex.Dev.Vos.Lib.Domain.Actions.Configuration.Save;
 using Frenchex.Dev.Vos.Lib.Domain.Actions.Naming;
 using Frenchex.Dev.Vos.Lib.Domain.Actions.Networking;
@@ -37,13 +36,11 @@ public class ServicesConfiguration
 
         services
             .AddScoped<IVagrantfileResource, VagrantfileResource>()
-            .AddScoped<IConfigJsonResource, ConfigJsonResource>()
             ;
 
         // actions
 
         services
-            .AddScoped<IConfigurationCreateAction, ConfigurationCreateAction>()
             .AddScoped<IConfigurationLoadAction, ConfigurationLoadAction>()
             .AddScoped<IConfigurationSaveAction, ConfigurationSaveAction>()
             .AddScoped<IDefaultGatewayGetterAction, DefaultGatewayGetterAction>()

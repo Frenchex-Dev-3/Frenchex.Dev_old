@@ -7,16 +7,16 @@ namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
 
 public abstract class RootCommand : IRootCommand
 {
-    protected IFilesystem _filesystem;
-    protected IProcessBuilder _processBuilder;
+    protected IFilesystem Filesystem;
+    protected IProcessBuilder ProcessBuilder;
 
-    public RootCommand(
+    protected RootCommand(
         IProcessBuilder processBuilder,
         IFilesystem fileSystem
     )
     {
-        _processBuilder = processBuilder;
-        _filesystem = fileSystem;
+        ProcessBuilder = processBuilder;
+        Filesystem = fileSystem;
     }
 
     protected static string GetBinary()
@@ -54,7 +54,7 @@ public abstract class RootCommand : IRootCommand
 
     protected IProcess Build(ProcessBuildingParameters buildParameters)
     {
-        return _processBuilder.Build(buildParameters);
+        return ProcessBuilder.Build(buildParameters);
     }
 
     protected static string BuildRootVagrantOptions(IBaseCommandRequest request)

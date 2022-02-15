@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Frenchex.Dev.Cli.DependencyInjection;
 
 /// <summary>
-/// Logic to configure an IServiceCollection with Vos CLI & Library dependencies registered as scoped.
+/// Logic to configure an IServiceCollection with Vos CLI and Library dependencies registered as scoped.
 /// </summary>
 public class ServicesConfiguration : IServicesConfiguration
 {

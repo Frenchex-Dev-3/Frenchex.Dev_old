@@ -6,10 +6,10 @@ public class SshConfigCommandResponseBuilder : RootResponseBuilder, ISshConfigCo
 {
     public ISshConfigCommandResponse Build()
     {
-        if (null == _process) throw new InvalidOperationException("process is null");
+        if (null == Process) throw new InvalidOperationException("process is null");
 
-        if (null == _processExecutionResult) throw new InvalidOperationException("processExecutionResult is null");
+        if (null == ProcessExecutionResult) throw new InvalidOperationException("processExecutionResult is null");
 
-        return new SshConfigCommandResponse(_process, _processExecutionResult);
+        return new SshConfigCommandResponse(Process, ProcessExecutionResult);
     }
 }

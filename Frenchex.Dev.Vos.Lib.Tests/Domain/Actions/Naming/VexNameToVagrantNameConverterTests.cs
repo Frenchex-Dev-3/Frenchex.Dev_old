@@ -43,7 +43,7 @@ public class VexNameToVagrantNameConverterTests
                             Box = "generic/alpine38",
                             Gui = false,
                             PageFusion = false,
-                            Provider = ProviderEnum.virtualbox,
+                            Provider = ProviderEnum.Virtualbox,
                             Files = new Dictionary<string, FileCopyDefinition>(),
                             SharedFolders = new Dictionary<string, SharedFolderDefinition>(),
                             Provisioning = new Dictionary<string, ProvisioningDefinition>()
@@ -52,7 +52,7 @@ public class VexNameToVagrantNameConverterTests
                         Name = "a-very-complex-foo",
                         NamingPattern = "v#{VAGRANT_INSTANCE}-#{NAME}-#{INSTANCE}",
                         Instances = 4,
-                        RamInMB = 128,
+                        RamInMb = 128,
                         IsPrimary = true,
                         Ipv4Pattern = "10.100.1.#{NUMBER}",
                         Ipv4Start = 3,
@@ -79,7 +79,7 @@ public class VexNameToVagrantNameConverterTests
                             Box = "generic/alpine38",
                             Gui = false,
                             PageFusion = false,
-                            Provider = ProviderEnum.virtualbox,
+                            Provider = ProviderEnum.Virtualbox,
                             Files = new Dictionary<string, FileCopyDefinition>(),
                             SharedFolders = new Dictionary<string, SharedFolderDefinition>(),
                             Provisioning = new Dictionary<string, ProvisioningDefinition>()

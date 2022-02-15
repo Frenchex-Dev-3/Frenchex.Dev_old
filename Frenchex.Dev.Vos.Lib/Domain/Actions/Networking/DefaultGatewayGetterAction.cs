@@ -16,8 +16,10 @@ public class DefaultGatewayGetterAction : IDefaultGatewayGetterAction
             .GetAllNetworkInterfaces()
             .Where(n => n.OperationalStatus == OperationalStatus.Up)
             .Where(n => n.NetworkInterfaceType != NetworkInterfaceType.Loopback)
+            // ReSharper disable ConstantConditionalAccessQualifier
             .Select(n => (n, n.GetIPProperties()?.GatewayAddresses.Select(x => x?.Address).ToList()))
-            .Where(x => x.Item2.Any())
+            // ReSharper restore ConstantConditionalAccessQualifier
+            .Where(x => x.Item2 != null && x.Item2.Any())
             .ToList();
     }
 }

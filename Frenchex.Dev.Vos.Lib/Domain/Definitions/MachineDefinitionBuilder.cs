@@ -22,7 +22,7 @@ public class MachineDefinitionBuilder
 
     private string? _networkBridge;
 
-    private int? _ramInMB;
+    private int? _ramInMb;
 
     private int? _vcpus;
 
@@ -44,7 +44,7 @@ public class MachineDefinitionBuilder
             Name = _name,
             NamingPattern = _namingPattern,
             Instances = _instances,
-            RamInMB = _ramInMB,
+            RamInMb = _ramInMb,
             VirtualCpus = _vcpus,
             Ipv4Pattern = _ipv4Pattern,
             Ipv4Start = _ipv4Start,
@@ -90,9 +90,10 @@ public class MachineDefinitionBuilder
         return this;
     }
 
-    public MachineDefinitionBuilder WithVirtualCPUs(int virtualCPUs)
+    public MachineDefinitionBuilder WithVirtualCpUs(int virtualCpUs)
     {
-        _vcpus = virtualCPUs;
+        if (virtualCpUs <= 0) throw new ArgumentOutOfRangeException(nameof(virtualCpUs));
+        _vcpus = virtualCpUs;
         return this;
     }
 
@@ -108,9 +109,9 @@ public class MachineDefinitionBuilder
         return this;
     }
 
-    public MachineDefinitionBuilder WithRamInMB(int ramInMB)
+    public MachineDefinitionBuilder WithRamInMb(int ramInMb)
     {
-        _ramInMB = ramInMB;
+        _ramInMb = ramInMb;
         return this;
     }
 

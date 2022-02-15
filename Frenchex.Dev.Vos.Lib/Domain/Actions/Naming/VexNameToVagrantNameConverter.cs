@@ -23,6 +23,9 @@ public class VexNameToVagrantNameConverter : IVexNameToVagrantNameConverter
         var list = new List<string>();
         var dirBase = Path.GetFileName(workingDirectory);
 
+        if (null == dirBase)
+            throw new ArgumentNullException(nameof(dirBase));
+
         var prefixWithDirBase = configuration.Vagrant.PrefixWithDirBase;
         var namingPattern = configuration.Vagrant.NamingPattern;
 
@@ -37,52 +40,52 @@ public class VexNameToVagrantNameConverter : IVexNameToVagrantNameConverter
             switch (matchesPatternFromToWildcard.Count)
             {
                 case 0:
-                {
-                    var matchesPatternFromTo = PatternFromTo.Matches(name);
-
-                    var firstMatches = matchesPatternFromTo.First();
-
-                    if (firstMatches.Groups.ContainsKey("machine"))
-                        machineName = firstMatches.Groups["machine"].Value;
-
-                    if (firstMatches.Groups.ContainsKey("instance"))
-                        instances = firstMatches.Groups["instance"].Value;
-
-                    if (instances == "*")
-                        to = (configuration?.Machines[machineName]?.Instances ?? 0) - 1;
-                    else
-                        from = to = int.Parse(instances);
-
-                    break;
-                }
-                case > 0:
-                {
-                    var firstMatches = matchesPatternFromToWildcard.First();
-
-                    if (firstMatches.Groups.ContainsKey("machine"))
-                        machineName = firstMatches.Groups["machine"].Value;
-
-                    if (firstMatches.Groups.ContainsKey("instance"))
-                        instances = firstMatches.Groups["instance"].Value;
-
-
-                    if (instances.Contains('-')) // [2-*], [2-3-4], 
                     {
-                        var instancesSplit = instances.Split('-');
+                        var matchesPatternFromTo = PatternFromTo.Matches(name);
 
-                        from = int.Parse(instancesSplit[0]);
+                        var firstMatches = matchesPatternFromTo.First();
 
-                        if (instancesSplit.Length == 2)
-                        {
-                            var instanceSplitTo = instancesSplit[1];
+                        if (firstMatches.Groups.ContainsKey("machine"))
+                            machineName = firstMatches.Groups["machine"].Value;
 
-                            if (instanceSplitTo == "*")
-                                to = (configuration?.Machines[machineName]?.Instances ?? 0) - 1;
-                        }
+                        if (firstMatches.Groups.ContainsKey("instance"))
+                            instances = firstMatches.Groups["instance"].Value;
+
+                        if (instances == "*")
+                            to = (configuration?.Machines[machineName].Instances ?? 0) - 1;
+                        else
+                            from = to = int.Parse(instances);
+
+                        break;
                     }
+                case > 0:
+                    {
+                        var firstMatches = matchesPatternFromToWildcard.First();
 
-                    break;
-                }
+                        if (firstMatches.Groups.ContainsKey("machine"))
+                            machineName = firstMatches.Groups["machine"].Value;
+
+                        if (firstMatches.Groups.ContainsKey("instance"))
+                            instances = firstMatches.Groups["instance"].Value;
+
+
+                        if (instances.Contains('-')) // [2-*], [2-3-4], 
+                        {
+                            var instancesSplit = instances.Split('-');
+
+                            from = int.Parse(instancesSplit[0]);
+
+                            if (instancesSplit.Length == 2)
+                            {
+                                var instanceSplitTo = instancesSplit[1];
+
+                                if (instanceSplitTo == "*")
+                                    to = (configuration?.Machines[machineName].Instances ?? 0) - 1;
+                            }
+                        }
+
+                        break;
+                    }
             }
 
             if (from > to)
@@ -108,7 +111,7 @@ public class VexNameToVagrantNameConverter : IVexNameToVagrantNameConverter
         return list.ToArray();
     }
 
-    private string Prefix(
+    private static string Prefix(
         string s,
         string instance,
         bool prefixWithDirBase,

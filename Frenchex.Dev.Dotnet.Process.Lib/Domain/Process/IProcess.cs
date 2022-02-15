@@ -5,8 +5,6 @@ public interface IProcess : IDisposable
     public System.Diagnostics.Process WrappedProcess { get; }
     ProcessExecutionResult Start();
     void Stop();
-    Task<ProcessExecutionResult> WaitForExitOrTimeOut();
-    bool TryKillProcess();
 }
 
 public class ProcessExecutionResult
@@ -18,7 +16,6 @@ public class ProcessExecutionResult
 
     public bool? Completed { get; set; }
     public int? ExitCode { get; set; }
-    public int? TimeOutMiliseconds { get; set; }
     public Exception? Exception { get; set; }
     public TaskCompletionSource<bool>? OutputCloseEvent { get; } = new();
     public TaskCompletionSource<bool>? ErrorCloseEvent { get; } = new();

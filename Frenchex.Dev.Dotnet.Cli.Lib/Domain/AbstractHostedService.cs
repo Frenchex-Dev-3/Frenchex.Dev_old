@@ -5,22 +5,23 @@ using Microsoft.Extensions.Logging;
 
 namespace Frenchex.Dev.Dotnet.Cli.Lib.Domain;
 
+public enum ExitCode
+{
+    ExitNormal = 0,
+    ExitGeneralException = 1
+}
+
 public abstract class AbstractHostedService : IHostedService
 {
-    public enum ExitCode
-    {
-        EXIT_NORMAL = 0,
-        EXIT_GENERAL_EXCEPTION = 1
-    }
-
     private readonly IEntrypointInfo _entryPointInfo;
     private readonly IHostApplicationLifetime _hostApplicationLifetime;
     private readonly IEnumerable<IIntegration> _integrations;
     private readonly ILogger<AbstractHostedService> _logger;
+    private int _exitCode = (int)ExitCode.ExitNormal;
 
-    protected RootCommand? _rootCommand;
+    protected RootCommand? RootCommand;
 
-    public AbstractHostedService(
+    protected AbstractHostedService(
         ILogger<AbstractHostedService> logger,
         IHostApplicationLifetime hostApplicationLifetime,
         IEntrypointInfo entryPointInfo,
@@ -32,9 +33,14 @@ public abstract class AbstractHostedService : IHostedService
         _entryPointInfo = entryPointInfo;
         _integrations = integrations;
 
-        _hostApplicationLifetime.ApplicationStarted.Register(async () => { await OnStarted(); });
-        _hostApplicationLifetime.ApplicationStopping.Register(() => { OnStopping(); });
-        _hostApplicationLifetime.ApplicationStopped.Register(() => { OnStopped(); });
+        _hostApplicationLifetime.ApplicationStarted.Register(OnStartedAsync);
+        _hostApplicationLifetime.ApplicationStopping.Register(OnStopping);
+        _hostApplicationLifetime.ApplicationStopped.Register(OnStopped);
+    }
+
+    private async void OnStartedAsync()
+    {
+        await OnStarted();
     }
 
     public Task StartAsync(CancellationToken cancellationToken = default)
@@ -56,17 +62,16 @@ public abstract class AbstractHostedService : IHostedService
     protected async Task ExecuteAsync()
     {
         _logger.LogInformation("started");
-        var exitCode = 0;
 
         try
         {
             BuildAndAssignCommands();
-            exitCode = await ExecuteMainCommand();
+            _exitCode = await ExecuteMainCommand();
         }
         catch (Exception e)
         {
-            _logger.LogError("General exception not caught", e);
-            exitCode |= (int) ExitCode.EXIT_GENERAL_EXCEPTION;
+            _logger.LogError("General exception not caught", e.Message);
+            _exitCode |= (int)ExitCode.ExitGeneralException;
         }
         finally
         {
@@ -77,17 +82,17 @@ public abstract class AbstractHostedService : IHostedService
 
     private void BuildAndAssignCommands()
     {
-        _rootCommand = BuildRootCommand();
+        RootCommand = BuildRootCommand();
         BuildCommands();
     }
 
     protected void BuildCommands()
     {
-        if (null == _rootCommand)
-            throw new ArgumentNullException(nameof(_rootCommand));
+        if (null == RootCommand)
+            throw new ArgumentNullException(nameof(RootCommand));
 
         foreach (var integration in _integrations)
-            integration.Integrate(_rootCommand);
+            integration.Integrate(RootCommand);
     }
 
     private RootCommand BuildRootCommand()
@@ -99,9 +104,9 @@ public abstract class AbstractHostedService : IHostedService
 
     private async Task<int> ExecuteMainCommand()
     {
-        if (null == _rootCommand)
-            throw new ArgumentNullException(nameof(_rootCommand));
+        if (null == RootCommand)
+            throw new ArgumentNullException(nameof(RootCommand));
 
-        return await _rootCommand.InvokeAsync(_entryPointInfo.CommandLineArgs);
+        return await RootCommand.InvokeAsync(_entryPointInfo.CommandLineArgs);
     }
 }

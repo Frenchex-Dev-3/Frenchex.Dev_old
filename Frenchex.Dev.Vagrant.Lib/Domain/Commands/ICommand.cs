@@ -2,9 +2,9 @@
 
 namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands;
 
-public interface ICommand<U, R>
-    where U : IRootCommandRequest
-    where R : IRootCommandResponse
+public interface ICommand<in TU, out TR>
+    where TU : IRootCommandRequest
+    where TR : IRootCommandResponse
 {
-    R StartProcess(U request);
+    TR StartProcess(TU request);
 }

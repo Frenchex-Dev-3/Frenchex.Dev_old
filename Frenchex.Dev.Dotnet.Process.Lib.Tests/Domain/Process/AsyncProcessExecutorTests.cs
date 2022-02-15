@@ -10,7 +10,7 @@ namespace Frenchex.Dev.Dotnet.Process.Lib.Tests.Domain.Process;
 [TestClass]
 public class AsyncProcessExecutorTests
 {
-    private IProcessBuilder? sut;
+    private IProcessBuilder? _sut;
 
     [TestInitialize]
     public void Setup()
@@ -22,14 +22,14 @@ public class AsyncProcessExecutorTests
 
         var di = services.BuildServiceProvider();
 
-        sut = di.GetService<IProcessBuilder>();
+        _sut = di.GetService<IProcessBuilder>();
     }
 
     [DataTestMethod]
     [DataRow(
-        /** binary                  **/ "dotnet",
-        /** arguments               **/ "--help",
-        /** timeoutInMiliSeconds    **/ 10000
+        "dotnet",
+        "--help",
+        10000
     )]
     public async Task Test_Can_Execute_Async(
         string binary,
@@ -41,9 +41,9 @@ public class AsyncProcessExecutorTests
 
         Directory.CreateDirectory(workingDirectory);
 
-        Assert.IsNotNull(sut);
+        Assert.IsNotNull(_sut);
 
-        var process = sut.Build(new ProcessBuildingParameters(
+        var process = _sut.Build(new ProcessBuildingParameters(
             binary,
             arguments,
             workingDirectory,
@@ -60,7 +60,7 @@ public class AsyncProcessExecutorTests
         var outputStream = new MemoryStream();
         var outputStreamWriter = new StreamWriter(outputStream);
 
-        processExecution.Process.OutputDataReceived += async (s, e) =>
+        processExecution.Process.OutputDataReceived += async (_, e) =>
         {
             if (e.Data != null) await outputStreamWriter.WriteLineAsync(e.Data);
         };

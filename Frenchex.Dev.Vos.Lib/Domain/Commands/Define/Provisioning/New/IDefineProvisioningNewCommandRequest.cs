@@ -8,5 +8,5 @@ public interface IDefineProvisioningNewCommandRequest : IRootCommandRequest
     string Name { get; }
     IDictionary<string, string> Env { get; }
     string[] Code { get; }
-    OsTypeEnum OS { get; }
+    OsTypeEnum Os { get; }
 }

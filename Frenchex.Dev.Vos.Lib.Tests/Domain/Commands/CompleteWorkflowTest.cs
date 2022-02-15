@@ -121,7 +121,7 @@ public class CompleteWorkflowTests
             var upResponse = await _upCommand.Execute(item);
             TestInner(upResponse);
             Assert.IsNotNull(upResponse.Response);
-            Assert.IsNotNull(upResponse.Response?.ProcessExecutionResult?.WaitForCompleteExit);
+            Assert.IsNotNull(upResponse.Response.ProcessExecutionResult.WaitForCompleteExit);
             await upResponse.Response.ProcessExecutionResult.WaitForCompleteExit;
 
             Assert.AreEqual(0, upResponse.Response.ProcessExecutionResult.ExitCode, "up exit code is zero");
@@ -463,7 +463,7 @@ public class CompleteWorkflowTests
 
         var defaultSystemNetworkBridge = _defaultGatewayGetterAction.GetDefaultGateway();
 
-        return new List<IDefineMachineAddCommandRequest>
+        return new()
         {
             _defineMachineAddCommandRequestBuilderFactory.Factory()
                 .BaseBuilder
@@ -480,7 +480,7 @@ public class CompleteWorkflowTests
                     .WithOsType(OsTypeEnum.Debian_64)
                     .WithOsVersion("10.9.1")
                     .WithPageFusion(false)
-                    .WithProvider(ProviderEnum.virtualbox)
+                    .WithProvider(ProviderEnum.Virtualbox)
                     .WithProvisioning(new Dictionary<string, ProvisioningDefinition>())
                     .WithSharedFolders(new Dictionary<string, SharedFolderDefinition>())
                     .WithVideoRamInMb(16)
@@ -494,8 +494,8 @@ public class CompleteWorkflowTests
                     .WithIPv4Pattern("10.100.1.#INSTANCE#")
                     .IsPrimary(true)
                     .Enabled(true)
-                    .WithVirtualCPUs(2)
-                    .WithRamInMB(512)
+                    .WithVirtualCpUs(2)
+                    .WithRamInMb(512)
                     .WithNetworkBridge(defaultSystemNetworkBridge.First().Item1.Description)
                     .Build()
                 )
@@ -515,7 +515,7 @@ public class CompleteWorkflowTests
                     .WithOsType(OsTypeEnum.Debian_64)
                     .WithOsVersion("10.9.1")
                     .WithPageFusion(false)
-                    .WithProvider(ProviderEnum.virtualbox)
+                    .WithProvider(ProviderEnum.Virtualbox)
                     .WithProvisioning(new Dictionary<string, ProvisioningDefinition>())
                     .WithRamInMb(128)
                     .WithSharedFolders(new Dictionary<string, SharedFolderDefinition>())

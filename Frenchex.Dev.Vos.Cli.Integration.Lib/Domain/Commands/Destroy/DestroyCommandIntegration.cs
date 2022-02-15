@@ -58,7 +58,7 @@ public class DestroyCommandIntegration : ABaseCommandIntegration, IDestroyComman
                 .UsingTimeoutMiliseconds(payload.TimeoutMs)
                 .UsingWorkingDirectory(payload.WorkingDirectory)
                 .Parent<DestroyCommandRequestBuilder>()
-                .UsingName(payload.NameOrId.FirstOrDefault())
+                .UsingName(payload.NameOrId!.FirstOrDefault())
                 .WithForce(payload.Force)
                 .WithParallel(payload.Parallel)
                 .WithGraceful(payload.Graceful)

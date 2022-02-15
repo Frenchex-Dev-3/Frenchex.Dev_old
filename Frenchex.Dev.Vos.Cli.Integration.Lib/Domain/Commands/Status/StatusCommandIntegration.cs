@@ -48,7 +48,7 @@ public class StatusCommandIntegration : ABaseCommandIntegration, IStatusCommandI
                     .UsingWorkingDirectory(payload.WorkingDirectory)
                     .UsingTimeoutMiliseconds(payload.TimeoutMs)
                     .Parent<IStatusCommandRequestBuilder>()
-                    .WithNames(payload.Names)
+                    .WithNames(payload.Names!)
                     .Build()
                 );
         }, binder);

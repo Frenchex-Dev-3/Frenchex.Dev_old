@@ -13,6 +13,6 @@ public class DestroyCommandRequestBuilderFactory : RootCommandRequestBuilderFact
 
     public IDestroyCommandRequestBuilder Factory()
     {
-        return new DestroyCommandRequestBuilder(_baseRequestBuilderFactory);
+        return new DestroyCommandRequestBuilder(BaseRequestBuilderFactory);
     }
 }

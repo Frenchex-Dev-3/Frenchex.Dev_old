@@ -86,7 +86,7 @@ public class DefineMachineAddCommandIntegration : ABaseCommandIntegration, IDefi
                 {
                     Name = payload.Name,
                     VirtualCpus = payload.VCpus,
-                    RamInMB = payload.RamInMb,
+                    RamInMb = payload.RamInMb,
                     MachineTypeName = payload.Type,
                     Instances = payload.Instances,
                     IsEnabled = payload.Enabled,

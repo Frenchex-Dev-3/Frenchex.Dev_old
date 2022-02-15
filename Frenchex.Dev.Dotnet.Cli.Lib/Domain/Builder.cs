@@ -1,19 +1,18 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace Frenchex.Dev.Dotnet.Cli.Lib.Domain;
 
 public class Builder
 {
-    public static IProgram Build<T>(
+    public static IProgram Build(
         Action<IServiceCollection> configureProgramServicesAction,
         Action<ILoggingBuilder> configureProgramLoggingAction,
         string hostSettingsJsonFilename,
         string appSettingsJsonFilename,
         string envVarPrefix,
         string appDomainDirectory
-    ) where T : class, IHostedService
+    )
     {
         var services = new ServiceCollection();
 

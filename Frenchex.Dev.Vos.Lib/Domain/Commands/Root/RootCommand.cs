@@ -5,21 +5,21 @@ namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Root;
 
 public abstract class RootCommand
 {
-    protected readonly IConfigurationLoadAction _configurationLoadAction;
-    protected readonly IVexNameToVagrantNameConverter _nameToVagrantNameConverter;
+    protected readonly IConfigurationLoadAction ConfigurationLoadAction;
+    protected readonly IVexNameToVagrantNameConverter NameToVagrantNameConverter;
 
-    public RootCommand(
+    protected RootCommand(
         IConfigurationLoadAction configurationLoadAction,
         IVexNameToVagrantNameConverter nameConverter
     )
     {
-        _configurationLoadAction = configurationLoadAction;
-        _nameToVagrantNameConverter = nameConverter;
+        ConfigurationLoadAction = configurationLoadAction;
+        NameToVagrantNameConverter = nameConverter;
     }
 
     protected async Task<Configuration.Configuration> ConfigurationLoad(string? path)
     {
-        return await _configurationLoadAction.Load(Path.Join(path, "config.json"));
+        return await ConfigurationLoadAction.Load(Path.Join(path, "config.json"));
     }
 
     protected string[] MapNamesToVagrantNames(
@@ -28,6 +28,6 @@ public abstract class RootCommand
         Configuration.Configuration configuration
     )
     {
-        return _nameToVagrantNameConverter.ConvertAll(names, workingDirectory, configuration);
+        return NameToVagrantNameConverter.ConvertAll(names, workingDirectory, configuration);
     }
 }

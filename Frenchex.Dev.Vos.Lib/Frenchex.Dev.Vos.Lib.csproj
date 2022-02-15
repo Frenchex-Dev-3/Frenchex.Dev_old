@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Domain\Commands\Define\Provisioning\Unmap\" />
+    <Folder Include="Resources\Provisioning\alpine38\v1\docker-ce\" />
   </ItemGroup>
 
   <ItemGroup>

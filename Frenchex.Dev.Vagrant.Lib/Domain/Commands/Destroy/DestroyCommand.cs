@@ -58,13 +58,4 @@ public class DestroyCommand : RootCommand, IDestroyCommand
     {
         return request.NameOrId;
     }
-
-    protected static string BuildArguments(string command, IDestroyCommandRequest request)
-    {
-        return
-            $"{command} " +
-            $"{BuildVagrantOptions(request)} " +
-            $"{BuildVagrantArguments(request)}"
-            ;
-    }
 }

@@ -2,12 +2,12 @@
 
 public abstract class RootCommandRequestBuilderFactory : IRootCommandRequestBuilderFactory
 {
-    protected readonly IBaseRequestBuilderFactory _baseRequestBuilderFactory;
+    protected readonly IBaseRequestBuilderFactory BaseRequestBuilderFactory;
 
-    public RootCommandRequestBuilderFactory(
+    protected RootCommandRequestBuilderFactory(
         IBaseRequestBuilderFactory baseRequestBuilderFactory
     )
     {
-        _baseRequestBuilderFactory = baseRequestBuilderFactory;
+        BaseRequestBuilderFactory = baseRequestBuilderFactory;
     }
 }

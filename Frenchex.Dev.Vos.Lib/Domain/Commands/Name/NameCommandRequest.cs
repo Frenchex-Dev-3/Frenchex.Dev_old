@@ -5,11 +5,11 @@ namespace Frenchex.Dev.Vos.Lib.Domain.Commands.Name;
 public class NameCommandRequest : RootRequest, INameCommandRequest
 {
     public NameCommandRequest(
-        IBaseRequest _base,
-        string[] _names
-    ) : base(_base)
+        IBaseRequest @base,
+        string[] names
+    ) : base(@base)
     {
-        Names = _names;
+        Names = names;
     }
 
     public string[] Names { get; }

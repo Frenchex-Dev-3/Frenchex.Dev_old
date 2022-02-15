@@ -28,7 +28,7 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
         var destroyOnErrorOpt = new Option<bool>(new[] {"--destroy-on-error"}, "Destroy on error");
         var parallelOpt = new Option<bool>(new[] {"--parallel"}, "Parallel");
         var providerOpt =
-            new Option<string>(new[] {"--provider"}, () => ProviderEnum.virtualbox.ToString(), "Provider");
+            new Option<string>(new[] {"--provider"}, () => ProviderEnum.Virtualbox.ToString(), "Provider");
         var installProviderOpt = new Option<bool>(new[] {"--install-provider", "-i"}, "Install provider");
         var timeoutMs = new Option<int>(new[] {"--timeout-ms", "-t"}, () => 0, "TimeOut in ms");
         var workiongDirOpt = new Option<string>(new[] {"--working-directory", "-w"}, () => Environment.CurrentDirectory,
@@ -72,12 +72,12 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
                         .UsingWorkingDirectory(payload.WorkingDirectory)
                         .UsingTimeoutMiliseconds(payload.TimeoutMs)
                         .Parent<UpCommandRequestBuilder>()
-                        .UsingNames(payload.Names.ToArray())
+                        .UsingNames(payload.Names!.ToArray())
                         .WithProvision(payload.Provision)
-                        .UsingProvisionWith(payload.ProvisionWith)
+                        .UsingProvisionWith(payload.ProvisionWith!)
                         .WithDestroyOnError(payload.DestroyOnError)
                         .WithParallel(payload.Parallel)
-                        .UsingProvider(payload.Provider)
+                        .UsingProvider(payload.Provider!)
                         .WithInstallProvider(payload.InstallProvider)
                         .Build()
                     )

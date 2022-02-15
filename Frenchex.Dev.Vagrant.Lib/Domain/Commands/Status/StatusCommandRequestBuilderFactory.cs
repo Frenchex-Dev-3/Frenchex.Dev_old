@@ -12,6 +12,6 @@ public class StatusCommandRequestBuilderFactory : RootCommandRequestBuilderFacto
 
     public IStatusCommandRequestBuilder Factory()
     {
-        return new StatusCommandRequestBuilder(_baseRequestBuilderFactory);
+        return new StatusCommandRequestBuilder(BaseRequestBuilderFactory);
     }
 }

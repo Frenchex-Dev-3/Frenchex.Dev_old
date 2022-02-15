@@ -14,7 +14,7 @@ public class MachineDefinitionDeclaration
 
     [JsonProperty("instances")] public int? Instances { get; set; } = 1;
 
-    [JsonProperty("ram_mb")] public int? RamInMB { get; set; } = 128;
+    [JsonProperty("ram_mb")] public int? RamInMb { get; set; } = 128;
 
     [JsonProperty("vcpus")] public int? VirtualCpus { get; set; } = 2;
 

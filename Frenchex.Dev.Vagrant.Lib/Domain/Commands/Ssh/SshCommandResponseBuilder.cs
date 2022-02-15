@@ -6,9 +6,9 @@ public class SshCommandResponseBuilder : RootResponseBuilder, ISshCommandRespons
 {
     public ISshCommandResponse Build()
     {
-        if (null == _process || null == _processExecutionResult)
+        if (null == Process || null == ProcessExecutionResult)
             throw new InvalidOperationException("process or processexecutionresult is null");
 
-        return new SshCommandResponse(_process, _processExecutionResult);
+        return new SshCommandResponse(Process, ProcessExecutionResult);
     }
 }

@@ -6,9 +6,9 @@ public class DestroyCommandResponseBuilder : RootResponseBuilder, IDestroyComman
 {
     public IDestroyCommandResponse Build()
     {
-        if (null == _process || null == _processExecutionResult)
+        if (null == Process || null == ProcessExecutionResult)
             throw new InvalidOperationException("missing process or execution result");
 
-        return new DestroyCommandResponse(_process, _processExecutionResult);
+        return new DestroyCommandResponse(Process, ProcessExecutionResult);
     }
 }

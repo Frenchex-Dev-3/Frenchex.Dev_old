@@ -7,8 +7,6 @@ public class HaltCommandRequestBuilder : RootCommandRequestBuilder, IHaltCommand
     private int? _usingHaltTimeoutMs;
     private string[]? _usingNamesOrIds;
     private bool? _withForce;
-    private bool? _withGraceful;
-    private bool? _withParallel;
 
     public HaltCommandRequestBuilder(
         IBaseCommandRequestBuilderFactory baseRequestBuilderFactory
@@ -21,8 +19,6 @@ public class HaltCommandRequestBuilder : RootCommandRequestBuilder, IHaltCommand
         return new HaltCommandRequest(
             _usingNamesOrIds ?? Array.Empty<string>(),
             _withForce ?? false,
-            _withParallel ?? false,
-            _withGraceful ?? false,
             _usingHaltTimeoutMs ?? (int) TimeSpan.FromMinutes(10).TotalMilliseconds,
             BaseBuilder.Build()
         );
@@ -46,15 +42,4 @@ public class HaltCommandRequestBuilder : RootCommandRequestBuilder, IHaltCommand
         return this;
     }
 
-    public IHaltCommandRequestBuilder WithParallel(bool with)
-    {
-        _withParallel = with;
-        return this;
-    }
-
-    public IHaltCommandRequestBuilder WithGraceful(bool with)
-    {
-        _withGraceful = with;
-        return this;
-    }
 }

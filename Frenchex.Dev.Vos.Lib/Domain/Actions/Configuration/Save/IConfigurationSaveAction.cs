@@ -24,6 +24,7 @@ public class ConfigurationSaveAction : IConfigurationSaveAction
         var serialized = JsonConvert.SerializeObject(configuration, Formatting.Indented, new JsonSerializerSettings
         {
             NullValueHandling = NullValueHandling.Ignore
+            
         });
         await _fileSystemOperator.WriteAllTextAsync(path, serialized);
     }

@@ -6,6 +6,5 @@ public interface IHaltCommandRequestBuilder : IRootCommandRequestBuilder
 {
     IHaltCommandRequest Build();
     IHaltCommandRequestBuilder UsingNamesOrIds(string[] namesOrIds);
-    IHaltCommandRequestBuilder WithForce(bool with);
     IHaltCommandRequestBuilder UsingHaltTimeoutInMiliSeconds(int timeoutMs);
 }

@@ -36,7 +36,7 @@ public class BaseRequest : IBaseRequest
     public bool Tty { get; }
     public bool Help { get; }
     public string? WorkingDirectory { get; }
-    public int TimeoutInMiliSeconds { get; } = 1000 * 2;
+    public int TimeoutInMiliSeconds { get; }
 
     public T Parent<T>(T parent)
     {

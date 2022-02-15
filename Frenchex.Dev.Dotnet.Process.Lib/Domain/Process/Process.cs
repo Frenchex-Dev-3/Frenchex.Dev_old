@@ -94,7 +94,7 @@ public class Process : IProcess
                     Result.OutputCloseEvent.Task,
                     Result.ErrorCloseEvent.Task
                 )
-                .ContinueWith(t =>
+                .ContinueWith(_ =>
                 {
                     Result.ExitCode = _wrappedProcess.ExitCode;
                     Result.Completed = true;
@@ -108,18 +108,6 @@ public class Process : IProcess
                 Task.Delay(_processBuildingParameters.TimeOutInMiliSeconds),
                 Result.WaitForCompleteExit
             );
-
-        return Result;
-    }
-
-    public async Task<ProcessExecutionResult> WaitForExitOrTimeOut()
-    {
-        if (null == Result) throw new InvalidOperationException(nameof(Result));
-
-        if (null == Result.WaitForExitOrTimeOut)
-            throw new InvalidOperationException(nameof(Result.WaitForExitOrTimeOut));
-
-        await Result.WaitForExitOrTimeOut;
 
         return Result;
     }
@@ -169,7 +157,7 @@ public class Process : IProcess
 
         var outputStreamWriter = new StreamWriter(Result.OutputStream);
 
-        _wrappedProcess.OutputDataReceived += async (s, e) =>
+        _wrappedProcess.OutputDataReceived += async (_, e) =>
         {
             // The output stream has been closed i.e. the process has terminated
             if (e.Data == null)
@@ -191,7 +179,7 @@ public class Process : IProcess
             await outputStreamWriter.WriteLineAsync(e.Data);
         };
 
-        _wrappedProcess.ErrorDataReceived += (s, e) =>
+        _wrappedProcess.ErrorDataReceived += (_, e) =>
         {
             // The error stream has been closed i.e. the process has terminated
             if (e.Data == null)

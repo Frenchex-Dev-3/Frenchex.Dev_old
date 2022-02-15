@@ -11,6 +11,6 @@ public class InitCommandRequestBuilderFactory : RootCommandRequestBuilderFactory
 
     public IInitCommandRequestBuilder Factory()
     {
-        return new InitCommandRequestBuilder(_baseRequestBuilderFactory);
+        return new InitCommandRequestBuilder(BaseRequestBuilderFactory);
     }
 }

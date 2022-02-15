@@ -6,12 +6,12 @@ public class StatusCommandResponseBuilder : RootResponseBuilder, IStatusCommandR
 {
     public IStatusCommandResponse Build()
     {
-        if (null == _process || null == _processExecutionResult)
+        if (null == Process || null == ProcessExecutionResult)
             throw new InvalidOperationException("process or processexecutionresult is null");
 
         return new StatusCommandResponse(
-            _process,
-            _processExecutionResult
+            Process,
+            ProcessExecutionResult
         );
     }
 }

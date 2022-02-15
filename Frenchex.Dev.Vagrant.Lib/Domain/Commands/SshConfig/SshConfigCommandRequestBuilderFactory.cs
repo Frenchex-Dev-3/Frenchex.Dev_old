@@ -13,6 +13,6 @@ public class SshConfigCommandRequestBuilderFactory : RootCommandRequestBuilderFa
 
     public ISshConfigCommandRequestBuilder Factory()
     {
-        return new SshConfigCommandRequestBuilder(_baseRequestBuilderFactory);
+        return new SshConfigCommandRequestBuilder(BaseRequestBuilderFactory);
     }
 }

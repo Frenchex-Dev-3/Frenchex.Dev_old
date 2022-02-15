@@ -22,8 +22,8 @@ public class InitCommand : RootCommand, IInitCommand
     {
         var responseBuilder = _responseBuilderFactory.Build();
 
-        if (!_filesystem.DirectoryExists(request.Base.WorkingDirectory))
-            _filesystem.CreateDirectory(request.Base.WorkingDirectory);
+        if (!Filesystem.DirectoryExists(request.Base.WorkingDirectory))
+            Filesystem.CreateDirectory(request.Base.WorkingDirectory);
 
         BuildAndStartProcess(
             request,

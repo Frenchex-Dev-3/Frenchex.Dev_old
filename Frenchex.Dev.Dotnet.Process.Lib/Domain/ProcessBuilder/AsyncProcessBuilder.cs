@@ -2,12 +2,13 @@
 using Frenchex.Dev.Dotnet.Process.Lib.Domain.Process;
 using Microsoft.Extensions.Logging;
 
+
+namespace Frenchex.Dev.Dotnet.Process.Lib.Domain.ProcessBuilder;
+
 /// <summary>
 /// Taken from https://gist.github.com/AlexMAS/276eed492bc989e13dcce7c78b9e179d
 /// Thank you AlexMAS !
 /// </summary>
-namespace Frenchex.Dev.Dotnet.Process.Lib.Domain.ProcessBuilder;
-
 public class AsyncProcessBuilder : IProcessBuilder
 {
     private readonly ILogger<IProcess> _processLogger;

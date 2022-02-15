@@ -44,7 +44,7 @@ public class SshConfigCommand : RootCommand, ISshConfigCommand
         );
 
 
-        if (null == process.ProcessExecutionResult?.WaitForCompleteExit)
+        if (null == process.ProcessExecutionResult.WaitForCompleteExit)
             throw new InvalidOperationException("wait for complete exit is null");
 
         await process.ProcessExecutionResult.WaitForCompleteExit;

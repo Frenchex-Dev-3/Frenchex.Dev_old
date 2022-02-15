@@ -14,12 +14,21 @@ using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.SshConfig;
 using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Status;
 using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Up;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.DependencyInjection;
 
 public class ServicesConfiguration
 {
+    /// <summary>
+    /// Configure services object against integration classes.
+    ///
+    /// Integration classes are meant to be used only once during execution of CLI.
+    /// Marking them as Singleton will save their unique instance into the DI.
+    /// While we only need them once.
+    /// So we mark them as Transient so that created instances will not be managed
+    /// by DI.
+    /// </summary>
+    /// <param name="services"></param>
     public static void ConfigureServices(IServiceCollection services)
     {
         Vos.Lib.DependencyInjection.ServicesConfiguration
@@ -27,16 +36,6 @@ public class ServicesConfiguration
 
         services
             .AddScoped<IIntegration, Domain.Integration>();
-        ;
-
-        /**
-        * Integration classes are meant to be used only once during execution of CLI.
-        * Marking them as Singleton will save their unique instance into the DI.
-        * While we only need them once.
-        * So we mark them as Transient so that created instances will not be managed
-        * by DI.
-        **/
-
 
         services
             .AddScoped<IVosCommandIntegration, DefineCommandIntegration>()

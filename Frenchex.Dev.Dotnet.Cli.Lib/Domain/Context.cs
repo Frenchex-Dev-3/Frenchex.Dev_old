@@ -15,8 +15,8 @@ public class Context
         BasePath = basePath;
     }
 
-    public string HostSettings { get; } = "hostsettings.json";
-    public string AppSettings { get; } = "appsettings.json";
+    public string HostSettings { get; }
+    public string AppSettings { get; }
     public string Prefix { get; }
     public string BasePath { get; }
 }

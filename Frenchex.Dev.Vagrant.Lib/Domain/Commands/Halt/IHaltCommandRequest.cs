@@ -6,5 +6,4 @@ public interface IHaltCommandRequest : IRootCommandRequest
 {
     string[] NamesOrIds { get; }
     bool Force { get; }
-    int HaltTimeoutInMiliSeconds { get; }
 }

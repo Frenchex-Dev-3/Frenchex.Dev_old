@@ -6,9 +6,9 @@ public class HaltCommandResponseBuilder : RootResponseBuilder, IHaltCommandRespo
 {
     public IHaltCommandResponse Build()
     {
-        if (null == _process || null == _processExecutionResult)
+        if (null == Process || null == ProcessExecutionResult)
             throw new InvalidOperationException("process or execution result is null");
 
-        return new HaltCommandResponse(_process, _processExecutionResult);
+        return new HaltCommandResponse(Process, ProcessExecutionResult);
     }
 }

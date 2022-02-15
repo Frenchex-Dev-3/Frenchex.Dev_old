@@ -54,15 +54,6 @@ public class HaltCommand : RootCommand, IHaltCommand
 
     protected static string BuildVagrantArguments(IHaltCommandRequest request)
     {
-        return request.NamesOrIds != null && request.NamesOrIds.Length > 0 ? string.Join(" ", request.NamesOrIds) : "";
-    }
-
-    protected static string BuildArguments(string command, IHaltCommandRequest request)
-    {
-        return
-            $"{command} " +
-            $"{BuildVagrantOptions(request)} " +
-            $"{BuildVagrantArguments(request)}"
-            ;
+        return request.NamesOrIds is {Length: > 0} ? string.Join(" ", request.NamesOrIds) : "";
     }
 }

@@ -44,8 +44,8 @@ public class StatusCommand : RootCommand, IStatusCommand
         );
 
 
-        if (null == process.ProcessExecutionResult?.WaitForCompleteExit
-            || null == process.ProcessExecutionResult?.OutputStream
+        if (null == process.ProcessExecutionResult.WaitForCompleteExit
+            || null == process.ProcessExecutionResult.OutputStream
            )
             throw new InvalidOperationException("wait for complete exit is null");
 

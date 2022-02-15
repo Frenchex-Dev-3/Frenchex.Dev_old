@@ -31,10 +31,10 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
         var ramMbArg = new Argument<int>("ram-mb", "RAM in MB");
         var osTypeArg = new Argument<string>("os-type", "OS Name");
         var osVersionArg = new Argument<string>("os-version", "OS Version");
-        var isEnabledOpt = new Option<bool>(new[] {"--enabled", "-e"}, "Enable Machine Type");
-        var isEnabled3dOpt = new Option<bool>(new[] {"--enable3d"}, "Enable 3D");
-        var timeoutMsOpt = new Option<int>(new[] {"--timeout-ms", "-t"}, "TimeOut in ms");
-        var workingDirOpt = new Option<string>(new[] {"--working-directory", "-w"}, "Working Directory");
+        var isEnabledOpt = new Option<bool>(new[] { "--enabled", "-e" }, "Enable Machine Type");
+        var isEnabled3dOpt = new Option<bool>(new[] { "--enable3d" }, "Enable 3D");
+        var timeoutMsOpt = new Option<int>(new[] { "--timeout-ms", "-t" }, "TimeOut in ms");
+        var workingDirOpt = new Option<string>(new[] { "--working-directory", "-w" }, "Working Directory");
 
         var command = new Command("add", "Define Machine-Types")
         {
@@ -70,6 +70,9 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
             CancellationToken cancellationToken
         ) =>
         {
+            if (payload.OsType == null)
+                throw new ArgumentNullException(nameof(payload.OsType));
+
             var request = _requestBuilderFactory.Factory()
                 .BaseBuilder
                 .UsingTimeoutMiliseconds(payload.TimeOutMs)

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using ServicesConfiguration = Frenchex.Dev.Cli.DependencyInjection.ServicesConfiguration;
 
 await Builder
-    .Build<Host>(
+    .Build(
         services =>
         {
             services.AddHostedService<Host>();

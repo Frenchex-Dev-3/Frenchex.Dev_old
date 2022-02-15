@@ -23,11 +23,11 @@ public class DefineMachineAddCommand : RootCommand, IDefineMachineAddCommand
 
     public async Task<IDefineMachineAddCommandResponse> Execute(IDefineMachineAddCommandRequest request)
     {
-        if (null == request?.DefinitionDeclaration?.Name)
+        if (null == request.DefinitionDeclaration.Name)
             throw new InvalidOperationException("request or definitionDeclaration or name is null");
 
         var configFilePath = Path.Join(request.Base.WorkingDirectory, "config.json");
-        var config = await _configurationLoadAction.Load(configFilePath);
+        var config = await ConfigurationLoadAction.Load(configFilePath);
 
         config.Machines.Add(request.DefinitionDeclaration.Name, request.DefinitionDeclaration);
 

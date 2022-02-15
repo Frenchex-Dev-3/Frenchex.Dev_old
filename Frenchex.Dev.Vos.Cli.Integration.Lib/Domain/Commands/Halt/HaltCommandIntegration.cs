@@ -66,7 +66,6 @@ public class HaltCommandIntegration : ABaseCommandIntegration, IHaltCommandInteg
                 )
                 ;
         }, binder);
-        ;
 
         rootCommand.AddCommand(command);
     }

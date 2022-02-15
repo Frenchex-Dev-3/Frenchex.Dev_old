@@ -4,7 +4,7 @@ public interface IFilesystem
 {
     DirectoryInfo CreateDirectory(string? path);
     bool DirectoryExists(string? path);
-    void DeleteDirectory(string path);
     void CopyFile(string sourceFile, string destinationFile);
     Task WriteAllTextAsync(string path, string content);
+    FileSystemInfo CreateSymbolicLink(string path, string pathToTarget);
 }

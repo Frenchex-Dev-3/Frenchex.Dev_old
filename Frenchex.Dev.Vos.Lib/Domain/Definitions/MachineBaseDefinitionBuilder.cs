@@ -137,9 +137,9 @@ public class MachineBaseDefinitionBuilder
         return this;
     }
 
-    public MachineBaseDefinitionBuilder WithRamInMb(int ramInMB)
+    public MachineBaseDefinitionBuilder WithRamInMb(int ramInMb)
     {
-        _ramInMb = ramInMB;
+        _ramInMb = ramInMb;
         return this;
     }
 
@@ -149,9 +149,9 @@ public class MachineBaseDefinitionBuilder
         return this;
     }
 
-    public MachineBaseDefinitionBuilder WithVideoRamInMb(int videoRamInMB)
+    public MachineBaseDefinitionBuilder WithVideoRamInMb(int videoRamInMb)
     {
-        _videoRamInMb = videoRamInMB;
+        _videoRamInMb = videoRamInMb;
         return this;
     }
 

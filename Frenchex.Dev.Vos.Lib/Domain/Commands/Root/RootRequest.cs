@@ -2,9 +2,9 @@
 
 public class RootRequest : IRootCommandRequest
 {
-    public RootRequest(IBaseRequest _base)
+    public RootRequest(IBaseRequest @base)
     {
-        Base = _base;
+        Base = @base;
     }
 
     public IBaseRequest Base { get; }

@@ -51,7 +51,7 @@ public class NameCommandIntegration : ABaseCommandIntegration, INameCommandInteg
                     .UsingWorkingDirectory(payload.WorkingDirectory)
                     .UsingTimeoutMiliseconds(payload.TimeoutMs)
                     .Parent<INameCommandRequestBuilder>()
-                    .WithNames(payload.Names)
+                    .WithNames(payload.Names!)
                     .Build()
                 );
 

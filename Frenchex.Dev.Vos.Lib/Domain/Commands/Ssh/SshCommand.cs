@@ -45,14 +45,14 @@ public class SshCommand : RootCommand, ISshCommand
         );
 
 
-        if (null == response.ProcessExecutionResult?.WaitForCompleteExit)
+        if (null == response.ProcessExecutionResult.WaitForCompleteExit)
             throw new InvalidOperationException("wait for complete exit is null");
 
 
         await response.ProcessExecutionResult.WaitForCompleteExit;
 
         var output =
-            Encoding.UTF8.GetString(response?.ProcessExecutionResult?.OutputStream?.ToArray() ?? Array.Empty<byte>());
+            Encoding.UTF8.GetString(response.ProcessExecutionResult.OutputStream?.ToArray() ?? Array.Empty<byte>());
 
         var responseBuilder = _responseBuilderFactory.Build();
 

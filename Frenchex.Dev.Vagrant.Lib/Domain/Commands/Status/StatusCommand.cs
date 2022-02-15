@@ -39,7 +39,7 @@ public class StatusCommand : RootCommand, IStatusCommand
 
     private static string BuildArguments(IStatusCommandRequest request)
     {
-        return $"{GetCliCommandName()} {string.Join(" ", request?.NamesOrIds ?? Array.Empty<string>())}";
+        return $"{GetCliCommandName()} {string.Join(" ", request.NamesOrIds)}";
     }
 
     private static string GetCliCommandName()

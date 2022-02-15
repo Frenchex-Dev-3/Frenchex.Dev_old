@@ -11,6 +11,6 @@ public class HaltCommandRequestBuilderFactory : RootCommandRequestBuilderFactory
 
     public IHaltCommandRequestBuilder Factory()
     {
-        return new HaltCommandRequestBuilder(_baseRequestBuilderFactory);
+        return new HaltCommandRequestBuilder(BaseRequestBuilderFactory);
     }
 }

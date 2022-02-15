@@ -9,6 +9,11 @@ public class Filesystem : IFilesystem
 
     public DirectoryInfo CreateDirectory(string? path)
     {
+        if (string.IsNullOrEmpty(path))
+        {
+            throw new ArgumentNullException(nameof(path));
+        }
+
         return Directory.CreateDirectory(path);
     }
 
@@ -17,9 +22,9 @@ public class Filesystem : IFilesystem
         await File.WriteAllTextAsync(path, content);
     }
 
-    public void DeleteDirectory(string path)
+    public FileSystemInfo CreateSymbolicLink(string path, string pathToTarget)
     {
-        Directory.Delete(path, true);
+        return Directory.CreateSymbolicLink(path, pathToTarget);
     }
 
     public bool DirectoryExists(string? path)

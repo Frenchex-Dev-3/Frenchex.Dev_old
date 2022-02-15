@@ -11,6 +11,6 @@ public class UpCommandRequestBuilderFactory : RootCommandRequestBuilderFactory, 
 
     public IUpCommandRequestBuilder Factory()
     {
-        return new UpCommandRequestBuilder(_baseRequestBuilderFactory);
+        return new UpCommandRequestBuilder(BaseRequestBuilderFactory);
     }
 }

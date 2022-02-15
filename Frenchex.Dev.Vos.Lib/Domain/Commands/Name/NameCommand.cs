@@ -23,7 +23,7 @@ public class NameCommand : RootCommand, INameCommand
 
         return _responseBuilderFactory
             .Factory()
-            .SetNames(_nameToVagrantNameConverter.ConvertAll(request.Names, request.Base.WorkingDirectory, config))
+            .SetNames(NameToVagrantNameConverter.ConvertAll(request.Names, request.Base.WorkingDirectory, config))
             .Build();
     }
 }

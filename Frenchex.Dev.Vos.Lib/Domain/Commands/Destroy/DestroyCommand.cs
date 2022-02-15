@@ -45,7 +45,7 @@ public class DestroyCommand : RootCommand, IDestroyCommand
             .Build()
         );
 
-        if (null == process?.ProcessExecutionResult?.WaitForCompleteExit)
+        if (null == process.ProcessExecutionResult.WaitForCompleteExit)
             throw new InvalidOperationException("waitforcompleteexit is null");
 
         await process.ProcessExecutionResult.WaitForCompleteExit;

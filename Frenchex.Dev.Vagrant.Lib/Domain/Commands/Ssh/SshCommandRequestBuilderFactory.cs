@@ -12,6 +12,6 @@ public class SshCommandRequestBuilderFactory : RootCommandRequestBuilderFactory,
 
     public ISshCommandRequestBuilder Factory()
     {
-        return new SshCommandRequestBuilder(_baseRequestBuilderFactory);
+        return new SshCommandRequestBuilder(BaseRequestBuilderFactory);
     }
 }
