@@ -8,6 +8,7 @@ public class DefineMachineTypeAddCommandIntegrationPayload
     public string? OsVersion { get; set; }
     public int VCpus { get; set; }
     public int RamInMb { get; set; }
+    public int VideoRamInMb { get; set; }
     public bool Enabled { get; set; }
     public bool Enable3D { get; set; }
     public int TimeOutMs { get; set; }

@@ -8,6 +8,7 @@ public class
 {
     private readonly Argument<string> _boxName;
     private readonly Option<bool> _is3DEnabled;
+    private readonly Option<int> _videoRamMb;
     private readonly Option<bool> _isEnabled;
     private readonly Argument<string> _name;
     private readonly Argument<string> _osType;
@@ -25,6 +26,7 @@ public class
         Argument<string> osVersion,
         Option<bool> isEnabled,
         Option<bool> is3DEnabled,
+        Option<int> videoRamMb,
         Option<int> timeoutMs,
         Option<string> workingDir
     )
@@ -33,6 +35,7 @@ public class
         _boxName = boxName;
         _isEnabled = isEnabled;
         _is3DEnabled = is3DEnabled;
+        _videoRamMb = videoRamMb;
         _vCpus = vCpus;
         _ramMb = ramMb;
         _osType = osType;
@@ -52,6 +55,7 @@ public class
             VCpus = bindingContext.ParseResult.GetValueForArgument(_vCpus),
             WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDir),
             Enable3D = bindingContext.ParseResult.GetValueForOption(_is3DEnabled),
+            VideoRamInMb = bindingContext.ParseResult.GetValueForOption(_videoRamMb),
             TimeOutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMs),
             OsType = bindingContext.ParseResult.GetValueForArgument(_osType),
             OsVersion = bindingContext.ParseResult.GetValueForArgument(_osVersion)

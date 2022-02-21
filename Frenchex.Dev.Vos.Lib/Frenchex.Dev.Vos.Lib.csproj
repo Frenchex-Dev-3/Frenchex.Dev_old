@@ -1,31 +1,24 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Domain\Commands\Define\Provisioning\Unmap\" />
-    <Folder Include="Resources\Provisioning\alpine38\v1\docker-ce\" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.2-mauipre.1.22054.8" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.2-mauipre.1.22054.8" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Frenchex.Dev.Dotnet.Filesystem.Lib\Frenchex.Dev.Dotnet.Filesystem.Lib.csproj" />
+		<ProjectReference Include="..\Frenchex.Dev.Dotnet.Process.Lib\Frenchex.Dev.Dotnet.Process.Lib.csproj" />
+		<ProjectReference Include="..\Frenchex.Dev.Vagrant.Lib\Frenchex.Dev.Vagrant.Lib.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Frenchex.Dev.Dotnet.Filesystem.Lib\Frenchex.Dev.Dotnet.Filesystem.Lib.csproj" />
-    <ProjectReference Include="..\Frenchex.Dev.Dotnet.Process.Lib\Frenchex.Dev.Dotnet.Process.Lib.csproj" />
-    <ProjectReference Include="..\Frenchex.Dev.Vagrant.Lib\Frenchex.Dev.Vagrant.Lib.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Resources\Vagrant\Vagrantfile">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="Resources\**\*.*" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
 
 </Project>

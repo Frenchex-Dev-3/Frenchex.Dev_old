@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.CommandLine;
 using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using Frenchex.Dev.Dotnet.Cli.Integration.Lib.Domain;
 using Frenchex.Dev.Dotnet.UnitTesting.Lib.Domain;
@@ -11,8 +12,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-#pragma warning disable CS8602
-#pragma warning disable CS1998
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Tests.Domain;
 
@@ -40,6 +39,7 @@ public class IntegrationWorkflowUnitTest
                 ServicesConfiguration.ConfigureServices(services);
 
                 // DI will be used as receptable of integrated commands
+                // by means of SubjectUnderTest
                 services.AddScoped<SubjectUnderTest>();
             },
             (services, configurationRoot) =>
@@ -57,9 +57,43 @@ public class IntegrationWorkflowUnitTest
     [TestMethod]
     [DynamicData(nameof(Test_Data), DynamicDataSourceType.Method)]
     [TestCategory("need-vagrant")]
-    public async Task Test(string testCaseName, InputCommand[] commands)
+    public async Task Test_Run(string testCaseName, InputCommand[] commands)
     {
         var workingDirectory = Path.Join(Path.GetTempPath(), Path.GetRandomFileName());
+
+        await RunInternal(workingDirectory, commands, async (s, command) =>
+        {
+            var result = await command.InvokeAsync(s);
+
+            Assert.IsNotNull(result, s);
+            Assert.AreEqual(0, result, s);
+        });
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(Test_Data), DynamicDataSourceType.Method)]
+    public async Task Test_Args(string testCaseName, InputCommand[] commands)
+    {
+        var workingDirectory = Path.Join(Path.GetTempPath(), Path.GetRandomFileName());
+        await RunInternal(workingDirectory, commands, async (command, rootCommand) =>
+        {
+            var parsed = rootCommand.Parse(command);
+            Assert.AreEqual(
+                0, 
+                parsed.Errors.Count, 
+                string.Join("\r\n\r\n", parsed.Errors.SelectMany(x => x.Message))
+            );
+        });
+    }
+
+    private async Task RunInternal(
+        string workingDirectory,
+        InputCommand[] commands,
+        Func<string, RootCommand, Task> execCommand
+    )
+    {
+        if (null == _unitTest)
+            throw new ArgumentNullException(nameof(_unitTest));
 
         await _unitTest
             .OpenVsCode(workingDirectory)
@@ -74,24 +108,14 @@ public class IntegrationWorkflowUnitTest
                 {
                     var sut = provider.GetRequiredService<SubjectUnderTest>().RootCommand;
 
-                    if (!Directory.Exists(workingDirectory))
-                        Directory.CreateDirectory(workingDirectory);
-
                     foreach (var command in commands)
                     {
                         var vosCommand = $"vos  {command.Command}"
                             .Replace(WorkingDirectoryMarkholder, workingDirectory);
 
-                        var parsed = sut.Parse(vosCommand);
+                        await execCommand(vosCommand, sut);
 
-                        Assert.AreEqual(0, parsed.Errors.Count, parsed.Errors.SelectMany(x => x.Message).ToString());
-
-                        var result = await sut.InvokeAsync(vosCommand);
-
-                        Assert.IsNotNull(result, vosCommand);
                     }
-
-                    Directory.Delete(workingDirectory, true);
                 },
                 async (provider, configurationRoot) =>
                 {
@@ -101,7 +125,7 @@ public class IntegrationWorkflowUnitTest
                 }
             );
     }
-
+    
     private static IEnumerable<object[]> Test_Data()
     {
         var timeOutOpt = "--timeout-ms " + TimeSpan.FromMinutes(10).TotalMilliseconds;
@@ -114,9 +138,9 @@ public class IntegrationWorkflowUnitTest
             {
                 new("init", $"init {timeOutOpt} {workingDirOpt}"),
                 new("d.m.t 1",
-                    $"define machine-type add foo generic/alpine38 4 128 Debian_64 10.9.0 --enabled {timeOutOpt} {workingDirOpt}"),
+                    $"define machine-type add foo generic/alpine38 4 128 Debian_64 10.9.0 --vram-mb 16 --enabled {timeOutOpt} {workingDirOpt}"),
                 new("d.m.t 2",
-                    $"define machine-type add bar generic/alpine38 4 128 Debian_64 10.9.0 --enabled {timeOutOpt} {workingDirOpt}"),
+                    $"define machine-type add bar generic/alpine38 4 128 Debian_64 10.9.0 --vram-mb 16 --enabled {timeOutOpt} {workingDirOpt}"),
                 new("d.m 1", $"define machine add foo foo 4 --enabled {timeOutOpt} {workingDirOpt}"),
                 new("d.m 2", $"define machine add bar bar 4 --enabled {timeOutOpt} {workingDirOpt}"),
                 new("name", $"name bar-0 foo-[2-*] {timeOutOpt} {workingDirOpt}"),
@@ -137,9 +161,9 @@ public class IntegrationWorkflowUnitTest
             {
                 new("init", $"init {timeOutOpt} {workingDirOpt}"),
                 new("d.m.t 1",
-                    $"define machine-type add foo generic/alpine38 4 128 Debian_64 10.9.0 --enabled {timeOutOpt} {workingDirOpt}"),
+                    $"define machine-type add foo generic/alpine38 4 128 Debian_64 10.9.0 --vram-mb 16 --enabled {timeOutOpt} {workingDirOpt}"),
                 new("d.m.t 2",
-                    $"define machine-type add bar generic/alpine38 4 128 Debian_64 10.9.0 --enabled {timeOutOpt} {workingDirOpt}"),
+                    $"define machine-type add bar generic/alpine38 4 128 Debian_64 10.9.0 --vram-mb 16 --enabled {timeOutOpt} {workingDirOpt}"),
                 new("d.m 1", $"define machine add foo foo 4 --enabled {timeOutOpt} {workingDirOpt}"),
                 new("d.m 2", $"define machine add bar bar 4 --enabled {timeOutOpt} {workingDirOpt}"),
                 new("name", $"name bar-0 foo-[2-*] {timeOutOpt} {workingDirOpt}"),

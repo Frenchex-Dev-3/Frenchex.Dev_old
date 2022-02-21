@@ -33,6 +33,7 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
         var osVersionArg = new Argument<string>("os-version", "OS Version");
         var isEnabledOpt = new Option<bool>(new[] { "--enabled", "-e" }, "Enable Machine Type");
         var isEnabled3dOpt = new Option<bool>(new[] { "--enable3d" }, "Enable 3D");
+        var vramMb = new Option<int>(new[] { "--vram-mb" }, () => 16, "VRAM in MB");
         var timeoutMsOpt = new Option<int>(new[] { "--timeout-ms", "-t" }, "TimeOut in ms");
         var workingDirOpt = new Option<string>(new[] { "--working-directory", "-w" }, "Working Directory");
 
@@ -46,6 +47,7 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
             osVersionArg,
             isEnabledOpt,
             isEnabled3dOpt,
+            vramMb,
             timeoutMsOpt,
             workingDirOpt
         };
@@ -59,6 +61,7 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
             osVersionArg,
             isEnabledOpt,
             isEnabled3dOpt,
+            vramMb,
             timeoutMsOpt,
             workingDirOpt
         );
@@ -86,6 +89,7 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
                     .WithRamInMb(payload.RamInMb)
                     .WithVirtualCpus(payload.VCpus)
                     .WithOsType(Enum.Parse<OsTypeEnum>(payload.OsType))
+                    .WithVideoRamInMb(payload.VideoRamInMb)
                     .Parent<IMachineTypeDefinitionBuilder>()
                     .WithName(payload.Name)
                     .Build()

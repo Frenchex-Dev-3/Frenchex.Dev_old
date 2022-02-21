@@ -6,5 +6,5 @@ public interface IFilesystem
     bool DirectoryExists(string? path);
     void CopyFile(string sourceFile, string destinationFile);
     Task WriteAllTextAsync(string path, string content);
-    FileSystemInfo CreateSymbolicLink(string path, string pathToTarget);
+    void CopyDirectory(string source, string target);
 }

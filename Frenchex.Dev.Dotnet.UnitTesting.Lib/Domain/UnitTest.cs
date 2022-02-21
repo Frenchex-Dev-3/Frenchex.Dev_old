@@ -236,6 +236,8 @@ namespace Frenchex.Dev.Dotnet.UnitTesting.Lib.Domain
             if (_openVsCode)
                 process = Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe", "-n " + _openVsCodePath);
 
+            Directory.CreateDirectory(_openVsCodePath);
+
             await prepareFunc(scopedDi, configuration);
             await executeFunc(scopedDi, configuration);
             await assertFunc(scopedDi, configuration);
@@ -244,6 +246,8 @@ namespace Frenchex.Dev.Dotnet.UnitTesting.Lib.Domain
 
             if (_openVsCode && process != null)
                 process.Kill(true);
+
+            Directory.Delete(_openVsCodePath, true);
         }
     }
 }

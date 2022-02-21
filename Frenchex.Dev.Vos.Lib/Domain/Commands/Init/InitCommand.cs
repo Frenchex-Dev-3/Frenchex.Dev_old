@@ -44,13 +44,14 @@ public class InitCommand : RootCommand, IInitCommand
             Path.Join(request.Base.WorkingDirectory, "config.json")
         );
 
-        _filesystem.CreateSymbolicLink(
-            Path.GetFullPath("provisioning", request.Base.WorkingDirectory), 
-            Path.GetFullPath("Resources\\Provisioning", AppDomain.CurrentDomain.BaseDirectory)
-            );
+        var provisioningPath = Path.GetFullPath("provisioning", request.Base.WorkingDirectory);
+        var provisioningPathLink =
+            Path.GetFullPath(Path.Join("Resources", "Provisioning"), AppDomain.CurrentDomain.BaseDirectory);
+
+        _filesystem.CopyDirectory(provisioningPathLink, provisioningPath);
 
         return _responseBuilderFactory
-            .Factory()
-            .Build();
+        .Factory()
+        .Build();
     }
 }

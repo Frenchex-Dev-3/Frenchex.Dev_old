@@ -22,9 +22,25 @@ public class Filesystem : IFilesystem
         await File.WriteAllTextAsync(path, content);
     }
 
-    public FileSystemInfo CreateSymbolicLink(string path, string pathToTarget)
+    public void CopyDirectory(string source, string target)
     {
-        return Directory.CreateSymbolicLink(path, pathToTarget);
+        if (!Directory.Exists(target))
+            Directory.CreateDirectory(target);
+
+        var files = Directory.GetFiles(source);
+        foreach (var file in files)
+        {
+            var name = Path.GetFileName(file);
+            var dest = Path.Combine(target, name);
+            File.Copy(file, dest);
+        }
+        var folders = Directory.GetDirectories(source);
+        foreach (var folder in folders)
+        {
+            var name = Path.GetFileName(folder);
+            var dest = Path.Combine(target, name);
+            CopyDirectory(folder, dest);
+        }
     }
 
     public bool DirectoryExists(string? path)
