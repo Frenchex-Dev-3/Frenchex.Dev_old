@@ -22,7 +22,7 @@ public class NameCommandIntegrationPayloadBinder : BinderBase<NameCommandIntegra
 
     protected override NameCommandIntegrationPayload GetBoundValue(BindingContext bindingContext)
     {
-        return new()
+        return new NameCommandIntegrationPayload
         {
             WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDirOpt),
             TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutOpt),

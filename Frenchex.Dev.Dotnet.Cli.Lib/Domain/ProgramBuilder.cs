@@ -15,7 +15,7 @@ public class ProgramBuilder : IProgramBuilder
     }
 
     public IProgram Build(
-        Context context, 
+        Context context,
         Action<IServiceCollection> registerServices,
         Action<ILoggingBuilder> loggingConfigurationLambda
     )

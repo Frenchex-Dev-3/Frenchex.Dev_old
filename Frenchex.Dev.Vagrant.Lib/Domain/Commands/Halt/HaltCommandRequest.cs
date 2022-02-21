@@ -16,7 +16,8 @@ public class HaltCommandRequest : RootCommandRequest, IHaltCommandRequest
         HaltTimeoutInMiliSeconds = haltTimeoutMs;
     }
 
+    public int HaltTimeoutInMiliSeconds { get; }
+
     public string[] NamesOrIds { get; }
     public bool Force { get; }
-    public int HaltTimeoutInMiliSeconds { get; }
 }

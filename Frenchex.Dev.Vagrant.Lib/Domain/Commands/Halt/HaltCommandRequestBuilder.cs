@@ -30,16 +30,15 @@ public class HaltCommandRequestBuilder : RootCommandRequestBuilder, IHaltCommand
         return this;
     }
 
-    public IHaltCommandRequestBuilder WithForce(bool with)
-    {
-        _withForce = with;
-        return this;
-    }
-
     public IHaltCommandRequestBuilder UsingHaltTimeoutInMiliSeconds(int timeoutMs)
     {
         _usingHaltTimeoutMs = timeoutMs;
         return this;
     }
 
+    public IHaltCommandRequestBuilder WithForce(bool with)
+    {
+        _withForce = with;
+        return this;
+    }
 }

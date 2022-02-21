@@ -23,12 +23,12 @@ await Builder
 
 
 /// <summary>
-/// Implements BasicHostedService for this Program
+///     Implements BasicHostedService for this Program
 /// </summary>
 public class Host : BasicHostedService
 {
     /// <summary>
-    /// Constructor for this Program Host
+    ///     Constructor for this Program Host
     /// </summary>
     /// <param name="logger"></param>
     /// <param name="hostApplicationLifetime"></param>

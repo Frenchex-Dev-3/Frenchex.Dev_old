@@ -1,4 +1,5 @@
 ﻿using System.CommandLine;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Options;
 using Frenchex.Dev.Vos.Lib.Domain.Commands.Ssh;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Ssh;
@@ -6,26 +7,35 @@ namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Ssh;
 public class SshCommandIntegration : ABaseCommandIntegration, ISshCommandIntegration
 {
     private readonly ISshCommand _command;
+    private readonly INamesOptionBuilder _namesOptionBuilder;
     private readonly ISshCommandRequestBuilderFactory _requestBuilderFactory;
+    private readonly ITimeoutMsOptionBuilder _timeoutMsOptionBuilder;
+    private readonly IWorkingDirectoryOptionBuilder _workingDirectoryOptionBuilder;
 
     public SshCommandIntegration(
         ISshCommand command,
-        ISshCommandRequestBuilderFactory requestBuilderFactory
+        ISshCommandRequestBuilderFactory requestBuilderFactory,
+        INamesOptionBuilder namesOptionBuilder,
+        IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder,
+        ITimeoutMsOptionBuilder timeoutMsOptionBuilder
     )
     {
         _command = command;
         _requestBuilderFactory = requestBuilderFactory;
+        _namesOptionBuilder = namesOptionBuilder;
+        _workingDirectoryOptionBuilder = workingDirectoryOptionBuilder;
+        _timeoutMsOptionBuilder = timeoutMsOptionBuilder;
     }
 
     public void Integrate(Command rootCommand)
     {
         var command = new Command("ssh", "Runs Vagrant ssh")
         {
-            new Option<string[]>("--name", "Name or ID"),
+            _namesOptionBuilder.Build(),
             new Option<string>("--command", "Command"),
             new Option<string>(new[] {"--host", "-h"}, "Host on guest"),
-            new Option<string>(new[] {"--working-directory", "-w"}, "Working Directory"),
-            new Option<int>(new[] {"--timeout", "-t"}, "TimeOut in ms")
+            _workingDirectoryOptionBuilder.Build(),
+            _timeoutMsOptionBuilder.Build()
         };
 
         command.SetHandler(async (

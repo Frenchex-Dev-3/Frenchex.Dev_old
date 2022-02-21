@@ -1,6 +1,8 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Help;
 using System.CommandLine.Invocation;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Arguments;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Options;
 using Frenchex.Dev.Vos.Lib.Domain.Commands.Define.MachineType.Add;
 using Frenchex.Dev.Vos.Lib.Domain.Definitions;
 
@@ -8,34 +10,67 @@ namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Define.MachineTyp
 
 public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, IDefineMachineTypeAddCommandIntegration
 {
+    private readonly IBoxNameArgumentBuilder _boxNameArgumentBuilder;
     private readonly IDefineMachineTypeAddCommand _command;
+    private readonly IEnabled3dOptionBuilder _enabled3dOptionBuilder;
+    private readonly IEnabledOptionBuilder _enabledOptionBuilder;
     private readonly IMachineTypeDefinitionBuilderFactory _machineTypeDefinitionBuilder;
+    private readonly INameArgumentBuilder _nameArgumentBuilder;
+    private readonly IOsTypeArgumentBuilder _osTypeArgumentBuilder;
+    private readonly IOsVersionArgumentBuilder _osVersionArgumentBuilder;
+    private readonly IRamMbArgumentBuilder _ramMbArgumentBuilder;
     private readonly IDefineMachineTypeAddCommandRequestBuilderFactory _requestBuilderFactory;
+    private readonly ITimeoutMsOptionBuilder _timeoutMsOptionBuilder;
+    private readonly IVirtualCpusArgumentBuilder _virtualCpusArgumentBuilder;
+    private readonly IVirtualRamMbOptionBuilder _virtualRamMbOptionBuilder;
+    private readonly IWorkingDirectoryOptionBuilder _workingDirectoryOptionBuilder;
 
     public DefineMachineTypeAddCommandIntegration(
         IDefineMachineTypeAddCommand command,
         IDefineMachineTypeAddCommandRequestBuilderFactory responseBuilderFactory,
-        IMachineTypeDefinitionBuilderFactory machineTypeDefinitionBuilderFactory
+        IMachineTypeDefinitionBuilderFactory machineTypeDefinitionBuilderFactory,
+        INameArgumentBuilder nameArgumentBuilder,
+        IBoxNameArgumentBuilder boxNameArgumentBuilder,
+        IVirtualCpusArgumentBuilder virtualCpusArgumentBuilder,
+        IRamMbArgumentBuilder ramMbArgumentBuilder,
+        IOsTypeArgumentBuilder osTypeArgumentBuilder,
+        IOsVersionArgumentBuilder osVersionArgumentBuilder,
+        IEnabledOptionBuilder enabledOptionBuilder,
+        IEnabled3dOptionBuilder enabled3dOptionBuilder,
+        IVirtualRamMbOptionBuilder virtualRamMbOptionBuilder,
+        ITimeoutMsOptionBuilder timeoutMsOptionBuilder,
+        IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder
     )
     {
         _command = command;
         _requestBuilderFactory = responseBuilderFactory;
         _machineTypeDefinitionBuilder = machineTypeDefinitionBuilderFactory;
+        _nameArgumentBuilder = nameArgumentBuilder;
+        _boxNameArgumentBuilder = boxNameArgumentBuilder;
+        _virtualCpusArgumentBuilder = virtualCpusArgumentBuilder;
+        _ramMbArgumentBuilder = ramMbArgumentBuilder;
+        _osTypeArgumentBuilder = osTypeArgumentBuilder;
+        _osVersionArgumentBuilder = osVersionArgumentBuilder;
+        _enabledOptionBuilder = enabledOptionBuilder;
+        _enabled3dOptionBuilder = enabled3dOptionBuilder;
+        _virtualRamMbOptionBuilder = virtualRamMbOptionBuilder;
+        _timeoutMsOptionBuilder = timeoutMsOptionBuilder;
+        _workingDirectoryOptionBuilder = workingDirectoryOptionBuilder;
     }
 
     public void Integrate(Command rootCommand)
     {
-        var nameArg = new Argument<string>("name", "Name");
-        var boxNameArg = new Argument<string>("box-name", "Box Name");
-        var vcpusArg = new Argument<int>("vcpus", "Virtual CPUs");
-        var ramMbArg = new Argument<int>("ram-mb", "RAM in MB");
-        var osTypeArg = new Argument<string>("os-type", "OS Name");
-        var osVersionArg = new Argument<string>("os-version", "OS Version");
-        var isEnabledOpt = new Option<bool>(new[] { "--enabled", "-e" }, "Enable Machine Type");
-        var isEnabled3dOpt = new Option<bool>(new[] { "--enable3d" }, "Enable 3D");
-        var vramMb = new Option<int>(new[] { "--vram-mb" }, () => 16, "VRAM in MB");
-        var timeoutMsOpt = new Option<int>(new[] { "--timeout-ms", "-t" }, "TimeOut in ms");
-        var workingDirOpt = new Option<string>(new[] { "--working-directory", "-w" }, "Working Directory");
+        var nameArg = _nameArgumentBuilder.Build();
+        var boxNameArg = _boxNameArgumentBuilder.Build();
+        var vcpusArg = _virtualCpusArgumentBuilder.Build();
+        var ramMbArg = _ramMbArgumentBuilder.Build();
+        var osTypeArg = _osTypeArgumentBuilder.Build();
+        var osVersionArg = _osVersionArgumentBuilder.Build();
+        var isEnabledOpt = _enabledOptionBuilder.Build();
+        var isEnabled3dOpt = _enabled3dOptionBuilder.Build();
+        var vramMbOpt = _virtualRamMbOptionBuilder.Build();
+        var timeoutMsOpt = _timeoutMsOptionBuilder.Build();
+        var workingDirOpt = _workingDirectoryOptionBuilder.Build();
 
         var command = new Command("add", "Define Machine-Types")
         {
@@ -47,7 +82,7 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
             osVersionArg,
             isEnabledOpt,
             isEnabled3dOpt,
-            vramMb,
+            vramMbOpt,
             timeoutMsOpt,
             workingDirOpt
         };
@@ -61,7 +96,7 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
             osVersionArg,
             isEnabledOpt,
             isEnabled3dOpt,
-            vramMb,
+            vramMbOpt,
             timeoutMsOpt,
             workingDirOpt
         );

@@ -28,7 +28,7 @@ public class DestroyCommandIntegrationPayloadBinder : BinderBase<DestroyCommandI
 
     protected override DestroyCommandIntegrationPayload GetBoundValue(BindingContext bindingContext)
     {
-        return new()
+        return new DestroyCommandIntegrationPayload
         {
             TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMsOpt),
             WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDirOpt),

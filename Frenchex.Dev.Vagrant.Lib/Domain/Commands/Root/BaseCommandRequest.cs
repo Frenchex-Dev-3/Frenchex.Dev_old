@@ -36,5 +36,5 @@ public class BaseCommandRequest : IBaseCommandRequest
     public bool Tty { get; }
     public bool Help { get; }
     public string? WorkingDirectory { get; }
-    public int TimeoutInMiliSeconds { get; } 
+    public int TimeoutInMiliSeconds { get; }
 }

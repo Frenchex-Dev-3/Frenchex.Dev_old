@@ -25,7 +25,7 @@ public class InitCommandIntegrationPayloadBinder : BinderBase<InitCommandIntegra
 
     protected override InitCommandIntegrationPayload GetBoundValue(BindingContext bindingContext)
     {
-        return new()
+        return new InitCommandIntegrationPayload
         {
             Naming = bindingContext.ParseResult.GetValueForOption(_name),
             TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMs),

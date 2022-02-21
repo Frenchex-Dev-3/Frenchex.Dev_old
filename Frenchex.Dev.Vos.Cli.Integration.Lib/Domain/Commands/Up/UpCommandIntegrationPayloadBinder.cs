@@ -40,7 +40,7 @@ public class UpCommandIntegrationPayloadBinder : BinderBase<UpCommandIntegration
 
     protected override UpCommandIntegrationPayload GetBoundValue(BindingContext bindingContext)
     {
-        return new()
+        return new UpCommandIntegrationPayload
         {
             TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMs),
             WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDir),

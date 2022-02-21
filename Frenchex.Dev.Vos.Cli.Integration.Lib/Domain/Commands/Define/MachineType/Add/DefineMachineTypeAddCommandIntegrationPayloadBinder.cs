@@ -8,7 +8,6 @@ public class
 {
     private readonly Argument<string> _boxName;
     private readonly Option<bool> _is3DEnabled;
-    private readonly Option<int> _videoRamMb;
     private readonly Option<bool> _isEnabled;
     private readonly Argument<string> _name;
     private readonly Argument<string> _osType;
@@ -16,6 +15,7 @@ public class
     private readonly Argument<int> _ramMb;
     private readonly Option<int> _timeoutMs;
     private readonly Argument<int> _vCpus;
+    private readonly Option<int> _videoRamMb;
     private readonly Option<string> _workingDir;
 
     public DefineMachineTypeAddCommandIntegrationPayloadBinder(Argument<string> name,
@@ -46,7 +46,7 @@ public class
 
     protected override DefineMachineTypeAddCommandIntegrationPayload GetBoundValue(BindingContext bindingContext)
     {
-        return new()
+        return new DefineMachineTypeAddCommandIntegrationPayload
         {
             BoxName = bindingContext.ParseResult.GetValueForArgument(_boxName),
             RamInMb = bindingContext.ParseResult.GetValueForArgument(_ramMb),

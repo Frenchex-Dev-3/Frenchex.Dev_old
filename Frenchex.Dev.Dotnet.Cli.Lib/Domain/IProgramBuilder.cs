@@ -6,7 +6,7 @@ namespace Frenchex.Dev.Dotnet.Cli.Lib.Domain;
 public interface IProgramBuilder
 {
     IProgram Build(
-        Context context, 
+        Context context,
         Action<IServiceCollection> registerServices,
         Action<ILoggingBuilder> loggingConfiguration
     );

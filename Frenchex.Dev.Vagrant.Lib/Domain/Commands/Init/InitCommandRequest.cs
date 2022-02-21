@@ -24,11 +24,12 @@ public class InitCommandRequest : RootCommandRequest, IInitCommandRequest
         BoxUrl = boxUrl;
     }
 
+    public string? BoxUrl { get; }
+
     public string? BoxVersion { get; }
     public bool? Force { get; }
     public bool? Minimal { get; }
     public string? OutputToFile { get; }
     public string? TemplateFile { get; }
     public string? BoxName { get; }
-    public string? BoxUrl { get; }
 }

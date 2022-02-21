@@ -23,7 +23,7 @@ public class Builder
         var scope = di.CreateAsyncScope();
         var scopedDi = scope.ServiceProvider;
         var programBuilder = scopedDi.GetRequiredService<IProgramBuilder>();
-        
+
         var program = programBuilder.Build(
             new Context(
                 Path.GetFullPath(hostSettingsJsonFilename, appDomainDirectory),

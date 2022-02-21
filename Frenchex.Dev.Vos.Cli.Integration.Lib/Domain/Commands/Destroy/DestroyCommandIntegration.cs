@@ -1,6 +1,8 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Help;
 using System.CommandLine.Invocation;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Arguments;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Options;
 using Frenchex.Dev.Vos.Lib.Domain.Commands.Destroy;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Destroy;
@@ -8,29 +10,47 @@ namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Destroy;
 public class DestroyCommandIntegration : ABaseCommandIntegration, IDestroyCommandIntegration
 {
     private readonly IDestroyCommand _command;
+    private readonly IForceOptionBuilder _forceOptionBuilder;
+    private readonly IGracefulOptionBuilder _gracefulOptionBuilder;
+    private readonly INamesArgumentBuilder _namesArgumentBuilder;
+    private readonly IParallelOptionBuilder _parallelOptionBuilder;
     private readonly IDestroyCommandRequestBuilderFactory _requestBuilderFactory;
+    private readonly ITimeoutMsOptionBuilder _timeoutMsOptionBuilder;
+    private readonly IWorkingDirectoryOptionBuilder _workingDirectoryOptionBuilder;
 
     public DestroyCommandIntegration(
         IDestroyCommand command,
-        IDestroyCommandRequestBuilderFactory responseBuilderFactory
+        IDestroyCommandRequestBuilderFactory responseBuilderFactory,
+        INamesArgumentBuilder namesArgumentBuilder,
+        IForceOptionBuilder forceOptionBuilder,
+        IParallelOptionBuilder parallelOptionBuilder,
+        IGracefulOptionBuilder gracefulOptionBuilder,
+        ITimeoutMsOptionBuilder timeoutMsOptionBuilder,
+        IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder
     )
     {
         _command = command;
         _requestBuilderFactory = responseBuilderFactory;
+        _namesArgumentBuilder = namesArgumentBuilder;
+        _forceOptionBuilder = forceOptionBuilder;
+        _parallelOptionBuilder = parallelOptionBuilder;
+        _gracefulOptionBuilder = gracefulOptionBuilder;
+        _timeoutMsOptionBuilder = timeoutMsOptionBuilder;
+        _workingDirectoryOptionBuilder = workingDirectoryOptionBuilder;
     }
 
     public void Integrate(Command rootCommand)
     {
-        var nameOpt = new Argument<string[]>("name", "Name");
-        var forceOpt = new Option<bool>(new[] {"--force", "-f"}, "Force");
-        var parallelOpt = new Option<bool>(new[] {"--parallel", "-p"}, "Parallel");
-        var gracefulOpt = new Option<bool>(new[] {"--graceful", "-g"}, "Graceful");
-        var timeoutMsOpt = new Option<int>(new[] {"--timeout-ms", "-t"}, "TimeOut in ms");
-        var workingDirOpt = new Option<string>(new[] {"--working-directory", "-w"}, "Working Directory");
+        var namesArg = _namesArgumentBuilder.Build();
+        var forceOpt = _forceOptionBuilder.Build();
+        var parallelOpt = _parallelOptionBuilder.Build();
+        var gracefulOpt = _gracefulOptionBuilder.Build();
+        var timeoutMsOpt = _timeoutMsOptionBuilder.Build();
+        var workingDirOpt = _workingDirectoryOptionBuilder.Build();
 
         var command = new Command("destroy", "Runs Vex destroy")
         {
-            nameOpt,
+            namesArg,
             forceOpt,
             parallelOpt,
             gracefulOpt,
@@ -39,7 +59,7 @@ public class DestroyCommandIntegration : ABaseCommandIntegration, IDestroyComman
         };
 
         var binder = new DestroyCommandIntegrationPayloadBinder(
-            nameOpt,
+            namesArg,
             forceOpt,
             gracefulOpt,
             timeoutMsOpt,

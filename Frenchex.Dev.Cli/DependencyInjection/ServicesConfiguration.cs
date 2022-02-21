@@ -4,12 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Frenchex.Dev.Cli.DependencyInjection;
 
 /// <summary>
-/// Logic to configure an IServiceCollection with Vos CLI and Library dependencies registered as scoped.
+///     Logic to configure an IServiceCollection with Vos CLI and Library dependencies registered as scoped.
 /// </summary>
 public class ServicesConfiguration : IServicesConfiguration
 {
     /// <summary>
-    /// Only method to run the logic on given `services` object
+    ///     Only method to run the logic on given `services` object
     /// </summary>
     /// <param name="services"></param>
     public void ConfigureServices(IServiceCollection services)

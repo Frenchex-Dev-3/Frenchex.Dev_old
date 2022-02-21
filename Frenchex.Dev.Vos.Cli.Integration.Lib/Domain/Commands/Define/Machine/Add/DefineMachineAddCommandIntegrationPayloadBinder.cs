@@ -52,7 +52,7 @@ public class DefineMachineAddCommandIntegrationPayloadBinder : BinderBase<Define
 
     protected override DefineMachineAddCommandIntegrationPayload GetBoundValue(BindingContext bindingContext)
     {
-        return new()
+        return new DefineMachineAddCommandIntegrationPayload
         {
             Type = bindingContext.ParseResult.GetValueForArgument(_type),
             RamInMb = bindingContext.ParseResult.GetValueForOption(_ramMb),

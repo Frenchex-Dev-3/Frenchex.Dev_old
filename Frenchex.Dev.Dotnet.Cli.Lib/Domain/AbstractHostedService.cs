@@ -17,7 +17,7 @@ public abstract class AbstractHostedService : IHostedService
     private readonly IHostApplicationLifetime _hostApplicationLifetime;
     private readonly IEnumerable<IIntegration> _integrations;
     private readonly ILogger<AbstractHostedService> _logger;
-    private int _exitCode = (int)ExitCode.ExitNormal;
+    private int _exitCode = (int) ExitCode.ExitNormal;
 
     protected RootCommand? RootCommand;
 
@@ -38,11 +38,6 @@ public abstract class AbstractHostedService : IHostedService
         _hostApplicationLifetime.ApplicationStopped.Register(OnStopped);
     }
 
-    private async void OnStartedAsync()
-    {
-        await OnStarted();
-    }
-
     public Task StartAsync(CancellationToken cancellationToken = default)
     {
         return Task.CompletedTask;
@@ -51,6 +46,11 @@ public abstract class AbstractHostedService : IHostedService
     public Task StopAsync(CancellationToken cancellationToken)
     {
         return Task.CompletedTask;
+    }
+
+    private async void OnStartedAsync()
+    {
+        await OnStarted();
     }
 
     protected abstract Task OnStarted();
@@ -71,7 +71,7 @@ public abstract class AbstractHostedService : IHostedService
         catch (Exception e)
         {
             _logger.LogError("General exception not caught", e.Message);
-            _exitCode |= (int)ExitCode.ExitGeneralException;
+            _exitCode |= (int) ExitCode.ExitGeneralException;
         }
         finally
         {

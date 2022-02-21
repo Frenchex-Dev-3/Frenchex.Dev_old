@@ -463,7 +463,7 @@ public class CompleteWorkflowTests
 
         var defaultSystemNetworkBridge = _defaultGatewayGetterAction.GetDefaultGateway();
 
-        return new()
+        return new List<IDefineMachineAddCommandRequest>
         {
             _defineMachineAddCommandRequestBuilderFactory.Factory()
                 .BaseBuilder

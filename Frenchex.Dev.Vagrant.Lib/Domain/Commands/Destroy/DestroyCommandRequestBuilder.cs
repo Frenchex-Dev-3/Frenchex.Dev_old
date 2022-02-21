@@ -34,15 +34,15 @@ public class DestroyCommandRequestBuilder : RootCommandRequestBuilder, IDestroyC
         return this;
     }
 
-    public IDestroyCommandRequestBuilder UsingDestroyTimeoutMiliseconds(int timeoutMs)
-    {
-        _withDestroyTimeoutMs = timeoutMs;
-        return this;
-    }
-
     public IDestroyCommandRequestBuilder WithForce(bool force)
     {
         _withForce = force;
+        return this;
+    }
+
+    public IDestroyCommandRequestBuilder UsingDestroyTimeoutMiliseconds(int timeoutMs)
+    {
+        _withDestroyTimeoutMs = timeoutMs;
         return this;
     }
 

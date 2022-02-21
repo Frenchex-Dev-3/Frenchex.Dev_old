@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.CommandLine;
 using System.IO;
 using System.Linq;
-using System.Net.Mime;
 using System.Threading.Tasks;
 using Frenchex.Dev.Dotnet.Cli.Integration.Lib.Domain;
 using Frenchex.Dev.Dotnet.UnitTesting.Lib.Domain;
@@ -79,8 +78,8 @@ public class IntegrationWorkflowUnitTest
         {
             var parsed = rootCommand.Parse(command);
             Assert.AreEqual(
-                0, 
-                parsed.Errors.Count, 
+                0,
+                parsed.Errors.Count,
                 string.Join("\r\n\r\n", parsed.Errors.SelectMany(x => x.Message))
             );
         });
@@ -114,7 +113,6 @@ public class IntegrationWorkflowUnitTest
                             .Replace(WorkingDirectoryMarkholder, workingDirectory);
 
                         await execCommand(vosCommand, sut);
-
                     }
                 },
                 async (provider, configurationRoot) =>
@@ -125,7 +123,7 @@ public class IntegrationWorkflowUnitTest
                 }
             );
     }
-    
+
     private static IEnumerable<object[]> Test_Data()
     {
         var timeOutOpt = "--timeout-ms " + TimeSpan.FromMinutes(10).TotalMilliseconds;

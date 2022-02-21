@@ -28,7 +28,7 @@ public class HaltCommandIntegrationPayloadBinder : BinderBase<HaltCommandIntegra
 
     protected override HaltCommandIntegrationPayload GetBoundValue(BindingContext bindingContext)
     {
-        return new()
+        return new HaltCommandIntegrationPayload
         {
             WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDirectory),
             Force = bindingContext.ParseResult.GetValueForOption(_force),

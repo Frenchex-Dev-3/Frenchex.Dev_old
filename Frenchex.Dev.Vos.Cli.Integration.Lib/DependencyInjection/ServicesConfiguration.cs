@@ -1,4 +1,5 @@
 ﻿using Frenchex.Dev.Dotnet.Cli.Integration.Lib.Domain;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Arguments;
 using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands;
 using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Define;
 using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Define.Machine;
@@ -13,6 +14,7 @@ using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Ssh;
 using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.SshConfig;
 using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Status;
 using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Up;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Options;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.DependencyInjection;
@@ -20,13 +22,12 @@ namespace Frenchex.Dev.Vos.Cli.Integration.Lib.DependencyInjection;
 public class ServicesConfiguration
 {
     /// <summary>
-    /// Configure services object against integration classes.
-    ///
-    /// Integration classes are meant to be used only once during execution of CLI.
-    /// Marking them as Singleton will save their unique instance into the DI.
-    /// While we only need them once.
-    /// So we mark them as Transient so that created instances will not be managed
-    /// by DI.
+    ///     Configure services object against integration classes.
+    ///     Integration classes are meant to be used only once during execution of CLI.
+    ///     Marking them as Singleton will save their unique instance into the DI.
+    ///     While we only need them once.
+    ///     So we mark them as Transient so that created instances will not be managed
+    ///     by DI.
     /// </summary>
     /// <param name="services"></param>
     public static void ConfigureServices(IServiceCollection services)
@@ -61,6 +62,39 @@ public class ServicesConfiguration
             .AddScoped<IStatusCommandIntegration, StatusCommandIntegration>()
             .AddScoped<IVosCommandIntegration, NameCommandIntegration>()
             .AddScoped<INameCommandIntegration, NameCommandIntegration>()
+            ;
+
+
+        services
+            .AddScoped<IBoxNameArgumentBuilder, BoxNameArgumentBuilder>()
+            .AddScoped<IInstancesArgumentBuilder, InstancesArgumentBuilder>()
+            .AddScoped<IMachineTypeNameArgumentBuilder, MachineTypeNameArgumentBuilder>()
+            .AddScoped<INameArgumentBuilder, NameArgumentBuilder>()
+            .AddScoped<INamesArgumentBuilder, NamesArgumentBuilder>()
+            .AddScoped<IOsVersionArgumentBuilder, OsVersionArgumentBuilder>()
+            .AddScoped<IOsTypeArgumentBuilder, OsTypeArgumentBuilder>()
+            .AddScoped<IParallelOptionBuilder, ParallelOptionBuilder>()
+            .AddScoped<IRamMbArgumentBuilder, RamMbArgumentBuilder>()
+            .AddScoped<IVirtualCpusArgumentBuilder, VirtualCpusArgumentBuilder>()
+            ;
+
+        services
+            .AddScoped<IEnabled3dOptionBuilder, Enabled3dOptionBuilder>()
+            .AddScoped<IEnabledOptionBuilder, EnabledOptionBuilder>()
+            .AddScoped<IForceOptionBuilder, ForceOptionBuilder>()
+            .AddScoped<IGracefulOptionBuilder, GracefulOptionBuilder>()
+            .AddScoped<IIpv4PatternOptionBuilder, Ipv4PatternOptionBuilder>()
+            .AddScoped<IIpv4StartOptionBuilder, Ipv4StartOptionBuilder>()
+            .AddScoped<INamesOptionBuilder, NamesOptionBuilder>()
+            .AddScoped<INamingPatternOptionBuilder, NamingPatternOptionBuilder>()
+            .AddScoped<INetworkBridgeOptionBuilder, NetworkBridgeOptionBuilder>()
+            .AddScoped<IPrimaryOptionBuilder, PrimaryOptionBuilder>()
+            .AddScoped<IRamMbOptionBuilder, RamMbOptionBuilder>()
+            .AddScoped<ITimeoutMsOptionBuilder, TimeoutMsOptionBuilder>()
+            .AddScoped<IVirtualCpusOptionBuilder, VirtualCpusOptionBuilder>()
+            .AddScoped<IVirtualRamMbOptionBuilder, VirtualRamMbOptionBuilder>()
+            .AddScoped<IWorkingDirectoryOptionBuilder, WorkingDirectoryOptionBuilder>()
+            .AddScoped<IZeroesOptionBuilder, ZeroesOptionBuilder>()
             ;
     }
 }

@@ -9,10 +9,8 @@ public class Filesystem : IFilesystem
 
     public DirectoryInfo CreateDirectory(string? path)
     {
-        if (string.IsNullOrEmpty(path))
-        {
+        if (string.IsNullOrEmpty(path)) 
             throw new ArgumentNullException(nameof(path));
-        }
 
         return Directory.CreateDirectory(path);
     }
@@ -34,6 +32,7 @@ public class Filesystem : IFilesystem
             var dest = Path.Combine(target, name);
             File.Copy(file, dest);
         }
+
         var folders = Directory.GetDirectories(source);
         foreach (var folder in folders)
         {

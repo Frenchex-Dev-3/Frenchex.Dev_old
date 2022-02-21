@@ -40,7 +40,7 @@ public class InitCommand : RootCommand, IInitCommand
         _vagrantfileResource.Copy(request.Base.WorkingDirectory);
 
         await _configurationActionSave.Save(
-            new Configuration.Configuration(),// @todo make it buildable via opts
+            new Configuration.Configuration(), // @todo make it buildable via opts
             Path.Join(request.Base.WorkingDirectory, "config.json")
         );
 
@@ -51,7 +51,7 @@ public class InitCommand : RootCommand, IInitCommand
         _filesystem.CopyDirectory(provisioningPathLink, provisioningPath);
 
         return _responseBuilderFactory
-        .Factory()
-        .Build();
+            .Factory()
+            .Build();
     }
 }

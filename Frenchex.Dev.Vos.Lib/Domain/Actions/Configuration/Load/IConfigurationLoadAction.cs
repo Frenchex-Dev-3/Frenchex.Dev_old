@@ -24,10 +24,7 @@ public class ConfigurationLoadAction : IConfigurationLoadAction
             Console.WriteLine($"Error while deserializing: {e.Message}");
         }
 
-        if (null == deserialized)
-        {
-            throw new ApplicationException("Error while deserializing");
-        }
+        if (null == deserialized) throw new ApplicationException("Error while deserializing");
 
         return deserialized;
     }

@@ -7,7 +7,7 @@ namespace Frenchex.Dev.Dotnet.Cli.Lib.Domain;
 public interface IHostBuilder
 {
     IHost Build(
-        Context context, 
+        Context context,
         Action<IServiceCollection> servicesConfigurationLambda,
         Action<ILoggingBuilder> loggingConfigurationLambda
     );

@@ -1,6 +1,8 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Help;
 using System.CommandLine.Invocation;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Arguments;
+using Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Options;
 using Frenchex.Dev.Vos.Lib.Domain.Commands.Up;
 using Frenchex.Dev.Vos.Lib.Domain.Definitions;
 
@@ -9,30 +11,41 @@ namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Up;
 public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegration
 {
     private readonly IUpCommand _command;
+    private readonly INamesArgumentBuilder _namesArgumentBuilder;
+    private readonly IParallelOptionBuilder _parallelOptionBuilder;
     private readonly IUpCommandRequestBuilderFactory _requestBuilderFactory;
+    private readonly ITimeoutMsOptionBuilder _timeoutMsOptionBuilder;
+    private readonly IWorkingDirectoryOptionBuilder _workingDirectoryOptionBuilder;
 
     public UpCommandIntegration(
         IUpCommand command,
-        IUpCommandRequestBuilderFactory requestBuilderFactory
+        IUpCommandRequestBuilderFactory requestBuilderFactory,
+        INamesArgumentBuilder namesArgumentBuilder,
+        IParallelOptionBuilder parallelOptionBuilder,
+        IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder,
+        ITimeoutMsOptionBuilder timeoutMsOptionBuilder
     )
     {
         _command = command;
         _requestBuilderFactory = requestBuilderFactory;
+        _namesArgumentBuilder = namesArgumentBuilder;
+        _parallelOptionBuilder = parallelOptionBuilder;
+        _workingDirectoryOptionBuilder = workingDirectoryOptionBuilder;
+        _timeoutMsOptionBuilder = timeoutMsOptionBuilder;
     }
 
     public void Integrate(Command rootCommand)
     {
-        var namesArg = new Argument<string[]>("names or IDs");
+        var namesArg = _namesArgumentBuilder.Build();
         var provisionOpt = new Option<bool>(new[] {"--provision"}, "Provision");
         var provisionWithOpt = new Option<string[]>(new[] {"--provision-with"}, "Provision with");
         var destroyOnErrorOpt = new Option<bool>(new[] {"--destroy-on-error"}, "Destroy on error");
-        var parallelOpt = new Option<bool>(new[] {"--parallel"}, "Parallel");
+        var parallelOpt = _parallelOptionBuilder.Build();
         var providerOpt =
             new Option<string>(new[] {"--provider"}, () => ProviderEnum.Virtualbox.ToString(), "Provider");
         var installProviderOpt = new Option<bool>(new[] {"--install-provider", "-i"}, "Install provider");
-        var timeoutMs = new Option<int>(new[] {"--timeout-ms", "-t"}, () => 0, "TimeOut in ms");
-        var workiongDirOpt = new Option<string>(new[] {"--working-directory", "-w"}, () => Environment.CurrentDirectory,
-            "Working Directory");
+        var timeoutMs = _timeoutMsOptionBuilder.Build();
+        var workiongDirOpt = _workingDirectoryOptionBuilder.Build();
 
         var command = new Command("up", "Runs Vagrant up")
         {
