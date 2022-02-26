@@ -132,7 +132,7 @@ public class UnitTest
             .GetAwaiter()
             .GetResult();
     }
-
+    
     public async Task RunAsync(
         Func<IServiceProvider, IConfigurationRoot, Task> prepareFunc,
         Func<IServiceProvider, IConfigurationRoot, Task> executeFunc,

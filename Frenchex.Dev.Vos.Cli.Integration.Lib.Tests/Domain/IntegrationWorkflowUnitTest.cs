@@ -74,28 +74,35 @@ public class IntegrationWorkflowUnitTest
     public async Task Test_Args(string testCaseName, InputCommand[] commands)
     {
         var workingDirectory = Path.Join(Path.GetTempPath(), Path.GetRandomFileName());
-        await RunInternal(workingDirectory, commands, async (command, rootCommand) =>
-        {
-            var parsed = rootCommand.Parse(command);
-            Assert.AreEqual(
-                0,
-                parsed.Errors.Count,
-                string.Join("\r\n\r\n", parsed.Errors.SelectMany(x => x.Message))
-            );
-        });
+
+        await RunInternal(
+            workingDirectory,
+            commands,
+            async (command, rootCommand) =>
+            {
+                var parsed = rootCommand.Parse(command);
+                Assert.AreEqual(
+                    0,
+                    parsed.Errors.Count,
+                    string.Join("\r\n\r\n", parsed.Errors.SelectMany(x => x.Message))
+                );
+            },
+            false
+        );
     }
 
     private async Task RunInternal(
         string workingDirectory,
         InputCommand[] commands,
-        Func<string, RootCommand, Task> execCommand
+        Func<string, RootCommand, Task> execCommand,
+        bool openVsCode = true
     )
     {
         if (null == _unitTest)
             throw new ArgumentNullException(nameof(_unitTest));
 
         await _unitTest
-            .OpenVsCode(workingDirectory)
+            .OpenVsCode(workingDirectory, openVsCode)
             .RunAsync(
                 async (provider, configurationRoot) =>
                 {

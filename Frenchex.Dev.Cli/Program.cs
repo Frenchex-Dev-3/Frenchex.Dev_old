@@ -21,7 +21,6 @@ await Builder
     )
     .RunAsync();
 
-
 /// <summary>
 ///     Implements BasicHostedService for this Program
 /// </summary>

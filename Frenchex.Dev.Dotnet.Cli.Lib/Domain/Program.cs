@@ -16,7 +16,6 @@ public class Program : IProgram
     public async Task RunAsync()
     {
         await _host.StartAsync();
-
         await _host.WaitForShutdownAsync();
     }
 }
