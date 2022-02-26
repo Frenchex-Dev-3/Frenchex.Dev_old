@@ -9,8 +9,5 @@ public interface IRamMbOptionBuilder
 
 public class RamMbOptionBuilder : IRamMbOptionBuilder
 {
-    public Option<int> Build()
-    {
-        return new(new[] {"--ram", "-r"}, () => 128, "RAM in MB");
-    }
+    public Option<int> Build()=> new(new[] { "--ram", "-r" }, () => 128, "RAM in MB");
 }

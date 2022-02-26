@@ -9,12 +9,9 @@ public interface IWorkingDirectoryOptionBuilder
 
 public class WorkingDirectoryOptionBuilder : IWorkingDirectoryOptionBuilder
 {
-    public Option<string> Build()
-    {
-        return new(
-            new[] {"--working-directory", "-w"},
-            Directory.GetCurrentDirectory,
-            "Working Directory"
-        );
-    }
+    public Option<string> Build()=> new(
+        new[] { "--working-directory", "-w" },
+        Directory.GetCurrentDirectory,
+        "Working Directory"
+    );
 }

@@ -136,7 +136,7 @@ public class UnitTest
     public async Task RunAsync(
         Func<IServiceProvider, IConfigurationRoot, Task> prepareFunc,
         Func<IServiceProvider, IConfigurationRoot, Task> executeFunc,
-        Func<IServiceProvider, IConfigurationRoot, Task> assertFunc
+        Func<IServiceProvider, IConfigurationRoot, Task>? assertFunc = null
     )
     {
         await RunInternalTaskAsync(
@@ -194,7 +194,7 @@ public class UnitTest
         Func<IServiceCollection, IConfigurationRoot, Task> configureMocksFunc,
         Func<IServiceProvider, IConfigurationRoot, Task> prepareFunc,
         Func<IServiceProvider, IConfigurationRoot, Task> executeFunc,
-        Func<IServiceProvider, IConfigurationRoot, Task> assertFunc
+        Func<IServiceProvider, IConfigurationRoot, Task>? assertFunc
     )
     {
         if (null == configureConfigurationFunc)
@@ -232,7 +232,15 @@ public class UnitTest
 
         await prepareFunc(scopedDi, configuration);
         await executeFunc(scopedDi, configuration);
-        await assertFunc(scopedDi, configuration);
+
+        // sometimes the executeFunc makes asserts 
+        // because we have not yet decomposed enough our tests
+        // in the executeFunc, we are asserting parsing and execution
+
+        if (null != assertFunc)
+        {
+            await assertFunc(scopedDi, configuration);
+        }
 
         await scope.DisposeAsync();
 

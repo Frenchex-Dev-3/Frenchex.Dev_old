@@ -9,8 +9,5 @@ public interface IForceOptionBuilder
 
 public class ForceOptionBuilder : IForceOptionBuilder
 {
-    public Option<bool> Build()
-    {
-        return new(new[] {"--force", "-f"}, "Force");
-    }
+    public Option<bool> Build()=> new(new[] { "--force", "-f" }, "Force");
 }

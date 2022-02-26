@@ -9,8 +9,5 @@ public interface IBoxNameArgumentBuilder
 
 public class BoxNameArgumentBuilder : IBoxNameArgumentBuilder
 {
-    public Argument<string> Build()
-    {
-        return new("box-name", "Box Name");
-    }
+    public Argument<string> Build() => new("box-name", "Box Name");
 }

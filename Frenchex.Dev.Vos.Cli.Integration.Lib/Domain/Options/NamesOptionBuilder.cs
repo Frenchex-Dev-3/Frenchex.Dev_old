@@ -9,8 +9,5 @@ public interface INamesOptionBuilder
 
 public class NamesOptionBuilder : INamesOptionBuilder
 {
-    public Option<string[]> Build()
-    {
-        throw new NotImplementedException();
-    }
+    public Option<string[]> Build() => new("--name", "Name or ID");
 }

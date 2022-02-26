@@ -9,8 +9,5 @@ public interface IVirtualCpusOptionBuilder
 
 public class VirtualCpusOptionBuilder : IVirtualCpusOptionBuilder
 {
-    public Option<int> Build()
-    {
-        return new(new[] {"--vcpus", "-c"}, () => 2, "Virtual CPUs");
-    }
+    public Option<int> Build() => new(new[] { "--vcpus", "-c" }, () => 2, "Virtual CPUs");
 }

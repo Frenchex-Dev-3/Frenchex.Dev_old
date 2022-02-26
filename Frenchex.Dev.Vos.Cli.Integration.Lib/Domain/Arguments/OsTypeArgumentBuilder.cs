@@ -9,8 +9,5 @@ public interface IOsTypeArgumentBuilder
 
 public class OsTypeArgumentBuilder : IOsTypeArgumentBuilder
 {
-    public Argument<string> Build()
-    {
-        return new("os-type", "OS Name");
-    }
+    public Argument<string> Build()=> new("os-type", "OS Name");
 }

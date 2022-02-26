@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.CommandLine;
+using System.CommandLine.Parsing;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -78,14 +80,26 @@ public class IntegrationWorkflowUnitTest
         await RunInternal(
             workingDirectory,
             commands,
-            async (command, rootCommand) =>
+            (command, rootCommand) =>
             {
-                var parsed = rootCommand.Parse(command);
+                ParseResult parsed;
+
+                try
+                {
+                    parsed = rootCommand.Parse(command);
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(command, e);
+                }
+
                 Assert.AreEqual(
                     0,
                     parsed.Errors.Count,
                     string.Join("\r\n\r\n", parsed.Errors.SelectMany(x => x.Message))
                 );
+
+                return Task.CompletedTask;
             },
             false
         );
@@ -98,17 +112,18 @@ public class IntegrationWorkflowUnitTest
         bool openVsCode = true
     )
     {
-        if (null == _unitTest)
-            throw new ArgumentNullException(nameof(_unitTest));
+        Debug.Assert(_unitTest != null, nameof(_unitTest) + " != null");
 
         await _unitTest
             .OpenVsCode(workingDirectory, openVsCode)
             .RunAsync(
-                async (provider, configurationRoot) =>
+                (provider, configurationRoot) =>
                 {
                     var rootCommand = provider.GetRequiredService<SubjectUnderTest>().RootCommand;
                     var integration = provider.GetRequiredService<IIntegration>();
                     integration.Integrate(rootCommand);
+
+                    return Task.CompletedTask;
                 },
                 async (provider, configurationRoot) =>
                 {
@@ -121,14 +136,7 @@ public class IntegrationWorkflowUnitTest
 
                         await execCommand(vosCommand, sut);
                     }
-                },
-                async (provider, configurationRoot) =>
-                {
-                    // it is useless here
-                    // because we have not yet decomposed enough our tests
-                    // in the executeFunc, we are asserting parsing and execution
-                }
-            );
+                });
     }
 
     private static IEnumerable<object[]> Test_Data()

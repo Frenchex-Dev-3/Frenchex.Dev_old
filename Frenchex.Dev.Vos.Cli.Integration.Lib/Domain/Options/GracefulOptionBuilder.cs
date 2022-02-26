@@ -9,8 +9,5 @@ public interface IGracefulOptionBuilder
 
 public class GracefulOptionBuilder : IGracefulOptionBuilder
 {
-    public Option<bool> Build()
-    {
-        return new(new[] {"--graceful", "-g"}, "Graceful");
-    }
+    public Option<bool> Build() => new(new[] { "--graceful", "-g" }, "Graceful");
 }

@@ -10,8 +10,5 @@ public interface INamesArgumentBuilder
 public class NamesArgumentBuilder : INamesArgumentBuilder
 
 {
-    public Argument<string[]> Build()
-    {
-        return new("names", "Names");
-    }
+    public Argument<string[]> Build() => new("names", "Names");
 }
