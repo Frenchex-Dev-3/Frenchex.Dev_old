@@ -11,4 +11,8 @@ public interface IUpCommandRequest : IRootCommandRequest
     bool Parallel { get; }
     string Provider { get; }
     bool InstallProvider { get; }
+    int ParallelWorkers { get; }
+    int ParallelWait { get; }
+
+    IUpCommandRequest CloneWithNewNames(string[] names);
 }

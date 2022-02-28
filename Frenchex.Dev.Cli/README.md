@@ -1,6 +1,6 @@
 # Installing
 
-## Using Chocolatey 
+## Using Chocolatey
 
 ```powershell
 choco install -y nuget.commandline

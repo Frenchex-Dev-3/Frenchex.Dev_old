@@ -12,4 +12,6 @@ public interface IUpCommandRequestBuilder : IRootCommandRequestBuilder
     IUpCommandRequestBuilder WithParallel(bool with);
     IUpCommandRequestBuilder UsingProvider(string provider);
     IUpCommandRequestBuilder WithInstallProvider(bool with);
+    IUpCommandRequestBuilder WithParallelWorkers(int workers);
+    IUpCommandRequestBuilder WithParallelWait(int wait);
 }

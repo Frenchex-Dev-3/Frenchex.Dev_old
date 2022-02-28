@@ -12,6 +12,8 @@ public class UpCommandRequestBuilder : RootCommandRequestBuilder, IUpCommandRequ
     private string? _provider;
     private bool? _provision;
     private string[]? _provisionWith;
+    private int _parallelWorkers;
+    private int _parallelWait;
 
     public UpCommandRequestBuilder(IBaseRequestBuilderFactory baseRequestBuilderFactory) : base(
         baseRequestBuilderFactory)
@@ -26,6 +28,8 @@ public class UpCommandRequestBuilder : RootCommandRequestBuilder, IUpCommandRequ
             _provisionWith ?? Array.Empty<string>(),
             _destroyOnError ?? false,
             _parallel ?? false,
+            _parallelWorkers,
+            _parallelWait,
             _provider ?? "",
             _installProvider ?? false,
             _minimal ?? false,
@@ -75,6 +79,18 @@ public class UpCommandRequestBuilder : RootCommandRequestBuilder, IUpCommandRequ
         return this;
     }
 
+    public IUpCommandRequestBuilder WithParallelWorkers(int workers)
+    {
+        _parallelWorkers = workers;
+        return this;
+    }
+
+    public IUpCommandRequestBuilder WithParallelWait(int wait)
+    {
+        _parallelWait = wait;
+        return this;
+    }
+    
     public IUpCommandRequestBuilder WithMinimal(bool with)
     {
         _minimal = with;

@@ -9,6 +9,8 @@ public class UpCommandIntegrationPayloadBinder : BinderBase<UpCommandIntegration
     private readonly Option<bool> _installProvider;
     private readonly Argument<string[]> _names;
     private readonly Option<bool> _parallel;
+    private readonly Option<int> _parallelWorkers;
+    private readonly Option<int> _parallelWait;
     private readonly Option<string> _provider;
     private readonly Option<bool> _provision;
     private readonly Option<string[]> _provisionWith;
@@ -21,17 +23,21 @@ public class UpCommandIntegrationPayloadBinder : BinderBase<UpCommandIntegration
         Option<string[]> provisionWith,
         Option<bool> destroyOnError,
         Option<bool> parallel,
+        Option<int> parallelWorkers,
+        Option<int> parallelWait,
         Option<string> provider,
         Option<bool> installProvider,
         Option<int> timeoutMs,
         Option<string> workingDir
-    )
+        )
     {
         _names = names;
         _provision = provision;
         _provisionWith = provisionWith;
         _destroyOnError = destroyOnError;
         _parallel = parallel;
+        _parallelWorkers = parallelWorkers;
+        _parallelWait = parallelWait;
         _provider = provider;
         _installProvider = installProvider;
         _timeoutMs = timeoutMs;
@@ -47,7 +53,8 @@ public class UpCommandIntegrationPayloadBinder : BinderBase<UpCommandIntegration
             DestroyOnError = bindingContext.ParseResult.GetValueForOption(_destroyOnError),
             InstallProvider = bindingContext.ParseResult.GetValueForOption(_installProvider),
             Names = bindingContext.ParseResult.GetValueForArgument(_names),
-            Parallel = bindingContext.ParseResult.GetValueForOption(_parallel),
+            ParallelWorkers = bindingContext.ParseResult.GetValueForOption(_parallelWorkers),
+            ParallelWait = bindingContext.ParseResult.GetValueForOption(_parallelWait),
             Provider = bindingContext.ParseResult.GetValueForOption(_provider),
             Provision = bindingContext.ParseResult.GetValueForOption(_provision),
             ProvisionWith = bindingContext.ParseResult.GetValueForOption(_provisionWith)

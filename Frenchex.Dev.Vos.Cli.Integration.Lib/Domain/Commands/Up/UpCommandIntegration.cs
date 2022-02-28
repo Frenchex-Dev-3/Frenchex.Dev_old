@@ -16,6 +16,8 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
     private readonly IUpCommandRequestBuilderFactory _requestBuilderFactory;
     private readonly ITimeoutMsOptionBuilder _timeoutMsOptionBuilder;
     private readonly IWorkingDirectoryOptionBuilder _workingDirectoryOptionBuilder;
+    private readonly IParallelWorkersOptionBuilder _parallelWorkersOptionBuilder;
+    private readonly IParallelWaitOptionBuilder _parallelWaitOptionBuilder;
 
     public UpCommandIntegration(
         IUpCommand command,
@@ -23,8 +25,9 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
         INamesArgumentBuilder namesArgumentBuilder,
         IParallelOptionBuilder parallelOptionBuilder,
         IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder,
-        ITimeoutMsOptionBuilder timeoutMsOptionBuilder
-    )
+        ITimeoutMsOptionBuilder timeoutMsOptionBuilder,
+        IParallelWorkersOptionBuilder parallelWorkersOptionBuilder,
+        IParallelWaitOptionBuilder parallelWaitOptionBuilder)
     {
         _command = command;
         _requestBuilderFactory = requestBuilderFactory;
@@ -32,6 +35,8 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
         _parallelOptionBuilder = parallelOptionBuilder;
         _workingDirectoryOptionBuilder = workingDirectoryOptionBuilder;
         _timeoutMsOptionBuilder = timeoutMsOptionBuilder;
+        _parallelWorkersOptionBuilder = parallelWorkersOptionBuilder;
+        _parallelWaitOptionBuilder = parallelWaitOptionBuilder;
     }
 
     public void Integrate(Command rootCommand)
@@ -41,11 +46,13 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
         var provisionWithOpt = new Option<string[]>(new[] {"--provision-with"}, "Provision with");
         var destroyOnErrorOpt = new Option<bool>(new[] {"--destroy-on-error"}, "Destroy on error");
         var parallelOpt = _parallelOptionBuilder.Build();
+        var parallelWorkers = _parallelWorkersOptionBuilder.Build();
+        var parallelWait = _parallelWaitOptionBuilder.Build();
         var providerOpt =
             new Option<string>(new[] {"--provider"}, () => ProviderEnum.Virtualbox.ToString(), "Provider");
         var installProviderOpt = new Option<bool>(new[] {"--install-provider", "-i"}, "Install provider");
         var timeoutMs = _timeoutMsOptionBuilder.Build();
-        var workiongDirOpt = _workingDirectoryOptionBuilder.Build();
+        var workingDirOpt = _workingDirectoryOptionBuilder.Build();
 
         var command = new Command("up", "Runs Vagrant up")
         {
@@ -54,10 +61,12 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
             provisionWithOpt,
             destroyOnErrorOpt,
             parallelOpt,
+            parallelWorkers,
+            parallelWait,
             providerOpt,
             installProviderOpt,
             timeoutMs,
-            workiongDirOpt
+            workingDirOpt
         };
 
         var binder = new UpCommandIntegrationPayloadBinder(
@@ -66,10 +75,12 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
             provisionWithOpt,
             destroyOnErrorOpt,
             parallelOpt,
+            parallelWorkers,
+            parallelWait,
             providerOpt,
             installProviderOpt,
             timeoutMs,
-            workiongDirOpt
+            workingDirOpt
         );
 
         command.SetHandler(async (

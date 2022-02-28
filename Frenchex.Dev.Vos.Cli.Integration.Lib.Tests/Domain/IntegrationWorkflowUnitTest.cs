@@ -34,20 +34,20 @@ public class IntegrationWorkflowUnitTest
                         new("MY_KEY", "MY_VALUE")
                     });
             },
-            (services, configurationRoot) =>
+            (services, _) =>
             {
                 // very same class used by Program.cs
                 ServicesConfiguration.ConfigureServices(services);
 
-                // DI will be used as receptable of integrated commands
+                // DI will be used as receptacle of integrated commands
                 // by means of SubjectUnderTest
                 services.AddScoped<SubjectUnderTest>();
             },
-            (services, configurationRoot) =>
+            (services, _) =>
             {
                 // overload your services to mock them
                 var mockedConsole = new Mock<IConsole>();
-                services.AddSingleton(provider => mockedConsole.Object);
+                services.AddSingleton(_ => mockedConsole.Object);
 
                 // we use DI to hold our mock
                 services.AddSingleton(mockedConsole);
@@ -117,7 +117,7 @@ public class IntegrationWorkflowUnitTest
         await _unitTest
             .OpenVsCode(workingDirectory, openVsCode)
             .RunAsync(
-                (provider, configurationRoot) =>
+                (provider, _) =>
                 {
                     var rootCommand = provider.GetRequiredService<SubjectUnderTest>().RootCommand;
                     var integration = provider.GetRequiredService<IIntegration>();
@@ -125,7 +125,7 @@ public class IntegrationWorkflowUnitTest
 
                     return Task.CompletedTask;
                 },
-                async (provider, configurationRoot) =>
+                async (provider, _) =>
                 {
                     var sut = provider.GetRequiredService<SubjectUnderTest>().RootCommand;
 
@@ -158,7 +158,7 @@ public class IntegrationWorkflowUnitTest
                 new("d.m 2", $"define machine add bar bar 4 --enabled {timeOutOpt} {workingDirOpt}"),
                 new("name", $"name bar-0 foo-[2-*] {timeOutOpt} {workingDirOpt}"),
                 new("status", $"status bar-* foo-[2-*] {timeOutOpt} {workingDirOpt}"),
-                new("up foo0", $"up foo-0 {timeOutOpt} {workingDirOpt}"),
+               // new("up foo0", $"up foo-0 {timeOutOpt} {workingDirOpt}"),
                 new("up foo2-*", $"up foo-[2-*] {timeOutOpt} {workingDirOpt}"),
                 new("status bar* foo2-*", $"status bar-* foo-[2-*] {timeOutOpt} {workingDirOpt}"),
                 new("halt bar-* foo2-*", $"halt bar-* foo-[2-*] {timeOutOpt} {workingDirOpt}"),

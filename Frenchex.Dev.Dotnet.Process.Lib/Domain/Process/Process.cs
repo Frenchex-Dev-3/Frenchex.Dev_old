@@ -15,6 +15,8 @@ public class Process : IProcess
     #endregion
 
     #region Publics
+    
+    public bool HasStarted { get; private set; }
 
     public Process(
         System.Diagnostics.Process wrappedProcess,
@@ -25,6 +27,7 @@ public class Process : IProcess
         _wrappedProcess = wrappedProcess;
         _processBuildingParameters = buildingParameters;
         _logger = logger;
+        HasStarted = false;
     }
 
     public System.Diagnostics.Process WrappedProcess => _wrappedProcess;
@@ -45,11 +48,11 @@ public class Process : IProcess
 
         Result = new ProcessExecutionResult(_wrappedProcess);
 
-        bool hasStarted;
-
+        HasStarted = false;
+        
         try
         {
-            hasStarted = _wrappedProcess.Start();
+            HasStarted = _wrappedProcess.Start();
         }
         catch (Exception error)
         {
@@ -59,12 +62,12 @@ public class Process : IProcess
             Result.ExitCode = -1;
             Result.Exception = error;
 
-            hasStarted = false;
+            HasStarted = false;
         }
 
         ConfigureProcessStreams();
 
-        if (hasStarted)
+        if (HasStarted)
         {
             // Reads the output stream first and then waits because deadlocks are possible
             if (_processBuildingParameters.RedirectStandardOutput) _wrappedProcess.BeginOutputReadLine();
@@ -209,6 +212,11 @@ public class Process : IProcess
     public void Stop()
     {
         _wrappedProcess.Kill(true);
+    }
+
+    bool IProcess.HasStarted()
+    {
+        return HasStarted;
     }
 
     #endregion

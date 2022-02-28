@@ -95,6 +95,9 @@ public class ServicesConfiguration
             .AddScoped<IVirtualRamMbOptionBuilder, VirtualRamMbOptionBuilder>()
             .AddScoped<IWorkingDirectoryOptionBuilder, WorkingDirectoryOptionBuilder>()
             .AddScoped<IZeroesOptionBuilder, ZeroesOptionBuilder>()
+            .AddScoped<IParallelOptionBuilder, ParallelOptionBuilder>()
+            .AddScoped<IParallelWaitOptionBuilder, ParallelWaitOptionBuilder>()
+            .AddScoped<IParallelWorkersOptionBuilder, ParallelWorkersOptionBuilder>()
             ;
     }
 }

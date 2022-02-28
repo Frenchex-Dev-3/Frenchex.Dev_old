@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Frenchex.Dev.Dotnet.Filesystem.Lib\Frenchex.Dev.Dotnet.Filesystem.Lib.csproj" />
-    <ProjectReference Include="..\Frenchex.Dev.Dotnet.Process.Lib\Frenchex.Dev.Dotnet.Process.Lib.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Frenchex.Dev.Dotnet.Filesystem.Lib\Frenchex.Dev.Dotnet.Filesystem.Lib.csproj"/>
+        <ProjectReference Include="..\Frenchex.Dev.Dotnet.Process.Lib\Frenchex.Dev.Dotnet.Process.Lib.csproj"/>
+    </ItemGroup>
 
 </Project>

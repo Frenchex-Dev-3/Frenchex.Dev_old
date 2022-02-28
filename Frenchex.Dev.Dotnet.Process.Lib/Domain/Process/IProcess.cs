@@ -5,6 +5,7 @@ public interface IProcess : IDisposable
     public System.Diagnostics.Process WrappedProcess { get; }
     ProcessExecutionResult Start();
     void Stop();
+    bool HasStarted();
 }
 
 public class ProcessExecutionResult

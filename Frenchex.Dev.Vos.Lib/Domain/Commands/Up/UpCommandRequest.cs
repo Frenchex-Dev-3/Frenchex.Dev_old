@@ -10,6 +10,8 @@ public class UpCommandRequest : RootRequest, IUpCommandRequest
         string[] provisionWith,
         bool destroyOnError,
         bool parallel,
+        int parallelWorkers,
+        int parallelWait,
         string provider,
         bool installProvider,
         bool minimal,
@@ -24,6 +26,8 @@ public class UpCommandRequest : RootRequest, IUpCommandRequest
         Provider = provider;
         InstallProvider = installProvider;
         Minimal = minimal;
+        ParallelWorkers = parallelWorkers;
+        ParallelWait = parallelWait;
     }
 
     public bool Minimal { get; }
@@ -33,5 +37,21 @@ public class UpCommandRequest : RootRequest, IUpCommandRequest
     public bool Parallel { get; }
     public string Provider { get; }
     public bool InstallProvider { get; }
+    public int ParallelWorkers { get; }
+    public int ParallelWait { get; }
     public string[] Names { get; }
+
+    public IUpCommandRequest CloneWithNewNames(string[] names) => new UpCommandRequest(
+        names,
+        Provision,
+        ProvisionWith,
+        DestroyOnError,
+        Parallel,
+        ParallelWorkers,
+        ParallelWait,
+        Provider,
+        InstallProvider,
+        Minimal,
+        Base
+    );
 }
