@@ -7,54 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fc691c9-6b38-4b30-914e-dfc108c67d48" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Frenchex.Dev.Cli/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/CommandIntegrationPayload.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Options/IVagrantBinPathOptionBuilder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/DependencyInjection/ServicesConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/DependencyInjection/ServicesConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Destroy/DestroyCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Destroy/DestroyCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Halt/HaltCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Halt/HaltCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Init/InitCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Init/InitCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Root/BaseCommandRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Root/BaseCommandRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Root/BaseCommandRequestBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Root/BaseCommandRequestBuilder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Root/IBaseCommandRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Root/IBaseCommandRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Root/RootCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Root/RootCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Ssh/SshCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Ssh/SshCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/SshConfig/SshConfigCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/SshConfig/SshConfigCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Status/StatusCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Status/StatusCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Up/UpCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Up/UpCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Frenchex.Dev.Vagrant.Lib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Frenchex.Dev.Vagrant.Lib.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib.Tests/Domain/IntegrationWorkflowUnitTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib.Tests/Domain/IntegrationWorkflowUnitTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/DependencyInjection/ServicesConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/DependencyInjection/ServicesConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/ABaseCommandIntegration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/ABaseCommandIntegration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Define/Machine/Add/DefineMachineAddCommandIntegration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Define/Machine/Add/DefineMachineAddCommandIntegration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Define/Machine/Add/DefineMachineAddCommandIntegrationPayload.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Define/Machine/Add/DefineMachineAddCommandIntegrationPayload.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Define/Machine/Add/DefineMachineAddCommandIntegrationPayloadBinder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Define/Machine/Add/DefineMachineAddCommandIntegrationPayloadBinder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Define/MachineType/Add/DefineMachineTypeAddCommandIntegration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Define/MachineType/Add/DefineMachineTypeAddCommandIntegration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Define/MachineType/Add/DefineMachineTypeAddCommandIntegrationPayload.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Define/MachineType/Add/DefineMachineTypeAddCommandIntegrationPayload.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Define/MachineType/Add/DefineMachineTypeAddCommandIntegrationPayloadBinder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Define/MachineType/Add/DefineMachineTypeAddCommandIntegrationPayloadBinder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Destroy/DestroyCommandIntegration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Destroy/DestroyCommandIntegration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Destroy/DestroyCommandIntegrationPayload.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Destroy/DestroyCommandIntegrationPayload.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Destroy/DestroyCommandIntegrationPayloadBinder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Destroy/DestroyCommandIntegrationPayloadBinder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Halt/HaltCommandIntegration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Halt/HaltCommandIntegration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Halt/HaltCommandIntegrationPayload.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Halt/HaltCommandIntegrationPayload.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Halt/HaltCommandIntegrationPayloadBinder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Halt/HaltCommandIntegrationPayloadBinder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Init/InitCommandIntegration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Init/InitCommandIntegration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Init/InitCommandIntegrationPayload.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Init/InitCommandIntegrationPayload.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Name/NameCommandIntegration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Name/NameCommandIntegration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Name/NameCommandIntegrationPayload.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Name/NameCommandIntegrationPayload.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Name/NameCommandIntegrationPayloadBinder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Name/NameCommandIntegrationPayloadBinder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Ssh/SshCommandIntegration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Ssh/SshCommandIntegration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/SshConfig/SshConfigCommandIntegration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/SshConfig/SshConfigCommandIntegration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Status/StatusCommandIntegration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Status/StatusCommandIntegration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Status/StatusCommandIntegrationPayload.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Status/StatusCommandIntegrationPayload.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Up/UpCommandIntegration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Up/UpCommandIntegration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Up/UpCommandIntegrationPayload.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Up/UpCommandIntegrationPayload.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Up/UpCommandIntegrationPayloadBinder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Up/UpCommandIntegrationPayloadBinder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Root/BaseRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Root/BaseRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Root/BaseRequestBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Root/BaseRequestBuilder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Root/IBaseRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Root/IBaseRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Root/IBaseRequestBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Root/IBaseRequestBuilder.cs" afterDir="false" />
+    <list default="true" id="7fc691c9-6b38-4b30-914e-dfc108c67d48" name="Changes" comment="Add --vagrant-bin-path option string">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Frenchex.Dev.Cli/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Frenchex.Dev.Cli/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/HaltCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/HaltCommand.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +53,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -110,22 +67,123 @@
     <property name="settings.editor.selected.configurable" value="ReSpellerSettingsId" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Frenchex.Dev.Cli">
-    <configuration name="Frenchex.Dev.Cli" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
-      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Frenchex.Dev.Cli.csproj" />
-      <option name="LAUNCH_PROFILE_TFM" value="net6.0-windows7.0" />
-      <option name="LAUNCH_PROFILE_NAME" value="Frenchex.Dev.Cli" />
+  <component name="RunManager" selected=".NET Project.devx vos halt foo-[2-*]">
+    <configuration name="devx vos define machine add foo" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/bin/Debug/net6.0-windows/devx.exe" />
+      <option name="PROGRAM_PARAMETERS" value="vos define machine add foo foo 4 --enabled  --timeout-ms 50000" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/" />
+      <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
-      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
-      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
-      <option name="SEND_DEBUG_REQUEST" value="1" />
-      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Frenchex.Dev.Cli.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="0" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value="net6.0-windows7.0" />
       <method v="2">
         <option name="Build" />
       </method>
     </configuration>
+    <configuration name="devx vos define machine-type add foo" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/bin/Debug/net6.0-windows/devx.exe" />
+      <option name="PROGRAM_PARAMETERS" value="vos define machine-type add foo generic/alpine38 4 128 Debian_64 10.9.0 --vram-mb 16 --enabled --timeout-ms 50000" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Frenchex.Dev.Cli.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="0" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value="net6.0-windows7.0" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="devx vos destroy foo-[2-*] --force" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/bin/Debug/net6.0-windows/devx.exe" />
+      <option name="PROGRAM_PARAMETERS" value="vos destroy foo-[2-*] --force" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Frenchex.Dev.Cli.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="0" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value="net6.0-windows7.0" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="devx vos halt foo-[2-*]" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/bin/Debug/net6.0-windows/devx.exe" />
+      <option name="PROGRAM_PARAMETERS" value="vos halt foo-[2-*]" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Frenchex.Dev.Cli.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="0" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value="net6.0-windows7.0" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="devx vos init" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/bin/Debug/net6.0-windows/devx.exe" />
+      <option name="PROGRAM_PARAMETERS" value="vos init" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Frenchex.Dev.Cli.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="0" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value="net6.0-windows7.0" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="devx vos up foo-[2-*]" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/bin/Debug/net6.0-windows/devx.exe" />
+      <option name="PROGRAM_PARAMETERS" value="vos up foo-[2-*]" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Frenchex.Dev.Cli.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="0" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value="net6.0-windows7.0" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue=".NET Project.devx vos init" />
+      <item itemvalue=".NET Project.devx vos define machine-type add foo" />
+      <item itemvalue=".NET Project.devx vos define machine add foo" />
+      <item itemvalue=".NET Project.devx vos up foo-[2-*]" />
+      <item itemvalue=".NET Project.devx vos halt foo-[2-*]" />
+      <item itemvalue=".NET Project.devx vos destroy foo-[2-*] --force" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -138,7 +196,7 @@
       <workItem from="1645922765088" duration="268000" />
       <workItem from="1645923451815" duration="3867000" />
       <workItem from="1645971365108" duration="6933000" />
-      <workItem from="1646067162329" duration="5496000" />
+      <workItem from="1646067162329" duration="8199000" />
     </task>
     <task id="LOCAL-00001" summary="Fix UTs, working again">
       <created>1646066587902</created>
@@ -147,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646066587902</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add --vagrant-bin-path option string">
+      <created>1646072958134</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1646072958134</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -371,25 +436,7 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Fix UTs, working again" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix UTs, working again" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Init/InitCommand.cs</url>
-          <line>33</line>
-          <properties documentPath="C:\code\Frenchex.Dev_i1\Frenchex.Dev.Vos.Lib\Domain\Commands\Init\InitCommand.cs" initialLine="33" containingFunctionPresentation="method 'Execute'">
-            <startOffsets>
-              <option value="1414" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1456" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Add --vagrant-bin-path option string" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add --vagrant-bin-path option string" />
   </component>
 </project>

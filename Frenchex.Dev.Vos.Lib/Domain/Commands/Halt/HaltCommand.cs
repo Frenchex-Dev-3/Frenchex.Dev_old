@@ -42,7 +42,14 @@ public class HaltCommand : RootCommand, IHaltCommand
             .UsingHaltTimeoutInMiliSeconds(request.HaltTimeoutInMiliSeconds)
             .Build()
         );
+        
+        if (null == process.ProcessExecutionResult.WaitForCompleteExit)
+            throw new InvalidOperationException("waitforcompleteexit is null");
 
-        return _responseBuilderFactory.Factory().Build();
+        await process.ProcessExecutionResult.WaitForCompleteExit;
+
+        var responseBuilder = _responseBuilderFactory.Factory();
+
+        return responseBuilder.Build();
     }
 }
