@@ -30,6 +30,7 @@ public class UpCommand : RootCommand, IUpCommand
         var libRequest = _vagrantUpCommandRequestBuilderFactory.Factory()
             .BaseBuilder
             .UsingWorkingDirectory(request.Base.WorkingDirectory)
+            .UsingTimeoutMiliseconds(request.Base.TimeoutInMiliSeconds)
             .Parent<Vagrant.Lib.Domain.Commands.Up.IUpCommandRequestBuilder>()
             .UsingNamesOrIds(
                 MapNamesToVagrantNames(

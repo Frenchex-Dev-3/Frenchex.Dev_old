@@ -27,7 +27,7 @@ public class HaltCommand : RootCommand, IHaltCommand
 
     public async Task<IHaltCommandResponse> Execute(IHaltCommandRequest request)
     {
-        var process = _vagrantHaltCommand.StartProcess(_vagrantHaltCommandRequestBuilderFactory.Factory()
+        var libRequest = _vagrantHaltCommandRequestBuilderFactory.Factory()
             .BaseBuilder
             .UsingWorkingDirectory(request.Base.WorkingDirectory)
             .UsingTimeoutMiliseconds(request.HaltTimeoutInMiliSeconds)
@@ -40,16 +40,12 @@ public class HaltCommand : RootCommand, IHaltCommand
                 )
             )
             .UsingHaltTimeoutInMiliSeconds(request.HaltTimeoutInMiliSeconds)
-            .Build()
-        );
+            .Build();
         
-        if (null == process.ProcessExecutionResult.WaitForCompleteExit)
-            throw new InvalidOperationException("waitforcompleteexit is null");
-
-        await process.ProcessExecutionResult.WaitForCompleteExit;
-
-        var responseBuilder = _responseBuilderFactory.Factory();
-
-        return responseBuilder.Build();
+        var process = _vagrantHaltCommand.StartProcess(libRequest);
+        
+        return _responseBuilderFactory.Factory()
+            .WithHaltResponse(process)
+            .Build();
     }
 }

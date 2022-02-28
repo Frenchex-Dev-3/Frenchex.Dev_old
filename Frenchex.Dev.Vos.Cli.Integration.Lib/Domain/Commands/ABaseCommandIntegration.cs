@@ -24,6 +24,7 @@ public class ABaseCommandIntegration
     {
         requestBuilder
             .BaseBuilder
+            .WithDebug(true)
             .UsingWorkingDirectory(payload.WorkingDirectory)
             .UsingTimeoutMiliseconds(payload.TimeoutMs)
             .UsingVagrantBinPath(payload.VagrantBinPath)

@@ -23,9 +23,9 @@ public abstract class RootCommand : IRootCommand
         _vagrantBinPath = configuration["VAGRANT_BIN_PATH"] ?? "vagrant";
     }
 
-    protected static string GetBinary()
+    private string GetBinary()
     {
-        return "vagrant";
+        return _vagrantBinPath;
     }
 
     protected ProcessExecutionResult BuildAndStartProcess(

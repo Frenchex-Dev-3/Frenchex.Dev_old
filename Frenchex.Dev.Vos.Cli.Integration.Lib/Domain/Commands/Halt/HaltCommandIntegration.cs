@@ -73,13 +73,30 @@ public class HaltCommandIntegration : ABaseCommandIntegration, IHaltCommandInteg
 
             BuildBase(requestBuilder, payload);
 
-            await _command.Execute(requestBuilder
+            var response = await _command.Execute(requestBuilder
                     .UsingNames(payload.Names)
                     .WithForce(payload.Force)
                     .UsingHaltTimeoutInMiliSeconds(payload.HaltTimeoutMs)
                     .Build()
                 )
                 ;
+
+            if (null == response.Response.ProcessExecutionResult.WaitForCompleteExit)
+                throw new InvalidOperationException("missing response elements");
+
+            response.Response.Process.WrappedProcess.OutputDataReceived += (sender, args) =>
+            {
+                if (args.Data != null) ctx.Console.Out.Write(args.Data + "\r\n");
+            };
+
+            Console.CancelKeyPress += delegate
+            {
+                Console.WriteLine("Cancel key pressed. Cleaning...");
+                response.Response.Process.Stop();
+                Console.WriteLine("Exiting");
+            };
+
+            await response.Response.ProcessExecutionResult.WaitForCompleteExit;
         }, binder);
 
         rootCommand.AddCommand(command);

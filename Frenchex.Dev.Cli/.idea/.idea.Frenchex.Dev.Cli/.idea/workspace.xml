@@ -7,10 +7,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fc691c9-6b38-4b30-914e-dfc108c67d48" name="Changes" comment="Add --vagrant-bin-path option string">
+    <list default="true" id="7fc691c9-6b38-4b30-914e-dfc108c67d48" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Frenchex.Dev.Cli/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Frenchex.Dev.Cli/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Configurations/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Configurations/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frenchex.Dev.Cli.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Frenchex.Dev.Cli.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frenchex.Dev.Cli.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Frenchex.Dev.Cli.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Root/RootCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Root/RootCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/ABaseCommandIntegration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/ABaseCommandIntegration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Halt/HaltCommandIntegration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Halt/HaltCommandIntegration.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/HaltCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/HaltCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/HaltCommandResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/HaltCommandResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/HaltCommandResponseBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/HaltCommandResponseBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/IHaltCommandResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/IHaltCommandResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/IHaltCommandResponseBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/IHaltCommandResponseBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Up/UpCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Up/UpCommand.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,12 +43,9 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bf408839e35535896e3625c8578c2bfb7bf56ef7ab2c4549ae59c3a19db9ae/Console.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/code/Frenchex.Dev_i1/Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Define/Machine/Add/DefineMachineAddCommandIntegrationPayload.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/50bb11537dfd1412327469f16cee68d25cc12a463e2b211fabbb47ce45ff9/AnonymousCommandHandler.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/code/Frenchex.Dev_i1/Frenchex.Dev.Vagrant.Lib/DependencyInjection/ServicesConfiguration.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/388dfc71961f17f021ca637ce55568ebefa06154feff3eb38529f16de676239/InvocationPipeline.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/154c95896c6b2e1edb7f67c71ccb31707f36efd180884a9b5795947c5c5b6b/CommandLineBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/code/Frenchex.Dev_i1/Frenchex.Dev.Vos.Cli.Integration.Lib.Tests/Domain/IntegrationWorkflowUnitTest.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3e2140877cf96c45dc89a7d9153aa215bf7e43f9eb07aaf9b51762d91397d/CommandExtensions.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -67,7 +75,7 @@
     <property name="settings.editor.selected.configurable" value="ReSpellerSettingsId" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Project.devx vos halt foo-[2-*]">
+  <component name="RunManager" selected=".NET Project.devx vos up foo-[2-*]">
     <configuration name="devx vos define machine add foo" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/bin/Debug/net6.0-windows/devx.exe" />
       <option name="PROGRAM_PARAMETERS" value="vos define machine add foo foo 4 --enabled  --timeout-ms 50000" />
@@ -160,7 +168,7 @@
     </configuration>
     <configuration name="devx vos up foo-[2-*]" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/bin/Debug/net6.0-windows/devx.exe" />
-      <option name="PROGRAM_PARAMETERS" value="vos up foo-[2-*]" />
+      <option name="PROGRAM_PARAMETERS" value="vos up foo-[2-*] --vagrant-bin-path C:\code\vagrant_i1\exec\vagrant" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
@@ -196,7 +204,8 @@
       <workItem from="1645922765088" duration="268000" />
       <workItem from="1645923451815" duration="3867000" />
       <workItem from="1645971365108" duration="6933000" />
-      <workItem from="1646067162329" duration="8199000" />
+      <workItem from="1646067162329" duration="13231000" />
+      <workItem from="1646082155978" duration="892000" />
     </task>
     <task id="LOCAL-00001" summary="Fix UTs, working again">
       <created>1646066587902</created>
@@ -212,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646072958134</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add rider debug launch settings&#10;HaltCommand reset">
+      <created>1646076013191</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1646076013191</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -437,6 +453,7 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Fix UTs, working again" />
     <MESSAGE value="Add --vagrant-bin-path option string" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add --vagrant-bin-path option string" />
+    <MESSAGE value="Add rider debug launch settings&#10;HaltCommand reset" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add rider debug launch settings&#10;HaltCommand reset" />
   </component>
 </project>
