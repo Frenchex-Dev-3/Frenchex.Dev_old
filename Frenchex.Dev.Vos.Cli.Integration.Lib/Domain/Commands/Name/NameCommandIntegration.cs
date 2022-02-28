@@ -12,41 +12,38 @@ public class NameCommandIntegration : ABaseCommandIntegration, INameCommandInteg
     private readonly INameCommand _command;
     private readonly INamesArgumentBuilder _namesArgumentBuilder;
     private readonly INameCommandRequestBuilderFactory _requestBuilderFactory;
-    private readonly ITimeoutMsOptionBuilder _timeoutMsOptionBuilder;
-    private readonly IWorkingDirectoryOptionBuilder _workingDirectoryOptionBuilder;
 
     public NameCommandIntegration(
         INameCommand command,
         INameCommandRequestBuilderFactory requestBuilderFactory,
         INamesArgumentBuilder namesArgumentBuilder,
         IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder,
-        ITimeoutMsOptionBuilder timeoutMsOptionBuilder
-    )
+        ITimeoutMsOptionBuilder timeoutMsOptionBuilder,
+        IVagrantBinPathOptionBuilder vagrantBinPathOptionBuilder
+    ) : base(workingDirectoryOptionBuilder, timeoutMsOptionBuilder, vagrantBinPathOptionBuilder)
     {
         _command = command;
         _requestBuilderFactory = requestBuilderFactory;
         _namesArgumentBuilder = namesArgumentBuilder;
-        _workingDirectoryOptionBuilder = workingDirectoryOptionBuilder;
-        _timeoutMsOptionBuilder = timeoutMsOptionBuilder;
     }
 
     public void Integrate(Command rootCommand)
     {
         var nameArg = _namesArgumentBuilder.Build();
-        var workingDirOpt = _workingDirectoryOptionBuilder.Build();
-        var timeoutOpt = _timeoutMsOptionBuilder.Build();
-
+        var workingDirOpt = WorkingDirectoryOptionBuilder.Build();
+        var timeoutOpt = TimeoutMsOptionBuilder.Build();
+        
         var command = new Command("name", "Output Vagrant machine names")
         {
             nameArg,
+            timeoutOpt,
             workingDirOpt,
-            timeoutOpt
         };
 
         var binder = new NameCommandIntegrationPayloadBinder(
             nameArg,
-            workingDirOpt,
-            timeoutOpt
+            timeoutOpt,
+            workingDirOpt
         );
 
         command.SetHandler(async (
@@ -56,15 +53,14 @@ public class NameCommandIntegration : ABaseCommandIntegration, INameCommandInteg
             CancellationToken cancellationToken
         ) =>
         {
-            var response = await _command
-                .Execute(_requestBuilderFactory.Factory()
-                    .BaseBuilder
-                    .UsingWorkingDirectory(payload.WorkingDirectory)
-                    .UsingTimeoutMiliseconds(payload.TimeoutMs)
-                    .Parent<INameCommandRequestBuilder>()
-                    .WithNames(payload.Names!)
-                    .Build()
-                );
+            var requestBuilder = _requestBuilderFactory.Factory();
+
+            BuildBase(requestBuilder, payload);
+
+            var response = await _command.Execute(requestBuilder
+                .WithNames(payload.Names!)
+                .Build()
+            );
 
             foreach (var name in response.Names) ctx.Console.Write(name);
         }, binder);

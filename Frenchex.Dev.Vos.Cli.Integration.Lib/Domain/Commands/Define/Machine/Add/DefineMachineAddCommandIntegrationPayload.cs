@@ -1,6 +1,6 @@
 ﻿namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Define.Machine.Add;
 
-public class DefineMachineAddCommandIntegrationPayload
+public class DefineMachineAddCommandIntegrationPayload : CommandIntegrationPayload
 {
     public string? Name { get; set; }
     public string? Type { get; set; }
@@ -17,6 +17,4 @@ public class DefineMachineAddCommandIntegrationPayload
     // ReSharper disable once InconsistentNaming
     public int IPv4Start { get; set; }
     public string? NetworkBridge { get; set; }
-    public int TimeoutMs { get; set; }
-    public string? WorkingDirectory { get; set; }
 }

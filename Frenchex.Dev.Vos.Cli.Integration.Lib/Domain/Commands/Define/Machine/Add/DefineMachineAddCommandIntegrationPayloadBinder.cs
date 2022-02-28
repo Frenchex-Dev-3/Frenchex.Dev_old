@@ -18,6 +18,7 @@ public class DefineMachineAddCommandIntegrationPayloadBinder : BinderBase<Define
     private readonly Argument<string> _type;
     private readonly Option<int> _vCpus;
     private readonly Option<string> _workingDir;
+    private readonly Option<string> _vagrantBinPath;
 
     public DefineMachineAddCommandIntegrationPayloadBinder(
         Argument<string> name,
@@ -32,7 +33,8 @@ public class DefineMachineAddCommandIntegrationPayloadBinder : BinderBase<Define
         Option<int> ipv4Start,
         Option<string> networkBridge,
         Option<int> timeoutMs,
-        Option<string> workingDir
+        Option<string> workingDir,
+        Option<string> vagrantBinPath
     )
     {
         _name = name;
@@ -48,6 +50,7 @@ public class DefineMachineAddCommandIntegrationPayloadBinder : BinderBase<Define
         _networkBridge = networkBridge;
         _timeoutMs = timeoutMs;
         _workingDir = workingDir;
+        _vagrantBinPath = vagrantBinPath;
     }
 
     protected override DefineMachineAddCommandIntegrationPayload GetBoundValue(BindingContext bindingContext)

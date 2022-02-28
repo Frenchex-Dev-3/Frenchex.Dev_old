@@ -12,7 +12,8 @@ public class BaseRequest : IBaseRequest
         bool tty,
         bool help,
         string? workingDirectory,
-        int timeoutMs
+        int timeoutMs,
+        string? vagrantBinPath
     )
     {
         Color = color;
@@ -25,6 +26,7 @@ public class BaseRequest : IBaseRequest
         Help = help;
         WorkingDirectory = workingDirectory;
         TimeoutInMiliSeconds = timeoutMs;
+        VagrantBinPath = vagrantBinPath;
     }
 
     public bool Color { get; }
@@ -37,7 +39,7 @@ public class BaseRequest : IBaseRequest
     public bool Help { get; }
     public string? WorkingDirectory { get; }
     public int TimeoutInMiliSeconds { get; }
-
+    public string? VagrantBinPath { get; }
     public T Parent<T>(T parent)
     {
         return parent;

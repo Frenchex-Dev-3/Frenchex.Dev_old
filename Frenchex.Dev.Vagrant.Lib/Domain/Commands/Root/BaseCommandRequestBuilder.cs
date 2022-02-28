@@ -14,6 +14,7 @@ public class BaseCommandRequestBuilder : IBaseCommandRequestBuilder
     private bool? _tty;
     private bool? _version;
     private string? _workingDirectory;
+    private string? _vagrantBinpath;
 
     public BaseCommandRequestBuilder(object parent)
     {
@@ -22,7 +23,8 @@ public class BaseCommandRequestBuilder : IBaseCommandRequestBuilder
 
     public IBaseCommandRequest Build()
     {
-        if (null == _workingDirectory) throw new InvalidOperationException("_workingDirectory is null");
+        if (null == _workingDirectory) 
+            throw new InvalidOperationException("_workingDirectory is null");
 
         return new BaseCommandRequest(
             _workingDirectory,
@@ -34,7 +36,8 @@ public class BaseCommandRequestBuilder : IBaseCommandRequestBuilder
             _debugTimestamp,
             _tty,
             _help,
-            _timeoutMs
+            _timeoutMs,
+            _vagrantBinpath
         );
     }
 
@@ -100,6 +103,12 @@ public class BaseCommandRequestBuilder : IBaseCommandRequestBuilder
     public IBaseCommandRequestBuilder WithDebugTimestamp(bool with)
     {
         _debugTimestamp = with;
+        return this;
+    }
+
+    public IBaseCommandRequestBuilder WithVagrantBinPath(string vagrantBinPath)
+    {
+        _vagrantBinpath = vagrantBinPath;
         return this;
     }
 }

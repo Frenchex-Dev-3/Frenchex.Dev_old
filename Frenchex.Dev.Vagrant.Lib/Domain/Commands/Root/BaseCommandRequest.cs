@@ -12,7 +12,8 @@ public class BaseCommandRequest : IBaseCommandRequest
         bool? debugTimestamp,
         bool? tty,
         bool? help,
-        int? timeoutMs
+        int? timeoutMs,
+        string? vagrantBinPath
     )
     {
         WorkingDirectory = workingDirectory;
@@ -25,6 +26,7 @@ public class BaseCommandRequest : IBaseCommandRequest
         Tty = tty ?? false;
         Help = help ?? false;
         TimeoutInMiliSeconds = timeoutMs ?? 1000;
+        VagrantBinPath = vagrantBinPath ?? "vagrant";
     }
 
     public bool Color { get; }
@@ -37,4 +39,5 @@ public class BaseCommandRequest : IBaseCommandRequest
     public bool Help { get; }
     public string? WorkingDirectory { get; }
     public int TimeoutInMiliSeconds { get; }
+    public string VagrantBinPath { get; }
 }

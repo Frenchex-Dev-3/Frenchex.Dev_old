@@ -10,13 +10,15 @@ public class DestroyCommandIntegrationPayloadBinder : BinderBase<DestroyCommandI
     private readonly Argument<string[]> _nameOpt;
     private readonly Option<int> _timeoutMsOpt;
     private readonly Option<string> _workingDirOpt;
+    private readonly Option<string> _vagrantBinPath;
 
     public DestroyCommandIntegrationPayloadBinder(
         Argument<string[]> nameOpt,
         Option<bool> forceOpt,
         Option<bool> gracefulOpt,
         Option<int> timeoutMsOpt,
-        Option<string> workingDirOpt
+        Option<string> workingDirOpt,
+        Option<string> vagrantBinPath
     )
     {
         _nameOpt = nameOpt;
@@ -24,17 +26,19 @@ public class DestroyCommandIntegrationPayloadBinder : BinderBase<DestroyCommandI
         _gracefulOpt = gracefulOpt;
         _timeoutMsOpt = timeoutMsOpt;
         _workingDirOpt = workingDirOpt;
+        _vagrantBinPath = vagrantBinPath;
     }
 
     protected override DestroyCommandIntegrationPayload GetBoundValue(BindingContext bindingContext)
     {
         return new DestroyCommandIntegrationPayload
         {
-            TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMsOpt),
-            WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDirOpt),
             Force = bindingContext.ParseResult.GetValueForOption(_forceOpt),
             Graceful = bindingContext.ParseResult.GetValueForOption(_gracefulOpt),
-            NameOrId = bindingContext.ParseResult.GetValueForArgument(_nameOpt)
+            NameOrId = bindingContext.ParseResult.GetValueForArgument(_nameOpt),
+            TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMsOpt),
+            WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDirOpt),
+            VagrantBinPath = bindingContext.ParseResult.GetValueForOption(_vagrantBinPath),
         };
     }
 }

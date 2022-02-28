@@ -98,6 +98,7 @@ public class ServicesConfiguration
             .AddScoped<IParallelOptionBuilder, ParallelOptionBuilder>()
             .AddScoped<IParallelWaitOptionBuilder, ParallelWaitOptionBuilder>()
             .AddScoped<IParallelWorkersOptionBuilder, ParallelWorkersOptionBuilder>()
+            .AddScoped<IVagrantBinPathOptionBuilder, VagrantBinPathOptionBuilder>()
             ;
     }
 }

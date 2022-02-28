@@ -2,6 +2,7 @@
 using Frenchex.Dev.Dotnet.Filesystem.Lib.Domain;
 using Frenchex.Dev.Dotnet.Process.Lib.Domain.ProcessBuilder;
 using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+using Microsoft.Extensions.Configuration;
 
 namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Up;
 
@@ -12,8 +13,9 @@ public class UpCommand : RootCommand, IUpCommand
     public UpCommand(
         IProcessBuilder processExecutor,
         IFilesystem fileSystem,
-        IUpCommandResponseBuilderFactory responseBuilderFactory
-    ) : base(processExecutor, fileSystem)
+        IUpCommandResponseBuilderFactory responseBuilderFactory,
+        IConfiguration configuration
+    ) : base(processExecutor, fileSystem, configuration)
     {
         _responseBuilderFactory = responseBuilderFactory;
     }
@@ -41,7 +43,7 @@ public class UpCommand : RootCommand, IUpCommand
         return "up";
     }
 
-    protected static string BuildVagrantOptions(IUpCommandRequest request)
+    private static string BuildVagrantOptions(IUpCommandRequest request)
     {
         return new StringBuilder()
                 .Append(request.Provision ? "" : " --no-provision")
@@ -55,7 +57,7 @@ public class UpCommand : RootCommand, IUpCommand
             ;
     }
 
-    protected static string BuildVagrantArguments(IUpCommandRequest request)
+    private static string BuildVagrantArguments(IUpCommandRequest request)
     {
         return string.Join(' ', request.NamesOrIds);
     }

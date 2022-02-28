@@ -11,34 +11,31 @@ public class InitCommandIntegration : ABaseCommandIntegration, IInitCommandInteg
     private readonly IInitCommand _command;
     private readonly INamingPatternOptionBuilder _namingPatternOptionBuilder;
     private readonly IInitCommandRequestBuilderFactory _responseBuilderFactory;
-    private readonly ITimeoutMsOptionBuilder _timeoutMsOptionBuilder;
-    private readonly IWorkingDirectoryOptionBuilder _workingDirectoryOptionBuilder;
     private readonly IZeroesOptionBuilder _zeroesOptionBuilder;
 
     public InitCommandIntegration(
         IInitCommand command,
         IInitCommandRequestBuilderFactory responseBuilderFactory,
-        IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder,
         INamingPatternOptionBuilder namingPatternOptionBuilder,
         IZeroesOptionBuilder zeroesOptionBuilder,
-        ITimeoutMsOptionBuilder timeoutMsOptionBuilder
-    )
+        ITimeoutMsOptionBuilder? timeoutMsOptionBuilder,
+        IWorkingDirectoryOptionBuilder? workingDirectoryOptionBuilder,
+        IVagrantBinPathOptionBuilder? vagrantBinPathOptionBuilder
+    ) : base(workingDirectoryOptionBuilder, timeoutMsOptionBuilder, vagrantBinPathOptionBuilder)
     {
         _command = command;
         _responseBuilderFactory = responseBuilderFactory;
-        _workingDirectoryOptionBuilder = workingDirectoryOptionBuilder;
         _namingPatternOptionBuilder = namingPatternOptionBuilder;
         _zeroesOptionBuilder = zeroesOptionBuilder;
-        _timeoutMsOptionBuilder = timeoutMsOptionBuilder;
     }
 
     public void Integrate(Command rootCommand)
     {
         var namingPatternOpt = _namingPatternOptionBuilder.Build();
         var zeroesOpt = _zeroesOptionBuilder.Build();
-        var timeoutMsOpt = _timeoutMsOptionBuilder.Build();
-        var workingDirOpt = _workingDirectoryOptionBuilder.Build();
-
+        var timeoutMsOpt = TimeoutMsOptionBuilder.Build();
+        var workingDirOpt = WorkingDirectoryOptionBuilder.Build();
+        
         var command = new Command("init", "Runs Vex init")
         {
             namingPatternOpt,
@@ -61,16 +58,15 @@ public class InitCommandIntegration : ABaseCommandIntegration, IInitCommandInteg
             CancellationToken cancellationToken
         ) =>
         {
-            await _command
-                    .Execute(_responseBuilderFactory.Factory()
-                        .BaseBuilder
-                        .UsingTimeoutMiliseconds(payload.TimeoutMs)
-                        .UsingWorkingDirectory(payload.WorkingDirectory)
-                        .Parent<IInitCommandRequestBuilder>()
-                        .WithNamingPattern(payload.Naming)
-                        .WithGivenLeadingZeroes(payload.Zeroes)
-                        .Build()
-                    )
+            var requestBuilder = _responseBuilderFactory.Factory();
+
+            BuildBase(requestBuilder, payload);
+
+            await _command.Execute(requestBuilder
+                    .WithNamingPattern(payload.Naming)
+                    .WithGivenLeadingZeroes(payload.Zeroes)
+                    .Build()
+                )
                 ;
         }, customBinder);
 

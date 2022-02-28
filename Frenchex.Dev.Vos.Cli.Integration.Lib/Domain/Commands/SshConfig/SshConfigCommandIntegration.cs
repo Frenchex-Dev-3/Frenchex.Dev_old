@@ -10,22 +10,19 @@ public class SshConfigCommandIntegration : ABaseCommandIntegration, ISshConfigCo
     private readonly ISshConfigCommand _command;
     private readonly INamesArgumentBuilder _namesArgumentBuilder;
     private readonly ISshConfigCommandRequestBuilderFactory _requestBuilderFactory;
-    private readonly ITimeoutMsOptionBuilder _timeoutMsOptionBuilder;
-    private readonly IWorkingDirectoryOptionBuilder _workingDirectoryOptionBuilder;
 
     public SshConfigCommandIntegration(
         ISshConfigCommand command,
         ISshConfigCommandRequestBuilderFactory requestBuilderFactory,
         INamesArgumentBuilder namesArgumentBuilder,
         IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder,
-        ITimeoutMsOptionBuilder timeoutMsOptionBuilder
-    )
+        ITimeoutMsOptionBuilder timeoutMsOptionBuilder,
+        IVagrantBinPathOptionBuilder vagrantBinPathOptionBuilder
+    ) : base(workingDirectoryOptionBuilder, timeoutMsOptionBuilder, vagrantBinPathOptionBuilder)
     {
         _command = command;
         _requestBuilderFactory = requestBuilderFactory;
         _namesArgumentBuilder = namesArgumentBuilder;
-        _workingDirectoryOptionBuilder = workingDirectoryOptionBuilder;
-        _timeoutMsOptionBuilder = timeoutMsOptionBuilder;
     }
 
     public void Integrate(Command rootCommand)
@@ -34,9 +31,10 @@ public class SshConfigCommandIntegration : ABaseCommandIntegration, ISshConfigCo
         {
             _namesArgumentBuilder.Build(),
             new Option<string>(new[] {"--host", "-h"}, "Host on guest"),
-            _workingDirectoryOptionBuilder.Build(),
-            _timeoutMsOptionBuilder.Build(),
-            new Option<bool>(new[] {"--color"}, "Color")
+            WorkingDirectoryOptionBuilder.Build(),
+            TimeoutMsOptionBuilder.Build(),
+            new Option<bool>(new[] {"--color"}, "Color"),
+            VagrantBinPathOptionBuilder.Build()
         };
 
         command.SetHandler(async (
@@ -44,7 +42,8 @@ public class SshConfigCommandIntegration : ABaseCommandIntegration, ISshConfigCo
             string host,
             string workingDirectory,
             int timeOutMiliseconds,
-            bool withColor
+            bool withColor,
+            string vagrantBinPath
         ) =>
         {
             await _command
@@ -52,6 +51,7 @@ public class SshConfigCommandIntegration : ABaseCommandIntegration, ISshConfigCo
                         .BaseBuilder
                         .UsingTimeoutMiliseconds(timeOutMiliseconds)
                         .UsingWorkingDirectory(workingDirectory)
+                        .UsingVagrantBinPath(vagrantBinPath)
                         .WithColor(withColor)
                         .Parent<SshConfigCommandRequestBuilder>()
                         .UsingName(nameOrId)

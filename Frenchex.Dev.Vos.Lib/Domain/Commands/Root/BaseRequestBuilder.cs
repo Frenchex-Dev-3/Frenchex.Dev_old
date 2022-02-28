@@ -14,6 +14,7 @@ public class BaseRequestBuilder : IBaseRequestBuilder
     private bool? _tty;
     private bool? _version;
     private string? _workingDirectory;
+    private string? _vagrantBinPath;
 
     public IBaseRequest Build()
     {
@@ -27,13 +28,20 @@ public class BaseRequestBuilder : IBaseRequestBuilder
             _tty ?? false,
             _help ?? false,
             _workingDirectory ?? "",
-            _timeoutMs ?? (int) TimeSpan.FromMinutes(10).TotalMilliseconds
+            _timeoutMs ?? (int) TimeSpan.FromMinutes(10).TotalMilliseconds,
+            _vagrantBinPath ?? "vagrant"
         );
     }
 
     public IBaseRequestBuilder UsingTimeoutMiliseconds(int timeoutMs)
     {
         _timeoutMs = timeoutMs;
+        return this;
+    }
+
+    public IBaseRequestBuilder UsingVagrantBinPath(string? vagrantBinPath)
+    {
+        _vagrantBinPath = vagrantBinPath;
         return this;
     }
 

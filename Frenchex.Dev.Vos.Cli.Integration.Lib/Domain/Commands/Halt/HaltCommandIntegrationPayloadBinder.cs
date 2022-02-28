@@ -10,13 +10,15 @@ public class HaltCommandIntegrationPayloadBinder : BinderBase<HaltCommandIntegra
     private readonly Argument<string[]> _names;
     private readonly Option<int> _timeoutMs;
     private readonly Option<string> _workingDirectory;
+    private readonly Option<string> _vagrantBinPath;
 
     public HaltCommandIntegrationPayloadBinder(
         Argument<string[]> names,
         Option<bool> force,
         Option<int> haltTimeoutMs,
         Option<int> timeoutMs,
-        Option<string> workingDirectory
+        Option<string> workingDirectory,
+        Option<string> vagrantBinPath
     )
     {
         _names = names;
@@ -24,17 +26,19 @@ public class HaltCommandIntegrationPayloadBinder : BinderBase<HaltCommandIntegra
         _haltTimeoutMs = haltTimeoutMs;
         _timeoutMs = timeoutMs;
         _workingDirectory = workingDirectory;
+        _vagrantBinPath = vagrantBinPath;
     }
 
     protected override HaltCommandIntegrationPayload GetBoundValue(BindingContext bindingContext)
     {
         return new HaltCommandIntegrationPayload
         {
-            WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDirectory),
             Force = bindingContext.ParseResult.GetValueForOption(_force),
             HaltTimeoutMs = bindingContext.ParseResult.GetValueForOption(_haltTimeoutMs),
             Names = bindingContext.ParseResult.GetValueForArgument(_names),
-            TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMs)
+            TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMs),
+            WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDirectory),
+            VagrantBinPath = bindingContext.ParseResult.GetValueForOption(_vagrantBinPath)
         };
     }
 }

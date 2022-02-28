@@ -11,8 +11,8 @@ public class NameCommandIntegrationPayloadBinder : BinderBase<NameCommandIntegra
 
     public NameCommandIntegrationPayloadBinder(
         Argument<string[]> nameArg,
-        Option<string> workingDirOpt,
-        Option<int> timeoutOpt
+        Option<int> timeoutOpt,
+        Option<string> workingDirOpt
     )
     {
         _nameArg = nameArg;

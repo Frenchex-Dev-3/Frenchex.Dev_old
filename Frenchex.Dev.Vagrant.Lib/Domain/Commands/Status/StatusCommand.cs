@@ -1,6 +1,7 @@
 ﻿using Frenchex.Dev.Dotnet.Filesystem.Lib.Domain;
 using Frenchex.Dev.Dotnet.Process.Lib.Domain.ProcessBuilder;
 using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+using Microsoft.Extensions.Configuration;
 
 namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Status;
 
@@ -11,8 +12,9 @@ public class StatusCommand : RootCommand, IStatusCommand
     public StatusCommand(
         IProcessBuilder processExecutor,
         IFilesystem fileSystem,
-        IStatusCommandResponseBuilderFactory responseBuilderFactory
-    ) : base(processExecutor, fileSystem)
+        IStatusCommandResponseBuilderFactory responseBuilderFactory,
+        IConfiguration configuration
+    ) : base(processExecutor, fileSystem, configuration)
     {
         _responseBuilderFactory = responseBuilderFactory;
     }

@@ -15,8 +15,6 @@ public class DestroyCommandIntegration : ABaseCommandIntegration, IDestroyComman
     private readonly INamesArgumentBuilder _namesArgumentBuilder;
     private readonly IParallelOptionBuilder _parallelOptionBuilder;
     private readonly IDestroyCommandRequestBuilderFactory _requestBuilderFactory;
-    private readonly ITimeoutMsOptionBuilder _timeoutMsOptionBuilder;
-    private readonly IWorkingDirectoryOptionBuilder _workingDirectoryOptionBuilder;
 
     public DestroyCommandIntegration(
         IDestroyCommand command,
@@ -26,8 +24,9 @@ public class DestroyCommandIntegration : ABaseCommandIntegration, IDestroyComman
         IParallelOptionBuilder parallelOptionBuilder,
         IGracefulOptionBuilder gracefulOptionBuilder,
         ITimeoutMsOptionBuilder timeoutMsOptionBuilder,
-        IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder
-    )
+        IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder,
+        IVagrantBinPathOptionBuilder vagrantBinPathOptionBuilder
+    ) : base(workingDirectoryOptionBuilder, timeoutMsOptionBuilder, vagrantBinPathOptionBuilder)
     {
         _command = command;
         _requestBuilderFactory = responseBuilderFactory;
@@ -35,8 +34,6 @@ public class DestroyCommandIntegration : ABaseCommandIntegration, IDestroyComman
         _forceOptionBuilder = forceOptionBuilder;
         _parallelOptionBuilder = parallelOptionBuilder;
         _gracefulOptionBuilder = gracefulOptionBuilder;
-        _timeoutMsOptionBuilder = timeoutMsOptionBuilder;
-        _workingDirectoryOptionBuilder = workingDirectoryOptionBuilder;
     }
 
     public void Integrate(Command rootCommand)
@@ -45,9 +42,10 @@ public class DestroyCommandIntegration : ABaseCommandIntegration, IDestroyComman
         var forceOpt = _forceOptionBuilder.Build();
         var parallelOpt = _parallelOptionBuilder.Build();
         var gracefulOpt = _gracefulOptionBuilder.Build();
-        var timeoutMsOpt = _timeoutMsOptionBuilder.Build();
-        var workingDirOpt = _workingDirectoryOptionBuilder.Build();
-
+        var timeoutMsOpt = TimeoutMsOptionBuilder.Build();
+        var workingDirOpt = WorkingDirectoryOptionBuilder.Build();
+        var vagrantBinPath = VagrantBinPathOptionBuilder.Build();
+        
         var command = new Command("destroy", "Runs Vex destroy")
         {
             namesArg,
@@ -55,7 +53,8 @@ public class DestroyCommandIntegration : ABaseCommandIntegration, IDestroyComman
             parallelOpt,
             gracefulOpt,
             timeoutMsOpt,
-            workingDirOpt
+            workingDirOpt,
+            vagrantBinPath
         };
 
         var binder = new DestroyCommandIntegrationPayloadBinder(
@@ -63,7 +62,8 @@ public class DestroyCommandIntegration : ABaseCommandIntegration, IDestroyComman
             forceOpt,
             gracefulOpt,
             timeoutMsOpt,
-            workingDirOpt
+            workingDirOpt,
+            vagrantBinPath
         );
 
         command.SetHandler(async (
@@ -73,11 +73,11 @@ public class DestroyCommandIntegration : ABaseCommandIntegration, IDestroyComman
             CancellationToken cancellationToken
         ) =>
         {
-            await _command.Execute(_requestBuilderFactory.Factory()
-                .BaseBuilder
-                .UsingTimeoutMiliseconds(payload.TimeoutMs)
-                .UsingWorkingDirectory(payload.WorkingDirectory)
-                .Parent<DestroyCommandRequestBuilder>()
+            var requestBuilder = _requestBuilderFactory.Factory();
+
+            BuildBase(requestBuilder, payload);
+
+            await _command.Execute(requestBuilder
                 .UsingName(payload.NameOrId!.FirstOrDefault())
                 .WithForce(payload.Force)
                 .WithParallel(payload.Parallel)

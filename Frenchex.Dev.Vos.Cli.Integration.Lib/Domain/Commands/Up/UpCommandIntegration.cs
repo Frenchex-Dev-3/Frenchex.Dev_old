@@ -14,8 +14,6 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
     private readonly INamesArgumentBuilder _namesArgumentBuilder;
     private readonly IParallelOptionBuilder _parallelOptionBuilder;
     private readonly IUpCommandRequestBuilderFactory _requestBuilderFactory;
-    private readonly ITimeoutMsOptionBuilder _timeoutMsOptionBuilder;
-    private readonly IWorkingDirectoryOptionBuilder _workingDirectoryOptionBuilder;
     private readonly IParallelWorkersOptionBuilder _parallelWorkersOptionBuilder;
     private readonly IParallelWaitOptionBuilder _parallelWaitOptionBuilder;
 
@@ -24,17 +22,17 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
         IUpCommandRequestBuilderFactory requestBuilderFactory,
         INamesArgumentBuilder namesArgumentBuilder,
         IParallelOptionBuilder parallelOptionBuilder,
-        IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder,
-        ITimeoutMsOptionBuilder timeoutMsOptionBuilder,
         IParallelWorkersOptionBuilder parallelWorkersOptionBuilder,
-        IParallelWaitOptionBuilder parallelWaitOptionBuilder)
+        IParallelWaitOptionBuilder parallelWaitOptionBuilder,
+        ITimeoutMsOptionBuilder timeoutMsOptionBuilder,
+        IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder,
+        IVagrantBinPathOptionBuilder vagrantBinPathOptionBuilder
+    ) : base(workingDirectoryOptionBuilder, timeoutMsOptionBuilder, vagrantBinPathOptionBuilder)
     {
         _command = command;
         _requestBuilderFactory = requestBuilderFactory;
         _namesArgumentBuilder = namesArgumentBuilder;
         _parallelOptionBuilder = parallelOptionBuilder;
-        _workingDirectoryOptionBuilder = workingDirectoryOptionBuilder;
-        _timeoutMsOptionBuilder = timeoutMsOptionBuilder;
         _parallelWorkersOptionBuilder = parallelWorkersOptionBuilder;
         _parallelWaitOptionBuilder = parallelWaitOptionBuilder;
     }
@@ -51,8 +49,9 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
         var providerOpt =
             new Option<string>(new[] {"--provider"}, () => ProviderEnum.Virtualbox.ToString(), "Provider");
         var installProviderOpt = new Option<bool>(new[] {"--install-provider", "-i"}, "Install provider");
-        var timeoutMs = _timeoutMsOptionBuilder.Build();
-        var workingDirOpt = _workingDirectoryOptionBuilder.Build();
+        var timeoutMs = TimeoutMsOptionBuilder.Build();
+        var workingDirOpt = WorkingDirectoryOptionBuilder.Build();
+        var vagrantBinPath = VagrantBinPathOptionBuilder.Build();
 
         var command = new Command("up", "Runs Vagrant up")
         {
@@ -66,7 +65,8 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
             providerOpt,
             installProviderOpt,
             timeoutMs,
-            workingDirOpt
+            workingDirOpt,
+            vagrantBinPath
         };
 
         var binder = new UpCommandIntegrationPayloadBinder(
@@ -80,7 +80,8 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
             providerOpt,
             installProviderOpt,
             timeoutMs,
-            workingDirOpt
+            workingDirOpt,
+            vagrantBinPath
         );
 
         command.SetHandler(async (
@@ -90,12 +91,12 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
             CancellationToken cancellationToken
         ) =>
         {
+            var requestBuilder = _requestBuilderFactory.Factory();
+
+            BuildBase(requestBuilder, payload);
+
             var response = await _command
-                    .Execute(_requestBuilderFactory.Factory()
-                        .BaseBuilder
-                        .UsingWorkingDirectory(payload.WorkingDirectory)
-                        .UsingTimeoutMiliseconds(payload.TimeoutMs)
-                        .Parent<UpCommandRequestBuilder>()
+                    .Execute(requestBuilder
                         .UsingNames(payload.Names!.ToArray())
                         .WithProvision(payload.Provision)
                         .UsingProvisionWith(payload.ProvisionWith!)

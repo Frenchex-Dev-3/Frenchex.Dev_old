@@ -13,8 +13,6 @@ public class HaltCommandIntegration : ABaseCommandIntegration, IHaltCommandInteg
     private readonly IForceOptionBuilder _forceOptionBuilder;
     private readonly INamesArgumentBuilder _namesArgumentBuilder;
     private readonly IHaltCommandRequestBuilderFactory _responseBuilderFactory;
-    private readonly ITimeoutMsOptionBuilder _timeoutMsOptionBuilder;
-    private readonly IWorkingDirectoryOptionBuilder _workingDirectoryOptionBuilder;
 
     public HaltCommandIntegration(
         IHaltCommand command,
@@ -22,28 +20,28 @@ public class HaltCommandIntegration : ABaseCommandIntegration, IHaltCommandInteg
         INamesArgumentBuilder namesArgumentBuilder,
         IForceOptionBuilder forceOptionBuilder,
         ITimeoutMsOptionBuilder timeoutMsOptionBuilder,
-        IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder
-    )
+        IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder,
+        IVagrantBinPathOptionBuilder vagrantBinPathOptionBuilder
+    ) : base(workingDirectoryOptionBuilder, timeoutMsOptionBuilder, vagrantBinPathOptionBuilder)
     {
         _command = command;
         _responseBuilderFactory = responseBuilder;
         _namesArgumentBuilder = namesArgumentBuilder;
         _forceOptionBuilder = forceOptionBuilder;
-        _timeoutMsOptionBuilder = timeoutMsOptionBuilder;
-        _workingDirectoryOptionBuilder = workingDirectoryOptionBuilder;
     }
 
     public void Integrate(Command rootCommand)
     {
         var namesArg = _namesArgumentBuilder.Build();
         var forceOpt = _forceOptionBuilder.Build();
-        var haltTimeoutMsOpt = _timeoutMsOptionBuilder.Build(
+        var haltTimeoutMsOpt = TimeoutMsOptionBuilder.Build(
             new[] {"--halt-timeoutms"},
             () => (int) TimeSpan.FromMinutes(1).TotalMilliseconds,
             "Halt timeout in ms"
         );
-        var timeoutMsOpt = _timeoutMsOptionBuilder.Build();
-        var workingDirOpt = _workingDirectoryOptionBuilder.Build();
+        var timeoutMsOpt = TimeoutMsOptionBuilder.Build();
+        var workingDirOpt = WorkingDirectoryOptionBuilder.Build();
+        var vagrantBinPath = VagrantBinPathOptionBuilder.Build();
 
         var command = new Command("halt", "Runs Vagrant halt")
         {
@@ -51,7 +49,8 @@ public class HaltCommandIntegration : ABaseCommandIntegration, IHaltCommandInteg
             forceOpt,
             haltTimeoutMsOpt,
             timeoutMsOpt,
-            workingDirOpt
+            workingDirOpt,
+            vagrantBinPath
         };
 
         var binder = new HaltCommandIntegrationPayloadBinder(
@@ -59,7 +58,8 @@ public class HaltCommandIntegration : ABaseCommandIntegration, IHaltCommandInteg
             forceOpt,
             haltTimeoutMsOpt,
             timeoutMsOpt,
-            workingDirOpt
+            workingDirOpt,
+            vagrantBinPath
         );
 
         command.SetHandler(async (
@@ -69,16 +69,15 @@ public class HaltCommandIntegration : ABaseCommandIntegration, IHaltCommandInteg
             CancellationToken cancellationToken
         ) =>
         {
-            await _command.Execute(
-                    _responseBuilderFactory.Factory()
-                        .BaseBuilder
-                        .UsingTimeoutMiliseconds(payload.TimeoutMs)
-                        .UsingWorkingDirectory(payload.WorkingDirectory)
-                        .Parent<HaltCommandRequestBuilder>()
-                        .UsingNames(payload.Names)
-                        .WithForce(payload.Force)
-                        .UsingHaltTimeoutInMiliSeconds(payload.HaltTimeoutMs)
-                        .Build()
+            var requestBuilder = _responseBuilderFactory.Factory();
+
+            BuildBase(requestBuilder, payload);
+
+            await _command.Execute(requestBuilder
+                    .UsingNames(payload.Names)
+                    .WithForce(payload.Force)
+                    .UsingHaltTimeoutInMiliSeconds(payload.HaltTimeoutMs)
+                    .Build()
                 )
                 ;
         }, binder);

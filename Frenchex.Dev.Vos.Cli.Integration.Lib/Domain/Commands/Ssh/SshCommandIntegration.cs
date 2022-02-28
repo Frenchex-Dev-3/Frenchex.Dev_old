@@ -9,22 +9,19 @@ public class SshCommandIntegration : ABaseCommandIntegration, ISshCommandIntegra
     private readonly ISshCommand _command;
     private readonly INamesOptionBuilder _namesOptionBuilder;
     private readonly ISshCommandRequestBuilderFactory _requestBuilderFactory;
-    private readonly ITimeoutMsOptionBuilder _timeoutMsOptionBuilder;
-    private readonly IWorkingDirectoryOptionBuilder _workingDirectoryOptionBuilder;
 
     public SshCommandIntegration(
         ISshCommand command,
         ISshCommandRequestBuilderFactory requestBuilderFactory,
         INamesOptionBuilder namesOptionBuilder,
+        ITimeoutMsOptionBuilder timeoutMsOptionBuilder,
         IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder,
-        ITimeoutMsOptionBuilder timeoutMsOptionBuilder
-    )
+        IVagrantBinPathOptionBuilder vagrantBinPathOptionBuilder
+    ) : base(workingDirectoryOptionBuilder, timeoutMsOptionBuilder, vagrantBinPathOptionBuilder)
     {
         _command = command;
         _requestBuilderFactory = requestBuilderFactory;
         _namesOptionBuilder = namesOptionBuilder;
-        _workingDirectoryOptionBuilder = workingDirectoryOptionBuilder;
-        _timeoutMsOptionBuilder = timeoutMsOptionBuilder;
     }
 
     public void Integrate(Command rootCommand)
@@ -34,23 +31,28 @@ public class SshCommandIntegration : ABaseCommandIntegration, ISshCommandIntegra
             _namesOptionBuilder.Build(),
             new Option<string>("--command", "Command"),
             new Option<string>(new[] {"--host", "-h"}, "Host on guest"),
-            _workingDirectoryOptionBuilder.Build(),
-            _timeoutMsOptionBuilder.Build()
+            TimeoutMsOptionBuilder.Build(),
+            VagrantBinPathOptionBuilder.Build(),
+            WorkingDirectoryOptionBuilder.Build(),
         };
 
-        command.SetHandler(async (
+        command.SetHandler(async(
             string nameOrId,
             string sshCommand,
             string host,
+            int timeOutMiliseconds,
             string? workingDirectory,
-            int timeOutMiliseconds
+            string? vagrantBinPath
         ) =>
         {
+            var requestBuilder = _requestBuilderFactory.Factory();
+            
             await _command
-                .Execute(_requestBuilderFactory.Factory()
+                .Execute(requestBuilder
                     .BaseBuilder
                     .UsingWorkingDirectory(workingDirectory)
                     .UsingTimeoutMiliseconds(timeOutMiliseconds)
+                    .UsingVagrantBinPath(vagrantBinPath)
                     .Parent<SshCommandRequestBuilder>()
                     .UsingCommand(sshCommand)
                     .UsingName(nameOrId)

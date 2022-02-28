@@ -12,5 +12,6 @@ public interface IBaseRequest
     bool Help { get; }
     string? WorkingDirectory { get; }
     int TimeoutInMiliSeconds { get; }
+    string? VagrantBinPath { get; }
     T Parent<T>(T parent);
 }

@@ -2,6 +2,7 @@
 using Frenchex.Dev.Dotnet.Filesystem.Lib.Domain;
 using Frenchex.Dev.Dotnet.Process.Lib.Domain.Process;
 using Frenchex.Dev.Dotnet.Process.Lib.Domain.ProcessBuilder;
+using Microsoft.Extensions.Configuration;
 
 namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
 
@@ -9,14 +10,17 @@ public abstract class RootCommand : IRootCommand
 {
     protected IFilesystem Filesystem;
     protected IProcessBuilder ProcessBuilder;
+    private readonly string _vagrantBinPath;
 
     protected RootCommand(
         IProcessBuilder processBuilder,
-        IFilesystem fileSystem
+        IFilesystem fileSystem,
+        IConfiguration configuration
     )
     {
         ProcessBuilder = processBuilder;
         Filesystem = fileSystem;
+        _vagrantBinPath = configuration["VAGRANT_BIN_PATH"] ?? "vagrant";
     }
 
     protected static string GetBinary()

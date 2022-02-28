@@ -16,6 +16,7 @@ public class UpCommandIntegrationPayloadBinder : BinderBase<UpCommandIntegration
     private readonly Option<string[]> _provisionWith;
     private readonly Option<int> _timeoutMs;
     private readonly Option<string> _workingDir;
+    private readonly Option<string> _vagrantBinPath;
 
     public UpCommandIntegrationPayloadBinder(
         Argument<string[]> names,
@@ -28,8 +29,9 @@ public class UpCommandIntegrationPayloadBinder : BinderBase<UpCommandIntegration
         Option<string> provider,
         Option<bool> installProvider,
         Option<int> timeoutMs,
-        Option<string> workingDir
-        )
+        Option<string> workingDir,
+        Option<string> vagrantBinPath
+    )
     {
         _names = names;
         _provision = provision;
@@ -42,14 +44,13 @@ public class UpCommandIntegrationPayloadBinder : BinderBase<UpCommandIntegration
         _installProvider = installProvider;
         _timeoutMs = timeoutMs;
         _workingDir = workingDir;
+        _vagrantBinPath = vagrantBinPath;
     }
 
     protected override UpCommandIntegrationPayload GetBoundValue(BindingContext bindingContext)
     {
         return new UpCommandIntegrationPayload
         {
-            TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMs),
-            WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDir),
             DestroyOnError = bindingContext.ParseResult.GetValueForOption(_destroyOnError),
             InstallProvider = bindingContext.ParseResult.GetValueForOption(_installProvider),
             Names = bindingContext.ParseResult.GetValueForArgument(_names),
@@ -57,7 +58,10 @@ public class UpCommandIntegrationPayloadBinder : BinderBase<UpCommandIntegration
             ParallelWait = bindingContext.ParseResult.GetValueForOption(_parallelWait),
             Provider = bindingContext.ParseResult.GetValueForOption(_provider),
             Provision = bindingContext.ParseResult.GetValueForOption(_provision),
-            ProvisionWith = bindingContext.ParseResult.GetValueForOption(_provisionWith)
+            ProvisionWith = bindingContext.ParseResult.GetValueForOption(_provisionWith),
+            TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMs),
+            WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDir),
+            VagrantBinPath = bindingContext.ParseResult.GetValueForOption(_vagrantBinPath),
         };
     }
 }

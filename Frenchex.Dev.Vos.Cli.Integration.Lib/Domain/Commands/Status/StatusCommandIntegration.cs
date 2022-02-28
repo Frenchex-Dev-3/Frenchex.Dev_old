@@ -12,36 +12,34 @@ public class StatusCommandIntegration : ABaseCommandIntegration, IStatusCommandI
     private readonly IStatusCommand _command;
     private readonly INamesArgumentBuilder _namesArgumentBuilder;
     private readonly IStatusCommandRequestBuilderFactory _requestBuilderFactory;
-    private readonly ITimeoutMsOptionBuilder _timeoutMsOptionBuilder;
-    private readonly IWorkingDirectoryOptionBuilder _workingDirectoryOptionBuilder;
 
     public StatusCommandIntegration(
         IStatusCommand command,
         IStatusCommandRequestBuilderFactory requestBuilderFactory,
         INamesArgumentBuilder namesArgumentBuilder,
         IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder,
-        ITimeoutMsOptionBuilder timeoutMsOptionBuilder
-    )
+        ITimeoutMsOptionBuilder timeoutMsOptionBuilder,
+        IVagrantBinPathOptionBuilder vagrantBinPathOptionBuilder
+    ) : base(workingDirectoryOptionBuilder, timeoutMsOptionBuilder, vagrantBinPathOptionBuilder)
     {
         _command = command;
         _requestBuilderFactory = requestBuilderFactory;
         _namesArgumentBuilder = namesArgumentBuilder;
-        _workingDirectoryOptionBuilder = workingDirectoryOptionBuilder;
-        _timeoutMsOptionBuilder = timeoutMsOptionBuilder;
     }
 
     public void Integrate(Command rootCommand)
     {
         var nameArg = _namesArgumentBuilder.Build();
-        var workingDirOpt = _workingDirectoryOptionBuilder.Build();
-        var timeoutOpt = _timeoutMsOptionBuilder.Build();
-
+        var workingDirOpt = WorkingDirectoryOptionBuilder.Build();
+        var timeoutOpt = TimeoutMsOptionBuilder.Build();
+        var vagrantBinPath = VagrantBinPathOptionBuilder.Build();
 
         var command = new Command("status", "Runs Vagrant status")
         {
             nameArg,
             workingDirOpt,
-            timeoutOpt
+            timeoutOpt,
+            vagrantBinPath
         };
 
         var binder = new StatusCommandIntegrationPayloadBinder(nameArg, workingDirOpt, timeoutOpt);
@@ -53,15 +51,14 @@ public class StatusCommandIntegration : ABaseCommandIntegration, IStatusCommandI
             CancellationToken cancellationToken
         ) =>
         {
-            await _command
-                .Execute(_requestBuilderFactory.Factory()
-                    .BaseBuilder
-                    .UsingWorkingDirectory(payload.WorkingDirectory)
-                    .UsingTimeoutMiliseconds(payload.TimeoutMs)
-                    .Parent<IStatusCommandRequestBuilder>()
-                    .WithNames(payload.Names!)
-                    .Build()
-                );
+            var requestBuilder = _requestBuilderFactory.Factory();
+            
+            BuildBase(requestBuilder, payload);
+
+            await _command.Execute(requestBuilder
+                .WithNames(payload.Names!)
+                .Build()
+            );
         }, binder);
 
         rootCommand.AddCommand(command);

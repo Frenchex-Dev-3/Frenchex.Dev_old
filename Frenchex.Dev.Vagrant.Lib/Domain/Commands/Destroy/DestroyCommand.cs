@@ -2,6 +2,7 @@
 using Frenchex.Dev.Dotnet.Filesystem.Lib.Domain;
 using Frenchex.Dev.Dotnet.Process.Lib.Domain.ProcessBuilder;
 using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+using Microsoft.Extensions.Configuration;
 
 namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Destroy;
 
@@ -12,8 +13,9 @@ public class DestroyCommand : RootCommand, IDestroyCommand
     public DestroyCommand(
         IProcessBuilder processExecutor,
         IFilesystem fileSystem,
-        IDestroyCommandResponseBuilderFactory responseBuilderFactory
-    ) : base(processExecutor, fileSystem)
+        IDestroyCommandResponseBuilderFactory responseBuilderFactory,
+        IConfiguration configuration
+    ) : base(processExecutor, fileSystem, configuration)
     {
         _responseBuilderFactory = responseBuilderFactory;
     }

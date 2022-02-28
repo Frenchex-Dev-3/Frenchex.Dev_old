@@ -12,4 +12,5 @@ public interface IBaseCommandRequest
     bool Help { get; }
     string? WorkingDirectory { get; }
     int TimeoutInMiliSeconds { get; }
+    string VagrantBinPath { get; }
 }

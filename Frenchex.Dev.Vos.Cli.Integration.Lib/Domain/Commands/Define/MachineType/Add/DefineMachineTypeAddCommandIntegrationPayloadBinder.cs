@@ -18,7 +18,8 @@ public class
     private readonly Option<int> _videoRamMb;
     private readonly Option<string> _workingDir;
 
-    public DefineMachineTypeAddCommandIntegrationPayloadBinder(Argument<string> name,
+    public DefineMachineTypeAddCommandIntegrationPayloadBinder(
+        Argument<string> name,
         Argument<string> boxName,
         Argument<int> vCpus,
         Argument<int> ramMb,
@@ -53,12 +54,12 @@ public class
             Enabled = bindingContext.ParseResult.GetValueForOption(_isEnabled),
             Name = bindingContext.ParseResult.GetValueForArgument(_name),
             VCpus = bindingContext.ParseResult.GetValueForArgument(_vCpus),
-            WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDir),
             Enable3D = bindingContext.ParseResult.GetValueForOption(_is3DEnabled),
             VideoRamInMb = bindingContext.ParseResult.GetValueForOption(_videoRamMb),
-            TimeOutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMs),
+            TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMs),
             OsType = bindingContext.ParseResult.GetValueForArgument(_osType),
-            OsVersion = bindingContext.ParseResult.GetValueForArgument(_osVersion)
+            OsVersion = bindingContext.ParseResult.GetValueForArgument(_osVersion),
+            WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDir),
         };
     }
 }

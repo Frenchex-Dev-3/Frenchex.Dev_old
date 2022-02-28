@@ -2,6 +2,7 @@
 using Frenchex.Dev.Dotnet.Filesystem.Lib.Domain;
 using Frenchex.Dev.Dotnet.Process.Lib.Domain.ProcessBuilder;
 using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+using Microsoft.Extensions.Configuration;
 
 namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Ssh;
 
@@ -12,8 +13,9 @@ public class SshCommand : RootCommand, ISshCommand
     public SshCommand(
         IProcessBuilder processExecutor,
         IFilesystem fileSystem,
-        ISshCommandResponseBuilderFactory responseBuilderFactory
-    ) : base(processExecutor, fileSystem)
+        ISshCommandResponseBuilderFactory responseBuilderFactory,
+        IConfiguration configuration
+    ) : base(processExecutor, fileSystem, configuration)
     {
         _responseBuilderFactory = responseBuilderFactory;
     }

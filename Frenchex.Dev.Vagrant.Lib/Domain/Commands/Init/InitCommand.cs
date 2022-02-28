@@ -2,6 +2,7 @@
 using Frenchex.Dev.Dotnet.Filesystem.Lib.Domain;
 using Frenchex.Dev.Dotnet.Process.Lib.Domain.ProcessBuilder;
 using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
+using Microsoft.Extensions.Configuration;
 
 namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Init;
 
@@ -12,8 +13,9 @@ public class InitCommand : RootCommand, IInitCommand
     public InitCommand(
         IProcessBuilder processExecutor,
         IFilesystem fileSystem,
-        IInitCommandResponseBuilderFactory responseBuilderFactory
-    ) : base(processExecutor, fileSystem)
+        IInitCommandResponseBuilderFactory responseBuilderFactory,
+        IConfiguration configuration
+    ) : base(processExecutor, fileSystem, configuration)
     {
         _responseBuilderFactory = responseBuilderFactory;
     }

@@ -1,6 +1,6 @@
 ﻿namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands.Define.MachineType.Add;
 
-public class DefineMachineTypeAddCommandIntegrationPayload
+public class DefineMachineTypeAddCommandIntegrationPayload : CommandIntegrationPayload
 {
     public string? Name { get; set; }
     public string? BoxName { get; set; }
@@ -11,6 +11,4 @@ public class DefineMachineTypeAddCommandIntegrationPayload
     public int VideoRamInMb { get; set; }
     public bool Enabled { get; set; }
     public bool Enable3D { get; set; }
-    public int TimeOutMs { get; set; }
-    public string? WorkingDirectory { get; set; }
 }

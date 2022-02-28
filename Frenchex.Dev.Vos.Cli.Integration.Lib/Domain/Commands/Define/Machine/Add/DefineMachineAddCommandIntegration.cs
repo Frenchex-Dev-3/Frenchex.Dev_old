@@ -22,9 +22,7 @@ public class DefineMachineAddCommandIntegration : ABaseCommandIntegration, IDefi
     private readonly IPrimaryOptionBuilder _primaryOptionBuilder;
     private readonly IRamMbOptionBuilder _ramMbOptionBuilder;
     private readonly IDefineMachineAddCommandRequestBuilderFactory _requestBuilderFactory;
-    private readonly ITimeoutMsOptionBuilder _timeoutMsOptionBuilder;
     private readonly IVirtualCpusOptionBuilder _virtualCpusOptionBuilder;
-    private readonly IWorkingDirectoryOptionBuilder _workingDirectoryOptionBuilder;
 
     public DefineMachineAddCommandIntegration(
         IDefineMachineAddCommand command,
@@ -41,8 +39,9 @@ public class DefineMachineAddCommandIntegration : ABaseCommandIntegration, IDefi
         IIpv4StartOptionBuilder ipv4StartOptionBuilder,
         INetworkBridgeOptionBuilder networkBridgeOptionBuilder,
         ITimeoutMsOptionBuilder timeoutMsOptionBuilder,
-        IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder
-    )
+        IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder,
+        IVagrantBinPathOptionBuilder vagrantBinPathOptionBuilder
+    ) : base(workingDirectoryOptionBuilder, timeoutMsOptionBuilder, vagrantBinPathOptionBuilder)
     {
         _command = command;
         _requestBuilderFactory = responseBuilderFactory;
@@ -57,8 +56,6 @@ public class DefineMachineAddCommandIntegration : ABaseCommandIntegration, IDefi
         _ipv4PatternOptionBuilder = ipv4PatternOptionBuilder;
         _ipv4StartOptionBuilder = ipv4StartOptionBuilder;
         _networkBridgeOptionBuilder = networkBridgeOptionBuilder;
-        _timeoutMsOptionBuilder = timeoutMsOptionBuilder;
-        _workingDirectoryOptionBuilder = workingDirectoryOptionBuilder;
     }
 
     public void Integrate(Command rootCommand)
@@ -75,8 +72,9 @@ public class DefineMachineAddCommandIntegration : ABaseCommandIntegration, IDefi
         var ipv4PatternOpt = _ipv4PatternOptionBuilder.Build();
         var ipv4StartOpt = _ipv4StartOptionBuilder.Build();
         var networkBridgeOpt = _networkBridgeOptionBuilder.Build();
-        var timeoutMsOpt = _timeoutMsOptionBuilder.Build();
-        var workingDirOpt = _workingDirectoryOptionBuilder.Build();
+        var timeoutMsOpt = TimeoutMsOptionBuilder.Build();
+        var workingDirOpt = WorkingDirectoryOptionBuilder.Build();
+        var vagrantBinPath = VagrantBinPathOptionBuilder.Build();
 
         var command = new Command("add", "Add a new Machine")
         {
@@ -92,7 +90,8 @@ public class DefineMachineAddCommandIntegration : ABaseCommandIntegration, IDefi
             ipv4StartOpt,
             networkBridgeOpt,
             timeoutMsOpt,
-            workingDirOpt
+            workingDirOpt,
+            vagrantBinPath
         };
 
         var binder = new DefineMachineAddCommandIntegrationPayloadBinder(
@@ -108,7 +107,8 @@ public class DefineMachineAddCommandIntegration : ABaseCommandIntegration, IDefi
             ipv4StartOpt,
             networkBridgeOpt,
             timeoutMsOpt,
-            workingDirOpt
+            workingDirOpt,
+            vagrantBinPath
         );
 
         command.SetHandler(async (
@@ -118,11 +118,11 @@ public class DefineMachineAddCommandIntegration : ABaseCommandIntegration, IDefi
             CancellationToken cancellationToken
         ) =>
         {
-            var request = _requestBuilderFactory.Factory()
-                .BaseBuilder
-                .UsingTimeoutMiliseconds(payload.TimeoutMs)
-                .UsingWorkingDirectory(payload.WorkingDirectory)
-                .Parent<DefineMachineAddCommandRequestBuilder>()
+            var requestBuilder = _requestBuilderFactory.Factory();
+
+            BuildBase(requestBuilder, payload);
+
+            var request = requestBuilder
                 .UsingDefinition(new MachineDefinitionDeclaration
                 {
                     Name = payload.Name,

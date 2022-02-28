@@ -20,10 +20,8 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
     private readonly IOsVersionArgumentBuilder _osVersionArgumentBuilder;
     private readonly IRamMbArgumentBuilder _ramMbArgumentBuilder;
     private readonly IDefineMachineTypeAddCommandRequestBuilderFactory _requestBuilderFactory;
-    private readonly ITimeoutMsOptionBuilder _timeoutMsOptionBuilder;
     private readonly IVirtualCpusArgumentBuilder _virtualCpusArgumentBuilder;
     private readonly IVirtualRamMbOptionBuilder _virtualRamMbOptionBuilder;
-    private readonly IWorkingDirectoryOptionBuilder _workingDirectoryOptionBuilder;
 
     public DefineMachineTypeAddCommandIntegration(
         IDefineMachineTypeAddCommand command,
@@ -39,8 +37,9 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
         IEnabled3dOptionBuilder enabled3dOptionBuilder,
         IVirtualRamMbOptionBuilder virtualRamMbOptionBuilder,
         ITimeoutMsOptionBuilder timeoutMsOptionBuilder,
-        IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder
-    )
+        IWorkingDirectoryOptionBuilder workingDirectoryOptionBuilder,
+        IVagrantBinPathOptionBuilder vagrantBinPathOptionBuilder
+    ) : base(workingDirectoryOptionBuilder, timeoutMsOptionBuilder, vagrantBinPathOptionBuilder)
     {
         _command = command;
         _requestBuilderFactory = responseBuilderFactory;
@@ -54,8 +53,6 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
         _enabledOptionBuilder = enabledOptionBuilder;
         _enabled3dOptionBuilder = enabled3dOptionBuilder;
         _virtualRamMbOptionBuilder = virtualRamMbOptionBuilder;
-        _timeoutMsOptionBuilder = timeoutMsOptionBuilder;
-        _workingDirectoryOptionBuilder = workingDirectoryOptionBuilder;
     }
 
     public void Integrate(Command rootCommand)
@@ -69,8 +66,8 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
         var isEnabledOpt = _enabledOptionBuilder.Build();
         var isEnabled3dOpt = _enabled3dOptionBuilder.Build();
         var vramMbOpt = _virtualRamMbOptionBuilder.Build();
-        var timeoutMsOpt = _timeoutMsOptionBuilder.Build();
-        var workingDirOpt = _workingDirectoryOptionBuilder.Build();
+        var timeoutMsOpt = TimeoutMsOptionBuilder.Build();
+        var workingDirOpt = WorkingDirectoryOptionBuilder.Build();
 
         var command = new Command("add", "Define Machine-Types")
         {
@@ -111,11 +108,11 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
             if (payload.OsType == null)
                 throw new ArgumentNullException(nameof(payload.OsType));
 
-            var request = _requestBuilderFactory.Factory()
-                .BaseBuilder
-                .UsingTimeoutMiliseconds(payload.TimeOutMs)
-                .UsingWorkingDirectory(payload.WorkingDirectory)
-                .Parent<IDefineMachineTypeAddCommandRequestBuilder>()
+            var requestBuilder = _requestBuilderFactory.Factory();
+
+            BuildBase(requestBuilder, payload);
+
+            var request = requestBuilder
                 .UsingDefinition(_machineTypeDefinitionBuilder.Factory()
                     .BaseBuilder
                     .Enabled(payload.Enabled)

@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Frenchex.Dev.Vagrant.Lib.DependencyInjection;
 
-public class ServicesConfiguration
+public static class ServicesConfiguration
 {
     public static IServiceCollection ConfigureServices(IServiceCollection services)
     {

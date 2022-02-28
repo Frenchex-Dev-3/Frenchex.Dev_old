@@ -34,7 +34,7 @@ public class IntegrationWorkflowUnitTest
                         new("MY_KEY", "MY_VALUE")
                     });
             },
-            (services, _) =>
+            (services, configurationRoot) =>
             {
                 // very same class used by Program.cs
                 ServicesConfiguration.ConfigureServices(services);
@@ -42,6 +42,7 @@ public class IntegrationWorkflowUnitTest
                 // DI will be used as receptacle of integrated commands
                 // by means of SubjectUnderTest
                 services.AddScoped<SubjectUnderTest>();
+                services.AddScoped<IConfiguration>((_) => configurationRoot);
             },
             (services, _) =>
             {
@@ -113,7 +114,7 @@ public class IntegrationWorkflowUnitTest
     )
     {
         Debug.Assert(_unitTest != null, nameof(_unitTest) + " != null");
-
+        
         await _unitTest
             .OpenVsCode(workingDirectory, openVsCode)
             .RunAsync(
@@ -132,7 +133,8 @@ public class IntegrationWorkflowUnitTest
                     foreach (var command in commands)
                     {
                         var vosCommand = $"vos  {command.Command}"
-                            .Replace(WorkingDirectoryMarkholder, workingDirectory);
+                                .Replace(WorkingDirectoryMarkholder, workingDirectory)
+                            ;
 
                         await execCommand(vosCommand, sut);
                     }
@@ -143,7 +145,9 @@ public class IntegrationWorkflowUnitTest
     {
         var timeOutOpt = "--timeout-ms " + TimeSpan.FromMinutes(10).TotalMilliseconds;
         const string workingDirOpt = $"--working-directory {WorkingDirectoryMarkholder}";
-
+        var vagrantBinPath = "C:\\code\\vagrant_i1\\execs\\vagrant";
+        var vagrantBinPathOpt = $"--vagrant-bin-path {vagrantBinPath}";
+        
         yield return new object[]
         {
             "Test case 1",
@@ -157,13 +161,13 @@ public class IntegrationWorkflowUnitTest
                 new("d.m 1", $"define machine add foo foo 4 --enabled {timeOutOpt} {workingDirOpt}"),
                 new("d.m 2", $"define machine add bar bar 4 --enabled {timeOutOpt} {workingDirOpt}"),
                 new("name", $"name bar-0 foo-[2-*] {timeOutOpt} {workingDirOpt}"),
-                new("status", $"status bar-* foo-[2-*] {timeOutOpt} {workingDirOpt}"),
-               // new("up foo0", $"up foo-0 {timeOutOpt} {workingDirOpt}"),
-                new("up foo2-*", $"up foo-[2-*] {timeOutOpt} {workingDirOpt}"),
-                new("status bar* foo2-*", $"status bar-* foo-[2-*] {timeOutOpt} {workingDirOpt}"),
-                new("halt bar-* foo2-*", $"halt bar-* foo-[2-*] {timeOutOpt} {workingDirOpt}"),
-                new("destroy foo2", $"destroy foo-2 --force {timeOutOpt} {workingDirOpt}"),
-                new("destroy all", $"destroy --force {timeOutOpt} {workingDirOpt}")
+                new("status", $"status bar-* foo-[2-*] {timeOutOpt} {workingDirOpt} {vagrantBinPathOpt}"),
+                // new("up foo0", $"up foo-0 {timeOutOpt} {workingDirOpt}"),
+                new("up foo2-*", $"up foo-[2-*] {timeOutOpt} {workingDirOpt} {vagrantBinPathOpt}"),
+                new("status bar* foo2-*", $"status bar-* foo-[2-*] {timeOutOpt} {workingDirOpt} {vagrantBinPathOpt}"),
+                new("halt bar-* foo2-*", $"halt bar-* foo-[2-*] {timeOutOpt} {workingDirOpt} {vagrantBinPathOpt}"),
+                new("destroy foo2", $"destroy foo-2 --force {timeOutOpt} {workingDirOpt} {vagrantBinPathOpt}"),
+                new("destroy all", $"destroy --force {timeOutOpt} {workingDirOpt} {vagrantBinPathOpt}")
             }
         };
 
@@ -180,13 +184,13 @@ public class IntegrationWorkflowUnitTest
                 new("d.m 1", $"define machine add foo foo 4 --enabled {timeOutOpt} {workingDirOpt}"),
                 new("d.m 2", $"define machine add bar bar 4 --enabled {timeOutOpt} {workingDirOpt}"),
                 new("name", $"name bar-0 foo-[2-*] {timeOutOpt} {workingDirOpt}"),
-                new("status", $"status bar-* foo-[2-*] {timeOutOpt} {workingDirOpt}"),
-                new("up foo0", $"up foo-0 {timeOutOpt} {workingDirOpt}"),
-                new("up foo2-*", $"up foo-[2-*] {timeOutOpt} {workingDirOpt}"),
-                new("status bar* foo2-*", $"status bar-* foo-[2-*] {timeOutOpt} {workingDirOpt}"),
-                new("halt bar-* foo2-*", $"halt bar-* foo-[2-*] {timeOutOpt} {workingDirOpt}"),
-                new("destroy foo2", $"destroy foo-2 --force {timeOutOpt} {workingDirOpt}"),
-                new("destroy all", $"destroy --force {timeOutOpt} {workingDirOpt}")
+                new("status", $"status bar-* foo-[2-*] {timeOutOpt} {workingDirOpt} {vagrantBinPathOpt}"),
+                new("up foo0", $"up foo-0 {timeOutOpt} {workingDirOpt} {vagrantBinPathOpt}"),
+                new("up foo2-*", $"up foo-[2-*] {timeOutOpt} {workingDirOpt} {vagrantBinPathOpt}"),
+                new("status bar* foo2-*", $"status bar-* foo-[2-*] {timeOutOpt} {workingDirOpt} {vagrantBinPathOpt}"),
+                new("halt bar-* foo2-*", $"halt bar-* foo-[2-*] {timeOutOpt} {workingDirOpt} {vagrantBinPathOpt}"),
+                new("destroy foo2", $"destroy foo-2 --force {timeOutOpt} {workingDirOpt} {vagrantBinPathOpt}"),
+                new("destroy all", $"destroy --force {timeOutOpt} {workingDirOpt} {vagrantBinPathOpt}")
             }
         };
     }
