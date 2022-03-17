@@ -56,6 +56,85 @@ public class IntegrationWorkflowUnitTest
         );
     }
 
+    private static IEnumerable<object[]> Test_Data_MultipleRuns()
+    {
+        var timeOutOpt = "--timeout-ms " + TimeSpan.FromMinutes(10).TotalMilliseconds;
+        const string workingDirOpt = $"--working-directory {WorkingDirectoryMarkholder}";
+
+        yield return new object[]
+        {
+            "Test case 1",
+            new InputCommand[]
+            {
+                new("init", $"init {timeOutOpt} {workingDirOpt}"),
+                new("d.m.t 1",
+                    $"define machine-type add foo generic/alpine38 4 128 Debian_64 10.9.0 --vram-mb 16 --enabled {timeOutOpt} {workingDirOpt}"),
+                new("d.m.t 2",
+                    $"define machine-type add bar generic/alpine38 4 128 Debian_64 10.9.0 --vram-mb 16 --enabled {timeOutOpt} {workingDirOpt}"),
+                new("d.m 1", $"define machine add foo foo 4 --enabled {timeOutOpt} {workingDirOpt}"),
+                new("d.m 2", $"define machine add bar bar 4 --enabled {timeOutOpt} {workingDirOpt}"),
+                new("name", $"name bar-0 foo-[2-*] {timeOutOpt} {workingDirOpt}"),
+                new("status", $"status bar-* foo-[2-*] {timeOutOpt} {workingDirOpt}"),
+                new("up foo0", $"up foo-0 {timeOutOpt} {workingDirOpt}"),
+                new("up foo2-*", $"up foo-[2-*] {timeOutOpt} {workingDirOpt} "),
+                new("status bar* foo2-*", $"status bar-* foo-[2-*] {timeOutOpt} {workingDirOpt} "),
+                new("halt bar-* foo2-*", $"halt bar-* foo-[2-*] {timeOutOpt} {workingDirOpt} "),
+                new("destroy foo2", $"destroy foo-2 --force {timeOutOpt} {workingDirOpt} "),
+                new("destroy all", $"destroy --force {timeOutOpt} {workingDirOpt} ")
+            },
+            new InputCommand[]
+            {
+                new("init", $"init {timeOutOpt} {workingDirOpt}"),
+                new("d.m.t 1",
+                    $"define machine-type add foo generic/alpine38 4 128 Debian_64 10.9.0 --vram-mb 16 --enabled {timeOutOpt} {workingDirOpt}"),
+                new("d.m.t 2",
+                    $"define machine-type add bar generic/alpine38 4 128 Debian_64 10.9.0 --vram-mb 16 --enabled {timeOutOpt} {workingDirOpt}"),
+                new("d.m 1", $"define machine add foo foo 4 --enabled {timeOutOpt} {workingDirOpt}"),
+                new("d.m 2", $"define machine add bar bar 4 --enabled {timeOutOpt} {workingDirOpt}"),
+                new("name", $"name bar-0 foo-[2-*] {timeOutOpt} {workingDirOpt}"),
+                new("status", $"status bar-* foo-[2-*] {timeOutOpt} {workingDirOpt}"),
+                new("up foo0", $"up foo-0 {timeOutOpt} {workingDirOpt}"),
+                new("up foo2-*", $"up foo-[2-*] {timeOutOpt} {workingDirOpt} "),
+                new("status bar* foo2-*", $"status bar-* foo-[2-*] {timeOutOpt} {workingDirOpt} "),
+                new("halt bar-* foo2-*", $"halt bar-* foo-[2-*] {timeOutOpt} {workingDirOpt} "),
+                new("destroy foo2", $"destroy foo-2 --force {timeOutOpt} {workingDirOpt} "),
+                new("destroy all", $"destroy --force {timeOutOpt} {workingDirOpt} ")
+            }
+        };
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(Test_Data_MultipleRuns), DynamicDataSourceType.Method)]
+    [TestCategory("need-vagrant")]
+    public async Task Test_MultipleRuns(string testCaseName, InputCommand[] commands1, InputCommand[] commands2)
+    {
+        var workingDirectory1 = Path.Join(Path.GetTempPath(), Path.GetRandomFileName());
+        var workingDirectory2 = Path.Join(Path.GetTempPath(), Path.GetRandomFileName());
+
+        var task1 = RunInternal(new List<string>() {workingDirectory1}.ToArray(),
+            commands1,
+            async (s, command) =>
+            {
+                var result = await command.InvokeAsync(s);
+
+                Assert.IsNotNull(result, s);
+                Assert.AreEqual(0, result, s);
+            });
+
+        var task2 = RunInternal(new List<string>() {workingDirectory2}.ToArray(),
+            commands2,
+            async (s, command) =>
+            {
+                var result = await command.InvokeAsync(s);
+
+                Assert.IsNotNull(result, s);
+                Assert.AreEqual(0, result, s);
+            });
+
+
+        await Task.WhenAll(task1, task2);
+    }
+
     [TestMethod]
     [DynamicData(nameof(Test_Data), DynamicDataSourceType.Method)]
     [TestCategory("need-vagrant")]
@@ -63,13 +142,13 @@ public class IntegrationWorkflowUnitTest
     {
         var workingDirectory = Path.Join(Path.GetTempPath(), Path.GetRandomFileName());
 
-        await RunInternal(workingDirectory, commands, async (s, command) =>
+        await RunInternal(new List<string>() {workingDirectory}.ToArray(), commands, async (s, command) =>
         {
             var result = await command.InvokeAsync(s);
 
             Assert.IsNotNull(result, s);
             Assert.AreEqual(0, result, s);
-        });
+        }, true);
     }
 
     [TestMethod]
@@ -79,7 +158,7 @@ public class IntegrationWorkflowUnitTest
         var workingDirectory = Path.Join(Path.GetTempPath(), Path.GetRandomFileName());
 
         await RunInternal(
-            workingDirectory,
+            new string[] {workingDirectory},
             commands,
             (command, rootCommand) =>
             {
@@ -107,16 +186,16 @@ public class IntegrationWorkflowUnitTest
     }
 
     private async Task RunInternal(
-        string workingDirectory,
+        string[] workingDirectories,
         InputCommand[] commands,
         Func<string, RootCommand, Task> execCommand,
         bool openVsCode = true
     )
     {
         Debug.Assert(_unitTest != null, nameof(_unitTest) + " != null");
-        
+
         await _unitTest
-            .OpenVsCode(workingDirectory, openVsCode)
+            .OpenVsCode(workingDirectories, openVsCode)
             .RunAsync(
                 (provider, _) =>
                 {
@@ -130,13 +209,15 @@ public class IntegrationWorkflowUnitTest
                 {
                     var sut = provider.GetRequiredService<SubjectUnderTest>().RootCommand;
 
-                    foreach (var command in commands)
+                    foreach (var workingDir in workingDirectories)
                     {
-                        var vosCommand = $"vos  {command.Command}"
-                                .Replace(WorkingDirectoryMarkholder, workingDirectory)
-                            ;
-
-                        await execCommand(vosCommand, sut);
+                        foreach (var command in commands)
+                        {
+                            var vosCommand = $"vos  {command.Command}"
+                                    .Replace(WorkingDirectoryMarkholder, workingDir)
+                                ;
+                            await execCommand(vosCommand, sut);
+                        }
                     }
                 });
     }
@@ -147,7 +228,7 @@ public class IntegrationWorkflowUnitTest
         const string workingDirOpt = $"--working-directory {WorkingDirectoryMarkholder}";
         var vagrantBinPath = "C:\\code\\vagrant_i1\\execs\\vagrant";
         var vagrantBinPathOpt = $"--vagrant-bin-path {vagrantBinPath}";
-        
+
         yield return new object[]
         {
             "Test case 1",

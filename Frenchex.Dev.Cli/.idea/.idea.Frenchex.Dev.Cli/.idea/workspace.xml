@@ -8,20 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fc691c9-6b38-4b30-914e-dfc108c67d48" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Frenchex.Dev.Cli/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Frenchex.Dev.Cli/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Configurations/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Configurations/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frenchex.Dev.Cli.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Frenchex.Dev.Cli.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frenchex.Dev.Cli.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Frenchex.Dev.Cli.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Root/RootCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vagrant.Lib/Domain/Commands/Root/RootCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/ABaseCommandIntegration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/ABaseCommandIntegration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Halt/HaltCommandIntegration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib/Domain/Commands/Halt/HaltCommandIntegration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/HaltCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/HaltCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/HaltCommandResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/HaltCommandResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/HaltCommandResponseBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/HaltCommandResponseBuilder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/IHaltCommandResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/IHaltCommandResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/IHaltCommandResponseBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Halt/IHaltCommandResponseBuilder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Up/UpCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Lib/Domain/Commands/Up/UpCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Dotnet.UnitTesting.Lib/Domain/UnitTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Dotnet.UnitTesting.Lib/Domain/UnitTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib.Tests/Domain/IntegrationWorkflowUnitTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib.Tests/Domain/IntegrationWorkflowUnitTest.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,10 +32,26 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bf408839e35535896e3625c8578c2bfb7bf56ef7ab2c4549ae59c3a19db9ae/Console.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/code/Frenchex.Dev_i1/Frenchex.Dev.Vos.Cli.Integration.Lib/DependencyInjection/ServicesConfiguration.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4cc899c6746242bd9ddbbaef089fd79d267b0/70/a5cd063f/TestMethodRunner.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/code/Frenchex.Dev_i1/Frenchex.Dev.Vos.Cli.Integration.Lib.Tests/Domain/IntegrationWorkflowUnitTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/code/Frenchex.Dev_i1/Frenchex.Dev.Vos.Cli.Integration.Lib.Tests/Domain/IntegrationWorkflowUnitTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/code/Frenchex.Dev_i1/Frenchex.Dev.Vos.Cli.Integration.Lib.Tests/Domain/IntegrationWorkflowUnitTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/code/Frenchex.Dev_i1/Frenchex.Dev.Dotnet.UnitTesting.Lib/Domain/UnitTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d5a2bbb8c5256a8c7a8f51120e5ed2d5712eeff71f1588fc2824645ddfd/Process.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/IL/49ece17e44c04119a13b62232e704e42121b0/ab/29afbc4f/0200001F.il" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/49ece17e44c04119a13b62232e704e42121b0/c1/314015c3/ExecutionScope.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e369b297d3b6663bffd2c705c77b5b7a138d8debb9154bce1b222481e31748/Process.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/50bb11537dfd1412327469f16cee68d25cc12a463e2b211fabbb47ce45ff9/AnonymousCommandHandler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/code/Frenchex.Dev_i1/Frenchex.Dev.Vos.Cli.Integration.Lib.Tests/Domain/IntegrationWorkflowUnitTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/92305e9d4ca44d4cb1460fdd309dcf3b46e80/1f/9e27c106/DataReceivedEventHandler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/code/Frenchex.Dev_i1/Frenchex.Dev.Vos.Cli.Integration.Lib.Tests/Domain/IntegrationWorkflowUnitTest.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/388dfc71961f17f021ca637ce55568ebefa06154feff3eb38529f16de676239/InvocationPipeline.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/code/Frenchex.Dev_i1/Frenchex.Dev.Dotnet.UnitTesting.Lib/Domain/UnitTest.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/154c95896c6b2e1edb7f67c71ccb31707f36efd180884a9b5795947c5c5b6b/CommandLineBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3e2140877cf96c45dc89a7d9153aa215bf7e43f9eb07aaf9b51762d91397d/CommandExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f5a2ccf8d64e7aa05089a63a768244d9f2dc55854b3a5ab1b61126bdc8f7ebe2/ToCollection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/code/Frenchex.Dev_i1/Frenchex.Dev.Vos.Cli.Integration.Lib/DependencyInjection/ServicesConfiguration.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -438,6 +443,16 @@
     <option featureType="com.jetbrains.rider.solution.reference" implementationName="System.Transactions" />
     <option featureType="com.jetbrains.rider.solution.reference" implementationName="System.Data" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -455,5 +470,24 @@
     <MESSAGE value="Add --vagrant-bin-path option string" />
     <MESSAGE value="Add rider debug launch settings&#10;HaltCommand reset" />
     <option name="LAST_COMMIT_MESSAGE" value="Add rider debug launch settings&#10;HaltCommand reset" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/../Frenchex.Dev.Vos.Cli.Integration.Lib.Tests/Domain/IntegrationWorkflowUnitTest.cs</url>
+          <line>113</line>
+          <properties documentPath="C:\code\Frenchex.Dev_i1\Frenchex.Dev.Vos.Cli.Integration.Lib.Tests\Domain\IntegrationWorkflowUnitTest.cs" initialLine="113" containingFunctionPresentation="method 'Test_MultipleRuns'">
+            <startOffsets>
+              <option value="5436" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5748" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

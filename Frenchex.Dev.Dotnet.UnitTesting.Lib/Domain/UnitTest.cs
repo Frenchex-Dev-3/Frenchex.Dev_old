@@ -27,7 +27,8 @@ public class UnitTest
 
     private readonly Func<IServiceProvider, IConfigurationRoot, Task>? _prepareFunc;
     private bool _openVsCode;
-    private string _openVsCodePath = string.Empty;
+
+    private List<string> _openVsCodePath = new List<string>();
 
     public UnitTest(
         Action<IConfigurationBuilder> configureConfigurationAction,
@@ -85,9 +86,9 @@ public class UnitTest
         _configureMocksFunc = configureMocksFunc;
     }
 
-    public UnitTest OpenVsCode(string path, bool open = true)
+    public UnitTest OpenVsCode(string[] path, bool open = true)
     {
-        _openVsCodePath = path;
+        _openVsCodePath.AddRange(path);
         _openVsCode = open;
 
         return this;
@@ -132,7 +133,7 @@ public class UnitTest
             .GetAwaiter()
             .GetResult();
     }
-    
+
     public async Task RunAsync(
         Func<IServiceProvider, IConfigurationRoot, Task> prepareFunc,
         Func<IServiceProvider, IConfigurationRoot, Task> executeFunc,
@@ -223,12 +224,16 @@ public class UnitTest
         var scope = di.CreateAsyncScope();
         var scopedDi = scope.ServiceProvider;
 
-        Process? process = null;
+        List<Process> processes = new List<Process>();
 
         if (_openVsCode)
-            process = Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe", "-n " + _openVsCodePath);
-
-        Directory.CreateDirectory(_openVsCodePath);
+        {
+            foreach (var vspath in _openVsCodePath)
+            {
+                Process process = Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe", "-n " + vspath);
+                processes.Add(process);
+            }
+        }
 
         await prepareFunc(scopedDi, configuration);
         await executeFunc(scopedDi, configuration);
@@ -244,9 +249,15 @@ public class UnitTest
 
         await scope.DisposeAsync();
 
-        if (_openVsCode && process != null)
-            process.Kill(true);
+        if (_openVsCode && processes.Any())
+            foreach (var pro in processes)
+            {
+                pro.Kill();
+            }
 
-        Directory.Delete(_openVsCodePath, true);
+        foreach (var vspath in _openVsCodePath.Where(vspath => Directory.Exists(vspath)))
+        {
+            Directory.Delete(vspath, true);
+        }
     }
 }
