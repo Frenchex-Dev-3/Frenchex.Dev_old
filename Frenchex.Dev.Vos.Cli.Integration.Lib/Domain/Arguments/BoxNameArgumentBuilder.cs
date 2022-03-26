@@ -11,6 +11,6 @@ public class BoxNameArgumentBuilder : IBoxNameArgumentBuilder
 {
     public Argument<string> Build()
     {
-        return new("box-name", "Box Name");
+        return new Argument<string>("box-name", "Box Name");
     }
 }

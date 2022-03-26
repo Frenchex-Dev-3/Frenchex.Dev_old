@@ -11,7 +11,7 @@ public class WorkingDirectoryOptionBuilder : IWorkingDirectoryOptionBuilder
 {
     public Option<string> Build()
     {
-        return new(
+        return new Option<string>(
             new[] {"--working-directory", "-w"},
             Directory.GetCurrentDirectory,
             "Working Directory"

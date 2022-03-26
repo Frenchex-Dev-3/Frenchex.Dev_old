@@ -11,6 +11,6 @@ public class PrimaryOptionBuilder : IPrimaryOptionBuilder
 {
     public Option<bool> Build()
     {
-        return new(new[] {"--primary"}, "Primary");
+        return new Option<bool>(new[] {"--primary"}, "Primary");
     }
 }

@@ -11,6 +11,6 @@ internal class NetworkBridgeOptionBuilder : INetworkBridgeOptionBuilder
 {
     public Option<string> Build()
     {
-        return new(new[] {"--network-bridge"}, "Network Bridge");
+        return new Option<string>(new[] {"--network-bridge"}, "Network Bridge");
     }
 }

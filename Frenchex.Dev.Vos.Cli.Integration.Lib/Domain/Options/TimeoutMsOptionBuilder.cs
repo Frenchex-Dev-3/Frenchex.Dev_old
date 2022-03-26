@@ -21,7 +21,7 @@ public class TimeoutMsOptionBuilder : ITimeoutMsOptionBuilder
 
     public Option<int> Build(string[] aliases, Func<int> getDefaultFunc, string description)
     {
-        return new(
+        return new Option<int>(
             aliases,
             getDefaultFunc,
             description

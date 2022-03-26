@@ -11,6 +11,6 @@ internal class VirtualRamMbOptionBuilder : IVirtualRamMbOptionBuilder
 {
     public Option<int> Build()
     {
-        return new(new[] {"--vram-mb"}, () => 16, "VRAM in MB");
+        return new Option<int>(new[] {"--vram-mb"}, () => 16, "VRAM in MB");
     }
 }

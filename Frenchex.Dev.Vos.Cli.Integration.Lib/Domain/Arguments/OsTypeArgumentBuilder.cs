@@ -11,6 +11,6 @@ public class OsTypeArgumentBuilder : IOsTypeArgumentBuilder
 {
     public Argument<string> Build()
     {
-        return new("os-type", "OS Name");
+        return new Argument<string>("os-type", "OS Name");
     }
 }

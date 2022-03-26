@@ -224,8 +224,8 @@ public class CompleteWorkflowTests
         var services = new ServiceCollection();
         var configuration = new ConfigurationBuilder().Build();
 
-        services.AddScoped<IConfiguration>((_)=> configuration);
-        
+        services.AddScoped<IConfiguration>(_ => configuration);
+
         ServicesConfiguration
             .ConfigureServices(services);
 

@@ -11,6 +11,6 @@ public class Enabled3dOptionBuilder : IEnabled3dOptionBuilder
 {
     public Option<bool> Build()
     {
-        return new(new[] {"--enabled-3d", "-3"}, "Enable Machine Type");
+        return new Option<bool>(new[] {"--enabled-3d", "-3"}, "Enable Machine Type");
     }
 }

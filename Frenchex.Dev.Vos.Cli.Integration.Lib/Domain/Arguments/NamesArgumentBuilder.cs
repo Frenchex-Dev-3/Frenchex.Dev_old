@@ -12,6 +12,6 @@ public class NamesArgumentBuilder : INamesArgumentBuilder
 {
     public Argument<string[]> Build()
     {
-        return new("names", "Names");
+        return new Argument<string[]>("names", "Names");
     }
 }

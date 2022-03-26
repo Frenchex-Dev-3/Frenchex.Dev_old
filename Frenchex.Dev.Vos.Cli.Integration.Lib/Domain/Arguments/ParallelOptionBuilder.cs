@@ -11,6 +11,6 @@ internal class ParallelOptionBuilder : IParallelOptionBuilder
 {
     public Option<bool> Build()
     {
-        return new(new[] {"--parallel", "-p"}, () => true, "Parallel");
+        return new Option<bool>(new[] {"--parallel", "-p"}, () => true, "Parallel");
     }
 }

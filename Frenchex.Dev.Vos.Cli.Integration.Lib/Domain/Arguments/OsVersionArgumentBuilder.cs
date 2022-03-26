@@ -11,6 +11,6 @@ public class OsVersionArgumentBuilder : IOsVersionArgumentBuilder
 {
     public Argument<string> Build()
     {
-        return new("os-version", "OS Version");
+        return new Argument<string>("os-version", "OS Version");
     }
 }

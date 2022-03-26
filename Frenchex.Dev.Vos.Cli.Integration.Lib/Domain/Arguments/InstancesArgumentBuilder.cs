@@ -11,6 +11,6 @@ public class InstancesArgumentBuilder : IInstancesArgumentBuilder
 {
     public Argument<int> Build()
     {
-        return new("instances", "# of instances");
+        return new Argument<int>("instances", "# of instances");
     }
 }

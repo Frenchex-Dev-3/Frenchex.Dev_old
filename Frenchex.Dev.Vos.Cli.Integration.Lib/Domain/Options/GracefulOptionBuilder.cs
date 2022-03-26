@@ -11,6 +11,6 @@ public class GracefulOptionBuilder : IGracefulOptionBuilder
 {
     public Option<bool> Build()
     {
-        return new(new[] {"--graceful", "-g"}, "Graceful");
+        return new Option<bool>(new[] {"--graceful", "-g"}, "Graceful");
     }
 }

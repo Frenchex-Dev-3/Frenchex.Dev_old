@@ -11,6 +11,6 @@ public class MachineTypeNameArgumentBuilder : IMachineTypeNameArgumentBuilder
 {
     public Argument<string> Build()
     {
-        return new("type", "MachineType Name");
+        return new Argument<string>("type", "MachineType Name");
     }
 }

@@ -11,6 +11,6 @@ public class NamesOptionBuilder : INamesOptionBuilder
 {
     public Option<string[]> Build()
     {
-        return new("--name", "Name or ID");
+        return new Option<string[]>("--name", "Name or ID");
     }
 }

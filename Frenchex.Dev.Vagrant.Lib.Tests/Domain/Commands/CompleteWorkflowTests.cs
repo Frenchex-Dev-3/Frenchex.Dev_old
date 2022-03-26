@@ -19,6 +19,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
+[assembly: Parallelize(Workers = 2, Scope = ExecutionScope.MethodLevel)]
+
 namespace Frenchex.Dev.Vagrant.Lib.Tests.Domain.Commands;
 
 [TestClass]
@@ -141,7 +143,7 @@ public class CompleteWorkflowTests
     {
         Debug.Assert(_unitTest != null, nameof(_unitTest) + " != null");
         Debug.Assert(_unitTest.Provider != null, "_unitTest.Provider != null");
-        
+
         var services = _unitTest.Provider;
 
         await TestInner("init", services.GetRequiredService<IInitCommand>().StartProcess(initRequest), true);

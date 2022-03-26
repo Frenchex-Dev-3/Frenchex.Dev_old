@@ -11,6 +11,6 @@ public class RamMbArgumentBuilder : IRamMbArgumentBuilder
 {
     public Argument<int> Build()
     {
-        return new("ram-mb", "RAM in MB");
+        return new Argument<int>("ram-mb", "RAM in MB");
     }
 }

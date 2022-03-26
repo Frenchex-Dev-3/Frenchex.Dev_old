@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
+[assembly: Parallelize(Workers = 2, Scope = ExecutionScope.MethodLevel)]
+
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Tests.Domain;
 
 [TestClass]

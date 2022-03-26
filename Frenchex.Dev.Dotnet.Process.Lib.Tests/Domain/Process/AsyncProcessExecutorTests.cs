@@ -5,6 +5,8 @@ using Frenchex.Dev.Dotnet.Process.Lib.Domain.ProcessBuilder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+[assembly: Parallelize(Workers = 2, Scope = ExecutionScope.MethodLevel)]
+
 namespace Frenchex.Dev.Dotnet.Process.Lib.Tests.Domain.Process;
 
 [TestClass]

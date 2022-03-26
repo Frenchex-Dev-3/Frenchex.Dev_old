@@ -11,7 +11,7 @@ public class ZeroesOptionBuilder : IZeroesOptionBuilder
 {
     public Option<int> Build()
     {
-        return new(
+        return new Option<int>(
             new[] {"--zeroes", "-z"},
             () => 2,
             "Numbering leading zeroes"

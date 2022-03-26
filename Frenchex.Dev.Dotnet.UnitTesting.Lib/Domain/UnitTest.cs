@@ -8,16 +8,11 @@ namespace Frenchex.Dev.Dotnet.UnitTesting.Lib.Domain;
 
 public class UnitTest
 {
-    public IServiceProvider? Provider { get; protected set; }
-    public AsyncServiceScope? AsyncScope { get; protected set; }
-    public IConfigurationRoot? Configuration { get; protected set; }
-
-    
     private readonly Action<IConfigurationBuilder> _configureConfigurationFunc;
     private readonly Action<IServiceCollection, IConfigurationRoot>? _configureMocksFunc;
     private readonly Action<IServiceCollection, IConfigurationRoot>? _configureServicesFunc;
-    private string _openVsCodePath;
     private bool _openVsCode;
+    private string _openVsCodePath;
 
 
     public UnitTest(
@@ -31,7 +26,11 @@ public class UnitTest
         _configureMocksFunc = configureMocksFunc;
     }
 
-   
+    public IServiceProvider? Provider { get; protected set; }
+    public AsyncServiceScope? AsyncScope { get; protected set; }
+    public IConfigurationRoot? Configuration { get; protected set; }
+
+
     public async Task RunAsync(
         Func<IServiceProvider, IConfigurationRoot, Task> prepareFunc,
         Func<IServiceProvider, IConfigurationRoot, Task> executeFunc,
@@ -58,12 +57,11 @@ public class UnitTest
         if (Provider != null)
         {
             Process vsCodeProcess = null;
-                
+
             if (_openVsCode)
-            {
-                vsCodeProcess = Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe", "-n " + _openVsCodePath);
-            }
-            
+                vsCodeProcess = Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe",
+                    "-n " + _openVsCodePath);
+
             await prepareFunc(Provider, Configuration);
             await executeFunc(Provider, Configuration);
 
@@ -108,7 +106,7 @@ public class UnitTest
         Provider = AsyncScope.Value.ServiceProvider;
         Configuration = configuration;
     }
-    
+
     public UnitTest OpenVsCode(string path, bool open = true)
     {
         _openVsCodePath = path;
@@ -116,5 +114,4 @@ public class UnitTest
 
         return this;
     }
-
 }

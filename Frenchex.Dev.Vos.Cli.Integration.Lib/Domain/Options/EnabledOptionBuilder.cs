@@ -11,6 +11,6 @@ public class EnabledOptionBuilder : IEnabledOptionBuilder
 {
     public Option<bool> Build()
     {
-        return new(new[] {"--enabled", "-e"}, "Enabled");
+        return new Option<bool>(new[] {"--enabled", "-e"}, "Enabled");
     }
 }

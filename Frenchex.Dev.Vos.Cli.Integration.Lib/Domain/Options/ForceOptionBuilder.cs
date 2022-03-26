@@ -11,6 +11,6 @@ public class ForceOptionBuilder : IForceOptionBuilder
 {
     public Option<bool> Build()
     {
-        return new(new[] {"--force", "-f"}, "Force");
+        return new Option<bool>(new[] {"--force", "-f"}, "Force");
     }
 }

@@ -11,6 +11,6 @@ public class VirtualCpusArgumentBuilder : IVirtualCpusArgumentBuilder
 {
     public Argument<int> Build()
     {
-        return new("vcpus", "Virtual CPUs");
+        return new Argument<int>("vcpus", "Virtual CPUs");
     }
 }

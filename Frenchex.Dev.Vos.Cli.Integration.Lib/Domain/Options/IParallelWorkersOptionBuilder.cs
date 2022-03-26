@@ -11,7 +11,7 @@ public class ParallelWorkersOptionBuilder : IParallelWorkersOptionBuilder
 {
     public Option<int> Build()
     {
-        return new(new[] {"--parallel-workers", "-pw"},
+        return new Option<int>(new[] {"--parallel-workers", "-pw"},
             () => Environment.ProcessorCount, "Parallel Workers");
     }
 }
