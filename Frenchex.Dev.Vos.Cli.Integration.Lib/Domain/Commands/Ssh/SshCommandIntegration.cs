@@ -33,10 +33,10 @@ public class SshCommandIntegration : ABaseCommandIntegration, ISshCommandIntegra
             new Option<string>(new[] {"--host", "-h"}, "Host on guest"),
             TimeoutMsOptionBuilder.Build(),
             VagrantBinPathOptionBuilder.Build(),
-            WorkingDirectoryOptionBuilder.Build(),
+            WorkingDirectoryOptionBuilder.Build()
         };
 
-        command.SetHandler(async(
+        command.SetHandler(async (
             string nameOrId,
             string sshCommand,
             string host,
@@ -46,7 +46,7 @@ public class SshCommandIntegration : ABaseCommandIntegration, ISshCommandIntegra
         ) =>
         {
             var requestBuilder = _requestBuilderFactory.Factory();
-            
+
             await _command
                 .Execute(requestBuilder
                     .BaseBuilder

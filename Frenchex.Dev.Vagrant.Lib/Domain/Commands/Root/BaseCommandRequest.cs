@@ -25,7 +25,7 @@ public class BaseCommandRequest : IBaseCommandRequest
         DebugTimestamp = debugTimestamp ?? false;
         Tty = tty ?? false;
         Help = help ?? false;
-        TimeoutInMiliSeconds = timeoutMs ?? 1000;
+        TimeoutInMiliSeconds = timeoutMs ?? (int) TimeSpan.FromMinutes(1).TotalMilliseconds;
         VagrantBinPath = vagrantBinPath ?? "vagrant";
     }
 

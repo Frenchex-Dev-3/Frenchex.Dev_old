@@ -9,5 +9,8 @@ public interface IOsVersionArgumentBuilder
 
 public class OsVersionArgumentBuilder : IOsVersionArgumentBuilder
 {
-    public Argument<string> Build() => new("os-version", "OS Version");
+    public Argument<string> Build()
+    {
+        return new("os-version", "OS Version");
+    }
 }

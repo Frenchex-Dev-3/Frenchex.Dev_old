@@ -41,17 +41,20 @@ public class UpCommandRequest : RootRequest, IUpCommandRequest
     public int ParallelWait { get; }
     public string[] Names { get; }
 
-    public IUpCommandRequest CloneWithNewNames(string[] names) => new UpCommandRequest(
-        names,
-        Provision,
-        ProvisionWith,
-        DestroyOnError,
-        Parallel,
-        ParallelWorkers,
-        ParallelWait,
-        Provider,
-        InstallProvider,
-        Minimal,
-        Base
-    );
+    public IUpCommandRequest CloneWithNewNames(string[] names)
+    {
+        return new UpCommandRequest(
+            names,
+            Provision,
+            ProvisionWith,
+            DestroyOnError,
+            Parallel,
+            ParallelWorkers,
+            ParallelWait,
+            Provider,
+            InstallProvider,
+            Minimal,
+            Base
+        );
+    }
 }

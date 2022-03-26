@@ -9,5 +9,8 @@ public interface IPrimaryOptionBuilder
 
 public class PrimaryOptionBuilder : IPrimaryOptionBuilder
 {
-    public Option<bool> Build()=> new(new[] { "--primary" }, "Primary");
+    public Option<bool> Build()
+    {
+        return new(new[] {"--primary"}, "Primary");
+    }
 }

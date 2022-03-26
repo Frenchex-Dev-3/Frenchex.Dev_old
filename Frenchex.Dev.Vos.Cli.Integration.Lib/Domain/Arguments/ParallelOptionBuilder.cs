@@ -9,5 +9,8 @@ public interface IParallelOptionBuilder
 
 internal class ParallelOptionBuilder : IParallelOptionBuilder
 {
-    public Option<bool> Build() => new(new[] {"--parallel", "-p"}, () => true, "Parallel");
+    public Option<bool> Build()
+    {
+        return new(new[] {"--parallel", "-p"}, () => true, "Parallel");
+    }
 }

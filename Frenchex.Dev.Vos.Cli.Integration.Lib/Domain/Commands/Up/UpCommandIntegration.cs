@@ -13,9 +13,9 @@ public class UpCommandIntegration : ABaseCommandIntegration, IUpCommandIntegrati
     private readonly IUpCommand _command;
     private readonly INamesArgumentBuilder _namesArgumentBuilder;
     private readonly IParallelOptionBuilder _parallelOptionBuilder;
-    private readonly IUpCommandRequestBuilderFactory _requestBuilderFactory;
-    private readonly IParallelWorkersOptionBuilder _parallelWorkersOptionBuilder;
     private readonly IParallelWaitOptionBuilder _parallelWaitOptionBuilder;
+    private readonly IParallelWorkersOptionBuilder _parallelWorkersOptionBuilder;
+    private readonly IUpCommandRequestBuilderFactory _requestBuilderFactory;
 
     public UpCommandIntegration(
         IUpCommand command,

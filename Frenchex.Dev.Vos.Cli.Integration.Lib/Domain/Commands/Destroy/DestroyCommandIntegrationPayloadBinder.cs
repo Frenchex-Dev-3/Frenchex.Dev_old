@@ -9,8 +9,8 @@ public class DestroyCommandIntegrationPayloadBinder : BinderBase<DestroyCommandI
     private readonly Option<bool> _gracefulOpt;
     private readonly Argument<string[]> _nameOpt;
     private readonly Option<int> _timeoutMsOpt;
-    private readonly Option<string> _workingDirOpt;
     private readonly Option<string> _vagrantBinPath;
+    private readonly Option<string> _workingDirOpt;
 
     public DestroyCommandIntegrationPayloadBinder(
         Argument<string[]> nameOpt,
@@ -38,7 +38,7 @@ public class DestroyCommandIntegrationPayloadBinder : BinderBase<DestroyCommandI
             NameOrId = bindingContext.ParseResult.GetValueForArgument(_nameOpt),
             TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMsOpt),
             WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDirOpt),
-            VagrantBinPath = bindingContext.ParseResult.GetValueForOption(_vagrantBinPath),
+            VagrantBinPath = bindingContext.ParseResult.GetValueForOption(_vagrantBinPath)
         };
     }
 }

@@ -9,11 +9,11 @@ public class UpCommandRequestBuilder : RootCommandRequestBuilder, IUpCommandRequ
     private bool? _minimal;
     private string[]? _namesOrIds;
     private bool? _parallel;
+    private int _parallelWait;
+    private int _parallelWorkers;
     private string? _provider;
     private bool? _provision;
     private string[]? _provisionWith;
-    private int _parallelWorkers;
-    private int _parallelWait;
 
     public UpCommandRequestBuilder(IBaseRequestBuilderFactory baseRequestBuilderFactory) : base(
         baseRequestBuilderFactory)
@@ -90,7 +90,7 @@ public class UpCommandRequestBuilder : RootCommandRequestBuilder, IUpCommandRequ
         _parallelWait = wait;
         return this;
     }
-    
+
     public IUpCommandRequestBuilder WithMinimal(bool with)
     {
         _minimal = with;

@@ -9,5 +9,8 @@ public interface IRamMbArgumentBuilder
 
 public class RamMbArgumentBuilder : IRamMbArgumentBuilder
 {
-    public Argument<int> Build() => new("ram-mb", "RAM in MB");
+    public Argument<int> Build()
+    {
+        return new("ram-mb", "RAM in MB");
+    }
 }

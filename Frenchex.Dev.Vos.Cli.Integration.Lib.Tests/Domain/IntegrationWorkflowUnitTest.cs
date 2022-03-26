@@ -42,7 +42,7 @@ public class IntegrationWorkflowUnitTest
                 // DI will be used as receptacle of integrated commands
                 // by means of SubjectUnderTest
                 services.AddScoped<SubjectUnderTest>();
-                services.AddScoped<IConfiguration>((_) => configurationRoot);
+                services.AddScoped<IConfiguration>(_ => configurationRoot);
             },
             (services, _) =>
             {
@@ -111,7 +111,7 @@ public class IntegrationWorkflowUnitTest
         var workingDirectory1 = Path.Join(Path.GetTempPath(), Path.GetRandomFileName());
         var workingDirectory2 = Path.Join(Path.GetTempPath(), Path.GetRandomFileName());
 
-        var task1 = RunInternal(new List<string>() {workingDirectory1}.ToArray(),
+        var task1 = RunInternal(new List<string> {workingDirectory1}.ToArray(),
             commands1,
             async (s, command) =>
             {
@@ -121,7 +121,7 @@ public class IntegrationWorkflowUnitTest
                 Assert.AreEqual(0, result, s);
             });
 
-        var task2 = RunInternal(new List<string>() {workingDirectory2}.ToArray(),
+        var task2 = RunInternal(new List<string> {workingDirectory2}.ToArray(),
             commands2,
             async (s, command) =>
             {
@@ -142,13 +142,13 @@ public class IntegrationWorkflowUnitTest
     {
         var workingDirectory = Path.Join(Path.GetTempPath(), Path.GetRandomFileName());
 
-        await RunInternal(new List<string>() {workingDirectory}.ToArray(), commands, async (s, command) =>
+        await RunInternal(new List<string> {workingDirectory}.ToArray(), commands, async (s, command) =>
         {
             var result = await command.InvokeAsync(s);
 
             Assert.IsNotNull(result, s);
             Assert.AreEqual(0, result, s);
-        }, true);
+        });
     }
 
     [TestMethod]
@@ -158,7 +158,7 @@ public class IntegrationWorkflowUnitTest
         var workingDirectory = Path.Join(Path.GetTempPath(), Path.GetRandomFileName());
 
         await RunInternal(
-            new string[] {workingDirectory},
+            new[] {workingDirectory},
             commands,
             (command, rootCommand) =>
             {
@@ -195,7 +195,6 @@ public class IntegrationWorkflowUnitTest
         Debug.Assert(_unitTest != null, nameof(_unitTest) + " != null");
 
         await _unitTest
-            .OpenVsCode(workingDirectories, openVsCode)
             .RunAsync(
                 (provider, _) =>
                 {
@@ -210,14 +209,12 @@ public class IntegrationWorkflowUnitTest
                     var sut = provider.GetRequiredService<SubjectUnderTest>().RootCommand;
 
                     foreach (var workingDir in workingDirectories)
+                    foreach (var command in commands)
                     {
-                        foreach (var command in commands)
-                        {
-                            var vosCommand = $"vos  {command.Command}"
-                                    .Replace(WorkingDirectoryMarkholder, workingDir)
-                                ;
-                            await execCommand(vosCommand, sut);
-                        }
+                        var vosCommand = $"vos  {command.Command}"
+                                .Replace(WorkingDirectoryMarkholder, workingDir)
+                            ;
+                        await execCommand(vosCommand, sut);
                     }
                 });
     }

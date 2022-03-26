@@ -9,5 +9,8 @@ public interface IEnabledOptionBuilder
 
 public class EnabledOptionBuilder : IEnabledOptionBuilder
 {
-    public Option<bool> Build() => new(new[] {"--enabled", "-e"}, "Enabled");
+    public Option<bool> Build()
+    {
+        return new(new[] {"--enabled", "-e"}, "Enabled");
+    }
 }

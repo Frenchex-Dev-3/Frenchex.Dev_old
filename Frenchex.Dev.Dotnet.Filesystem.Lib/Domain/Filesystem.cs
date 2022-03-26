@@ -9,7 +9,7 @@ public class Filesystem : IFilesystem
 
     public DirectoryInfo CreateDirectory(string? path)
     {
-        if (string.IsNullOrEmpty(path)) 
+        if (string.IsNullOrEmpty(path))
             throw new ArgumentNullException(nameof(path));
 
         return Directory.CreateDirectory(path);

@@ -9,14 +9,14 @@ public class UpCommandIntegrationPayloadBinder : BinderBase<UpCommandIntegration
     private readonly Option<bool> _installProvider;
     private readonly Argument<string[]> _names;
     private readonly Option<bool> _parallel;
-    private readonly Option<int> _parallelWorkers;
     private readonly Option<int> _parallelWait;
+    private readonly Option<int> _parallelWorkers;
     private readonly Option<string> _provider;
     private readonly Option<bool> _provision;
     private readonly Option<string[]> _provisionWith;
     private readonly Option<int> _timeoutMs;
-    private readonly Option<string> _workingDir;
     private readonly Option<string> _vagrantBinPath;
+    private readonly Option<string> _workingDir;
 
     public UpCommandIntegrationPayloadBinder(
         Argument<string[]> names,
@@ -61,7 +61,7 @@ public class UpCommandIntegrationPayloadBinder : BinderBase<UpCommandIntegration
             ProvisionWith = bindingContext.ParseResult.GetValueForOption(_provisionWith),
             TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMs),
             WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDir),
-            VagrantBinPath = bindingContext.ParseResult.GetValueForOption(_vagrantBinPath),
+            VagrantBinPath = bindingContext.ParseResult.GetValueForOption(_vagrantBinPath)
         };
     }
 }

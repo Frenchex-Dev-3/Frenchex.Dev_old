@@ -9,5 +9,8 @@ public interface IEnabled3dOptionBuilder
 
 public class Enabled3dOptionBuilder : IEnabled3dOptionBuilder
 {
-    public Option<bool> Build() => new(new[] {"--enabled-3d", "-3"}, "Enable Machine Type");
+    public Option<bool> Build()
+    {
+        return new(new[] {"--enabled-3d", "-3"}, "Enable Machine Type");
+    }
 }

@@ -9,5 +9,8 @@ public interface INetworkBridgeOptionBuilder
 
 internal class NetworkBridgeOptionBuilder : INetworkBridgeOptionBuilder
 {
-    public Option<string> Build()=> new(new[] { "--network-bridge" }, "Network Bridge");
+    public Option<string> Build()
+    {
+        return new(new[] {"--network-bridge"}, "Network Bridge");
+    }
 }

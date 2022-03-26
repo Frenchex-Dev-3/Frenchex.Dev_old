@@ -8,9 +8,9 @@ namespace Frenchex.Dev.Vagrant.Lib.Domain.Commands.Root;
 
 public abstract class RootCommand : IRootCommand
 {
+    private readonly string _vagrantBinPath;
     protected IFilesystem Filesystem;
     protected IProcessBuilder ProcessBuilder;
-    private readonly string _vagrantBinPath;
 
     protected RootCommand(
         IProcessBuilder processBuilder,

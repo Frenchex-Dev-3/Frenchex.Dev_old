@@ -9,8 +9,8 @@ public class HaltCommandIntegrationPayloadBinder : BinderBase<HaltCommandIntegra
     private readonly Option<int> _haltTimeoutMs;
     private readonly Argument<string[]> _names;
     private readonly Option<int> _timeoutMs;
-    private readonly Option<string> _workingDirectory;
     private readonly Option<string> _vagrantBinPath;
+    private readonly Option<string> _workingDirectory;
 
     public HaltCommandIntegrationPayloadBinder(
         Argument<string[]> names,

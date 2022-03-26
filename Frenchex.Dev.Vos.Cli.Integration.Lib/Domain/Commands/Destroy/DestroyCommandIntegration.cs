@@ -45,7 +45,7 @@ public class DestroyCommandIntegration : ABaseCommandIntegration, IDestroyComman
         var timeoutMsOpt = TimeoutMsOptionBuilder.Build();
         var workingDirOpt = WorkingDirectoryOptionBuilder.Build();
         var vagrantBinPath = VagrantBinPathOptionBuilder.Build();
-        
+
         var command = new Command("destroy", "Runs Vex destroy")
         {
             namesArg,

@@ -16,9 +16,9 @@ public class DefineMachineAddCommandIntegrationPayloadBinder : BinderBase<Define
     private readonly Option<int> _ramMb;
     private readonly Option<int> _timeoutMs;
     private readonly Argument<string> _type;
+    private readonly Option<string> _vagrantBinPath;
     private readonly Option<int> _vCpus;
     private readonly Option<string> _workingDir;
-    private readonly Option<string> _vagrantBinPath;
 
     public DefineMachineAddCommandIntegrationPayloadBinder(
         Argument<string> name,

@@ -10,15 +10,21 @@ public interface ITimeoutMsOptionBuilder
 
 public class TimeoutMsOptionBuilder : ITimeoutMsOptionBuilder
 {
-    public Option<int> Build() => Build(
-        new[] { "--timeout-ms", "-t" },
-        () => (int)TimeSpan.FromMinutes(10).TotalMilliseconds,
-        "TimeOut in ms"
-    );
+    public Option<int> Build()
+    {
+        return Build(
+            new[] {"--timeout-ms", "-t"},
+            () => (int) TimeSpan.FromMinutes(10).TotalMilliseconds,
+            "TimeOut in ms"
+        );
+    }
 
-    public Option<int> Build(string[] aliases, Func<int> getDefaultFunc, string description) => new(
-        aliases,
-        getDefaultFunc,
-        description
-    );
+    public Option<int> Build(string[] aliases, Func<int> getDefaultFunc, string description)
+    {
+        return new(
+            aliases,
+            getDefaultFunc,
+            description
+        );
+    }
 }

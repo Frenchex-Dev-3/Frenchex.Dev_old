@@ -12,9 +12,9 @@ public class BaseCommandRequestBuilder : IBaseCommandRequestBuilder
     private int? _timeoutMs;
     private bool? _timestamp;
     private bool? _tty;
+    private string? _vagrantBinpath;
     private bool? _version;
     private string? _workingDirectory;
-    private string? _vagrantBinpath;
 
     public BaseCommandRequestBuilder(object parent)
     {
@@ -23,7 +23,7 @@ public class BaseCommandRequestBuilder : IBaseCommandRequestBuilder
 
     public IBaseCommandRequest Build()
     {
-        if (null == _workingDirectory) 
+        if (null == _workingDirectory)
             throw new InvalidOperationException("_workingDirectory is null");
 
         return new BaseCommandRequest(

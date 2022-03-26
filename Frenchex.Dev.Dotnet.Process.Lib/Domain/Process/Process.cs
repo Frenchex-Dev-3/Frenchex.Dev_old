@@ -15,7 +15,7 @@ public class Process : IProcess
     #endregion
 
     #region Publics
-    
+
     public bool HasStarted { get; private set; }
 
     public Process(
@@ -49,7 +49,7 @@ public class Process : IProcess
         Result = new ProcessExecutionResult(_wrappedProcess);
 
         HasStarted = false;
-        
+
         try
         {
             HasStarted = _wrappedProcess.Start();

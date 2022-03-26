@@ -59,7 +59,7 @@ public class
             TimeoutMs = bindingContext.ParseResult.GetValueForOption(_timeoutMs),
             OsType = bindingContext.ParseResult.GetValueForArgument(_osType),
             OsVersion = bindingContext.ParseResult.GetValueForArgument(_osVersion),
-            WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDir),
+            WorkingDirectory = bindingContext.ParseResult.GetValueForOption(_workingDir)
         };
     }
 }

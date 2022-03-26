@@ -9,5 +9,8 @@ public interface IInstancesArgumentBuilder
 
 public class InstancesArgumentBuilder : IInstancesArgumentBuilder
 {
-    public Argument<int> Build()=> new("instances", "# of instances");
+    public Argument<int> Build()
+    {
+        return new("instances", "# of instances");
+    }
 }

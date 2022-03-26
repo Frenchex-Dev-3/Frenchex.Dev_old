@@ -35,7 +35,7 @@ public class InitCommandIntegration : ABaseCommandIntegration, IInitCommandInteg
         var zeroesOpt = _zeroesOptionBuilder.Build();
         var timeoutMsOpt = TimeoutMsOptionBuilder.Build();
         var workingDirOpt = WorkingDirectoryOptionBuilder.Build();
-        
+
         var command = new Command("init", "Runs Vex init")
         {
             namingPatternOpt,

@@ -9,7 +9,9 @@ public interface IParallelWaitOptionBuilder
 
 public class ParallelWaitOptionBuilder : IParallelWaitOptionBuilder
 {
-    public Option<int> Build() =>
-        new(new[] {"--parallel-wait", "-a"},
+    public Option<int> Build()
+    {
+        return new(new[] {"--parallel-wait", "-a"},
             () => Environment.ProcessorCount, "Parallel Wait");
+    }
 }

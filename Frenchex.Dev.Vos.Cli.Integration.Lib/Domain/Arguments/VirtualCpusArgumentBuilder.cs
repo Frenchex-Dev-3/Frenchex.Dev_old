@@ -9,5 +9,8 @@ public interface IVirtualCpusArgumentBuilder
 
 public class VirtualCpusArgumentBuilder : IVirtualCpusArgumentBuilder
 {
-    public Argument<int> Build() => new("vcpus", "Virtual CPUs");
+    public Argument<int> Build()
+    {
+        return new("vcpus", "Virtual CPUs");
+    }
 }

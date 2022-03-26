@@ -41,9 +41,9 @@ public class HaltCommand : RootCommand, IHaltCommand
             )
             .UsingHaltTimeoutInMiliSeconds(request.HaltTimeoutInMiliSeconds)
             .Build();
-        
+
         var process = _vagrantHaltCommand.StartProcess(libRequest);
-        
+
         return _responseBuilderFactory.Factory()
             .WithHaltResponse(process)
             .Build();

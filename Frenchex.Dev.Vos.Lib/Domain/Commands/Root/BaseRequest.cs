@@ -40,6 +40,7 @@ public class BaseRequest : IBaseRequest
     public string? WorkingDirectory { get; }
     public int TimeoutInMiliSeconds { get; }
     public string? VagrantBinPath { get; }
+
     public T Parent<T>(T parent)
     {
         return parent;

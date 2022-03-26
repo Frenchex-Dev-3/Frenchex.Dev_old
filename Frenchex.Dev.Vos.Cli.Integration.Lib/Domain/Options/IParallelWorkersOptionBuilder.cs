@@ -9,7 +9,9 @@ public interface IParallelWorkersOptionBuilder
 
 public class ParallelWorkersOptionBuilder : IParallelWorkersOptionBuilder
 {
-    public Option<int> Build() =>
-        new(new[] {"--parallel-workers", "-pw"},
+    public Option<int> Build()
+    {
+        return new(new[] {"--parallel-workers", "-pw"},
             () => Environment.ProcessorCount, "Parallel Workers");
+    }
 }

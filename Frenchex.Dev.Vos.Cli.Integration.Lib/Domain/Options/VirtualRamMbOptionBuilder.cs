@@ -9,5 +9,8 @@ public interface IVirtualRamMbOptionBuilder
 
 internal class VirtualRamMbOptionBuilder : IVirtualRamMbOptionBuilder
 {
-    public Option<int> Build() => new(new[] { "--vram-mb" }, () => 16, "VRAM in MB");
+    public Option<int> Build()
+    {
+        return new(new[] {"--vram-mb"}, () => 16, "VRAM in MB");
+    }
 }

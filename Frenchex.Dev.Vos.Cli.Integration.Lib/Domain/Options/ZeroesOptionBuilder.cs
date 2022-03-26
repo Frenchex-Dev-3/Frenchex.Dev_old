@@ -9,9 +9,12 @@ public interface IZeroesOptionBuilder
 
 public class ZeroesOptionBuilder : IZeroesOptionBuilder
 {
-    public Option<int> Build() => new(
-        new[] { "--zeroes", "-z" },
-        () => 2,
-        "Numbering leading zeroes"
-    );
+    public Option<int> Build()
+    {
+        return new(
+            new[] {"--zeroes", "-z"},
+            () => 2,
+            "Numbering leading zeroes"
+        );
+    }
 }

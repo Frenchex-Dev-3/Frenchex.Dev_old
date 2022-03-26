@@ -12,9 +12,9 @@ public class BaseRequestBuilder : IBaseRequestBuilder
     private int? _timeoutMs;
     private bool? _timestamp;
     private bool? _tty;
+    private string? _vagrantBinPath;
     private bool? _version;
     private string? _workingDirectory;
-    private string? _vagrantBinPath;
 
     public IBaseRequest Build()
     {

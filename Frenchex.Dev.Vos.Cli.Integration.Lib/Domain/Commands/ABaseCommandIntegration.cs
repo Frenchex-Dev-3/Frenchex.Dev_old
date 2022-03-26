@@ -6,8 +6,8 @@ namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Domain.Commands;
 public class ABaseCommandIntegration
 {
     protected readonly ITimeoutMsOptionBuilder? TimeoutMsOptionBuilder;
-    protected readonly IWorkingDirectoryOptionBuilder? WorkingDirectoryOptionBuilder;
     protected readonly IVagrantBinPathOptionBuilder? VagrantBinPathOptionBuilder;
+    protected readonly IWorkingDirectoryOptionBuilder? WorkingDirectoryOptionBuilder;
 
     public ABaseCommandIntegration(
         IWorkingDirectoryOptionBuilder? workingDirectoryOptionBuilder,

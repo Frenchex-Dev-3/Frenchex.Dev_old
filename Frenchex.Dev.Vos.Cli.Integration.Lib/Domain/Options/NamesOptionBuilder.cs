@@ -9,5 +9,8 @@ public interface INamesOptionBuilder
 
 public class NamesOptionBuilder : INamesOptionBuilder
 {
-    public Option<string[]> Build() => new("--name", "Name or ID");
+    public Option<string[]> Build()
+    {
+        return new("--name", "Name or ID");
+    }
 }

@@ -9,5 +9,8 @@ public interface IMachineTypeNameArgumentBuilder
 
 public class MachineTypeNameArgumentBuilder : IMachineTypeNameArgumentBuilder
 {
-    public Argument<string> Build()=> new("type", "MachineType Name");
+    public Argument<string> Build()
+    {
+        return new("type", "MachineType Name");
+    }
 }

@@ -8,7 +8,7 @@ public class HaltCommandResponseBuilder : RootResponseBuilder, IHaltCommandRespo
 
     public IHaltCommandResponse Build()
     {
-        if (null == _haltCommandResponse) 
+        if (null == _haltCommandResponse)
             throw new InvalidOperationException("Halt command response is null");
 
         return new HaltCommandResponse(_haltCommandResponse);

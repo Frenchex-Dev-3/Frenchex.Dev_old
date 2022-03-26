@@ -32,12 +32,12 @@ public class NameCommandIntegration : ABaseCommandIntegration, INameCommandInteg
         var nameArg = _namesArgumentBuilder.Build();
         var workingDirOpt = WorkingDirectoryOptionBuilder.Build();
         var timeoutOpt = TimeoutMsOptionBuilder.Build();
-        
+
         var command = new Command("name", "Output Vagrant machine names")
         {
             nameArg,
             timeoutOpt,
-            workingDirOpt,
+            workingDirOpt
         };
 
         var binder = new NameCommandIntegrationPayloadBinder(

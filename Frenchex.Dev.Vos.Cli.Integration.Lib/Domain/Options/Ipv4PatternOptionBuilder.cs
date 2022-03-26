@@ -9,10 +9,12 @@ public interface IIpv4PatternOptionBuilder
 
 public class Ipv4PatternOptionBuilder : IIpv4PatternOptionBuilder
 {
-    public Option<string> Build() 
-        => new(
-            new[] { "--ipv4-pattern" }, 
-            () => "10.100.1.#INSTANCE#", 
+    public Option<string> Build()
+    {
+        return new(
+            new[] {"--ipv4-pattern"},
+            () => "10.100.1.#INSTANCE#",
             "IPv4 pattern"
         );
+    }
 }

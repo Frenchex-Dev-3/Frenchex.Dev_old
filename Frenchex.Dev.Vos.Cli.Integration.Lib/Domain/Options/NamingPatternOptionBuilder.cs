@@ -9,9 +9,12 @@ public interface INamingPatternOptionBuilder
 
 public class NamingPatternOptionBuilder : INamingPatternOptionBuilder
 {
-    public Option<string> Build()=> new(
-        new[] { "--naming-pattern", "-n" },
-        () => "#vdi#-#name#-#instance#",
-        "Naming pattern"
-    );
+    public Option<string> Build()
+    {
+        return new(
+            new[] {"--naming-pattern", "-n"},
+            () => "#vdi#-#name#-#instance#",
+            "Naming pattern"
+        );
+    }
 }

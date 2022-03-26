@@ -9,5 +9,8 @@ public interface IVagrantBinPathOptionBuilder
 
 public class VagrantBinPathOptionBuilder : IVagrantBinPathOptionBuilder
 {
-    public Option<string> Build() => new (new[] {"--vagrant-bin-path"}, "Vagrant Bin Path");
+    public Option<string> Build()
+    {
+        return new(new[] {"--vagrant-bin-path"}, "Vagrant Bin Path");
+    }
 }

@@ -19,6 +19,7 @@ using Frenchex.Dev.Vos.Lib.Domain.Commands.SshConfig;
 using Frenchex.Dev.Vos.Lib.Domain.Commands.Status;
 using Frenchex.Dev.Vos.Lib.Domain.Commands.Up;
 using Frenchex.Dev.Vos.Lib.Domain.Definitions;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -218,10 +219,13 @@ public class CompleteWorkflowTests
 
     private static IDefaultGatewayGetterAction? _defaultGatewayGetterAction;
 
-    protected static IServiceCollection SetupServices()
+    private static IServiceCollection SetupServices()
     {
         var services = new ServiceCollection();
+        var configuration = new ConfigurationBuilder().Build();
 
+        services.AddScoped<IConfiguration>((_)=> configuration);
+        
         ServicesConfiguration
             .ConfigureServices(services);
 

@@ -52,7 +52,7 @@ public class StatusCommandIntegration : ABaseCommandIntegration, IStatusCommandI
         ) =>
         {
             var requestBuilder = _requestBuilderFactory.Factory();
-            
+
             BuildBase(requestBuilder, payload);
 
             await _command.Execute(requestBuilder
