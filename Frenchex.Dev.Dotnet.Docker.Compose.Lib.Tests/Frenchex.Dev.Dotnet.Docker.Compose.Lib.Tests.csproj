@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Frenchex.Dev.Dotnet.Docker.Compose.Lib\Frenchex.Dev.Dotnet.Docker.Compose.Lib.csproj" />
+      <ProjectReference Include="..\Frenchex.Dev.Dotnet.UnitTesting.Lib\Frenchex.Dev.Dotnet.UnitTesting.Lib.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Resources\docker-compose-example-1.yml">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>

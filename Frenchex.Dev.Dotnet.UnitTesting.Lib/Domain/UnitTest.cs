@@ -62,15 +62,23 @@ public class UnitTest
                 vsCodeProcess = Process.Start("C:\\Program Files\\Microsoft VS Code\\Code.exe",
                     "-n " + _openVsCodePath);
 
-            await prepareFunc(Provider, Configuration);
-            await executeFunc(Provider, Configuration);
+            try
+            {
+                await prepareFunc(Provider, Configuration);
+                await executeFunc(Provider, Configuration);
 
-            // sometimes the executeFunc makes asserts 
-            // because we have not yet decomposed enough our tests
-            // in the executeFunc, we are asserting parsing and execution
+                // sometimes the executeFunc makes asserts 
+                // because we have not yet decomposed enough our tests
+                // in the executeFunc, we are asserting parsing and execution
 
-            if (null != assertFunc) await assertFunc(Provider, Configuration);
-
+                if (null != assertFunc)
+                    await assertFunc(Provider, Configuration);
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+            
             vsCodeProcess?.Kill();
         }
 

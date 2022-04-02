@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.CommandLine;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,7 +16,6 @@ using Frenchex.Dev.Vagrant.Lib.Domain.Commands.Up;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 
 [assembly: Parallelize(Workers = 2, Scope = ExecutionScope.MethodLevel)]
 
@@ -51,11 +49,6 @@ public class CompleteWorkflowTests
             (services, _) =>
             {
                 // overload your services to mock them
-                var mockedConsole = new Mock<IConsole>();
-                services.AddSingleton(_ => mockedConsole.Object);
-
-                // we use DI to hold our mock
-                services.AddSingleton(mockedConsole);
             }
         );
 

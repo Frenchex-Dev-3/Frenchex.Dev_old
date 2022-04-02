@@ -19,7 +19,7 @@ using Moq;
 namespace Frenchex.Dev.Vos.Cli.Integration.Lib.Tests.Domain;
 
 [TestClass]
-public class IntegrationWorkflowUnitTest
+public class IntegrationWorkflowUnitTestForVirtualBox
 {
     private const string WorkingDirectoryMarkholder = "#WORKING_DIRECTORY#";
     private UnitTest? _unitTest;

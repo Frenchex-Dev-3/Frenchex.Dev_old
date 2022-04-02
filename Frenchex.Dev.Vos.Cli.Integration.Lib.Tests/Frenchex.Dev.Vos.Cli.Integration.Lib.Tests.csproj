@@ -8,19 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0-preview-20220131-20"/>
-        <PackageReference Include="Moq" Version="4.16.1"/>
-        <PackageReference Include="MSTest.TestAdapter" Version="2.2.9-preview-20220210-07"/>
-        <PackageReference Include="MSTest.TestFramework" Version="2.2.9-preview-20220210-07"/>
-        <PackageReference Include="coverlet.collector" Version="3.1.2">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+        <PackageReference Include="Moq" Version="4.16.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Frenchex.Dev.Dotnet.UnitTesting.Lib\Frenchex.Dev.Dotnet.UnitTesting.Lib.csproj"/>
-        <ProjectReference Include="..\Frenchex.Dev.Vos.Cli.Integration.Lib\Frenchex.Dev.Vos.Cli.Integration.Lib.csproj"/>
+        <ProjectReference Include="..\Frenchex.Dev.Dotnet.UnitTesting.Lib\Frenchex.Dev.Dotnet.UnitTesting.Lib.csproj" />
+        <ProjectReference Include="..\Frenchex.Dev.Vos.Cli.Integration.Lib\Frenchex.Dev.Vos.Cli.Integration.Lib.csproj" />
     </ItemGroup>
 
 </Project>

@@ -139,7 +139,7 @@ debug = ENV["VOS_DEBUG"] == "true";
           vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
           vb.customize ["modifyvm", :id, "--hpet", "on"]
           vb.customize ["modifyvm", :id, "--nestedpaging", "on"]
-          vb.customize ["modifyvm", :id, "--largepages", "on"]
+          vb.customize ["modifyvm", :id, "--largepages", "on"]d
           vb.customize ["modifyvm", :id, "--vtxvpid", "on"]
           vb.customize ["modifyvm", :id, "--vtxux", "on"]
           vb.customize ["modifyvm", :id, "--pae", "on"]

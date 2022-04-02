@@ -130,7 +130,13 @@ public class MachineBaseDefinitionBuilder
         _provider = provider;
         return this;
     }
-
+    
+    public MachineBaseDefinitionBuilder WithProvider(string provider)
+    {
+        Enum.TryParse(provider, true, out ProviderEnum parsed);
+        _provider = parsed;
+        return this;
+    }
     public MachineBaseDefinitionBuilder WithProvisioning(Dictionary<string, ProvisioningDefinition> provisioning)
     {
         _provisioning = provisioning ?? throw new ArgumentNullException(nameof(provisioning));

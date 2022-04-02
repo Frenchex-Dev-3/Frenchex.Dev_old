@@ -11,4 +11,5 @@ public class DefineMachineTypeAddCommandIntegrationPayload : CommandIntegrationP
     public int VideoRamInMb { get; set; }
     public bool Enabled { get; set; }
     public bool Enable3D { get; set; }
+    public string Provider { get; set; }
 }

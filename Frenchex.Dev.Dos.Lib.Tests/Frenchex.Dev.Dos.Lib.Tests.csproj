@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Frenchex.Dev.Dos.Lib\Frenchex.Dev.Dos.Lib.csproj" />
+      <ProjectReference Include="..\Frenchex.Dev.Dotnet.UnitTesting.Lib\Frenchex.Dev.Dotnet.UnitTesting.Lib.csproj" />
+    </ItemGroup>
+
+</Project>

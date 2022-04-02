@@ -122,6 +122,7 @@ public class DefineMachineTypeAddCommandIntegration : ABaseCommandIntegration, I
                     .WithVirtualCpus(payload.VCpus)
                     .WithOsType(Enum.Parse<OsTypeEnum>(payload.OsType))
                     .WithVideoRamInMb(payload.VideoRamInMb)
+                    .WithProvider(payload.Provider)
                     .Parent<IMachineTypeDefinitionBuilder>()
                     .WithName(payload.Name)
                     .Build()

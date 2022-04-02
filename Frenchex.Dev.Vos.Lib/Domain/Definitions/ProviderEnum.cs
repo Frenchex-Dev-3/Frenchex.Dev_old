@@ -2,5 +2,6 @@
 
 public enum ProviderEnum
 {
-    Virtualbox
+    Virtualbox,
+    Wsl2
 }

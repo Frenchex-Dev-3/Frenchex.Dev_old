@@ -7,4 +7,5 @@ public interface IFilesystem
     void CopyFile(string sourceFile, string destinationFile);
     Task WriteAllTextAsync(string path, string content);
     void CopyDirectory(string source, string target);
+    bool FileExists(string path);
 }

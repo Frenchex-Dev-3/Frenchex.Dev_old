@@ -7,12 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Frenchex.Dev.Dotnet.Filesystem.Lib\Frenchex.Dev.Dotnet.Filesystem.Lib.csproj"/>
-        <ProjectReference Include="..\Frenchex.Dev.Dotnet.Process.Lib\Frenchex.Dev.Dotnet.Process.Lib.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.2-mauipre.1.22054.8"/>
+        <ProjectReference Include="..\Frenchex.Dev.Dotnet.Dependencies.Configuration.Abstractions.Lib\Frenchex.Dev.Dotnet.Dependencies.Configuration.Abstractions.Lib.csproj" />
+        <ProjectReference Include="..\Frenchex.Dev.Dotnet.Filesystem.Lib\Frenchex.Dev.Dotnet.Filesystem.Lib.csproj" />
+        <ProjectReference Include="..\Frenchex.Dev.Dotnet.Process.Lib\Frenchex.Dev.Dotnet.Process.Lib.csproj" />
     </ItemGroup>
 
 </Project>

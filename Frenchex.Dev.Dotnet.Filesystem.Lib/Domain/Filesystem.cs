@@ -42,6 +42,11 @@ public class Filesystem : IFilesystem
         }
     }
 
+    public bool FileExists(string path)
+    {
+        return File.Exists(path);
+    }
+
     public bool DirectoryExists(string? path)
     {
         return Directory.Exists(path);

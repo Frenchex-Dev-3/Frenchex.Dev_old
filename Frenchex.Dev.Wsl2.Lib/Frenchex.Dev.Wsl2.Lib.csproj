@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Domain\Commands" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Frenchex.Dev.Dotnet.Dependencies.Configuration.Abstractions.Lib\Frenchex.Dev.Dotnet.Dependencies.Configuration.Abstractions.Lib.csproj" />
+      <ProjectReference Include="..\Frenchex.Dev.Dotnet.Dependencies.DependencyInjection.Lib\Frenchex.Dev.Dotnet.Dependencies.DependencyInjection.Lib.csproj" />
+    </ItemGroup>
+
+</Project>
